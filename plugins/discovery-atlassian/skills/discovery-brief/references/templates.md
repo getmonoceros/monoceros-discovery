@@ -24,9 +24,9 @@ keep them.
 <h2>{Problem / why}</h2>
 <div data-type="panel-error"><p>{Two to four sentences of prose: the actual problem and its cause.}</p></div>
 <h2>{Audience}</h2>
-<h3>🇦 {Group 1}</h3>
+<h3>🅰️ {Group 1}</h3>
 <p>{who they are and why they have the problem}</p>
-<h3>🇧 {Group 2}</h3>
+<h3>🅱️ {Group 2}</h3>
 <p>{…}</p>
 <h2>{Core capabilities}</h2>
 <section data-type="layout-two-equal" data-breakout="wide" data-breakout-width="760"><div data-type="column" data-width="50"><h3>{Emoji} {Capability 1}</h3><p>{what, not how}</p></div><div data-type="column" data-width="50"><h3>{Emoji} {Capability 2}</h3><p>{…}</p></div></section>
@@ -45,7 +45,7 @@ Rules:
 
 - **Pitch** = info panel, **problem** = error panel (red). Panels only here
   (emotionally charged), not everywhere.
-- **Audience** with letter emojis (🇦 🇧 …), **assumptions** with number emojis
+- **Audience** with letter emojis (🅰️ 🅱️ …), **assumptions** with number emojis
   (1️⃣ 2️⃣ …) - each full width, h3 + paragraph.
 - **Core capabilities** with topic emojis (app-fitting), 2 columns.
 - **Scope** red `{out}` chips, **success** green `{Signal}` chips, 2 columns.

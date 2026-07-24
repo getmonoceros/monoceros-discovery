@@ -1,126 +1,126 @@
 ---
 name: discovery-design
-description: Leitet aus Brief, Personas und Journeys im geführten Dialog den Design Brief für ein Produkt ab - Nordstern, Markenpersönlichkeit, Gestaltungsprinzipien, visuelle Richtung, Schlüssel-Screens, Interaktion und Barrierefreiheit - und legt ihn als Confluence-Seite unter dem Brief an. Nutze diesen Skill, wenn jemand die Gestaltungsrichtung, das Design-Briefing oder die Grundlage für ein Design-System und einen Prototyp erarbeiten will. Der Design Brief ist der Input für die anschließende Generierung von Design-System und Hifi-Prototyp.
+description: Derives the design brief for a product from the brief, personas, and journeys through a guided dialog - north star, brand personality, design principles, visual direction, key screens, interaction, and accessibility - and files it as a Confluence page under the brief. Use this skill when someone wants to work out the design direction, the design briefing, or the basis for a design system and a prototype. The design brief is the input for the subsequent generation of the design system and hi-fi prototype.
 allowed-tools: Read, Write, AskUserQuestion
 ---
 
 # Design Brief
 
-Du leitest aus Brief, Personas und Journeys die **Gestaltungsrichtung**
-eines Produkts ab - als Design Brief, der anschließend Claude Design
-(oder Figma Make) als Grundlage dient, um ein Design-System und einen
-Hifi-Prototyp zu erzeugen.
+You derive the **design direction** of a product from the brief, personas,
+and journeys - as a design brief that then serves Claude Design (or Figma
+Make) as the basis for generating a design system and a hi-fi prototype.
 
-**Zwei Grundregeln:**
+**Two ground rules:**
 
-- Du **ergänzt** die gestalterische Ebene, du **duplizierst nicht** den
-  Produkt-Brief (Problem, Zielgruppe stehen dort).
-- Du beschreibst die **Richtung**, nicht die fertigen Tokens. Farben,
-  Schriftgrößen, Abstände entstehen erst in der Generierung. Das
-  Design-System ist ein **Output** der Generierung, kein Input - schreib
-  hier also kein System, sondern das, woraus es entstehen soll.
+- You **add** the design layer, you do **not duplicate** the product brief
+  (problem and audience live there).
+- You describe the **direction**, not the finished tokens. Colors, font
+  sizes, spacing emerge only during generation. The design system is an
+  **output** of the generation, not an input - so don't write a system
+  here, write what it should be built from.
 
-## Prinzipien
+## Output language
 
-- **Schlank halten**, vorschlagen statt ausfragen, ein Thema nach dem
-  anderen.
-- **Beschriebene Listenelemente, keine Stichwortwüste** - jeder Punkt
-  ein Halbsatz mit dem *Warum*.
-- **Schlüssel-Screens fallen aus den Journeys** - für jede wichtige
-  Journey ein Screen.
-- **Gefühl vor Werten** - visuelle Richtung als Stimmung, nicht als
-  Farbcode.
+Author the design brief - prose, headings, and labels - in the **user's
+language**. Take it from the conversation, or ask once at the start if it
+is unclear ("Which language should the design brief be written in?"). This
+skill's own instructions and the template's technical markers stay as they
+are; only reader-visible text is written in the user's language. See the
+template for exactly what never gets translated.
 
-## Vorgehen
+## Principles
 
-### Schritt 0: Vorlagen-Dokumente lesen
+- **Keep it lean**, propose rather than interrogate, one topic at a time.
+- **Described list items, not a keyword dump** - each point a half-sentence
+  with the *why*.
+- **Key screens fall out of the journeys** - one screen per important journey.
+- **Feeling before values** - visual direction as a mood, not a color code.
 
-Lies Brief, Personas und Journeys (aus Confluence, Dateien oder per
-Einfügen), wenn vorhanden auch den Technical Brief (er liefert
-Plattform-Constraints wie PWA/mobile-first). Fasse das angestrebte Gefühl
-und die Schlüssel-Journeys zusammen und bestätige mit dem Nutzer.
+## Procedure
 
-**Bestehender Design Brief**: Falls schon einer existiert, frage, ob du
-ihn aktualisieren oder einen neuen anlegen sollst.
+### Step 0: Read the source documents
 
-### Schritt 1: Abschnitt für Abschnitt erarbeiten
+Read the brief, personas, and journeys (from Confluence, files, or pasted
+in), and if present also the technical brief (it provides platform
+constraints such as PWA / mobile-first). Summarize the intended feeling and
+the key journeys and confirm with the user.
 
-Mach je Abschnitt einen konkreten Vorschlag, der Nutzer korrigiert.
+**Existing design brief**: if one already exists, ask whether to update it
+or create a new one.
 
-1. **Design-Ziel (Nordstern)** - ein Satz: welches Gefühl/Ergebnis das
-   Design erreichen muss.
-2. **Markenpersönlichkeit & Tonalität** - wie sich die App anfühlt und
-   klingt.
-3. **Gestaltungsprinzipien** - drei bis fünf, direkt aus den
-   Persona-Bedürfnissen abgeleitet.
-4. **Visuelle Richtung** - Palette, Bildsprache, Typo, Form als Stimmung
-   (keine finalen Tokens).
-5. **Schlüssel-Screens** - aus den Journeys, je mit ihrer Aufgabe.
-6. **Interaktion & Plattform** - aus dem Technical Brief (PWA,
-   mobile-first, offline, Ein-Tipp-Aktionen).
-7. **Barrierefreiheit** - Kontrast, Touch-Ziele, nicht nur über Farbe.
-8. **Marke & Assets** - bestehende Marke/Assets oder Greenfield.
+### Step 1: Work section by section
 
-Für echte Auswahlentscheidungen nutze **AskUserQuestion**.
+Make a concrete proposal per section and let the user correct it.
 
-### Schritt 2: Bestätigen und Abdeckung prüfen
+1. **Design goal (north star)** - one sentence: which feeling/outcome the
+   design must achieve.
+2. **Brand personality & tone** - how the app feels and sounds.
+3. **Design principles** - three to five, derived directly from the persona
+   needs.
+4. **Visual direction** - palette, imagery, typography, form as a mood (no
+   final tokens).
+5. **Key screens** - from the journeys, each with its task.
+6. **Interaction & platform** - from the technical brief (PWA, mobile-first,
+   offline, one-tap actions).
+7. **Accessibility** - contrast, touch targets, not by color alone.
+8. **Brand & assets** - existing brand/assets or greenfield.
 
-Prüfe: Hat jede wichtige Journey einen Schlüssel-Screen? Fasse
-den Design Brief zusammen und hole Bestätigung.
+For real choices, use **AskUserQuestion**.
 
-## Abschluss: Dokument erstellen
+### Step 2: Confirm and check coverage
 
-1. Lies die Vorlage aus `references/templates.md`.
-2. Fülle sie. Der letzte Abschnitt **„Was die Generierung liefern soll"**
-   hält fest: Design-System als **Tokens + Komponenten** und ein
-   **Hifi-Prototyp** der Schlüssel-Screens, **als Code** (nicht Figma-
-   only), damit die Monoceros-Workbench es direkt weiterverarbeitet.
-3. Lege das Dokument als **HTML+-Seite** (`contentFormat: html`) **unter
-   dem Brief** an (frage nach der Brief-Seite als Eltern) oder als
-   Markdown-Fallback. Format siehe unten.
-4. **Erzeuge das fertige Generierungs-Prompt.** Lies
-   `references/generation-prompt.md`, ersetze `{{PRODUKTNAME}}` durch den
-   Produktnamen und `{{DESIGN_BRIEF}}` durch den **vollständigen
-   Inhalt** des Design Brief **als lesbaren Text** (nicht die
-   Confluence-HTML+-Auszeichnung - Claude Design liest Fließtext, keine
-   Makros). Gib das Ergebnis als **einen Codeblock** aus, damit der Nutzer
-   es mit einem Klick kopieren kann.
-5. Erkläre in einem Satz: Der Design Brief liegt in Confluence; dieses
-   Prompt fügt der Nutzer in Claude Design (oder Figma Make) ein, um
-   daraus Design-System und Hifi-Prototyp zu erzeugen - das System
-   *entsteht* dort, es ist kein Input.
+Check: does every important journey have a key screen? Summarize the design
+brief and get confirmation.
 
-### Format (HTML+) - Rhythmus statt Raster
+## Finish: create the document
 
-Gemeinsame Stil-Regel: `references/confluence-style.md`. Der Design Brief
-hat ein festes Abschnitts-Skelett, aber **kein einheitliches Layout** -
-würde jeder Abschnitt gleich aussehen (überall 2-Spalten, überall Emoji),
-wird die Seite unlesbar. Deshalb: **jeder Abschnitt eine andere Behandlung,
-kein zweimal dasselbe direkt hintereinander**, Behandlung passend zum
-Inhalt. Die freigegebene Aufteilung (Details + HTML-Muster in
-`references/templates.md`):
+1. Read the template from `references/templates.md`.
+2. Fill it. The last section **"What the generation should deliver"** records:
+   design system as **tokens + components** and a **hi-fi prototype** of the
+   key screens, **as code** (not Figma-only), so the Monoceros workbench can
+   process it directly.
+3. Create the document as an **HTML+ page** (`contentFormat: html`) **under
+   the brief** (ask for the brief page as parent) or as a Markdown fallback.
+   Format see below.
+4. **Produce the finished generation prompt.** Read
+   `references/generation-prompt.md`, replace `{{PRODUCTNAME}}` with the
+   product name and `{{DESIGN_BRIEF}}` with the **full content** of the
+   design brief **as readable text** (not the Confluence HTML+ markup -
+   Claude Design reads prose, not macros). Output the result as **one code
+   block** so the user can copy it with a single click.
+5. Explain in one sentence: the design brief lives in Confluence; the user
+   pastes this prompt into Claude Design (or Figma Make) to generate the
+   design system and hi-fi prototype from it - the system *emerges* there,
+   it is not an input.
 
-- **Design-Ziel (Nordstern)** → **benannter Excerpt `Summary`**, reiner
-  Text, **kein Panel** (kann transkludiert werden).
-- **Markenpersönlichkeit & Tonalität** → volle Breite, `<h3>` + `<p>`, je
-  Zug ein **Stimmungs-Emoji**.
-- **Gestaltungsprinzipien** → 2-Spalten (760), je `<h3>` mit **Themen-Emoji**.
-- **Visuelle Richtung** → volle Breite; die **Palette mit Farb-Chips** als
-  Mini-Vorschau (Chip-Farben grob zur Palette), am Ende ein
-  Kursiv-Disclaimer („Richtung, keine finalen Tokens").
-- **Schlüssel-Screens** → volle Breite, `<h3>` + `<p>`, **durchnummeriert**
-  (1️⃣ 2️⃣ 3️⃣ …).
-- **Interaktion & Plattform** → 2-Spalten (760), je `<h3>` mit **Themen-Emoji**.
-- **Barrierefreiheit** → volle Breite, je Anforderung ein blauer
-  **`Pflicht`-Chip** vor dem Titel.
-- **Marke & Assets** → 2-Spalten (760), schlicht (kein Emoji).
-- **Was die Generierung liefern soll** → **Success-Panel**
-  (`<div data-type="panel-success">`), `<strong>`-geführte Absätze - der
-  Handoff in den Bau.
-- Emojis app-passend (nicht fix). 2-Spalten einheitlich `760`; bei
-  ungerader Zahl letzte Spalte leer.
+### Format (HTML+) - rhythm, not a grid
 
-## Stil
+Shared style rule: `references/confluence-style.md`. The design brief has a
+fixed section skeleton, but **no uniform layout** - if every section looked
+the same (2 columns everywhere, emoji everywhere), the page would become
+unreadable. So: **each section gets a different treatment, never the same
+one twice in direct succession**, the treatment fitting the content. The
+approved layout (details + HTML patterns in `references/templates.md`):
 
-- Vorschlagen statt ausfragen, ein Satz „warum" je Entscheidung.
-- Antworte in der Sprache des Nutzers.
+- **Design goal (north star)** → **named excerpt `Summary`**, plain text,
+  **no panel** (can be transcluded).
+- **Brand personality & tone** → full width, `<h3>` + `<p>`, a **mood emoji**
+  per trait.
+- **Design principles** → 2 columns (760), each `<h3>` with a **topic emoji**.
+- **Visual direction** → full width; the **palette with color chips** as a
+  mini preview (chip colors roughly matching the palette), an italic
+  disclaimer at the end ("direction, not final tokens").
+- **Key screens** → full width, `<h3>` + `<p>`, **numbered** (1️⃣ 2️⃣ 3️⃣ …).
+- **Interaction & platform** → 2 columns (760), each `<h3>` with a **topic emoji**.
+- **Accessibility** → full width, a blue **`Required` chip** before the title
+  per requirement.
+- **Brand & assets** → 2 columns (760), plain (no emoji).
+- **What the generation should deliver** → **success panel**
+  (`<div data-type="panel-success">`), `<strong>`-led paragraphs - the
+  handoff into the build.
+- Emojis app-fitting (not fixed). 2 columns uniformly `760`; on an odd count
+  leave the last column empty.
+
+## Style
+
+- Propose rather than interrogate, one "why" sentence per decision.

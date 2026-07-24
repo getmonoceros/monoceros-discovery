@@ -1,43 +1,39 @@
-# Vorlage: Generierungs-Prompt
+# Template: Generation prompt
 
-Der Skill füllt diese Vorlage am Ende aus: `{{PRODUKTNAME}}` durch den
-Produktnamen ersetzen, `{{DESIGN_BRIEF}}` durch den vollständigen
-Inhalt des erstellten Design Brief. Das Ergebnis als **Codeblock**
-ausgeben, damit der Nutzer es mit einem Klick kopieren und in Claude
-Design (oder Figma Make) einfügen kann.
+The skill fills this template in at the end: replace `{{PRODUCTNAME}}` with the
+product name, `{{DESIGN_BRIEF}}` with the full content of the design brief you
+created. Output the result as a **code block** so the user can copy it with a
+single click and paste it into Claude Design (or Figma Make).
 
-Produkt-Spezifika (Palette, Screens, Plattform) kommen aus der
-eingebetteten Design Brief - die Vorlage bleibt darum generisch.
+Product specifics (palette, screens, platform) come from the embedded design
+brief - so the template stays generic.
 
 ---
 
-Du gestaltest ein Design-System und einen Hifi-Prototyp für
-{{PRODUKTNAME}}. Grundlage ist der unten stehende Design Brief; halte
-dich an Nordstern, Tonalität und Gestaltungsprinzipien.
+You are designing a design system and a hi-fi prototype for {{PRODUCTNAME}}.
+The basis is the design brief below; stick to the north star, tone, and design
+principles.
 
-Geh in zwei Schritten vor:
+Proceed in two steps:
 
-1. Etabliere zuerst das Design-System. Tokens: Farbpalette inklusive
-   Zustandsfarben, Typografie-Skala, Abstände, Radien, Schatten. Dazu ein
-   Kern-Komponenten-Set: Buttons, Eingabefelder, Cards, Listen,
-   Navigation, Status-/Badge-Elemente, Empty States. Das System trägt die
-   Markenpersönlichkeit aus dem Design Brief.
-2. Baue darauf den Hifi-Prototyp der Schlüssel-Screens. Jeder Screen
-   nutzt ausschließlich das System, damit alles konsistent ist.
+1. Establish the design system first. Tokens: color palette including state
+   colors, typography scale, spacing, radii, shadows. Plus a core component set:
+   buttons, input fields, cards, lists, navigation, status/badge elements, empty
+   states. The system carries the brand personality from the design brief.
+2. Build the hi-fi prototype of the key screens on top of it. Each screen uses
+   only the system, so everything stays consistent.
 
-Halte dich an:
+Stick to:
 
-- Die Plattform-, Interaktions- und Barrierefreiheits-Vorgaben des
-  Design Brief; Kontrast mindestens AA und Zustand nie nur über Farbe als
-  Grundlinie.
-- Die im Design Brief beschriebene Bildsprache; nutze Platzhalterbilder.
+- The platform, interaction, and accessibility requirements of the design brief;
+  contrast at least AA and state never by color alone as a baseline.
+- The imagery described in the design brief; use placeholder images.
 
-Deliverable: das Design-System als maschinenlesbare Tokens (z.B.
-CSS-Variablen oder JSON) plus Komponenten und Prototyp als Code (HTML/CSS
-oder React), damit ein Entwickler oder Coding-Agent direkt damit
-weiterarbeiten kann. Kein reines Figma-Artefakt. Wenn das Werkzeug primär
-Figma erzeugt, exportiere zusätzlich die Tokens und liefere einen
-Code-Handoff.
+Deliverable: the design system as machine-readable tokens (e.g. CSS variables or
+JSON) plus components and prototype as code (HTML/CSS or React), so a developer
+or coding agent can work on it directly. Not a Figma-only artifact. If the tool
+primarily produces Figma, additionally export the tokens and provide a code
+handoff.
 
 Design Brief:
 

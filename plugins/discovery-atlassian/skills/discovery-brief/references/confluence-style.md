@@ -16,7 +16,7 @@ reference; render them in the **output language**. Technical values
 | Pitch / core statement | **info panel** (`panel-info`) |
 | Problem / pain | **error panel** (`panel-error`, red) |
 | Handoff / deliverable | **success panel** (`panel-success`, green) |
-| Enumerable segments (audiences, personas) | full width, h3 + paragraph, **letter emojis** 🇦 🇧 🇨 |
+| Enumerable segments (audiences, personas) | full width, h3 + paragraph, **letter emojis** 🅰️ 🅱️ 🅲️ |
 | Numbered / sequential points (assumptions, steps) | full width, h3 + paragraph, **number emojis** 1️⃣ 2️⃣ 3️⃣ |
 | Topic / capability list (core capabilities, principles) | **2 columns**, h3 with a **fitting topic emoji** |
 | Exclusions (scope-out) | 2 columns, red **status chip** ("out") |

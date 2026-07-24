@@ -1,146 +1,150 @@
 ---
 name: planning-epics-stories
-description: Leitet aus der Discovery (Brief, Journeys, Personas, Technical Brief, Design) im geführten Dialog den Backlog ab - Epics und Stories - und legt sie als Jira-Issues an. Nutze diesen Skill, wenn jemand aus Anforderungen einen Backlog, Epics oder Stories erstellen, ein Projekt planen oder Arbeit für die Umsetzung schneiden will. Ziel: jede Story ist agent-tauglich und autark.
+description: Derives the backlog - epics and stories - from the discovery (brief, journeys, personas, technical brief, design) through a guided dialog, and files them as Jira issues. Use this skill when someone wants to turn requirements into a backlog, epics, or stories, plan a project, or slice work for implementation. Goal: every story is agent-ready and self-contained.
 allowed-tools: Read, Write, AskUserQuestion
 ---
 
 # Planning: Epics & Stories
 
-Du leitest aus der Discovery den Backlog ab und legst ihn in **Jira** an.
+You derive the backlog from the discovery and file it in **Jira**.
 
-**Leitziel:** Jede **Story ist autark**. Wer nur die Story bekommt (ein
-Agent wie Claude Code oder ein Mensch), weiß daraus: für wen und warum,
-was zu tun ist, und wo er für Details nachschaut - ohne erst das Epic oder
-andere Vorgänge öffnen zu müssen. Das **Epic ist schlank**: nur der
-Vermittler zwischen seinen Stories und der Journey.
+**Top rule:** every **story is self-contained**. Whoever gets only the story
+(an agent like Claude Code, or a human) knows from it: for whom and why, what
+to do, and where to look for details - without having to open the epic or other
+issues first. The **epic stays lean**: only the bridge between its stories and
+the journey.
 
-## Prinzipien
+## Output language
 
-- **Story autark, Epic schlank.** Der Kontext lebt auf der Story, nicht
-  im Epic.
-- **So viele Stories wie nötig** je Epic - keine feste Zahl.
-- **Links sind Smartlink-Karten**, keine rohen URLs (siehe Schritt 4).
-- **Beschreibungen strukturiert**, nicht als Prosa-Wust.
+Author the artifact - epic and story summaries, descriptions, acceptance
+criteria, and section headings - in the **user's language**. Take it from the
+conversation, or ask once at the start if it is unclear ("Which language should
+the backlog be written in?"). This skill's own instructions and every technical
+identifier stay as they are: Jira field names, issue-type keys, JQL,
+status/workflow ids, and any `data-*`/macro identifiers are never translated.
+See the template for exactly what stays verbatim.
 
-## Vorgehen
+## Principles
 
-### Schritt 0: Discovery lesen und Projekt klären
+- **Story self-contained, epic lean.** The context lives on the story, not
+  in the epic.
+- **As many stories as needed** per epic - no fixed number.
+- **Links are smartlink cards**, not raw URLs (see step 4).
+- **Descriptions are structured**, not a wall of prose.
 
-Lies Brief, Journeys, Personas, Technical Brief und Design. Fasse
-zusammen, welche Journeys/Personas es gibt, und bestätige. Frage nach dem
-**Jira-Projekt** (Key). Steht keine Design-URL im Prompt und gibt es
-UI-Stories, frag den Nutzer nach der URL des Design-Deliverables
-(Prototyp/Screens) - werkzeugunabhängig (Figma Make, Claude Design o.a.).
+## Procedure
 
-**Bestehender Backlog / zweiter Durchlauf**: Prüfe je Journey, ob es schon
-ein passendes Epic gibt - der auf der Seite verlinkte Epic-Key noch **live**
-in Jira, oder ein Epic mit passender Summary im Projekt. Lebt eins →
-wiederverwenden/aktualisieren, kein Duplikat. Existiert keins (z.B. im
-Testloop gelöscht, Key tot) → neu anlegen. Der Journey-Link wird danach
-**immer** auf den Key aus diesem Lauf gezogen (siehe Backfill), auch wenn
-dort noch ein alter/toter Key steht.
+### Step 0: Read the discovery and clarify the project
 
-### Schritt 1: Epics vorschlagen
+Read brief, journeys, personas, technical brief, and design. Summarize which
+journeys/personas exist, and confirm. Ask for the **Jira project** (key). If no
+design URL is in the prompt and there are UI stories, ask the user for the URL
+of the design deliverable (prototype/screens) - tool-agnostic (Figma Make,
+Claude Design, or other).
 
-- **Foundation-Epic zuerst** (`architectural`): das Walking Skeleton aus
-  dem Technical Brief. Karte: **Technical Brief**. Seine Stories speisen
-  sich aus dem Walking Skeleton **und den umsetzbaren Offenen Punkten** des
-  Technical Brief (die To-dos, nicht die noch offenen Entscheidungen -
-  z.B. twg-Config setzen, Keycloak-Realm mounten, Ports und Mock-Port
-  festlegen).
-- **Ein Business-Epic je Journey** (sofern kein passendes, lebendes Epic
-  existiert - sonst das bestehende weiterverwenden): ein bis zwei Sätze Prosa (die Essenz),
-  die **Journey als Karte**, und epic-weite Akzeptanzkriterien. Mehr
-  nicht - das Epic ist der Vermittler zur Journey, kein Kontext-Sammler.
-  **Keine** Persona-, Brief- oder Technical-Brief-Karte am
-  Business-Epic.
+**Existing backlog / second pass**: for each journey, check whether a fitting
+epic already exists - the epic key linked on the page still **live** in Jira, or
+an epic with a fitting summary in the project. If one lives → reuse/update it, no
+duplicate. If none exists (e.g. deleted in a test loop, key dead) → create a new
+one. The journey link is afterward **always** pulled to the key from this run
+(see backfill), even if an old/dead key still sits there.
 
-### Schritt 2: Stories je Epic (autark)
+### Step 1: Propose epics
 
-Schlage je Epic so viele Stories vor, wie nötig. Jede Story hat diese
-Abschnitte:
+- **Foundation epic first** (`architectural`): the walking skeleton from
+  the technical brief. Card: **Technical Brief**. Its stories come from the
+  walking skeleton **and the actionable open points** of the technical brief
+  (the to-dos, not the still-open decisions - e.g. set twg config, mount the
+  Keycloak realm, fix ports and mock port).
+- **One business epic per journey** (unless a fitting, live epic already
+  exists - otherwise keep using the existing one): one or two sentences of prose
+  (the essence), the **journey as a card**, and epic-wide acceptance criteria.
+  Nothing more - the epic is the bridge to the journey, not a context collector.
+  **No** persona, brief, or technical-brief card on the business epic.
 
-1. **Story-Text**: „Als [Persona] möchte ich [Funktion], um [Nutzen]."
-2. **### Fachlicher Kontext**: ein paar Sätze zum Bedürfnis dahinter
-   (**kein** Ein-Satz-Verweis), dann **Persona** und **Journey** je als
-   Inline-Karte mit **fettem Label davor** (`Persona:`, `Journey:`).
-3. **### Umsetzungsinformationen**: ein **Plan als Liste** - was zu tun
-   ist und woran zu denken (z.B. Backend-Endpoint, Persistenz/Migration,
-   Frontend-Komponente, Integrationen, Randfälle, Testebene). Eine
-   übergeordnete Abarbeitungs-Liste, **kein** Prosa-Wust. Dazu der
-   **Technical Brief** als Inline-Karte mit fettem Label
-   (`Technical Brief:`).
-4. **## Design** - **nur wenn die Story UI/Frontend berührt**: der
-   betroffene Design-Screen bzw. Prototyp als volle **`blockCard`**. Die
-   Design-URL kommt aus dem Prompt; steht keine da, **frag den Nutzer**
-   nach der URL des Design-Deliverables - werkzeugunabhängig (Figma Make,
-   Claude Design o.a.). Ist keine verfügbar, lass den Abschnitt weg.
-5. **### Akzeptanzkriterien**: Checkbox-Liste. Je Kriterium **Given**,
-   **When**, **Then** auf **eigenen Zeilen**; die Labels **fett und in der
-   Farbe `#403294`**.
+### Step 2: Stories per epic (self-contained)
 
-### Schritt 3: Reihenfolge
+Propose as many stories per epic as needed. Every story has these sections:
 
-Foundation-Epic zuerst, dann die Feature-Epics nach Wert und Abhängigkeit.
+1. **Story text**: "As a [persona] I want [capability], so that [value]."
+2. **### Business context**: a few sentences on the need behind it
+   (**not** a one-sentence reference), then **persona** and **journey** each as
+   an inline card with a **bold label in front** (`Persona:`, `Journey:`).
+3. **### Implementation notes**: a **plan as a list** - what to do
+   and what to keep in mind (e.g. backend endpoint, persistence/migration,
+   frontend component, integrations, edge cases, test level). One overarching
+   task list, **not** a wall of prose. Plus the **Technical Brief** as an inline
+   card with a bold label (`Technical Brief:`).
+4. **## Design** - **only if the story touches UI/frontend**: the
+   affected design screen or prototype as a full **`blockCard`**. The design URL
+   comes from the prompt; if none is there, **ask the user** for the URL of the
+   design deliverable - tool-agnostic (Figma Make, Claude Design, or other). If
+   none is available, leave the section out.
+5. **### Acceptance criteria**: checkbox list. Per criterion **Given**,
+   **When**, **Then** on **their own lines**; the labels **bold and in the
+   color `#403294`**.
 
-### Schritt 4: In Jira anlegen
+### Step 3: Order
 
-Nutze die verfügbaren Atlassian-Tools und schreibe **ADF**:
+Foundation epic first, then the feature epics by value and dependency.
 
-- **Links immer als ADF-Karten, nie als rohe URL/Markdown-Link.**
-  Prominente Einzel-Referenzen (Journey am Epic, Design-Screen an der
-  Story) als volle **`blockCard`**. Die Kontext-Referenzen an der Story
-  (Persona, Journey, Technical Brief) als **`inlineCard` mit fettem
-  Label davor** (`Persona:` usw.).
-- **Story → Epic** über das **Parent-Feld** (kein generischer
-  Issue-Link).
-- **Epic-Label** `business` bzw. `architectural`.
-- **Journey-Backfill**: Trage auf der Journey-Seite das Epic aus diesem Lauf
-  ein und **überschreibe**, was dort steht: die Zeile „Epic in Jira" (egal ob
-  Platzhalter **„folgt"** oder ein alter/toter Key) wird die echte
-  Epic-Karte, und die „Zugehörige Vorgänge"-Datasource wird auf
-  `parent = <Epic-Key dieses Laufs>` gesetzt. So zeigt die Journey ihr Epic
-  und die Live-Tabelle ihrer Stories.
-- **Backfill-Tabelle richtig schreiben** (sonst kaputte Kopfzeile): Schreib
-  die Seiteneigenschaften-Tabelle als **ein einziges `<tbody>`** - linke
-  Zelle `<th>` (Label = Header-Spalte), rechte Zelle **`<td>`** (die
-  Epic-Karte). **Kein `<thead>`**: der HTML+-Read liefert die erste Zeile
-  fälschlich in einem `<thead>`; schreibt man das 1:1 zurück, macht
-  Confluence aus der Wert-`<td>` eine `<th>`, und die Zeile rendert als graue
-  Kopf**zeile** statt als Header-**Spalte**. Also das `<thead>` beim
-  Zurückschreiben in `<tbody>` auflösen und die Wert-Zelle als `<td>` halten.
-- **Akzeptanzkriterien** als **Task-Liste** (echte Checkboxen); je Punkt
-  Given/When/Then auf eigenen Zeilen, Labels **fett und in Farbe
+### Step 4: Create in Jira
+
+Use the available Atlassian tools and write **ADF**:
+
+- **Links always as ADF cards, never as a raw URL/Markdown link.**
+  Prominent single references (journey on the epic, design screen on the
+  story) as a full **`blockCard`**. The context references on the story
+  (persona, journey, technical brief) as an **`inlineCard` with a bold
+  label in front** (`Persona:` etc.).
+- **Story → Epic** via the **Parent field** (not a generic
+  issue link).
+- **Epic label** `business` or `architectural`.
+- **Journey backfill**: on the journey page, enter the epic from this run and
+  **overwrite** what is there: the "Epic in Jira" row (whether placeholder
+  **"follows"** or an old/dead key) becomes the real epic card, and the
+  "Related issues" datasource is set to `parent = <epic key of this run>`. That
+  way the journey shows its epic and the live table of its stories.
+- **Write the backfill table correctly** (otherwise a broken header row): write
+  the page-properties table as **one single `<tbody>`** - left cell `<th>`
+  (label = header column), right cell **`<td>`** (the epic card). **No
+  `<thead>`**: the HTML+ read wrongly returns the first row inside a `<thead>`;
+  writing that back 1:1 makes Confluence turn the value `<td>` into a `<th>`, and
+  the row renders as a gray header **row** instead of a header **column**. So
+  dissolve the `<thead>` into `<tbody>` on write-back and keep the value cell as
+  a `<td>`.
+- **Acceptance criteria** as a **task list** (real checkboxes); per point
+  Given/When/Then on their own lines, labels **bold and in color
   `#403294`**.
-- Überschriften als echte Headings. Die Überschrift heißt genau
-  „Akzeptanzkriterien" - **kein** Zusatz wie „(Definition of Done)".
-- Nenne dem Nutzer die Issue-Keys und die Reihenfolge.
+- Headings as real headings. The heading is exactly
+  "Acceptance criteria" - **no** addition like "(Definition of Done)".
+- Tell the user the issue keys and the order.
 
-Kann ein Tool eine Karte oder Verknüpfung nicht setzen, sag es dem Nutzer
-und gib ihm das Nötige an die Hand, statt es still zu überspringen.
+If a tool cannot set a card or link, tell the user and hand them what they need,
+rather than silently skipping it.
 
-## Verlinkungs-Matrix (was gehört an welche Ebene)
+## Linking matrix (what belongs at which level)
 
-| Ebene            | Karten                                              |
+| Level            | Cards                                               |
 |------------------|-----------------------------------------------------|
-| Business-Epic    | Journey                                             |
-| Foundation-Epic  | Technical Brief                                     |
-| Feature-Story    | Persona + Journey (Fachlicher Kontext), Technical Brief (Umsetzung), Design-Screen (nur bei UI) |
-| Foundation-Story | Technical Brief                                     |
+| Business epic    | Journey                                             |
+| Foundation epic  | Technical Brief                                     |
+| Feature story    | Persona + Journey (Business context), Technical Brief (Implementation), Design screen (only for UI) |
+| Foundation story | Technical Brief                                     |
 
-Die Story trägt ihre Kontext-Karten **bewusst selbst**, damit sie autark
-ist. Dass Persona/Journey über Geschwister-Stories wiederkehren, ist
-gewollt - Autarkie geht vor Dopplungs-Vermeidung.
+The story carries its context cards **deliberately itself**, so it is
+self-contained. That persona/journey recur across sibling stories is
+intended - self-containment beats deduplication.
 
-## Verifikation & `/goal`
+## Verification & `/goal`
 
-Die Akzeptanzkriterien sind die Prüf-Grundlage. Bei der Umsetzung läuft
-der Agent unter `/goal` mit „die Akzeptanzkriterien von PL-X sind
-erfüllt, Tests und Build grün" - aus den AK abgeleitet, kein eigenes
-Feld. Ob es *aussieht* wie der Design-Screen, prüft ein separater
-Preview-/Mensch-Schritt.
+The acceptance criteria are the basis for checking. During implementation
+the agent runs under `/goal` with "the acceptance criteria of PL-X are
+met, tests and build green" - derived from the criteria, not a separate
+field. Whether it *looks* like the design screen is checked by a separate
+preview/human step.
 
-## Stil
+## Style
 
-- Vorschlagen statt ausfragen, ein Thema nach dem anderen.
-- Antworte in der Sprache des Nutzers.
+- Propose rather than interrogate, one topic at a time.
+- Author reader-visible content in the user's language (see Output language).

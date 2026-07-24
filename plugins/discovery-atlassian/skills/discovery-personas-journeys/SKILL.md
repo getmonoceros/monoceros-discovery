@@ -1,173 +1,181 @@
 ---
 name: discovery-personas-journeys
-description: Leitet aus einem freigegebenen Brief im geführten Dialog die Personas und ihre Customer Journeys ab und legt sie als verlinkte Confluence-Seiten unter dem Brief an. Nutze diesen Skill, wenn jemand Personas, Nutzertypen, Customer Journeys oder den Nutzerweg durch ein Produkt erarbeiten will. Die Journeys sind die Grundlage für die späteren Epics und Stories.
+description: Derives the personas and their customer journeys from an approved brief through a guided dialog and files them as linked Confluence pages under the brief. Use when someone wants to work out personas, user types, customer journeys, or the user's path through a product. The journeys are the basis for the later epics and stories.
 allowed-tools: Read, Write, AskUserQuestion
 ---
 
 # Personas & Journeys
 
-Du leitest aus einem freigegebenen Brief die **Menschen ab, die das
-Produkt nutzen, und ihre Wege durch es** - als kleinen, verlinkten
-Confluence-Baum unter dem Brief. Die Personas wachsen aus der Zielgruppe
-des Briefs; die Journeys müssen **zusammen alle Kernfähigkeiten des
-Briefs abdecken**.
+You derive, from an approved brief, the **people who use the product and
+their paths through it** - as a small, linked Confluence tree under the
+brief. The personas grow out of the brief's audience; the journeys must
+**together cover all of the brief's core capabilities**.
 
-## Prinzipien
+## Output language
 
-- **Schlank halten**: ein bis zwei Personas, ein bis zwei Journeys. Die
-  Personas decken gemeinsam die Kernfähigkeiten ab - mehr ist selten
-  nötig und macht das Bild unübersichtlich.
-- **Vorschlagen statt ausfragen**: Formuliere Personas und Journeys als
-  konkreten Vorschlag, der Nutzer korrigiert.
-- **Beschriebene Listenelemente, keine Stichwortwüste**: jeder Punkt ist
-  ein Halbsatz, der erklärt, *warum* er dazugehört.
-- **Journey als Story, nicht als Tabelle**: eine zusammenhängende,
-  erzählte Story mit Auslöser, Pain Points und dem, was die App ändert -
-  keine Spaltenwüste, keine Emoji-Kurve.
-- **Problem-Fokus**: die Journey zeigt, wie ein Problem gelöst wird,
-  nicht eine Feature-Aufzählung.
+Author the personas and journeys - prose, headings, and labels - in the
+**user's language**. Take it from the conversation, or ask once at the
+start if it is unclear ("Which language should the pages be written
+in?"). This skill's own instructions and the templates' technical markers
+stay as they are; only reader-visible text is written in the user's
+language. See the templates for exactly what never gets translated.
 
-## Vorgehen
+## Principles
 
-### Schritt 0: Brief lesen
+- **Keep it lean**: one to two personas, one to two journeys. The
+  personas together cover the core capabilities - more is rarely needed
+  and clutters the picture.
+- **Propose, don't interrogate**: phrase personas and journeys as a
+  concrete proposal that the user corrects.
+- **Described list items, not a keyword dump**: each point is a
+  half-sentence saying *why* it belongs.
+- **Journey as a story, not a table**: one coherent, narrated story with
+  a trigger, pain points, and what the app changes - no column jungle, no
+  emoji curve.
+- **Stay problem-focused**: the journey shows how a problem gets solved,
+  not a feature list.
 
-Lies den Brief (aus Confluence, einer Datei oder per Einfügen). Fasse
-**Zielgruppe** und **Kernfähigkeiten** kurz zusammen und bestätige mit
-dem Nutzer. Stimme den Scope ab: wie viele Personas und Journeys (Default
-1-2 je). Kündige den Ablauf an: Personas → Journeys → Abdeckungs-Check.
+## Procedure
 
-**Bestehende Personas/Journeys**: Falls schon welche existieren, frage,
-ob du sie aktualisieren oder neue anlegen sollst.
+### Step 0: Read the brief
 
-### Schritt 1: Personas entwickeln
+Read the brief (from Confluence, a file, or pasted in). Summarize the
+**audience** and **core capabilities** briefly and confirm with the user.
+Agree on the scope: how many personas and journeys (default 1-2 each).
+Announce the flow: personas → journeys → coverage check.
 
-Schlage aus der Zielgruppe des Briefs ein bis zwei Personas vor. Für
-jede:
+**Existing personas/journeys**: if some already exist, ask whether to
+update them or create new ones.
 
-- **Name, Alter, Kurzcharakterisierung** (z.B. „die überforderte
-  Sammlerin") - wird der Seitentitel.
-- **Beschreibung** als kurze Prosa (ein Absatz): Kontext, Situation, warum
-  das Problem sie trifft. Kommt später ins Excerpt-Makro.
-- **Erwartungen**: drei bis vier, je mit **kurzem Titel** und einem, zwei
-  Sätzen Begründung. Der Titel wird eine h3-Überschrift (Anker), sodass
-  Journeys später auf eine einzelne Erwartung verlinken können.
+### Step 1: Develop personas
 
-Achte darauf, dass die Personas zusammen die Kernfähigkeiten motivieren.
-Paraphrasiere jede Persona und hole Bestätigung.
+Propose one to two personas from the brief's audience. For each:
 
-### Schritt 2: Journeys erarbeiten
+- **Name, age, short characterization** (e.g. "the overwhelmed
+  collector") - becomes the page title.
+- **Description** as short prose (one paragraph): context, situation, why
+  the problem hits them. Goes into the excerpt macro later.
+- **Expectations**: three to four, each with a **short title** and one or
+  two sentences of reasoning. The title becomes an h3 heading (anchor), so
+  journeys can later link to a single expectation.
 
-Eine Journey je Persona (oder für die wichtigsten). Für jede sammelst du:
+Make sure the personas together motivate the core capabilities.
+Paraphrase each persona and get confirmation.
 
-- **Kurzzusammenfassung** (ein Satz) - kommt ins Excerpt.
-- **Persona**: welche Persona sie durchläuft (wird per Excerpt-Include
-  eingebunden).
-- **Adressierte Kernfähigkeiten** aus dem Brief - als Liste in die
-  Seiteneigenschaften; zugleich die Brücke zu den späteren Epics.
-- **Auslöser**: der konkrete Moment, der die Journey startet.
-- **Journey**: eine zusammenhängende, erzählte Story (Happy Path) als
-  Prosa-Absatz.
-- **Pain Points heute**: drei bis vier, je **kurzer Titel + Begründung**.
-- **Was die App ändert**: drei bis vier, je **kurzer Titel + Begründung**.
+### Step 2: Work out journeys
 
-Das **Epic entsteht erst in der Planung** - „Epic in Jira" und
-„Zugehörige Vorgänge" bleiben auf der Journey-Seite zunächst Platzhalter
-(„folgt") und werden dann ergänzt.
+One journey per persona (or for the most important ones). For each you
+collect:
 
-### Schritt 3: Abdeckung prüfen
+- **Short summary** (one sentence) - goes into the excerpt.
+- **Persona**: which persona runs through it (embedded via
+  excerpt-include).
+- **Addressed core capabilities** from the brief - as a list in the page
+  properties; at the same time the bridge to the later epics.
+- **Trigger**: the concrete moment that starts the journey.
+- **Journey**: one coherent, narrated story (happy path) as a prose
+  paragraph.
+- **Pain points today**: three to four, each **short title + reasoning**.
+- **What the app changes**: three to four, each **short title +
+  reasoning**.
 
-Prüfe: Wird **jede Kernfähigkeit** des Briefs von mindestens einer
-Journey berührt? Fehlt etwas, schlage eine ergänzende Journey oder Persona
-vor. Hole finale Bestätigung.
+The **epic only comes into being during planning** - "Epic in Jira" and
+"Related work items" stay placeholders ("to follow") on the journey page
+at first and are filled in then.
 
-## Abschluss: als Confluence-Baum anlegen
+### Step 3: Check coverage
 
-Gemeinsame Stil-Regel: `references/confluence-style.md` (Marker je
-Abschnittstyp - Themen-Emojis auf Listen, Status-Chips für Pain/Lösung,
-benannter Excerpt ohne Panel).
+Check: is **every core capability** of the brief touched by at least one
+journey? If something is missing, propose an additional journey or
+persona. Get final confirmation.
 
-1. Lies die Vorlagen aus `references/templates.md`.
-2. Lege die Struktur **unter dem Brief** an (frage nach der Brief-Seite
-   als Eltern). „Personas" und „Journeys" sollen **Confluence-Folder**
-   sein, keine Seiten (die Gruppenknoten tragen keinen Inhalt) - aber der
-   Atlassian-Connector **kann keine Folder anlegen**. Bitte den Nutzer
-   daher, die zwei Folder „Personas" und „Journeys" unter dem Brief
-   anzulegen (oder dir die vorhandenen zu nennen), und lege dann **eine
-   Seite pro Persona** bzw. **pro Journey** in den passenden Folder.
-   Einzelne Persona-Seiten, damit sie per Suche direkt verlinkbar sind.
-   Erzeuge nie leere Gruppen-Seiten als Ersatz für Folder.
-3. Setze die Links: Journey → ihre Persona (glatter Seiten-Link, kein
-   Anker), Persona → ihre Journey, beide verweisen auf den Brief.
-4. Falls kein Confluence verfügbar ist, schreibe die Seiten als
-   Markdown-Dateien und nenne die Pfade.
+## Finish: create the Confluence tree
 
-### Persona-Seite: Format (HTML+)
+Shared style rule: `references/confluence-style.md` (a marker per section
+type - topic emojis on lists, status chips for pain/solution, a named
+excerpt without a panel).
 
-Lege Persona-Seiten über das **HTML+-Format** an (`contentFormat: html`) -
-Makros und Layouts gehen so zuverlässig, ADF von Hand nicht. Aufbau:
+1. Read the templates from `references/templates.md`.
+2. Create the structure **under the brief** (ask for the brief page as
+   parent). "Personas" and "Journeys" should be **Confluence folders**,
+   not pages (the group nodes carry no content) - but the Atlassian
+   connector **cannot create folders**. So ask the user to create the two
+   folders "Personas" and "Journeys" under the brief (or to name the
+   existing ones), and then create **one page per persona** resp. **per
+   journey** in the matching folder. Individual persona pages so they are
+   directly linkable by search. Never create empty group pages as a
+   substitute for folders.
+3. Set the links: journey → its persona (plain page link, no anchor),
+   persona → its journey, both point to the brief.
+4. If no Confluence is available, write the pages as Markdown files and
+   name the paths.
 
-1. **Excerpt-Makro, benannt `summary`**, um die Beschreibung (ein
-   Absatz):
+### Persona page: format (HTML+)
+
+Create persona pages via the **HTML+ format** (`contentFormat: html`) -
+macros and layouts work reliably that way, ADF by hand does not.
+Structure:
+
+1. **Excerpt macro, named `summary`**, around the description (one
+   paragraph):
    `<div data-type="bodied-extension" data-extension-key="excerpt" data-extension-type="com.atlassian.confluence.macro.core" data-parameters='{"macroParams":{"name":{"value":"summary"}}}'><p>…</p></div>`.
-   Der Name „summary" zeigt „Summary" statt „Auszug ohne Titel" an und ist
-   der Auszug, den die Journey per Excerpt-Include zieht. Der Name greift
-   **nur mit dem `macroParams`-Wrapper**.
-2. **Seiteneigenschaften-Makro** (`data-extension-key="details"`) mit
-   einer Key-Value-Tabelle: Zeile „Beteiligt an diesen Journey(s)" →
-   Journey(s) als **Inline-Karte**, Zeile „Produktbrief" → Brief als
-   Inline-Karte (`<a href="…" data-card-appearance="inline">…</a>`). So
-   sind die Felder per Seiteneigenschaften-Report auswertbar.
-   **Kein `<thead>`** - beide Zeilen in `<tbody>`, die linke Zelle je
-   Zeile ein `<th>` (Zeilen-Header). Ein `<thead>` macht die erste Zeile
-   instabil (wird mal als Kopfzeile über beide Spalten interpretiert).
-3. **`<h2>Erwartungen</h2>`**.
-4. Die Erwartungen als **2-Spalten-Layout**
+   The name `summary` displays "Summary" instead of "Excerpt without
+   title" and is the excerpt the journey pulls via excerpt-include. The
+   name only takes effect **with the `macroParams` wrapper**.
+2. **Page-properties macro** (`data-extension-key="details"`) with a
+   key-value table: row "Involved in these journey(s)" → journey(s) as an
+   **inline card**, row "Product brief" → brief as an inline card
+   (`<a href="…" data-card-appearance="inline">…</a>`). This makes the
+   fields evaluable via a page-properties report. **No `<thead>`** - both
+   rows in `<tbody>`, the left cell of each row a `<th>` (row header). A
+   `<thead>` makes the first row unstable (sometimes interpreted as a
+   header spanning both columns).
+3. **`<h2>Expectations</h2>`**.
+4. The expectations as a **2-column layout**
    (`<section data-type="layout-two-equal" data-breakout="wide" data-breakout-width="760">`
-   mit zwei `<div data-type="column" data-width="50">`), je Erwartung eine
-   **`<h3>` (Titel mit einem passenden Emoji davor)** + `<p>` (Text). Das
-   Emoji je zum Thema der App und der Erwartung wählen, nicht fix. Die h3
-   gibt jeder Erwartung einen **Anker** für spätere Deep-Links aus
-   Journeys.
+   with two `<div data-type="column" data-width="50">`), each expectation
+   an **`<h3>` (title with a fitting emoji in front)** + `<p>` (text).
+   Choose the emoji per the app's topic and the expectation, not fixed.
+   The h3 gives each expectation an **anchor** for later deep links from
+   journeys.
 
-### Journey-Seite: Format (HTML+)
+### Journey page: format (HTML+)
 
-Auch als HTML+ (`contentFormat: html`). Aufbau:
+Also as HTML+ (`contentFormat: html`). Structure:
 
-1. **Excerpt-Makro** (benannt `summary`) mit der Kurzzusammenfassung.
-2. **Seiteneigenschaften-Makro** (`details`), Tabelle als reines `tbody`:
-   Zeile „Epic in Jira" → das Epic; solange es keins gibt, der Text
-   **„folgt"** (kein Link - die Planung macht daraus den echten
-   Jira-Link); Zeile
-   „Adressierte Kernfähigkeiten" → **Bullet-Liste der im Brief
-   adressierten Kernfähigkeiten**, die die Journey bedient (in der
-   Discovery ausfüllen).
-3. **`<h2>Persona(s)</h2>`** + **Excerpt-Include**, das die Persona per
-   Seitentitel zieht (bindet deren benannten `summary`-Auszug ein):
-   `<div data-type="extension" data-extension-key="excerpt-include" data-extension-type="com.atlassian.confluence.macro.core" data-parameters='{"macroParams":{"":{"value":"{Persona-Seitentitel}"}}}'></div>`
-4. **`<h2>Auslöser</h2>`** + Absatz.
-5. **`<h2>Journey</h2>`** + erzählter Absatz.
-6. **`<h2>Pain Points heute</h2>`** + 2-Spalten-Layout (760), je Punkt
-   `<h3>` mit einem **roten Status-Chip `Problem`** vor dem Titel
+1. **Excerpt macro** (named `summary`) with the short summary.
+2. **Page-properties macro** (`details`), table as a plain `tbody`: row
+   "Epic in Jira" → the epic; as long as there is none, the text **"to
+   follow"** (no link - planning turns it into the real Jira link); row
+   "Addressed core capabilities" → **bullet list of the brief's addressed
+   core capabilities** that the journey serves (fill in during
+   discovery).
+3. **`<h2>Persona(s)</h2>`** + **excerpt-include** that pulls the persona
+   by page title (embeds its named `summary` excerpt):
+   `<div data-type="extension" data-extension-key="excerpt-include" data-extension-type="com.atlassian.confluence.macro.core" data-parameters='{"macroParams":{"":{"value":"{persona page title}"}}}'></div>`
+4. **`<h2>Trigger</h2>`** + paragraph.
+5. **`<h2>Journey</h2>`** + narrated paragraph.
+6. **`<h2>Pain points today</h2>`** + 2-column layout (760), each point
+   `<h3>` with a **red status chip `Problem`** in front of the title
    (`<span data-type="status" data-color="red">Problem</span>`) + `<p>`.
-7. **`<h2>Was die App ändert</h2>`** + 2-Spalten-Layout, je Punkt `<h3>`
-   mit einem **grünen Status-Chip `Lösung`** vor dem Titel + `<p>`.
-8. **`<h2>Zugehörige Vorgänge</h2>`** + eine **Jira-Datasource-Block-Card**
-   auf `parent = EPIC-KEY` (Spalten Typ/Key/Summary/Assignee/Status). Die
-   Datasource braucht neben `cloudId` und JQL das **`id`-Feld** (Jira-
-   Datasource-Provider) - fehlt es, rendert statt der Tabelle nur eine
-   „N Issues"-Kachel. Am einfachsten die komplette Datasource-JSON aus
-   einer bestehenden Jira-Issues-Card übernehmen.
+7. **`<h2>What the app changes</h2>`** + 2-column layout, each point
+   `<h3>` with a **green status chip `Solution`** in front of the title +
+   `<p>`.
+8. **`<h2>Related work items</h2>`** + a **Jira datasource block card** on
+   `parent = EPIC-KEY` (columns type/key/summary/assignee/status). Beyond
+   `cloudId` and JQL, the datasource needs the **`id` field** (Jira
+   datasource provider) - without it the table renders as just an
+   "N issues" tile instead. Easiest is to copy the complete datasource
+   JSON from an existing Jira issues card.
 
-Zwei Platzhalter bis zum Backfill: die Zeile „Epic in Jira" zeigt
-**„folgt"**, die Datasource-JQL nutzt **`parent = EPIC-KEY`** (rendert
-leer als „0 Issues", kein Fehler). Die Planung setzt beide auf das echte
-Epic.
+Two placeholders until backfill: the row "Epic in Jira" shows **"to
+follow"**, the datasource JQL uses **`parent = EPIC-KEY`** (renders empty
+as "0 issues", no error). Planning sets both to the real epic.
 
-`<thead>`-Hinweis von oben gilt auch hier.
+The `<thead>` note from above applies here too.
 
-## Stil
+## Style
 
-- Vorschlagen statt ausfragen, ein Thema nach dem anderen.
-- Paraphrasieren, um Verständnis zu zeigen.
-- Personas realistisch halten, Journeys konkret und erzählt.
-- Antworte in der Sprache des Nutzers.
+- Propose, don't interrogate; one topic at a time.
+- Paraphrase to show understanding.
+- Keep personas realistic, journeys concrete and narrated.

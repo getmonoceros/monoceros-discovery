@@ -1,90 +1,102 @@
-# Vorlagen: Epic & Story (für Jira)
+# Templates: Epic & Story (for Jira)
 
-In Jira als **ADF**. Regeln:
+In Jira as **ADF**. Rules:
 
-- **Referenzen als ADF-Karten**, nie als rohe URL/Markdown-Link.
-  Prominente Einzel-Referenzen (Journey am Epic, Design-Screen an der
-  Story) als volle **`blockCard`**. Kontext-Referenzen an der Story
-  (Persona, Journey, Technical Brief) als **`inlineCard` mit fettem
-  Label davor** (`Persona:`, `Journey:`, `Technical Brief:`).
-- **Akzeptanzkriterien als Checkbox-Liste**; Given/When/Then je auf
-  eigener Zeile, Labels **fett und in Farbe `#403294`**.
-- Beschreibungen strukturiert, nicht als Prosa-Wust.
+- **References as ADF cards**, never as a raw URL/Markdown link.
+  Prominent single references (journey on the epic, design screen on the
+  story) as a full **`blockCard`**. Context references on the story
+  (persona, journey, technical brief) as an **`inlineCard` with a bold
+  label in front** (`Persona:`, `Journey:`, `Technical Brief:`).
+- **Acceptance criteria as a checkbox list**; Given/When/Then each on
+  its own line, labels **bold and in color `#403294`**.
+- Descriptions structured, not a wall of prose.
 
-Ziel: die Story ist autark. Entferne die Klammer-Hinweise in der finalen
-Fassung.
+Goal: the story is self-contained. Remove the `{...}` hints in the final
+version.
+
+## Output language - what to translate and what not
+
+Render **all reader-visible text in the output language** (the user's language):
+issue summaries, description prose, section headings, and list items. The
+English strings below are the **reference meaning**, not literal output.
+
+**Never translate** (leave verbatim): Jira field names (Summary, Parent, Label),
+issue-type keys, JQL, status/workflow ids, the label values `business` /
+`architectural`, ADF node types (`blockCard`, `inlineCard`), the color
+`#403294`, any `data-*`/macro identifiers, the BDD keywords Given/When/Then, and
+the artifact-type names (Persona, Journey, Technical Brief, Epic, Story).
 
 ---
 
-## Epic (Business) - schlank, Vermittler zur Journey
+## Epic (Business) - lean, bridge to the journey
 
-- **Summary**: {kurzer, prägnanter Titel}
+- **Summary**: {short, crisp title}
 - **Label**: `business`
 
-{Ein bis zwei Sätze Prosa: die Essenz des Epics.}
+{One or two sentences of prose: the essence of the epic.}
 
-{Journey als blockCard}
+{Journey as blockCard}
 
-### Akzeptanzkriterien
+### {Acceptance criteria}
 
-- [ ] {epic-weites Kriterium}
+- [ ] {epic-wide criterion}
 - [ ] {…}
 
 ---
 
 ## Epic (Architectural)
 
-- **Summary**: {Walking Skeleton …}
+- **Summary**: {Walking skeleton …}
 - **Label**: `architectural`
 
-{Ein bis zwei Sätze Prosa.}
+{One or two sentences of prose.}
 
-{Technical Brief als blockCard}
+{Technical Brief as blockCard}
 
-### Akzeptanzkriterien
+### {Acceptance criteria}
 
 - [ ] {…}
 
 ---
 
-## Story - autark
+## Story - self-contained
 
-Als {Persona} möchte ich {Funktion}, um {Nutzen}.
+As a {persona} I want {capability}, so that {value}.
 
-### Fachlicher Kontext
+### {Business context}
 
-Ein paar Sätze zum Bedürfnis dahinter - genug, dass der fachliche Sinn
-klar ist (kein Ein-Satz-Verweis).
+A few sentences on the need behind it - enough that the business sense is
+clear (not a one-sentence reference).
 
-**Persona:** {Persona als Inline-Karte}
+**Persona:** {persona as inline card}
 
-**Journey:** {Journey als Inline-Karte}
+**Journey:** {journey as inline card}
 
-### Umsetzungsinformationen
+### {Implementation notes}
 
-Plan als Liste - was zu tun ist und woran zu denken:
+Plan as a list - what to do and what to keep in mind:
 
-- {Backend: Endpoint, Persistenz/Migration}
-- {Frontend: Komponente(n)}
-- {Integrationen: Auth, Speicher, externe Dienste}
-- {Randfälle}
-- {Testebene}
+- {Backend: endpoint, persistence/migration}
+- {Frontend: component(s)}
+- {Integrations: auth, storage, external services}
+- {Edge cases}
+- {Test level}
 
-**Technical Brief:** {als Inline-Karte}
+**Technical Brief:** {as inline card}
 
-## Design
+## {Design}
 
-{Nur wenn die Story UI/Frontend berührt: der Design-Screen bzw. Prototyp
-als volle `blockCard` (URL aus dem Prompt oder beim Nutzer erfragt,
-werkzeugunabhängig). Sonst diesen Abschnitt weglassen.}
+{Only if the story touches UI/frontend: the design screen or prototype
+as a full `blockCard` (URL from the prompt or asked from the user,
+tool-agnostic). Otherwise leave this section out.}
 
-### Akzeptanzkriterien
+### {Acceptance criteria}
 
-Given/When/Then fett und in Farbe `#403294`, je auf eigener Zeile:
+Given/When/Then bold and in color `#403294`, each on its own line:
 
-- [ ] **Given** {Ausgangslage}
-  **When** {Aktion}
-  **Then** {erwartetes, prüfbares Ergebnis}
+- [ ] **Given** {initial situation}
+  **When** {action}
+  **Then** {expected, verifiable result}
 - [ ] **Given** {…}
   **When** {…}
   **Then** {…}

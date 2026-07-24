@@ -1,105 +1,113 @@
-# Vorlage: Design Brief (HTML+)
+# Template: Design Brief (HTML+)
 
-In Confluence als **HTML+** (`contentFormat: html`). Marker je
-Abschnittstyp - siehe `references/confluence-style.md`. Beschreibe die
-**Richtung**, nicht fertige Tokens. Entferne die Klammer-Hinweise.
+In Confluence as **HTML+** (`contentFormat: html`). A marker per section type -
+see `references/confluence-style.md`. Describe the **direction**, not finished
+tokens. Remove the `{...}` hints.
 
-Seitentitel: `{Produktname} | Design Brief` (Konvention: Produkt zuerst,
-dann Artefakt-Typ, getrennt mit `|`. Das Artefakt-Wort ist englisch, damit
-die Titel sprachneutral bleiben; der Seiteninhalt folgt der Sprache des
-Nutzers.)
+Page title: `{Product name} | Design Brief` (convention: product first, then
+artifact type, separated by `|`. The artifact word stays **English** so titles
+are language-neutral; the page content follows the output language.)
 
-## Leitidee: Rhythmus statt Raster
+## Output language - what to translate and what not
 
-Der Design Brief hat ein **festes Abschnitts-Skelett**, aber **kein
-einheitliches Layout**. Genau das ist der Punkt: würde jeder Abschnitt
-gleich aussehen (überall 2-Spalten, überall Emoji), wird die Seite
-unlesbar. Deshalb bekommt **jeder Abschnitt eine andere Behandlung, und
-kein zweimal dasselbe direkt hintereinander**. Die Behandlung passt zum
-Inhalt. Konkret die freigegebene Aufteilung:
+Render **all reader-visible text in the output language** (the user's language):
+section headings (`<h2>`/`<h3>` text), status-chip labels, color words, the
+italic disclaimer, and prose. The English strings below are the **reference
+meaning**, not literal output.
 
-| Abschnitt | Behandlung |
+**Never translate** (leave verbatim): every `data-*` attribute, `data-extension-key`
+and extension type, macro parameter names, the excerpt name `Summary`,
+`data-color` values, the page-title artifact word (`Design Brief`), and any
+macro/excerpt name. Emojis are structural markers - keep them.
+
+## Guiding idea: rhythm, not a grid
+
+The design brief has a **fixed section skeleton**, but **no uniform layout**.
+That is exactly the point: if every section looked the same (2 columns
+everywhere, emoji everywhere), the page would become unreadable. So **each
+section gets a different treatment, and never the same one twice in direct
+succession**. The treatment fits the content. Concretely, the approved layout:
+
+| Section | Treatment |
 |---|---|
-| Design-Ziel (Nordstern) | benannter Auszug `Summary`, reiner Text |
-| Markenpersönlichkeit & Tonalität | volle Breite, h3 + p, **Stimmungs-Emoji** je Zug |
-| Gestaltungsprinzipien | 2-Spalten (760), **Themen-Emoji** je Prinzip |
-| Visuelle Richtung | volle Breite, h3 + p; **Palette mit Farb-Chips** als Mini-Vorschau; Kursiv-Disclaimer am Ende |
-| Schlüssel-Screens | volle Breite, h3 + p, **durchnummeriert** 1️⃣ 2️⃣ 3️⃣ … |
-| Interaktion & Plattform | 2-Spalten (760), **Themen-Emoji** je Punkt |
-| Barrierefreiheit | volle Breite, h3 + p, **blauer `Pflicht`-Chip** je Anforderung |
-| Marke & Assets | 2-Spalten (760), schlicht (kein Emoji) |
-| Was die Generierung liefern soll | **Success-Panel** |
+| Design goal (north star) | named excerpt `Summary`, plain text |
+| Brand personality & tone | full width, h3 + p, **mood emoji** per trait |
+| Design principles | 2 columns (760), **topic emoji** per principle |
+| Visual direction | full width, h3 + p; **palette with color chips** as a mini preview; italic disclaimer at the end |
+| Key screens | full width, h3 + p, **numbered** 1️⃣ 2️⃣ 3️⃣ … |
+| Interaction & platform | 2 columns (760), **topic emoji** per point |
+| Accessibility | full width, h3 + p, **blue `Required` chip** per requirement |
+| Brand & assets | 2 columns (760), plain (no emoji) |
+| What the generation should deliver | **success panel** |
 
-Emojis app-passend wählen (nicht fix). 2-Spalten einheitlich `760`; bei
-ungerader Zahl letzte Spalte leer (`<p></p>`).
+Choose emojis to fit the app (not fixed). 2 columns uniformly `760`; on an odd
+count leave the last column empty (`<p></p>`).
 
-## HTML-Muster je Typ
+## HTML patterns per type
 
-**Auszug (Nordstern):**
+**Excerpt (north star):**
 
 ```html
-<h2>Design-Ziel (Nordstern)</h2>
-<div data-type="bodied-extension" data-extension-key="excerpt" data-extension-type="com.atlassian.confluence.macro.core" data-parameters='{"macroParams":{"name":{"value":"Summary"}}}'><p>{Ein Satz: welches Gefühl oder Ergebnis das Design erreichen muss.}</p></div>
+<h2>{Design goal (north star)}</h2>
+<div data-type="bodied-extension" data-extension-key="excerpt" data-extension-type="com.atlassian.confluence.macro.core" data-parameters='{"macroParams":{"name":{"value":"Summary"}}}'><p>{One sentence: which feeling or outcome the design must achieve.}</p></div>
 ```
 
-**Volle Breite mit Emoji** (Markenpersönlichkeit, Schlüssel-Screens
-durchnummeriert):
+**Full width with emoji** (brand personality, key screens numbered):
 
 ```html
-<h2>Markenpersönlichkeit und Tonalität</h2>
-<h3>{Emoji} {Eigenschaft 1}</h3>
-<p>{wie sich die App anfühlt/klingt und warum}</p>
-<h3>{Emoji} {Eigenschaft 2}</h3>
+<h2>{Brand personality and tone}</h2>
+<h3>{Emoji} {Trait 1}</h3>
+<p>{how the app feels/sounds and why}</p>
+<h3>{Emoji} {Trait 2}</h3>
 <p>{…}</p>
 ```
 
-**2-Spalten mit Emoji** (Gestaltungsprinzipien, Interaktion) - je Paar ein
-`<section>`:
+**2 columns with emoji** (design principles, interaction) - one `<section>` per
+pair:
 
 ```html
-<h2>Gestaltungsprinzipien</h2>
-<section data-type="layout-two-equal" data-breakout="wide" data-breakout-width="760"><div data-type="column" data-width="50"><h3>{Emoji} {Prinzip 1}</h3><p>{aus welchem Persona-Bedürfnis}</p></div><div data-type="column" data-width="50"><h3>{Emoji} {Prinzip 2}</h3><p>{…}</p></div></section>
+<h2>{Design principles}</h2>
+<section data-type="layout-two-equal" data-breakout="wide" data-breakout-width="760"><div data-type="column" data-width="50"><h3>{Emoji} {Principle 1}</h3><p>{from which persona need}</p></div><div data-type="column" data-width="50"><h3>{Emoji} {Principle 2}</h3><p>{…}</p></div></section>
 ```
 
-**Visuelle Richtung** - volle Breite; die Palette bekommt eine
-Farb-Chip-Zeile als Mini-Vorschau (Chip-Farben grob zur beschriebenen
-Palette), am Ende der Kursiv-Disclaimer:
+**Visual direction** - full width; the palette gets a color-chip row as a mini
+preview (chip colors roughly matching the described palette), the italic
+disclaimer at the end:
 
 ```html
-<h2>Visuelle Richtung</h2>
-<h3>Palette</h3>
-<p><span data-type="status" data-color="green">{Farbwort 1}</span> <span data-type="status" data-color="yellow">{Farbwort 2}</span> <span data-type="status" data-color="grey">{Farbwort 3}</span></p>
-<p>{Palette als Stimmung beschrieben}</p>
-<h3>Bildsprache</h3><p>{…}</p>
-<h3>Typografie</h3><p>{…}</p>
-<h3>Form</h3><p>{…}</p>
-<p><em>Richtung, keine finalen Tokens. Die entstehen in der Generierung.</em></p>
+<h2>{Visual direction}</h2>
+<h3>{Palette}</h3>
+<p><span data-type="status" data-color="green">{Color word 1}</span> <span data-type="status" data-color="yellow">{Color word 2}</span> <span data-type="status" data-color="grey">{Color word 3}</span></p>
+<p>{palette described as a mood}</p>
+<h3>{Imagery}</h3><p>{…}</p>
+<h3>{Typography}</h3><p>{…}</p>
+<h3>{Form}</h3><p>{…}</p>
+<p><em>{Direction, not final tokens. They emerge during generation.}</em></p>
 ```
 
-**Barrierefreiheit** - volle Breite, je Anforderung ein blauer
-`Pflicht`-Chip vor dem Titel:
+**Accessibility** - full width, a blue `Required` chip before the title per
+requirement:
 
 ```html
-<h2>Barrierefreiheit</h2>
-<h3><span data-type="status" data-color="blue">Pflicht</span> {Anforderung 1}</h3><p>{…}</p>
-<h3><span data-type="status" data-color="blue">Pflicht</span> {Anforderung 2}</h3><p>{…}</p>
+<h2>{Accessibility}</h2>
+<h3><span data-type="status" data-color="blue">{Required}</span> {Requirement 1}</h3><p>{…}</p>
+<h3><span data-type="status" data-color="blue">{Required}</span> {Requirement 2}</h3><p>{…}</p>
 ```
 
-**Success-Panel (Was die Generierung liefern soll)** - der Handoff in den
-Bau, `<strong>`-geführte Absätze:
+**Success panel (what the generation should deliver)** - the handoff into the
+build, `<strong>`-led paragraphs:
 
 ```html
-<h2>Was die Generierung liefern soll</h2>
-<div data-type="panel-success"><p><strong>Design-System als Tokens</strong>: {Farbe, Typografie, Abstände, Radien, Zustände, plus Komponenten-Set}.</p><p><strong>Hifi-Prototyp der Schlüssel-Screens</strong>: {die Screens aus dem Abschnitt oben}.</p><p><strong>Als Code</strong>: {Tokens plus HTML- oder React-Prototyp, damit die Werkbank direkt weiterarbeitet, nicht Figma-only}.</p></div>
+<h2>{What the generation should deliver}</h2>
+<div data-type="panel-success"><p><strong>{Design system as tokens}</strong>: {color, typography, spacing, radii, states, plus a component set}.</p><p><strong>{Hi-fi prototype of the key screens}</strong>: {the screens from the section above}.</p><p><strong>{As code}</strong>: {tokens plus an HTML or React prototype, so the workbench can work on it directly, not Figma-only}.</p></div>
 ```
 
-Regeln:
+Rules:
 
-- **Nordstern** = benannter Auszug `Summary`, reiner Text, **kein Panel**
-  (kann transkludiert werden).
-- **Rhythmus wahren**: kein Abschnitt sieht aus wie sein direkter Nachbar.
-  Wenn Inhalt und Menge es nahelegen, darf ein Abschnitt auch anders
-  behandelt werden als in der Tabelle - solange die Seite abwechslungsreich
-  und lesbar bleibt.
-- **Handoff** = **Success-Panel**.
-- 2-Spalten einheitlich `760`; bei ungerader Zahl letzte Spalte leer.
+- **North star** = named excerpt `Summary`, plain text, **no panel** (can be
+  transcluded).
+- **Keep the rhythm**: no section looks like its direct neighbor. When content
+  and volume suggest it, a section may be treated differently than in the table -
+  as long as the page stays varied and readable.
+- **Handoff** = **success panel**.
+- 2 columns uniformly `760`; on an odd count leave the last column empty.

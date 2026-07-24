@@ -1,58 +1,73 @@
-# Vorlagen: Personas & Journeys
+# Templates: Personas & Journeys
 
-Beide als HTML+ (`contentFormat: html`) mit Makros/Layout. Entferne die
-Klammer-Hinweise in der finalen Fassung.
+Both as HTML+ (`contentFormat: html`) with macros/layout. Remove the
+`{...}` hints in the final version.
+
+## Output language - what to translate and what not
+
+Render **all reader-visible text in the output language** (the user's
+language): section headings (`<h2>`/`<h3>` text), table row labels,
+status-chip labels, link text, and prose. The English strings below are
+the **reference meaning**, not literal output.
+
+**Never translate** (leave verbatim): every `data-*` attribute,
+`data-extension-key` and extension type, macro parameter names (the
+excerpt name `summary`), `data-color` values, JQL, `cloudId` and
+datasource ids, the page-title artifact word (`Journey`), and the
+artifact-type names (Persona, Journey, Brief, Epic) wherever they appear as
+a heading or reference label. Emojis are structural markers - keep them.
 
 ---
 
-## Persona-Seite (HTML+, `contentFormat: html`)
+## Persona page (HTML+, `contentFormat: html`)
 
-Seitentitel: `{Name}, {Alter} - {Kurzcharakterisierung}`
+Page title: `{Name}, {age} - {short characterization}`
 
 ```html
-<div data-type="bodied-extension" data-extension-key="excerpt" data-extension-type="com.atlassian.confluence.macro.core" data-parameters='{"macroParams":{"name":{"value":"summary"}}}'><p>{Kurze Prosa: Kontext, Situation, warum das Problem genau sie trifft.}</p></div>
-<div data-type="bodied-extension" data-extension-key="details" data-extension-type="com.atlassian.confluence.macro.core"><table data-width="760"><tbody><tr><th><p><strong>Beteiligt an diesen Journey(s)</strong></p></th><td><p><a href="{journey-url}" data-card-appearance="inline">{journey-url}</a></p></td></tr><tr><th><p><strong>Produktbrief</strong></p></th><td><p><a href="{brief-url}" data-card-appearance="inline">{brief-url}</a></p></td></tr></tbody></table></div>
-<h2>Erwartungen</h2>
-<section data-type="layout-two-equal" data-breakout="wide" data-breakout-width="760"><div data-type="column" data-width="50"><h3>{Emoji} {Erwartung 1 - Titel}</h3><p>{ein, zwei Sätze}</p></div><div data-type="column" data-width="50"><h3>{Emoji} {Erwartung 2 - Titel}</h3><p>{…}</p></div></section>
-<section data-type="layout-two-equal" data-breakout="wide" data-breakout-width="760"><div data-type="column" data-width="50"><h3>{Emoji} {Erwartung 3 - Titel}</h3><p>{…}</p></div><div data-type="column" data-width="50"><h3>{Emoji} {Erwartung 4 - Titel}</h3><p>{…}</p></div></section>
+<div data-type="bodied-extension" data-extension-key="excerpt" data-extension-type="com.atlassian.confluence.macro.core" data-parameters='{"macroParams":{"name":{"value":"summary"}}}'><p>{Short prose: context, situation, why the problem hits exactly them.}</p></div>
+<div data-type="bodied-extension" data-extension-key="details" data-extension-type="com.atlassian.confluence.macro.core"><table data-width="760"><tbody><tr><th><p><strong>{Involved in these journey(s)}</strong></p></th><td><p><a href="{journey-url}" data-card-appearance="inline">{journey-url}</a></p></td></tr><tr><th><p><strong>Product brief</strong></p></th><td><p><a href="{brief-url}" data-card-appearance="inline">{brief-url}</a></p></td></tr></tbody></table></div>
+<h2>{Expectations}</h2>
+<section data-type="layout-two-equal" data-breakout="wide" data-breakout-width="760"><div data-type="column" data-width="50"><h3>{Emoji} {Expectation 1 - title}</h3><p>{one or two sentences}</p></div><div data-type="column" data-width="50"><h3>{Emoji} {Expectation 2 - title}</h3><p>{…}</p></div></section>
+<section data-type="layout-two-equal" data-breakout="wide" data-breakout-width="760"><div data-type="column" data-width="50"><h3>{Emoji} {Expectation 3 - title}</h3><p>{…}</p></div><div data-type="column" data-width="50"><h3>{Emoji} {Expectation 4 - title}</h3><p>{…}</p></div></section>
 ```
 
-- Der Excerpt ist **reiner Text, benannt `summary`** (kein Panel - er wird
-  von der Journey transkludiert; ein Panel würde mitreisen).
-- **Emoji** je Erwartung zum Thema der App wählen, nicht fix.
-- Die h3 je Erwartung erzeugt einen **Anker** für Deep-Links aus Journeys.
-- Bei ungerader Zahl die letzte Spalte leer lassen (`<p></p>`).
+- The excerpt is **plain text, named `summary`** (no panel - it is
+  transcluded by the journey; a panel would travel with it).
+- Choose the **emoji** per expectation to fit the app's topic, not fixed.
+- The h3 per expectation creates an **anchor** for deep links from
+  journeys.
+- On an odd count leave the last column empty (`<p></p>`).
 
 ---
 
-## Journey-Seite (HTML+, `contentFormat: html`)
+## Journey page (HTML+, `contentFormat: html`)
 
-Seitentitel: `Journey {n}: {prägnanter Titel}`
+Page title: `Journey {n}: {concise title}`
 
 ```html
-<div data-type="bodied-extension" data-extension-key="excerpt" data-extension-type="com.atlassian.confluence.macro.core" data-parameters='{"macroParams":{"name":{"value":"summary"}}}'><p>{Kurzzusammenfassung der Journey, ein Satz.}</p></div>
-<div data-type="bodied-extension" data-extension-key="details" data-extension-type="com.atlassian.confluence.macro.core"><table data-width="760"><tbody><tr><th><p><strong>Epic in Jira</strong></p></th><td><p>folgt</p></td></tr><tr><th><p><strong>Adressierte Kernfähigkeiten</strong></p></th><td><ul><li><p>{Fähigkeit A}</p></li><li><p>{Fähigkeit B}</p></li></ul></td></tr></tbody></table></div>
+<div data-type="bodied-extension" data-extension-key="excerpt" data-extension-type="com.atlassian.confluence.macro.core" data-parameters='{"macroParams":{"name":{"value":"summary"}}}'><p>{Short summary of the journey, one sentence.}</p></div>
+<div data-type="bodied-extension" data-extension-key="details" data-extension-type="com.atlassian.confluence.macro.core"><table data-width="760"><tbody><tr><th><p><strong>Epic in Jira</strong></p></th><td><p>{to follow}</p></td></tr><tr><th><p><strong>{Addressed core capabilities}</strong></p></th><td><ul><li><p>{Capability A}</p></li><li><p>{Capability B}</p></li></ul></td></tr></tbody></table></div>
 <h2>Persona(s)</h2>
-<div data-type="extension" data-extension-key="excerpt-include" data-extension-type="com.atlassian.confluence.macro.core" data-parameters='{"macroParams":{"":{"value":"{Persona-Seitentitel}"}}}'></div>
-<h2>Auslöser</h2>
-<p>{der konkrete Moment, der die Journey startet}</p>
+<div data-type="extension" data-extension-key="excerpt-include" data-extension-type="com.atlassian.confluence.macro.core" data-parameters='{"macroParams":{"":{"value":"{persona page title}"}}}'></div>
+<h2>{Trigger}</h2>
+<p>{the concrete moment that starts the journey}</p>
 <h2>Journey</h2>
-<p>{Erzählte Story im Präsens: wie die Persona Schritt für Schritt ihr Problem löst.}</p>
-<h2>Pain Points heute</h2>
-<section data-type="layout-two-equal" data-breakout="wide" data-breakout-width="760"><div data-type="column" data-width="50"><h3><span data-type="status" data-color="red">Problem</span> {Titel}</h3><p>{Begründung}</p></div><div data-type="column" data-width="50"><h3><span data-type="status" data-color="red">Problem</span> {Titel}</h3><p>{…}</p></div></section>
-<h2>Was die App ändert</h2>
-<section data-type="layout-two-equal" data-breakout="wide" data-breakout-width="760"><div data-type="column" data-width="50"><h3><span data-type="status" data-color="green">Lösung</span> {Titel}</h3><p>{…}</p></div><div data-type="column" data-width="50"><h3><span data-type="status" data-color="green">Lösung</span> {Titel}</h3><p>{…}</p></div></section>
-<h2>Zugehörige Vorgänge</h2>
-<div data-type="block-card" data-url="{JQL-URL mit parent = EPIC-KEY}" data-datasource='{"id":"{datasource-id}","parameters":{"cloudId":"{cloudId}","jql":"parent = EPIC-KEY ORDER BY Rank"},"views":[{"type":"table","properties":{"columns":[{"key":"issuetype"},{"key":"key"},{"key":"summary"},{"key":"assignee"},{"key":"status"}]}}]}'><a href="{JQL-URL mit parent = EPIC-KEY}">Zugehörige Vorgänge</a></div>
+<p>{Narrated story in the present tense: how the persona solves their problem step by step.}</p>
+<h2>{Pain points today}</h2>
+<section data-type="layout-two-equal" data-breakout="wide" data-breakout-width="760"><div data-type="column" data-width="50"><h3><span data-type="status" data-color="red">{Problem}</span> {title}</h3><p>{reasoning}</p></div><div data-type="column" data-width="50"><h3><span data-type="status" data-color="red">{Problem}</span> {title}</h3><p>{…}</p></div></section>
+<h2>{What the app changes}</h2>
+<section data-type="layout-two-equal" data-breakout="wide" data-breakout-width="760"><div data-type="column" data-width="50"><h3><span data-type="status" data-color="green">{Solution}</span> {title}</h3><p>{…}</p></div><div data-type="column" data-width="50"><h3><span data-type="status" data-color="green">{Solution}</span> {title}</h3><p>{…}</p></div></section>
+<h2>{Related work items}</h2>
+<div data-type="block-card" data-url="{JQL URL with parent = EPIC-KEY}" data-datasource='{"id":"{datasource-id}","parameters":{"cloudId":"{cloudId}","jql":"parent = EPIC-KEY ORDER BY Rank"},"views":[{"type":"table","properties":{"columns":[{"key":"issuetype"},{"key":"key"},{"key":"summary"},{"key":"assignee"},{"key":"status"}]}}]}'><a href="{JQL URL with parent = EPIC-KEY}">{Related work items}</a></div>
 ```
 
-- Excerpt = reiner Text, benannt `summary` (kein Panel).
-- **Pain Points** je h3 mit rotem `Problem`-Chip, **Was die App ändert** je
-  h3 mit grünem `Lösung`-Chip.
-- Bis zum Backfill: „Epic in Jira" = **„folgt"**, Datasource-JQL =
-  **`parent = EPIC-KEY`** (leer, kein Fehler). Die Planung setzt beide auf
-  das echte Epic.
-- Die Datasource braucht **`id`** (Jira-Datasource-Provider) **und**
-  `cloudId` - fehlt die `id`, rendert nur eine „N Issues"-Kachel statt der
-  Tabelle. Am einfachsten die komplette Datasource-JSON aus einer
-  bestehenden Jira-Issues-Card übernehmen.
+- Excerpt = plain text, named `summary` (no panel).
+- **Pain points** each h3 with a red `{Problem}` chip, **what the app
+  changes** each h3 with a green `{Solution}` chip.
+- Until backfill: "Epic in Jira" = **`{to follow}`**, datasource JQL =
+  **`parent = EPIC-KEY`** (empty, no error). Planning sets both to the
+  real epic.
+- The datasource needs **`id`** (Jira datasource provider) **and**
+  `cloudId` - without the `id` it renders just an "N issues" tile instead
+  of the table. Easiest is to copy the complete datasource JSON from an
+  existing Jira issues card.
