@@ -1,5 +1,5 @@
 ---
-name: discovery-design
+name: discovery-design-atlassian
 description: Derives the design brief for a product from the brief, personas, and journeys through a guided dialog - north star, brand personality, design principles, visual direction, key screens, interaction, and accessibility - and files it as a Confluence page under the brief. Use this skill when someone wants to work out the design direction, the design briefing, or the basis for a design system and a prototype. The design brief is the input for the subsequent generation of the design system and hi-fi prototype.
 allowed-tools: Read, Write, AskUserQuestion
 ---

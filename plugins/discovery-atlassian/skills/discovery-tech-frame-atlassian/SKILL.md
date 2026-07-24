@@ -1,5 +1,5 @@
 ---
-name: discovery-tech-frame
+name: discovery-tech-frame-atlassian
 description: Works a released brief into concrete technology decisions for a product - backend, frontend, auth, data storage, object storage, external services - through a guided dialog, and maps them onto a Monoceros container definition. Use this skill when someone wants to set the technical frame, the stack, the architecture, or the workbench setup for a product. The result feeds the monoceros-init definition and is the architecture reference for the build.
 ---
 
