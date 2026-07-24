@@ -1,111 +1,105 @@
 ---
 name: discovery-brief
-description: Verwandelt eine rohe Produktidee im geführten Dialog in einen schlanken, einseitigen Brief - Problem, Zielgruppe, Kernfähigkeiten, Scope, Erfolg, Rahmen - und legt ihn als Confluence-Seite ab. Nutze diesen Skill, wenn jemand eine Idee, ein Problem oder einen Bedarf für ein Produkt oder Feature festhalten will. Der Brief ist der Startpunkt der Discovery und die Grundlage für Personas, Journeys und Stories.
+description: Turns a raw product idea into a lean one-page brief - problem, audience, core capabilities, scope, success, frame - through a guided dialog, and files it as a Confluence page. Use when someone wants to capture an idea, a problem, or a need for a product or feature. The brief is the start of discovery and the basis for personas, journeys, and stories.
 allowed-tools: Read, Write, AskUserQuestion
 ---
 
 # Discovery Brief
 
-Du führst den Nutzer aus einer rohen Idee zu einem **schlanken,
-einseitigen Brief**. Der Brief hält fest, *warum* etwas gebaut werden
-soll und *was* es leisten muss - nicht *wie*.
+You guide the user from a raw idea to a **lean, one-page brief**. The brief
+captures *why* something should be built and *what* it must do - not *how*.
 
-**Wichtigste Grundregel**: Ein Brief beschreibt ein **Problem und den
-Nutzen**, nicht die Lösung. Wenn der Nutzer in Lösungen denkt („eine App
-mit Feature X"), hol ihn sanft zurück zum Problem dahinter.
+**Top rule**: a brief describes a **problem and its value**, not the solution.
+When the user thinks in solutions ("an app with feature X"), gently steer them
+back to the problem behind it.
 
-## Prinzipien
+## Output language
 
-- **Schlank halten**: Eine Seite, sieben kurze Abschnitte. Kein
-  Enterprise-Apparat (kein Cost of Delay, keine OKR-Baseline). Lieber ein
-  vollständiger knapper Brief als ein steckengebliebener Dialog.
-- **Vorschlagen statt ausfragen**: Formuliere aus dem, was der Nutzer
-  sagt, einen konkreten Vorschlag je Abschnitt. Der Nutzer korrigiert,
-  statt bei null anzufangen.
-- **Ein Abschnitt nach dem anderen**: Nicht alle Fragen auf einmal.
-- **Beschriebene Listenelemente, keine Stichwortwüste**: Jeder
-  Listenpunkt ist ein Halbsatz, der erklärt, *warum* er dazugehört -
-  nicht nur ein Schlagwort. („Nutzer mit wenig Zeit, die die App in
-  kurzen Momenten öffnen" statt „Zeitmangel".)
-- **Problem-Fokus halten**: Das *Warum* ist das Herz des Briefs.
+Author the brief - prose, headings, and labels - in the **user's language**.
+Take it from the conversation, or ask once at the start if it is unclear
+("Which language should the brief be written in?"). This skill's own
+instructions and the template's technical markers stay as they are; only
+reader-visible text is written in the user's language. See the template for
+exactly what never gets translated.
 
-## Vorgehen
+## Principles
 
-### Schritt 0: Idee einfangen
+- **Keep it lean**: one page, seven short sections. No enterprise apparatus (no
+  cost of delay, no OKR baseline). A complete, terse brief beats a stalled dialog.
+- **Propose, don't interrogate**: from what the user says, form a concrete
+  proposal per section. The user corrects, rather than starting from zero.
+- **One section at a time**: not all questions at once.
+- **Described list items, not a keyword dump**: each bullet is a half-sentence
+  saying *why* it belongs - not just a tag. ("Users with little time who open the
+  app in short moments", not "time pressure".)
+- **Stay problem-focused**: the *why* is the heart of the brief.
 
-Bitte den Nutzer, seine Idee in eigenen Worten zu beschreiben, oder nimm
-auf, was er schon gesagt hat. Spiegele sie in ein, zwei Sätzen zurück und
-bestätige, dass du das Richtige verstanden hast.
+## Procedure
 
-**Bestehender Brief**: Falls im Zielbereich schon ein Brief existiert,
-frage, ob du ihn aktualisieren oder einen neuen anlegen sollst.
+### Step 0: Capture the idea
 
-### Schritt 1: Abschnitt für Abschnitt erarbeiten
+Ask the user to describe their idea in their own words, or take up what they
+have already said. Mirror it back in a sentence or two and confirm you understood
+the right thing.
 
-Arbeite die sieben Abschnitte in dieser Reihenfolge durch. Mache je
-Abschnitt einen konkreten Vorschlag und lass den Nutzer korrigieren.
+**Existing brief**: if a brief already exists in the target space, ask whether to
+update it or create a new one.
 
-1. **In einem Satz** - die Idee in einem prägnanten Satz: für wen, was,
-   welcher Nutzen.
-2. **Problem / Warum** - das eigentliche Problem als Prosa. Frage nach,
-   wenn es zu oberflächlich bleibt: Was genau ist das Problem? Wer ist
-   betroffen? Was ist die Ursache, nicht nur das Symptom?
-3. **Zielgruppe** - zwei bis drei beschriebene Nutzergruppen. Das sät
-   später die Personas.
-4. **Kernfähigkeiten** - was das System leisten soll (was, nicht wie).
-   Beschriebene Punkte. Das sät später die Epics.
-5. **Nicht im Scope** - erfrage explizit, was NICHT dazugehört. Das ist
-   erfahrungsgemäß der wertvollste Abschnitt gegen Scope-Creep.
-6. **Woran wir Erfolg erkennen** - ein bis drei beobachtbare Signale,
-   kein Kennzahlen-Apparat.
-7. **Annahmen / Rahmen** - der einzige Ort mit etwas Technik (Plattform,
-   Login, externe Dienste), soweit schon bekannt. „Noch offen" ist ok.
+### Step 1: Work section by section
 
-Für echte Auswahlentscheidungen (z.B. Plattform-Rahmen) nutze
-**AskUserQuestion**.
+Work through the seven sections in this order. Make a concrete proposal per
+section and let the user correct it.
 
-### Schritt 2: Bestätigen
+1. **In one sentence** - the idea in one crisp sentence: for whom, what, which value.
+2. **Problem / why** - the actual problem as prose. Probe when it stays shallow:
+   what exactly is the problem? Who is affected? What is the cause, not just the symptom?
+3. **Audience** - two to three described user groups. This seeds the personas later.
+4. **Core capabilities** - what the system must do (what, not how). Described
+   bullets. This seeds the epics later.
+5. **Out of scope** - explicitly ask what does NOT belong. In practice this is the
+   most valuable section against scope creep.
+6. **How we know it works** - one to three observable signals, not a metrics apparatus.
+7. **Assumptions / frame** - the only place with some technology (platform, login,
+   external services), as far as already known. "Still open" is fine.
 
-Fasse den Brief zusammen und frage: „Passt das so? Fehlt etwas, ist etwas
-zu viel?" Integriere Korrekturen.
+For real choices (e.g. platform frame), use **AskUserQuestion**.
 
-## Abschluss: Brief erstellen
+### Step 2: Confirm
 
-1. Lies die Vorlage aus `references/templates.md`.
-2. Fülle sie mit den erarbeiteten Inhalten.
-3. Frage den Nutzer, wo der Brief liegen soll (Confluence-Space und
-   optionale Eltern-Seite), und lege ihn als **HTML+-Seite**
-   (`contentFormat: html`) an. Der Brief ist die Eltern-Seite, unter der
-   später Personas, Journeys, Technical Brief und Design Brief
-   hängen.
-4. Falls kein Confluence verfügbar ist, schreibe den Brief als
-   Markdown-Datei und nenne dem Nutzer den Pfad.
+Summarize the brief and ask: "Does this fit? Anything missing or too much?"
+Integrate corrections.
 
-### Format (HTML+) - Marker je Abschnittstyp
+## Finish: create the brief
 
-Gemeinsame Stil-Regel: `references/confluence-style.md` (jeder
-Abschnittstyp bekommt einen eigenen Marker). Für den Brief konkret:
+1. Read the template from `references/templates.md`.
+2. Fill it with the worked-out content.
+3. Ask the user where the brief should live (Confluence space and optional parent
+   page) and create it as an **HTML+ page** (`contentFormat: html`). The brief is
+   the parent page under which personas, journeys, technical brief, and design
+   brief hang later.
+4. If no Confluence is available, write the brief as a Markdown file and tell the
+   user the path.
 
-- **Pitch („In einem Satz")** → **Info-Panel** (`<div data-type="panel-info">`),
-  **kein Excerpt** (Brief wird nicht transkludiert; und ein Excerpt darf
-  kein Panel enthalten).
-- **Kopf-Infobox** (`details`-Makro): „Plattform" und „Status"
-  (`<span data-type="status" data-color="blue">Entwurf</span>`).
-- **Problem / Warum** → **Error-Panel** (`<div data-type="panel-error">`,
-  rot) - das Problem als Callout.
-- **Zielgruppe** → volle Breite, `<h3>` + `<p>`, mit **Buchstaben-Emojis**
-  (🇦 🇧 …) vor dem Titel.
-- **Kernfähigkeiten** → **2-Spalten** (760), `<h3>` mit **passendem
-  Themen-Emoji** (app-abhängig, nicht fix).
-- **Nicht im Scope** → 2-Spalten, rotes **`raus`-Status-Chip** im h3.
-- **Woran wir Erfolg erkennen** → 2-Spalten, grünes **`Signal`-Chip** im h3.
-- **Annahmen / Rahmen** → volle Breite, `<h3>` + `<p>`, mit
-  **Zahlen-Emojis** (1️⃣ 2️⃣ 3️⃣) vor dem Titel.
-- 2-Spalten einheitlich 760; bei ungerader Zahl die letzte Spalte leer.
+### Format (HTML+) - a marker per section type
 
-## Stil
+Shared style rule: `references/confluence-style.md` (each section type gets its
+own marker). For the brief specifically:
 
-- Professionell, aber zugänglich - kein Fachjargon ohne Erklärung.
-- Paraphrasieren, um Verständnis zu zeigen.
-- Nachhaken, wenn Antworten oberflächlich bleiben.
-- Sanft zum Problem zurückführen, wenn der Nutzer in Lösungen denkt.
+- **Pitch ("In one sentence")** → **info panel** (`<div data-type="panel-info">`),
+  **no excerpt** (the brief is not transcluded; and an excerpt must not contain a panel).
+- **Header infobox** (`details` macro): "Platform" and "Status"
+  (`<span data-type="status" data-color="blue">` with a "Draft" label in the output language).
+- **Problem / why** → **error panel** (`<div data-type="panel-error">`, red) - the problem as a callout.
+- **Audience** → full width, `<h3>` + `<p>`, with **letter emojis** (🇦 🇧 …) before the title.
+- **Core capabilities** → **2 columns** (760), `<h3>` with a **fitting topic emoji** (app-dependent, not fixed).
+- **Out of scope** → 2 columns, red **status chip** in the h3.
+- **How we know it works** → 2 columns, green **status chip** in the h3.
+- **Assumptions / frame** → full width, `<h3>` + `<p>`, with **number emojis** (1️⃣ 2️⃣ 3️⃣) before the title.
+- 2 columns uniformly 760; on an odd count leave the last column empty.
+
+## Style
+
+- Professional but approachable - no jargon without explanation.
+- Paraphrase to show understanding.
+- Probe when answers stay shallow.
+- Steer gently back to the problem when the user thinks in solutions.
