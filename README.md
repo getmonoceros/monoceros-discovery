@@ -47,6 +47,7 @@ Claude Desktop, add it under Customize; in Claude Code, via the plugin marketpla
 
 ## Status
 
-Pre-release. Pending before publish: strip sample-specific content from the skill
-templates, and switch `discovery-tech-frame` from an inlined component list to a
-live query against the Monoceros connector.
+Pre-release. The skills carry no sample-specific content, and `discovery-tech-frame`
+queries the Monoceros connector for the live catalog (no baked component list).
+Before publish: validate the marketplace manifests against the CLI, decide the
+license, and confirm the distribution setup.
