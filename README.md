@@ -35,9 +35,13 @@ back to local files.
 ## Prerequisites
 
 - **An Atlassian connector** (Confluence + Jira), authenticated with write access -
-  this is where the discovery artifacts and backlog land.
-- **The Monoceros docs connector** (`mcp.getmonoceros.build`) - `discovery-tech-frame`
-  asks it for the current component catalog so its stack proposals stay accurate.
+  this is where the discovery artifacts and backlog land. You bring this (it needs
+  your own instance and auth).
+
+The **Monoceros docs connector** (`mcp.getmonoceros.build`) is **bundled** with the
+plugin and configured automatically on install - `discovery-tech-frame` uses it for
+the live component catalog. It needs no auth, and if you already have that connector
+yours is used (matched by URL); no duplicate.
 
 ## Install
 
