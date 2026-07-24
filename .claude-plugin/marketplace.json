@@ -1,0 +1,18 @@
+{
+  "name": "monoceros-discovery",
+  "owner": {
+    "name": "Monoceros",
+    "url": "https://getmonoceros.build"
+  },
+  "metadata": {
+    "description": "Structured product discovery that lives in your team's tools and hands off to a Monoceros workbench.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "discovery-atlassian",
+      "source": "./plugins/discovery-atlassian",
+      "description": "Monoceros Discovery for Atlassian: from a raw idea to a Confluence discovery tree and a Jira backlog, with a ready `monoceros init` handoff to the workbench."
+    }
+  ]
+}

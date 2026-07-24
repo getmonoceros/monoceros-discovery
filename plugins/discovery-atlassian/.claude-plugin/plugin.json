@@ -1,0 +1,9 @@
+{
+  "name": "discovery-atlassian",
+  "version": "0.1.0",
+  "description": "Monoceros Discovery for Atlassian - structured product discovery (brief, personas & journeys, design, tech frame, backlog) that writes to Confluence & Jira and hands you a ready `monoceros init` command.",
+  "author": {
+    "name": "Monoceros",
+    "url": "https://getmonoceros.build"
+  }
+}
