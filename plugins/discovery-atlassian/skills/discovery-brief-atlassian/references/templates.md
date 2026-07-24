@@ -45,7 +45,7 @@ Rules:
 
 - **Pitch** = info panel, **problem** = error panel (red). Panels only here
   (emotionally charged), not everywhere.
-- **Audience** with letter emojis (🅰️ 🅱️ …), **assumptions** with number emojis
+- **Audience** with letter emojis (🔵 🟡 🟢 …), **assumptions** with number emojis
   (1️⃣ 2️⃣ …) - each full width, h3 + paragraph.
 - **Core capabilities** with topic emojis (app-fitting), 2 columns.
 - **Scope** red `{out}` chips, **success** green `{Signal}` chips, 2 columns.
