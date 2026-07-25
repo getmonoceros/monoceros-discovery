@@ -88,10 +88,9 @@ Page title: `Journey {n}: {concise title}`
 - Excerpt = plain text, named `summary` (no panel).
 - **Pain points** each h3 with a red `{Problem}` chip, **what the app
   changes** each h3 with a green `{Solution}` chip.
-- Until backfill: "Epic in Jira" = **`{to follow}`**, datasource JQL =
-  **`parent = EPIC-KEY`** (empty, no error). Planning sets both to the
-  real epic.
-- The datasource needs **`id`** (Jira datasource provider) **and**
-  `cloudId` - without the `id` it renders just an "N issues" tile instead
-  of the table. Easiest is to copy the complete datasource JSON from an
-  existing Jira issues card.
+- **At this stage there is no epic yet**, so you have neither an epic key
+  nor a datasource `id`. Leave the block-card exactly as the template above:
+  `{to follow}` in the row, `parent = EPIC-KEY` and `{datasource-id}` left
+  as placeholders. **Do not look up an epic key or a datasource id anywhere -
+  never read other pages for one.** Planning fills both in when it creates
+  the epic (it also supplies the real datasource `id` then).

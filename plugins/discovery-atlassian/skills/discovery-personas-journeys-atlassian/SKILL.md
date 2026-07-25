@@ -164,15 +164,15 @@ Also as HTML+ (`contentFormat: html`). Structure:
    `<h3>` with a **green status chip `Solution`** in front of the title +
    `<p>`.
 8. **`<h2>Related work items</h2>`** + a **Jira datasource block card** on
-   `parent = EPIC-KEY` (columns type/key/summary/assignee/status). Beyond
-   `cloudId` and JQL, the datasource needs the **`id` field** (Jira
-   datasource provider) - without it the table renders as just an
-   "N issues" tile instead. Easiest is to copy the complete datasource
-   JSON from an existing Jira issues card.
+   `parent = EPIC-KEY` (columns type/key/summary/assignee/status), straight
+   from the template.
 
-Two placeholders until backfill: the row "Epic in Jira" shows **"to
-follow"**, the datasource JQL uses **`parent = EPIC-KEY`** (renders empty
-as "0 issues", no error). Planning sets both to the real epic.
+**At this stage there is no epic**, so you have neither an epic key nor a
+datasource `id`. Leave both placeholders exactly as the template: the row
+"Epic in Jira" = **"to follow"**, the datasource JQL = **`parent =
+EPIC-KEY`**, the datasource `id` = the `{datasource-id}` placeholder. **Do
+not look up an epic key or an id anywhere - never read other pages for
+one.** Planning fills all of it in when it creates the epic.
 
 The `<thead>` note from above applies here too.
 
