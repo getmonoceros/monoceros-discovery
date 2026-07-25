@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Structured product discovery that lives in your team's tools and hands off to a Monoceros workbench.",
-    "version": "0.2.3"
+    "version": "0.2.4"
   },
   "plugins": [
     {

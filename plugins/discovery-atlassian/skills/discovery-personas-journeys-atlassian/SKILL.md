@@ -96,18 +96,20 @@ type - topic emojis on lists, status chips for pain/solution, a named
 excerpt without a panel).
 
 1. Read the templates from `references/templates.md`.
-2. Create the structure **under the brief** (ask for the brief page as
-   parent). "Personas" and "Journeys" should be **Confluence folders**,
-   not pages (the group nodes carry no content) - but the Atlassian
-   connector **cannot create folders**. So ask the user to create the two
-   folders "Personas" and "Journeys" under the brief (or to name the
-   existing ones), and then create **one page per persona** resp. **per
-   journey** in the matching folder. Individual persona pages so they are
-   directly linkable by search. Never create empty group pages as a
-   substitute for folders.
-3. Set the links: journey → its persona (plain page link, no anchor),
+2. Create two **container pages under the brief** (ask for the brief page as
+   parent): one titled `Personas`, one titled `Journeys`. Each uses the
+   **container-page template** (`references/templates.md`): a short intro
+   paragraph in the output language, a divider, and the child-pages macro
+   that auto-lists everything beneath it. These container pages **replace
+   folders** - the Atlassian connector cannot create Folder-type nodes. If a
+   `Personas`/`Journeys` page already exists under the brief, **reuse** it
+   (don't duplicate).
+3. Create **one page per persona** as a child of the `Personas` page, and
+   **one page per journey** as a child of the `Journeys` page - individual
+   pages so each stays directly linkable by search.
+4. Set the links: journey → its persona (plain page link, no anchor),
    persona → its journey, both point to the brief.
-4. If no Confluence is available, write the pages as Markdown files and
+5. If no Confluence is available, write the pages as Markdown files and
    name the paths.
 
 ### Persona page: format (HTML+)

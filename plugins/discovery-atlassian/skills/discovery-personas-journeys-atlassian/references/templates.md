@@ -19,6 +19,30 @@ a heading or reference label. Emojis are structural markers - keep them.
 
 ---
 
+## Container pages: `Personas` and `Journeys` (HTML+, `contentFormat: html`)
+
+Two grouping pages **under the brief**, one per collection, that replace
+folders. Each = a short intro paragraph (in the output language) + a divider +
+the child-pages macro that auto-lists the pages filed beneath it. Titles stay
+the English artifact words (`Personas`, `Journeys`). Reuse an existing one
+instead of creating a duplicate.
+
+Intro reference text (render in the **output language**):
+
+- **Personas**: {Personas are fictional but realistic descriptions of a product's typical users. They capture goals, needs, behaviors, and problems, and help teams in discovery structure assumptions, prioritize problem spaces, and decide from the user's perspective rather than purely the company's.}
+- **Journeys**: {User journeys describe the steps users take to reach a goal with a product or service. They surface the touchpoints, expectations, questions, and hurdles along the way, and help teams understand user needs, spot weak points, and derive targeted improvements for a coherent experience.}
+
+```html
+<p>{intro paragraph, in the output language - Personas resp. Journeys reference above}</p>
+<hr>
+<div data-type="extension" data-extension-key="children" data-extension-type="com.atlassian.confluence.macro.core" data-layout="default" data-parameters="{&quot;macroParams&quot;:{&quot;depth&quot;:{&quot;value&quot;:&quot;1&quot;},&quot;allChildren&quot;:{&quot;value&quot;:&quot;true&quot;},&quot;style&quot;:{&quot;value&quot;:&quot;h3&quot;},&quot;sortAndReverse&quot;:{&quot;value&quot;:&quot;&quot;},&quot;excerptType&quot;:{&quot;value&quot;:&quot;simple&quot;},&quot;first&quot;:{&quot;value&quot;:&quot;0&quot;}},&quot;macroMetadata&quot;:{&quot;macroId&quot;:{&quot;value&quot;:&quot;ac68f07125ac3693340608fd9e3ebb29c3a52778adc8f999125e3b3f8d42ebc8&quot;},&quot;schemaVersion&quot;:{&quot;value&quot;:&quot;2&quot;},&quot;title&quot;:&quot;Untergeordnete Seiten&quot;}}"></div>
+```
+
+- The child-pages macro **auto-lists** the persona/journey pages filed beneath the container - never hand-list them.
+- Keep the `<div data-*>` and the whole `data-parameters` string **verbatim** (technical macro config, incl. `title: "Untergeordnete Seiten"`). Only the intro `<p>` is written in the output language.
+
+---
+
 ## Persona page (HTML+, `contentFormat: html`)
 
 Page title: `{Name}, {age} - {short characterization}`
