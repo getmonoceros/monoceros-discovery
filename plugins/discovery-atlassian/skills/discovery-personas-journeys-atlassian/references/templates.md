@@ -35,7 +35,7 @@ Intro reference text (render in the **output language**):
 ```html
 <p>{intro paragraph, in the output language - Personas resp. Journeys reference above}</p>
 <hr>
-<div data-type="extension" data-extension-key="children" data-extension-type="com.atlassian.confluence.macro.core" data-layout="default" data-parameters="{&quot;macroParams&quot;:{&quot;depth&quot;:{&quot;value&quot;:&quot;1&quot;},&quot;allChildren&quot;:{&quot;value&quot;:&quot;true&quot;},&quot;style&quot;:{&quot;value&quot;:&quot;h3&quot;},&quot;sortAndReverse&quot;:{&quot;value&quot;:&quot;&quot;},&quot;excerptType&quot;:{&quot;value&quot;:&quot;simple&quot;},&quot;first&quot;:{&quot;value&quot;:&quot;0&quot;}},&quot;macroMetadata&quot;:{&quot;macroId&quot;:{&quot;value&quot;:&quot;ac68f07125ac3693340608fd9e3ebb29c3a52778adc8f999125e3b3f8d42ebc8&quot;},&quot;schemaVersion&quot;:{&quot;value&quot;:&quot;2&quot;},&quot;title&quot;:&quot;Untergeordnete Seiten&quot;}}"></div>
+<div data-type="extension" data-extension-key="children" data-extension-type="com.atlassian.confluence.macro.core" data-layout="default" data-parameters="{&quot;macroParams&quot;:{&quot;depth&quot;:{&quot;value&quot;:&quot;1&quot;},&quot;allChildren&quot;:{&quot;value&quot;:&quot;true&quot;},&quot;style&quot;:{&quot;value&quot;:&quot;h3&quot;},&quot;sortAndReverse&quot;:{&quot;value&quot;:&quot;&quot;},&quot;excerptType&quot;:{&quot;value&quot;:&quot;simple&quot;},&quot;first&quot;:{&quot;value&quot;:&quot;0&quot;}},&quot;macroMetadata&quot;:{&quot;schemaVersion&quot;:{&quot;value&quot;:&quot;2&quot;},&quot;title&quot;:&quot;Untergeordnete Seiten&quot;}}"></div>
 ```
 
 - The child-pages macro **auto-lists** the persona/journey pages filed beneath the container - never hand-list them.
