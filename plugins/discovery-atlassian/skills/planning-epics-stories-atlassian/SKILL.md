@@ -100,14 +100,20 @@ Use the available Atlassian tools and write **ADF**:
 - **Story → Epic** via the **Parent field** (not a generic
   issue link).
 - **Epic label** `business` or `architectural`.
-- **Journey backfill**: on the journey page, enter the epic from this run and
-  **overwrite** what is there: the "Epic in Jira" row (whether placeholder
-  **"to follow"** or an old/dead key) becomes the real epic card, and in the
-  "Related work items" section the classic Jira issues macro
-  (`data-extension-key="jira"`) gets its `jqlQuery` set to
-  `parent = <epic key of this run> ORDER BY key ASC`. That macro needs only the
-  JQL - no datasource `id`, no `cloudId`. That way the journey shows its epic
-  and the live table of its stories.
+- **Journey backfill**: the journey page arrives with two `to follow`
+  placeholders (the discovery skill writes nothing else there). **Planning is
+  the only skill that fills them with real data.** On the journey page,
+  **overwrite** both:
+  - the "Epic in Jira" row (whether **"to follow"** or an old/dead key) becomes
+    the real epic card of this run;
+  - the "Related work items" section (the plain `to follow` paragraph) becomes
+    the **classic Jira issues macro** with `jqlQuery = parent = <epic key of
+    this run> ORDER BY key ASC`. That macro needs **only the JQL** - no
+    datasource `id`, no `cloudId`, nothing to look up (you already have the epic
+    key, you just created it). Exact markup:
+    `<div data-type="extension" data-extension-key="jira" data-extension-type="com.atlassian.confluence.macro.core" data-parameters="{&quot;macroParams&quot;:{&quot;columns&quot;:{&quot;value&quot;:&quot;key,summary,type,status&quot;},&quot;jqlQuery&quot;:{&quot;value&quot;:&quot;parent = <EPIC-KEY> ORDER BY key ASC&quot;}},&quot;macroMetadata&quot;:{&quot;schemaVersion&quot;:{&quot;value&quot;:&quot;1&quot;}}}"></div>`
+
+  That way the journey shows its epic and the live table of its stories.
 - **Write the backfill table correctly** (otherwise a broken header row): write
   the page-properties table as **one single `<tbody>`** - left cell `<th>`
   (label = header column), right cell **`<td>`** (the epic card). **No

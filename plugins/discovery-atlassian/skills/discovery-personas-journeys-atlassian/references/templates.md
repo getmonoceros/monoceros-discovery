@@ -82,17 +82,15 @@ Page title: `Journey {n}: {concise title}`
 <h2>{What the app changes}</h2>
 <section data-type="layout-two-equal" data-breakout="wide" data-breakout-width="760"><div data-type="column" data-width="50"><h3><span data-type="status" data-color="green">{Solution}</span> {title}</h3><p>{…}</p></div><div data-type="column" data-width="50"><h3><span data-type="status" data-color="green">{Solution}</span> {title}</h3><p>{…}</p></div></section>
 <h2>{Related work items}</h2>
-<div data-type="extension" data-extension-key="jira" data-extension-type="com.atlassian.confluence.macro.core" data-layout="default" data-parameters="{&quot;macroParams&quot;:{&quot;columns&quot;:{&quot;value&quot;:&quot;key,summary,type,status&quot;},&quot;jqlQuery&quot;:{&quot;value&quot;:&quot;parent = EPIC-KEY ORDER BY key ASC&quot;}},&quot;macroMetadata&quot;:{&quot;schemaVersion&quot;:{&quot;value&quot;:&quot;1&quot;},&quot;title&quot;:&quot;Jira&quot;}}"></div>
+<p>{to follow}</p>
 ```
 
 - Excerpt = plain text, named `summary` (no panel).
 - **Pain points** each h3 with a red `{Problem}` chip, **what the app
   changes** each h3 with a green `{Solution}` chip.
-- The related-work table is the **classic Jira issues macro**
-  (`data-extension-key="jira"`). It needs **only the JQL** (`jqlQuery`) - no
-  datasource `id`, no `cloudId`, nothing to look up.
-- **At this stage there is no epic yet**, so keep the placeholders exactly as
-  the template: `{to follow}` in the "Epic in Jira" row and `parent =
-  EPIC-KEY` in the macro's `jqlQuery`. **Do not look up an epic key anywhere -
-  never read other pages.** Planning replaces `EPIC-KEY` with the real epic
-  key when it creates the epic.
+- **This skill only writes placeholders for the two epic-dependent spots.**
+  There is no epic yet, so the "Epic in Jira" row is `{to follow}` and the
+  "Related work items" section is a plain `{to follow}` paragraph. **Do not
+  build any Jira card, macro or table here, and never read other pages** -
+  there is nothing to look up. Planning fills both in when it creates the
+  epic (see the planning skill).
