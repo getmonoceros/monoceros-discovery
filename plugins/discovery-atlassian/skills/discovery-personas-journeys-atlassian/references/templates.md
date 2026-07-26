@@ -82,15 +82,17 @@ Page title: `Journey {n}: {concise title}`
 <h2>{What the app changes}</h2>
 <section data-type="layout-two-equal" data-breakout="wide" data-breakout-width="760"><div data-type="column" data-width="50"><h3><span data-type="status" data-color="green">{Solution}</span> {title}</h3><p>{…}</p></div><div data-type="column" data-width="50"><h3><span data-type="status" data-color="green">{Solution}</span> {title}</h3><p>{…}</p></div></section>
 <h2>{Related work items}</h2>
-<div data-type="block-card" data-url="{JQL URL with parent = EPIC-KEY}" data-datasource='{"id":"{datasource-id}","parameters":{"cloudId":"{cloudId}","jql":"parent = EPIC-KEY ORDER BY Rank"},"views":[{"type":"table","properties":{"columns":[{"key":"issuetype"},{"key":"key"},{"key":"summary"},{"key":"assignee"},{"key":"status"}]}}]}'><a href="{JQL URL with parent = EPIC-KEY}">{Related work items}</a></div>
+<div data-type="extension" data-extension-key="jira" data-extension-type="com.atlassian.confluence.macro.core" data-layout="default" data-parameters="{&quot;macroParams&quot;:{&quot;columns&quot;:{&quot;value&quot;:&quot;key,summary,type,status&quot;},&quot;jqlQuery&quot;:{&quot;value&quot;:&quot;parent = EPIC-KEY ORDER BY key ASC&quot;}},&quot;macroMetadata&quot;:{&quot;schemaVersion&quot;:{&quot;value&quot;:&quot;1&quot;},&quot;title&quot;:&quot;Jira&quot;}}"></div>
 ```
 
 - Excerpt = plain text, named `summary` (no panel).
 - **Pain points** each h3 with a red `{Problem}` chip, **what the app
   changes** each h3 with a green `{Solution}` chip.
-- **At this stage there is no epic yet**, so you have neither an epic key
-  nor a datasource `id`. Leave the block-card exactly as the template above:
-  `{to follow}` in the row, `parent = EPIC-KEY` and `{datasource-id}` left
-  as placeholders. **Do not look up an epic key or a datasource id anywhere -
-  never read other pages for one.** Planning fills both in when it creates
-  the epic (it also supplies the real datasource `id` then).
+- The related-work table is the **classic Jira issues macro**
+  (`data-extension-key="jira"`). It needs **only the JQL** (`jqlQuery`) - no
+  datasource `id`, no `cloudId`, nothing to look up.
+- **At this stage there is no epic yet**, so keep the placeholders exactly as
+  the template: `{to follow}` in the "Epic in Jira" row and `parent =
+  EPIC-KEY` in the macro's `jqlQuery`. **Do not look up an epic key anywhere -
+  never read other pages.** Planning replaces `EPIC-KEY` with the real epic
+  key when it creates the epic.

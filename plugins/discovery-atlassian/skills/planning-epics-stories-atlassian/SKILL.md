@@ -102,9 +102,12 @@ Use the available Atlassian tools and write **ADF**:
 - **Epic label** `business` or `architectural`.
 - **Journey backfill**: on the journey page, enter the epic from this run and
   **overwrite** what is there: the "Epic in Jira" row (whether placeholder
-  **"follows"** or an old/dead key) becomes the real epic card, and the
-  "Related issues" datasource is set to `parent = <epic key of this run>`. That
-  way the journey shows its epic and the live table of its stories.
+  **"to follow"** or an old/dead key) becomes the real epic card, and in the
+  "Related work items" section the classic Jira issues macro
+  (`data-extension-key="jira"`) gets its `jqlQuery` set to
+  `parent = <epic key of this run> ORDER BY key ASC`. That macro needs only the
+  JQL - no datasource `id`, no `cloudId`. That way the journey shows its epic
+  and the live table of its stories.
 - **Write the backfill table correctly** (otherwise a broken header row): write
   the page-properties table as **one single `<tbody>`** - left cell `<th>`
   (label = header column), right cell **`<td>`** (the epic card). **No

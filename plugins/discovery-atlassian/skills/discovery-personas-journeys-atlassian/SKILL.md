@@ -163,16 +163,16 @@ Also as HTML+ (`contentFormat: html`). Structure:
 7. **`<h2>What the app changes</h2>`** + 2-column layout, each point
    `<h3>` with a **green status chip `Solution`** in front of the title +
    `<p>`.
-8. **`<h2>Related work items</h2>`** + a **Jira datasource block card** on
-   `parent = EPIC-KEY` (columns type/key/summary/assignee/status), straight
-   from the template.
+8. **`<h2>Related work items</h2>`** + the **classic Jira issues macro**
+   (`data-extension-key="jira"`) on `parent = EPIC-KEY`, straight from the
+   template. It needs **only the JQL** (`jqlQuery`) - no datasource `id`, no
+   `cloudId`, nothing to look up.
 
-**At this stage there is no epic**, so you have neither an epic key nor a
-datasource `id`. Leave both placeholders exactly as the template: the row
-"Epic in Jira" = **"to follow"**, the datasource JQL = **`parent =
-EPIC-KEY`**, the datasource `id` = the `{datasource-id}` placeholder. **Do
-not look up an epic key or an id anywhere - never read other pages for
-one.** Planning fills all of it in when it creates the epic.
+**At this stage there is no epic**, so keep the placeholders exactly as the
+template: the row "Epic in Jira" = **"to follow"** and the macro's `jqlQuery`
+= **`parent = EPIC-KEY`**. **Do not look up an epic key anywhere - never read
+other pages.** Planning replaces `EPIC-KEY` with the real key when it creates
+the epic.
 
 The `<thead>` note from above applies here too.
 
