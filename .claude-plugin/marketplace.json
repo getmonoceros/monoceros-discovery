@@ -5,8 +5,8 @@
     "url": "https://getmonoceros.build"
   },
   "metadata": {
-    "description": "Structured product discovery that lives in your team's tools and hands off to a Monoceros workbench.",
-    "version": "0.2.8"
+    "description": "Monoceros plugins: structured product discovery in your team's tools, plus a quick on-ramp from a raw idea to a running Monoceros workbench.",
+    "version": "0.3.0"
   },
   "plugins": [
     {
@@ -14,6 +14,12 @@
       "displayName": "Monoceros Discovery for Atlassian",
       "source": "./plugins/discovery-atlassian",
       "description": "From a raw idea to a complete product plan: product brief, personas and journeys, design brief, technical brief and a Jira backlog - a guided dialog in your Atlassian tools that ends Monoceros Workbench ready."
+    },
+    {
+      "name": "quickstart",
+      "displayName": "Monoceros Quickstart",
+      "source": "./plugins/quickstart",
+      "description": "Turn an idea into a local, running dev container fast: a short guided dialog maps it onto the Monoceros catalog and hands you the exact init/apply/run commands plus a build prompt for the AI agent. The quick on-ramp to the workbench."
     }
   ]
 }

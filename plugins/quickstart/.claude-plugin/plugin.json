@@ -1,0 +1,10 @@
+{
+  "name": "quickstart",
+  "displayName": "Monoceros Quickstart",
+  "version": "0.1.0",
+  "description": "Turn an idea into a local, running dev container fast: a short guided dialog maps it onto the Monoceros catalog and hands you the exact init/apply/run commands plus a build prompt for the AI agent. The quick on-ramp to the workbench.",
+  "author": {
+    "name": "Monoceros",
+    "url": "https://getmonoceros.build"
+  }
+}
