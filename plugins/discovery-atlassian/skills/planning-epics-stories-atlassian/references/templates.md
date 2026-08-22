@@ -1,18 +1,22 @@
-# Templates: Epic & Story (for Jira)
+# Templates: Epic, Story & Task (for Jira)
 
-In Jira as **ADF**. Rules:
+In Jira as **ADF**. Remove the `{...}` hints in the final version.
 
-- **References as ADF cards**, never as a raw URL/Markdown link.
-  Prominent single references (journey on the epic, design screen on the
-  story) as a full **`blockCard`**. Context references on the story
-  (persona, journey, technical brief) as an **`inlineCard` with a bold
-  label in front** (`Persona:`, `Journey:`, `Technical Brief:`).
-- **Acceptance criteria as a checkbox list**; Given/When/Then each on
-  its own line, labels **bold and in color `#403294`**.
+## Markup rules
+
+- **References as ADF cards**, never as a raw URL or Markdown link. Prominent
+  single references (journey on the epic, design screen on the story) as a full
+  **`blockCard`**. Context references on the story (persona, journey, technical
+  brief) as an **`inlineCard` with a bold label in front** (`Persona:`,
+  `Journey:`, `Technical Brief:`).
+- **Story to Epic via the Parent field**, not a generic issue link.
+- **Epic label** `business`. There is no other epic label; the backlog has no
+  architectural or technical epic.
+- **Acceptance criteria as a checkbox list** (a real task list); Given/When/Then
+  each on its own line, labels **bold and in color `#403294`**.
+- Headings as real headings. The heading is exactly "Acceptance criteria", with
+  no addition like "(Definition of Done)".
 - Descriptions structured, not a wall of prose.
-
-Goal: the story is self-contained. Remove the `{...}` hints in the final
-version.
 
 ## Output language - what to translate and what not
 
@@ -21,14 +25,14 @@ issue summaries, description prose, section headings, and list items. The
 English strings below are the **reference meaning**, not literal output.
 
 **Never translate** (leave verbatim): Jira field names (Summary, Parent, Label),
-issue-type keys, JQL, status/workflow ids, the label values `business` /
-`architectural`, ADF node types (`blockCard`, `inlineCard`), the color
-`#403294`, any `data-*`/macro identifiers, the BDD keywords Given/When/Then, and
-the artifact-type names (Persona, Journey, Technical Brief, Epic, Story).
+issue-type keys, JQL, status/workflow ids, the label value `business`, ADF node
+types (`blockCard`, `inlineCard`), the color `#403294`, any `data-*`/macro
+identifiers, the BDD keywords Given/When/Then, and the artifact-type names
+(Persona, Journey, Technical Brief, Epic, Story, Task).
 
 ---
 
-## Epic (Business) - lean, bridge to the journey
+## Epic - one per journey, lean
 
 - **Summary**: {short, crisp title}
 - **Label**: `business`
@@ -44,40 +48,32 @@ the artifact-type names (Persona, Journey, Technical Brief, Epic, Story).
 
 ---
 
-## Epic (Architectural)
+## Story - one promised function, everything needed for it
 
-- **Summary**: {Walking skeleton …}
-- **Label**: `architectural`
-
-{One or two sentences of prose.}
-
-{Technical Brief as blockCard}
-
-### {Acceptance criteria}
-
-- [ ] {…}
-
----
-
-## Story - self-contained
-
-As a {persona} I want {capability}, so that {value}.
+As a {persona} I want {capability the persona can carry out afterwards},
+so that {value}.
 
 ### {Business context}
 
-A few sentences on the need behind it - enough that the business sense is
-clear (not a one-sentence reference).
+A few sentences on the need behind it - enough that the business sense is clear
+(not a one-sentence reference).
 
 **Persona:** {persona as inline card}
 
 **Journey:** {journey as inline card}
 
+{If the story serves a second journey: that journey as a further inline card
+with its own bold label.}
+
 ### {Implementation notes}
 
-Plan as a list - what to do and what to keep in mind:
+Plan as a list - everything needed so the persona can carry the function out,
+across all layers. Whatever is missing for that belongs here:
 
-- {Backend: endpoint, persistence/migration}
-- {Frontend: component(s)}
+- {Data: schema, migration, persistence}
+- {Service: endpoint, validation, authorization}
+- {View: the screen(s) the persona operates, states, keyboard use}
+- {Delivery: routing, caching, headers - whatever the promise depends on}
 - {Integrations: auth, storage, external services}
 - {Edge cases}
 - {Test level}
@@ -86,17 +82,34 @@ Plan as a list - what to do and what to keep in mind:
 
 ## {Design}
 
-{Only if the story touches UI/frontend: the design screen or prototype
-as a full `blockCard` (URL from the prompt or asked from the user,
-tool-agnostic). Otherwise leave this section out.}
+{The affected screen or prototype as a full `blockCard` (URL from the prompt or
+asked from the user, tool-agnostic). This is the norm: a story a person operates
+touches a screen. If the design deliverable has no screen for it yet, say so to
+the user instead of dropping the section.}
 
 ### {Acceptance criteria}
 
-Given/When/Then bold and in color `#403294`, each on its own line:
+From the persona's viewpoint: what they do, and what they then see. Not
+"the response contains the address" but "the address appears with a copy
+button". Given/When/Then bold and in color `#403294`, each on its own line:
 
 - [ ] **Given** {initial situation}
-  **When** {action}
-  **Then** {expected, verifiable result}
+  **When** {the persona does something}
+  **Then** {what they can see or do afterwards}
 - [ ] **Given** {…}
   **When** {…}
   **Then** {…}
+
+---
+
+## Task - work with no product function
+
+For CI, licensing, repository settings and the like. No epic, no persona
+sentence, no Given/When/Then.
+
+- **Summary**: {what gets done}
+
+{A few sentences: what is to be done and why it is needed. A short list of
+concrete steps if that helps.}
+
+{Technical Brief as inline card, if it is the source of the task.}

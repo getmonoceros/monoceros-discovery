@@ -188,9 +188,10 @@ enter concretely; the token stays "at apply time". Two rules:
 - **Only flag, don't execute.** The technical brief collects open points but
   does not work them off. When resolving them later: a **decision** is worked
   into its section (the chip disappears, the note panel becomes body text); an
-  **actionable to-do** (set config, mount realm, fix a port) becomes a
-  **foundation story** in the backlog during planning. An empty "Open points"
-  section means: the technical brief stands.
+  **actionable to-do** (set config, mount realm, fix a port) is absorbed during
+  planning into the story whose function needs it, and only becomes an issue of
+  its own if no function needs it. An empty "Open points" section means: the
+  technical brief stands.
 
 ## Style
 
