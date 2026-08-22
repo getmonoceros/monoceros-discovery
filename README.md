@@ -49,6 +49,28 @@ Add this marketplace, then install the plugin for your backend. On claude.ai and
 Claude Desktop, add it under Customize; in Claude Code, via the plugin marketplace.
 (Exact commands per surface: see the Monoceros docs.)
 
+### In a Monoceros workbench
+
+Name it in the workbench yml instead, on the `claude` feature entry, and every
+container comes up with it installed:
+
+```yaml
+features:
+  - ref: ghcr.io/getmonoceros/monoceros-features/claude-code:1
+    options:
+      permissionMode: auto
+    plugins:
+      - url: https://github.com/getmonoceros/monoceros-discovery.git
+        enable:
+          - discovery-atlassian
+```
+
+`monoceros apply <name>` registers the marketplace and installs the plugin, and
+later applies pull it again so a change here reaches your workbench. While this
+repository is private, the workbench needs a GitHub token that can read it, the
+same one a private repo would use. Needs Monoceros 1.57.0 or newer; details on
+the [Claude Code feature page](https://getmonoceros.build/docs/features/claude/#plugins).
+
 ## Status
 
 Pre-release. The skills carry no sample-specific content, and `discovery-tech-frame`
