@@ -11,6 +11,28 @@ their paths through it** - as a small, linked Confluence tree under the
 brief. The personas grow out of the brief's audience; the journeys must
 **together cover all of the brief's core capabilities**.
 
+## Before you write anything
+
+Read `references/discovery-rules.md`. It holds the rules that apply to every
+discovery artifact, and four of them decide whether this skill's output is
+usable:
+
+- **Invent nothing.** No requirement, property or condition of use that is not
+  backed by the dialog or by the brief. When in doubt, ask; do not plausibly
+  fill the gap. An invention here reaches every epic and story built on it.
+- **Read the human's comments first** when the page already exists. Their
+  comments are the work order, not your impression of the page.
+- **Sections the human wrote are the calibration** for form. Derive from them,
+  carry the form to the other pages of the same type, and do not touch their
+  sections unasked.
+- **The page structure is closed.** No extra sections, lists, panels or
+  tables. What turns up goes into the dialog, and step 4 gives it a
+  destination.
+
+Read `references/example-journey.md` and `references/example-persona.md` too -
+a real, human-corrected persona and journey. They are the measure for form and
+level of detail, not a content template.
+
 ## Output language
 
 Author the personas and journeys - prose, headings, and labels - in the
@@ -22,18 +44,21 @@ language. See the templates for exactly what never gets translated.
 
 ## Principles
 
-- **Keep it lean**: one to two personas, one to two journeys. The
-  personas together cover the core capabilities - more is rarely needed
-  and clutters the picture.
+- **One journey per flow**: a journey covers one self-contained flow that a
+  persona runs from trigger to outcome. Split as soon as a flow has a trigger
+  and an outcome of its own. The number of journeys follows from the number of
+  flows, not from a target figure.
 - **Propose, don't interrogate**: phrase personas and journeys as a
   concrete proposal that the user corrects.
 - **Described list items, not a keyword dump**: each point is a
   half-sentence saying *why* it belongs.
-- **Journey as a story, not a table**: one coherent, narrated story with
-  a trigger, pain points, and what the app changes - no column jungle, no
-  emoji curve.
-- **Stay problem-focused**: the journey shows how a problem gets solved,
-  not a feature list.
+- **Journey as a story, not a table**: narrated prose in four movements (see
+  step 2) - no column jungle, no emoji curve.
+- **Name the interactions, don't argue about them**: logging in, creating,
+  switching on an option, uploading, copying, choosing - concrete actions
+  belong in the story. What does not belong is reasoning about requirements or
+  deriving a solution inside the narrative.
+- **Write from the user's side only**. See step 2 for the patterns to refuse.
 
 ## Procedure
 
@@ -41,53 +66,111 @@ language. See the templates for exactly what never gets translated.
 
 Read the brief (from Confluence, a file, or pasted in). Summarize the
 **audience** and **core capabilities** briefly and confirm with the user.
-Agree on the scope: how many personas and journeys (default 1-2 each).
-Announce the flow: personas → journeys → coverage check.
+Then work out **which flows** the product has - one journey per flow, so the
+count comes out of the brief rather than out of a target figure. Announce the
+sequence: personas → journeys → coverage check → feedback into the brief.
 
 **Existing personas/journeys**: if some already exist, ask whether to
 update them or create new ones.
 
 ### Step 1: Develop personas
 
-Propose one to two personas from the brief's audience. For each:
+Propose **one persona per audience group** of the brief. The brief separates
+its groups by role, so a group that looks like the same person in practice
+still gets its own persona - that role has requirements of its own. For each:
 
 - **Name, age, short characterization** (e.g. "the overwhelmed
   collector") - becomes the page title.
 - **Description** as short prose (one paragraph): context, situation, why
   the problem hits them. Goes into the excerpt macro later.
 - **Expectations**: three to four, each with a **short title** and one or
-  two sentences of reasoning. The title becomes an h3 heading (anchor), so
-  journeys can later link to a single expectation.
+  two sentences of reasoning. Each title becomes its own h3 heading, so a
+  single expectation stays individually addressable - in the dialog, in a
+  review comment, and as a link target.
 
-Make sure the personas together motivate the core capabilities.
-Paraphrase each persona and get confirmation.
+Make sure the personas together motivate the core capabilities. Take form and
+level of detail from `references/example-persona.md`. Paraphrase each persona
+and get confirmation.
 
 ### Step 2: Work out journeys
 
-One journey per persona (or for the most important ones). For each you
-collect:
+One journey per flow. For each you collect:
 
+- **Title**: `J-001: <action>`, `J-002: <action>`, … - three digits, numbered
+  in the order the journeys were worked out. The title names the **action**
+  ("Ein Handout löschen"), never the story ("Der Abend, an dem es steht").
+  Nobody ever finds a literary title again.
 - **Short summary** (one sentence) - goes into the excerpt.
 - **Persona**: which persona runs through it (embedded via
   excerpt-include).
 - **Addressed core capabilities** from the brief - as a list in the page
-  properties; at the same time the bridge to the later epics.
-- **Trigger**: the concrete moment that starts the journey.
-- **Journey**: one coherent, narrated story (happy path) as a prose
-  paragraph.
+  properties, each one a **deep link** into its heading in the brief (anchor
+  scheme in `references/confluence-style.md`). At the same time the bridge to
+  the later epics.
+- **Trigger**: the concrete **moment** that starts the journey. Two or three
+  sentences: weekday, time, the state of things. The starting situation belongs
+  in the journey text, not here - written in both places it stands twice.
+- **Journey**: the narrated story, happy path, in four movements (below).
 - **Pain points today**: three to four, each **short title + reasoning**.
 - **What the app changes**: three to four, each **short title +
-  reasoning**.
+  reasoning**, one per pain point and in the same order.
 
 The **epic only comes into being during planning** - "Epic in Jira" and
 "Related work items" stay placeholders ("to follow") on the journey page
 at first and are filled in then.
 
+#### The journey text: four movements
+
+The story is not one paragraph. It runs through four movements, each at least
+one paragraph. `references/example-journey.md` shows all four on a real case -
+read it before you write.
+
+1. **The starting situation.** Who the person is, what undertaking they are in,
+   who they work for, and **what the thing is** the journey is even about. A
+   reader with no prior knowledge has to be able to follow. Unexplained
+   particulars are the single most common reason a journey text is unusable.
+2. **Why the product enters.** Said out loud, not assumed. What blocks the
+   person without it.
+3. **The actions, in order.** Complete, each one named: export, save, log in,
+   create, upload, switch the option on, copy, paste, choose. No step left as
+   understood.
+4. **The outcome.** What is different because of it.
+
+#### Write from the user's side only
+
+Hard rule, and these are the patterns that came back from real runs:
+
+- **No sentences about the system or which of its parts is responsible**
+  ("that's X's job, not Y's").
+- **No verdict on system behavior** ("there is no confirmation").
+- **No invented feelings or motives** that do not follow from the persona.
+- **No other persona** in a journey that is not theirs.
+- **No rhetoric.** Refuse these openings outright: "What must not happen
+  here ...", "This is the most dangerous moment ...", "and therein lies
+  exactly ...".
+
 ### Step 3: Check coverage
 
 Check: is **every core capability** of the brief touched by at least one
-journey? If something is missing, propose an additional journey or
-persona. Get final confirmation.
+journey?
+
+Coverage is allowed to spread over increments. A core capability without a
+journey is a **finding to name**, not a defect - and never a reason to drop the
+capability or to invent a journey for it. Say which capabilities are uncovered
+and let the user decide whether a journey follows now or later.
+
+### Step 4: Feed the findings back into the brief
+
+Writing journeys regularly shows that the brief is wrong: a core capability is
+missing, or one is wrong, or two are the same thing. In one real run this
+happened four times, and the skill had no step for it.
+
+So ask explicitly: **what did this change about the brief?** Collect the
+changes, work them into the brief in one pass, and only then let planning and
+design build on it. A finding carried forward silently becomes a defect in
+every artifact after it.
+
+Get final confirmation.
 
 ## Finish: create the Confluence tree
 
@@ -138,8 +221,8 @@ Structure:
    with two `<div data-type="column" data-width="50">`), each expectation
    an **`<h3>` (title with a fitting emoji in front)** + `<p>` (text).
    Choose the emoji per the app's topic and the expectation, not fixed.
-   The h3 gives each expectation an **anchor** for later deep links from
-   journeys.
+   One h3 per expectation keeps it individually addressable - in a review
+   comment and as a link target.
 
 ### Journey page: format (HTML+)
 
@@ -150,13 +233,16 @@ Also as HTML+ (`contentFormat: html`). Structure:
    "Epic in Jira" → the epic; as long as there is none, the text **"to
    follow"** (no link - planning turns it into the real Jira link); row
    "Addressed core capabilities" → **bullet list of the brief's addressed
-   core capabilities** that the journey serves (fill in during
-   discovery).
+   core capabilities** that the journey serves, each one a **deep link into
+   its heading in the brief** (anchor scheme in
+   `references/confluence-style.md`) - not plain text.
 3. **`<h2>Persona(s)</h2>`** + **excerpt-include** that pulls the persona
    by page title (embeds its named `summary` excerpt):
    `<div data-type="extension" data-extension-key="excerpt-include" data-extension-type="com.atlassian.confluence.macro.core" data-parameters='{"macroParams":{"":{"value":"{persona page title}"}}}'></div>`
-4. **`<h2>Trigger</h2>`** + paragraph.
-5. **`<h2>Journey</h2>`** + narrated paragraph.
+4. **`<h2>Trigger</h2>`** + paragraph: the moment only, not the starting
+   situation.
+5. **`<h2>Journey</h2>`** + the narrated story in **four movements**, one
+   `<p>` per movement or more (step 2). Not a single paragraph.
 6. **`<h2>Pain points today</h2>`** + 2-column layout (760), each point
    `<h3>` with a **red status chip `Problem`** in front of the title
    (`<span data-type="status" data-color="red">Problem</span>`) + `<p>`.
@@ -169,8 +255,8 @@ Also as HTML+ (`contentFormat: html`). Structure:
 **This skill only writes placeholders for the two epic-dependent spots.**
 There is no epic yet, so the row "Epic in Jira" = **"to follow"** and the
 "Related work items" section is a plain **"to follow"** paragraph. **Do not
-build any Jira card, macro or table here, and never read other pages** -
-there is nothing to look up. Planning fills both in when it creates the epic.
+build any Jira card, macro or table here, and never go searching Jira or other
+pages for an epic** - there is none to look up yet. Planning fills both in when it creates the epic.
 
 The `<thead>` note from above applies here too.
 
@@ -179,3 +265,8 @@ The `<thead>` note from above applies here too.
 - Propose, don't interrogate; one topic at a time.
 - Paraphrase to show understanding.
 - Keep personas realistic, journeys concrete and narrated.
+- **After every change to a journey text, re-check its derived sections**
+  against it: does each pain point and each "what the app changes" point still
+  describe something that happens in *this* story, and does it not already
+  stand on another journey page? Moving a flow into its own journey is exactly
+  where duplicates appear.

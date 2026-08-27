@@ -11,6 +11,23 @@ mapping onto a Monoceros container definition. You capture *with what* and
 The document you produce is the source for `monoceros init` and the
 architecture reference for the build.
 
+## Before you write anything
+
+Read `references/discovery-rules.md`. It holds the rules that apply to every
+discovery artifact; these three decide whether this skill's output is usable:
+
+- **Invent nothing.** No requirement, property or condition of use that is not
+  backed by the dialog or by an upstream artifact. When in doubt, ask; do not
+  plausibly fill the gap.
+- **Read the human's comments first** when the artifact already exists. Their
+  comments are the work order, not your impression of the page.
+- **Sections the human wrote are the calibration** for form, and they are not
+  touched unasked. Propose a change and wait.
+
+Findings that touch an upstream artifact do not get carried forward silently -
+name them and work them in first (`discovery-rules.md`, "Feed findings back
+upstream").
+
 ## Output language
 
 Author the technical brief - prose, headings, and labels - in the **user's

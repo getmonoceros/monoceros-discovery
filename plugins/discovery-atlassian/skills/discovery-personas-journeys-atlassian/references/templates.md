@@ -58,25 +58,32 @@ Page title: `{Name}, {age} - {short characterization}`
 - The excerpt is **plain text, named `summary`** (no panel - it is
   transcluded by the journey; a panel would travel with it).
 - Choose the **emoji** per expectation to fit the app's topic, not fixed.
-- The h3 per expectation creates an **anchor** for deep links from
-  journeys.
+- One h3 per expectation keeps it individually addressable - in a review
+  comment and as a link target. A real example: `example-persona.md`.
 - On an odd count leave the last column empty (`<p></p>`).
 
 ---
 
 ## Journey page (HTML+, `contentFormat: html`)
 
-Page title: `Journey {n}: {concise title}`
+Page title: `J-00{n}: {the action}`
+
+The title names the **action** ("Ein Handout löschen"), never the story ("Der
+Abend, an dem es steht"). `J-001`, `J-002`, … stays verbatim; the action
+follows the output language. A real example: `references/example-journey.md`.
 
 ```html
 <div data-type="bodied-extension" data-extension-key="excerpt" data-extension-type="com.atlassian.confluence.macro.core" data-parameters='{"macroParams":{"name":{"value":"summary"}}}'><p>{Short summary of the journey, one sentence.}</p></div>
-<div data-type="bodied-extension" data-extension-key="details" data-extension-type="com.atlassian.confluence.macro.core"><table data-width="760"><tbody><tr><th><p><strong>Epic in Jira</strong></p></th><td><p>{to follow}</p></td></tr><tr><th><p><strong>{Addressed core capabilities}</strong></p></th><td><ul><li><p>{Capability A}</p></li><li><p>{Capability B}</p></li></ul></td></tr></tbody></table></div>
+<div data-type="bodied-extension" data-extension-key="details" data-extension-type="com.atlassian.confluence.macro.core"><table data-width="760"><tbody><tr><th><p><strong>Epic in Jira</strong></p></th><td><p>{to follow}</p></td></tr><tr><th><p><strong>{Addressed core capabilities}</strong></p></th><td><ul><li><p><a href="{brief-url}#{anchor of capability A}">{Capability A}</a></p></li><li><p><a href="{brief-url}#{anchor of capability B}">{Capability B}</a></p></li></ul></td></tr></tbody></table></div>
 <h2>Persona(s)</h2>
 <div data-type="extension" data-extension-key="excerpt-include" data-extension-type="com.atlassian.confluence.macro.core" data-parameters='{"macroParams":{"":{"value":"{persona page title}"}}}'></div>
 <h2>{Trigger}</h2>
 <p>{the concrete moment that starts the journey}</p>
 <h2>Journey</h2>
-<p>{Narrated story in the present tense: how the persona solves their problem step by step.}</p>
+<p>{Movement 1: the starting situation - who they are, what undertaking, for whom, and what the thing is.}</p>
+<p>{Movement 2: why the product enters, said out loud.}</p>
+<p>{Movement 3: the actions in order, each one named. One or more paragraphs.}</p>
+<p>{Movement 4: the outcome - what is different now.}</p>
 <h2>{Pain points today}</h2>
 <section data-type="layout-two-equal" data-breakout="wide" data-breakout-width="760"><div data-type="column" data-width="50"><h3><span data-type="status" data-color="red">{Problem}</span> {title}</h3><p>{reasoning}</p></div><div data-type="column" data-width="50"><h3><span data-type="status" data-color="red">{Problem}</span> {title}</h3><p>{…}</p></div></section>
 <h2>{What the app changes}</h2>
@@ -86,6 +93,13 @@ Page title: `Journey {n}: {concise title}`
 ```
 
 - Excerpt = plain text, named `summary` (no panel).
+- **Addressed core capabilities are deep links** into the brief's headings, one
+  per capability - anchor scheme in `confluence-style.md`. Plain text there
+  loses the only bridge back to the brief.
+- **The journey text runs in four movements**, one `<p>` each or more, never a
+  single paragraph. `example-journey.md` shows it on a real case.
+- **Trigger is the moment only** (weekday, time, state of things). The starting
+  situation belongs in movement 1; written in both places it stands twice.
 - **Pain points** each h3 with a red `{Problem}` chip, **what the app
   changes** each h3 with a green `{Solution}` chip.
 - **This skill only writes placeholders for the two epic-dependent spots.**

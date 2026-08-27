@@ -50,3 +50,11 @@ Rules:
 - **Core capabilities** with topic emojis (app-fitting), 2 columns.
 - **Scope** red `{out}` chips, **success** green `{Signal}` chips, 2 columns.
 - On an odd count leave the last column empty (`<p></p>`).
+- **Audience by role**, one group per role, even where one person fills two of
+  them in practice.
+- **Scope-out is exclusion only.** A stage that is deliberately postponed goes
+  into **Assumptions / frame** instead, together with what has to be done today
+  to keep it open.
+- **Degree, not absoluteness** in every section: enumerate what can be
+  enumerated, and write the degree where it cannot ("little maintenance and an
+  update you need not fear", not "maintenance-free").

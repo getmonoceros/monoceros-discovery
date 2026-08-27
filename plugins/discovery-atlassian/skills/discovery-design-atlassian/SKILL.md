@@ -19,6 +19,23 @@ Make) as the basis for generating a design system and a hi-fi prototype.
   **output** of the generation, not an input - so don't write a system
   here, write what it should be built from.
 
+## Before you write anything
+
+Read `references/discovery-rules.md`. It holds the rules that apply to every
+discovery artifact; these three decide whether this skill's output is usable:
+
+- **Invent nothing.** No requirement, property or condition of use that is not
+  backed by the dialog or by an upstream artifact. When in doubt, ask; do not
+  plausibly fill the gap.
+- **Read the human's comments first** when the artifact already exists. Their
+  comments are the work order, not your impression of the page.
+- **Sections the human wrote are the calibration** for form, and they are not
+  touched unasked. Propose a change and wait.
+
+Findings that touch an upstream artifact do not get carried forward silently -
+name them and work them in first (`discovery-rules.md`, "Feed findings back
+upstream").
+
 ## Output language
 
 Author the design brief - prose, headings, and labels - in the **user's

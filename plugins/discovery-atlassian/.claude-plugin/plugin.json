@@ -1,7 +1,7 @@
 {
   "name": "discovery-atlassian",
   "displayName": "Monoceros Discovery for Atlassian",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "From a raw idea to a complete product plan: product brief, personas and journeys, design brief, technical brief and a Jira backlog - a guided dialog in your Atlassian tools that ends Monoceros Workbench ready.",
   "author": {
     "name": "Monoceros",
