@@ -1,7 +1,6 @@
 ---
 name: discovery-brief-atlassian
 description: Turns a raw product idea into a lean one-page brief - problem, audience, core capabilities, scope, success, frame - through a guided dialog, and files it as a Confluence page. Use when someone wants to capture an idea, a problem, or a need for a product or feature. The brief is the start of discovery and the basis for personas, journeys, and stories.
-allowed-tools: Read, Write, AskUserQuestion
 ---
 
 # Discovery Brief

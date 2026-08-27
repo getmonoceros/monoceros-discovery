@@ -1,7 +1,6 @@
 ---
 name: discovery-domain-model-atlassian
 description: Derives the business domain model for a product from the brief and the journeys through a guided dialog - entities, relationships, attributes, states, enumerations - and files it as a Confluence page under the brief. Use this skill when someone wants to work out the data model, the entities, the domain objects, the attributes, the relationships between them, or the states an object can be in. The domain model is the reference every story is built against, and it feeds the storage decision in the technical brief.
-allowed-tools: Read, Write, AskUserQuestion
 ---
 
 # Domain Model

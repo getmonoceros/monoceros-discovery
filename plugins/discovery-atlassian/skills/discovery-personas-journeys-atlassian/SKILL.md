@@ -1,7 +1,6 @@
 ---
 name: discovery-personas-journeys-atlassian
 description: Derives the personas and their customer journeys from an approved brief through a guided dialog and files them as linked Confluence pages under the brief. Use when someone wants to work out personas, user types, customer journeys, or the user's path through a product. The journeys are the basis for the later epics and stories.
-allowed-tools: Read, Write, AskUserQuestion
 ---
 
 # Personas & Journeys

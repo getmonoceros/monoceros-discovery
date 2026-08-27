@@ -1,7 +1,6 @@
 ---
 name: planning-epics-stories-atlassian
 description: Derives the backlog - epics and stories - from the discovery (brief, journeys, personas, domain model, technical brief, design) through a guided dialog, and files them as Jira issues. Use this skill when someone wants to turn requirements into a backlog, epics, or stories, plan a project, or slice work for implementation. Goal: every story promises a function and carries everything needed to deliver it.
-allowed-tools: Read, Write, AskUserQuestion
 ---
 
 # Planning: Epics & Stories
