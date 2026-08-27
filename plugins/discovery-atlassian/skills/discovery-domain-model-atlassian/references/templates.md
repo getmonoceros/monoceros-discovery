@@ -13,17 +13,22 @@ domain is about; the functional context sits in the page tree.
 
 ## Output language - what to translate and what not
 
-Render **all reader-visible text in the output language**: section headings,
-table column labels, status-chip labels, prose, and **the entity and attribute
-names** - they are business terms and the build reads them from here. The English
+Render **prose and labels in the output language**: section headings, table
+column labels, status-chip labels, and the descriptive sentences. The English
 strings below are the **reference meaning**, not literal output.
+
+**The names are the exception and default to English**: entity names, attribute
+names, enumeration names, enumeration values and state values. The build reads
+them from here and writes code. Only where the user explicitly asked for their own
+language do the names follow it. Where an English name is not self-evident, the
+entity's sentence names the business term.
 
 **Never translate** (leave verbatim): every `data-*` attribute,
 `data-extension-key` and extension type, macro parameter names (the excerpt name
 `summary`, the `details` macro), `data-color` values, the PlantUML keywords and
 `skinparam` lines, and the page-title artifact words (`Domain Model`). Data type
 names (`String`, `Long`, `DateTime`, `Boolean`, `Decimal`, `Enum`) stay verbatim
-too - they are read by the build. Emojis are structural markers - keep them.
+too - they are read by the build, like the entity and attribute names above. Emojis are structural markers - keep them.
 
 ---
 

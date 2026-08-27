@@ -41,13 +41,29 @@ output is usable:
   the brief: do they carry `<Product> | `, then so does this page. Only ask if
   nothing is there yet.
 
-## Output language
+## Output language, and the names as a separate question
 
-Author the page - prose, headings, and labels - in the **user's language**. Take
-it from the conversation, or ask once at the start if it is unclear. Entity and
-attribute names follow the output language too: they are business terms, and the
-build reads them from here. This skill's own instructions and the template's
-technical markers stay as they are.
+Author the page - prose, headings, section labels, table column labels - in the
+**user's language**. Take it from the conversation, or ask once at the start if
+it is unclear. This skill's own instructions and the template's technical markers
+stay as they are.
+
+**The names are a different decision, and they default to English.** Entity
+names, attribute names, enumeration names, enumeration values and state values
+are **English unless the user asks otherwise**. The build reads them from here
+and writes code, and code is written in English in almost every project. A model
+with German names produces either German identifiers or a translation each
+developer and each agent invents again, differently.
+
+Ask once, with AskUserQuestion, when you start naming things (step 1): "The
+entity and attribute names: English, so the build can take them over
+unchanged - or in your language?" If the user wants their own language, take it,
+and say in one sentence what it costs: the implementation translates the names,
+and it will do so inconsistently.
+
+Where an English name is not self-evident to a reader of the prose, the entity's
+sentence names the business term. `Access` is fine as a name as long as the
+sentence says it is an Aufruf of a Handout.
 
 ## Principles
 
@@ -79,6 +95,9 @@ Anything missing?"
 fresh, and read its comments first.
 
 ### Step 1: Entities
+
+Settle the **naming language** first (see above): English by default, one
+question, then it holds for every name on the page.
 
 Present the candidates from the noun analysis. Then settle, together:
 
