@@ -75,6 +75,74 @@ reference; render them in the **output language**. Technical values
 - **An update needs the page's current version.** Fetch it immediately before
   writing; a stale version is rejected.
 
+## Diagrams (PlantUML)
+
+A diagram is the **overview for the human**, never the carrier of the content.
+The tables stay authoritative: the planning skill reads them, and they survive
+the Markdown fallback. Nobody should have to reconstruct a model from a picture.
+
+Diagrams need the **PlantUML Diagrams & Charts for Confluence** app. It may not
+be installed, and then the macro renders as nothing. So always write the text
+sketch and the tables first, and add the diagram on top. If the diagram is
+missing, the page still stands.
+
+### Writing the macro
+
+Verified: the minimal parameter set is enough. No `cloudId`, no
+`embeddedMacroContext`, no `localId`, no page reference - so a diagram can be
+written onto a page that does not exist yet.
+
+```html
+<div data-type="extension" data-extension-key="4f4a33ef-c50d-44b6-9340-f5cdd566bdd3/f305fd82-ebe5-458b-b477-5e378c610cf3/static/plantuml-fullpage-editor" data-extension-type="com.atlassian.ecosystem" data-layout="default" data-parameters='{"layout":"extension","guestParams":{"code":"@startuml\n…\n@enduml","diagramName":"{caption}","type":"plantuml"},"forgeEnvironment":"PRODUCTION","extensionId":"ari:cloud:ecosystem::extension/4f4a33ef-c50d-44b6-9340-f5cdd566bdd3/f305fd82-ebe5-458b-b477-5e378c610cf3/static/plantuml-fullpage-editor"}'>PlantUML Diagrams &amp; Charts for Confluence</div>
+```
+
+The diagram source is plain text in `guestParams.code`, line breaks as `\n`.
+`diagramName` renders as the caption above the diagram. Everything else is a
+fixed string.
+
+### The preamble every diagram gets
+
+The app renders the canvas in the reader's colour mode, and PlantUML cannot
+override it: `skinparam backgroundColor` is ignored. So the diagram paints its
+own surface - everything goes inside a white `package`, which makes the picture
+identical in light and dark mode.
+
+```
+@startuml
+<style>
+root { FontName Verdana  FontSize 12 }
+</style>
+skinparam shadowing false
+skinparam packageStyle rectangle
+skinparam packageBackgroundColor #FFFFFF
+skinparam packageBorderColor #FFFFFF
+skinparam packageFontColor #FFFFFF
+skinparam classBackgroundColor #FFFFFF
+skinparam classBorderColor #44546F
+skinparam classFontColor #172B4D
+skinparam classAttributeFontColor #172B4D
+skinparam ArrowColor #44546F
+skinparam ArrowFontColor #172B4D
+package Modell #FFFFFF {
+  {the actual diagram}
+}
+@enduml
+```
+
+Three traps, each one paid for by a broken render:
+
+- **Declare the font.** Without `FontName`, PlantUML measures with different
+  metrics than the server draws with, and the labels run out of their boxes.
+- **Never `skinparam padding`.** It puts a yellow warning banner inside the
+  picture ("Please use CSS style instead of skinparam padding"). Spacing only
+  through the `<style>` block.
+- **The package name carries no quotes.** `package "." #FFFFFF` flips PlantUML
+  into a component diagram and the render dies with a syntax error. `package
+  Modell #FFFFFF` works, and the white font colour keeps the name invisible.
+
+The package also gives the picture a margin of its own, so nothing sticks to the
+edge of the canvas.
+
 ## Deep links to a heading
 
 A heading's jump mark cannot be read through any interface: the stored HTML
