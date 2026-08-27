@@ -35,7 +35,9 @@ too - they are read by the build, like the entity and attribute names above. Emo
 ```html
 <h2>{What the domain is about}</h2>
 <div data-type="bodied-extension" data-extension-key="excerpt" data-extension-type="com.atlassian.confluence.macro.core" data-parameters='{"macroParams":{"name":{"value":"summary"}}}'><p>{One or two sentences: which things the product deals with and what holds them together.}</p></div>
-<div data-type="bodied-extension" data-extension-key="details" data-extension-type="com.atlassian.confluence.macro.core"><table data-width="760"><tbody><tr><th><p><strong>{Product brief}</strong></p></th><td><p><a href="{brief-url}" data-card-appearance="inline">{brief-url}</a></p></td></tr><tr><th><p><strong>{Covered journeys}</strong></p></th><td><p><a href="{journey-url}" data-card-appearance="inline">{journey-url}</a></p></td></tr></tbody></table></div>
+<div data-type="bodied-extension" data-extension-key="details" data-extension-type="com.atlassian.confluence.macro.core"><table data-width="760"><tbody><tr><th><p><strong>{Product brief}</strong></p></th><td><p><a href="{brief-url}" data-card-appearance="inline">{brief-url}</a></p></td></tr><tr><th><p><strong>{Journeys}</strong></p></th><td><p><a href="{journeys-collection-page-url}" data-card-appearance="inline">{journeys-collection-page-url}</a></p></td></tr><tr><th><p><strong>{Technical brief}</strong></p></th><td><p><a href="{technical-brief-url}" data-card-appearance="inline">{technical-brief-url}</a></p></td></tr></tbody></table></div>
+<h2>{The model}</h2>
+<div data-type="extension" data-extension-key="{plantuml extension key, see confluence-style.md}" data-extension-type="com.atlassian.ecosystem" data-layout="default" data-parameters='{"layout":"extension","guestParams":{"code":"{@startuml … @enduml, preamble from confluence-style.md, entities and lines only}","diagramName":"{The model of <product>}","type":"plantuml"},"forgeEnvironment":"PRODUCTION","extensionId":"{extension id, see confluence-style.md}"}'>PlantUML Diagrams &amp; Charts for Confluence</div>
 <h2>{Entities}</h2>
 <h3>{Emoji} {Entity 1}</h3>
 <p>{one sentence: what it is, in business terms}</p>
@@ -45,7 +47,6 @@ too - they are read by the build, like the entity and attribute names above. Emo
 <table data-width="760">{…}</table>
 <h2>{Relationships}</h2>
 <table data-width="760"><thead><tr><th><p><strong>{From}</strong></p></th><th><p><strong>{To}</strong></p></th><th><p><strong>{How many}</strong></p></th><th><p><strong>{What it means}</strong></p></th></tr></thead><tbody><tr><td><p>{Handout}</p></td><td><p>{Address}</p></td><td><p>{exactly one}</p></td><td><p>{one sentence, with the verb: a handout is always reachable at exactly one address}</p></td></tr><tr><td><p>{Address}</p></td><td><p>{Handout}</p></td><td><p>{at most one}</p></td><td><p>{…}</p></td></tr></tbody></table>
-<div data-type="extension" data-extension-key="{plantuml extension key, see confluence-style.md}" data-extension-type="com.atlassian.ecosystem" data-layout="default" data-parameters='{"layout":"extension","guestParams":{"code":"{@startuml … @enduml, preamble from confluence-style.md}","diagramName":"{Domain model}","type":"plantuml"},"forgeEnvironment":"PRODUCTION","extensionId":"{extension id, see confluence-style.md}"}'>PlantUML Diagrams &amp; Charts for Confluence</div>
 <h2>{States}</h2>
 <h3>{Emoji} {Entity with a status}</h3>
 <table data-width="760"><thead><tr><th><p><strong>{From}</strong></p></th><th><p><strong>{To}</strong></p></th><th><p><strong>{Trigger}</strong></p></th><th><p><strong>{Condition}</strong></p></th><th><p><strong>{Who}</strong></p></th></tr></thead><tbody><tr><td><p>{value}</p></td><td><p>{value}</p></td><td><p>{what the persona does}</p></td><td><p>{what has to hold}</p></td><td><p>{which persona or role}</p></td></tr></tbody></table>
@@ -73,11 +74,21 @@ Rules:
   notation belongs in the diagram, not here.
 - **The `What it means` sentence carries the verb.** "A handout is always
   reachable at exactly one address" is what a reader takes away; `0..1` is not.
-- **The diagram carries entities and lines only** - no attributes, no
-  multiplicities, no relationship labels. It answers which entities exist and
-  what is connected to what; everything else is read off the tables. The reason
-  is in `confluence-style.md`: Confluence draws the SVG with its own font and any
+- **The model section comes before the detail.** The diagram sits in its own
+  `<h2>` directly after the page properties, because it is the overview and a
+  reader wants it first. It carries **entities and lines only** - no attributes,
+  no multiplicities, no relationship labels. It answers which entities exist and
+  what is connected to what; everything else is read off the tables. The reason is
+  in `confluence-style.md`: Confluence draws the SVG with its own font, so any
   text in the picture breaks out of its box.
+- **An enumeration and an inheritance must not express the same distinction.**
+  `ArtifactType` with the values ZIP, HTML, PDF **and** the entities
+  `ZipArtifact`, `HtmlArtifact`, `PdfArtifact` is a contradiction: one of the two
+  is redundant. Subclasses when the forms behave differently, an enumeration when
+  they only need to be named.
+- **The page properties link three ways**: the brief above, the **Journeys
+  collection page** as the source (one card, not one per journey), and the
+  technical brief, which reads this model.
 - The page has to stand **without** the diagram - the PlantUML app may not be
   installed.
 - **The entity `<h3>` is a link target.** Journeys and stories deep-link to a

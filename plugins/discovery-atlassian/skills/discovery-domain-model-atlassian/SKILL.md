@@ -141,6 +141,15 @@ identifiable. Per attribute a **name**, a **type**, and whether it is
 Ask about **enumerations** explicitly: are there fields with a fixed set of
 values? A status field almost always is, and it feeds step 4.
 
+**An enumeration and an inheritance must not express the same distinction.** If
+`ArtifactType` carries the values ZIP, HTML, PDF and the model also has
+`ZipArtifact`, `HtmlArtifact` and `PdfArtifact`, one of the two is redundant and
+the page contradicts itself. What decides it: **do the forms behave
+differently** - own attributes, own rules, own states? Then they are subclasses
+and the enumeration goes. Do they only need to be named and told apart? Then it
+is an enumeration and the subclasses go. Put the question to the user; do not
+settle it silently.
+
 Offer the usual bookkeeping attributes rather than assuming them: a technical
 identifier, created-at, changed-at. Offer, do not invent - if the user does not
 want them, they are not in the model.
@@ -190,15 +199,19 @@ the diagram recipe, and the anchor scheme for deep links.
 - **What the domain is about** → **named excerpt `summary`** (plain text, no
   panel), one or two sentences. No meta intro ("This document describes …").
 - **Page-properties macro** (`details`): row "Product brief" → the brief as an
-  inline card, row "Covered journeys" → the journeys as inline cards.
+  inline card, row "Journeys" → the **Journeys collection page** as one card (not
+  each journey separately, that turns into a stack), row "Technical brief" → the
+  technical brief, which reads this model.
+- **The model** → its own `<h2>` right after the page properties, carrying the
+  diagram as a PlantUML macro (recipe in `confluence-style.md`). The picture comes
+  **before** the detail: it is the overview, and a reader wants it first. It
+  carries **entities and lines only** - no attributes, no multiplicities, no
+  labels, since any text in the picture breaks out of its box.
 - **Entities** → one `<h3>` per entity with a fitting topic emoji, a sentence of
   prose, and **its attribute table directly underneath**. One place per entity,
   not names here and attributes there.
 - **Relationships** → a **table**, one row per direction: the two entities in
-  named columns, the quantity **in words**, and a sentence with the verb. Then the
-  diagram as a PlantUML macro (recipe in `confluence-style.md`), carrying
-  **entities and lines only** - no attributes, no multiplicities, no labels, since
-  any text in the picture breaks out of its box.
+  named columns, the quantity **in words**, and a sentence with the verb.
 - **States** → one `<h3>` per entity that has a status, with a transition table.
 - **Enumerations** → one table.
 - **Open points** → 2 columns with yellow `open` status chips. Domain questions
