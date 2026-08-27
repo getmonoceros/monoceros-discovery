@@ -44,8 +44,7 @@ too - they are read by the build, like the entity and attribute names above. Emo
 <p>{…}</p>
 <table data-width="760">{…}</table>
 <h2>{Relationships}</h2>
-<pre data-breakout="wide" data-breakout-width="760"><code>{Entity A} --1..*-- {Entity B}
-{Entity A} --0..1-- {Entity C}</code></pre>
+<table data-width="760"><thead><tr><th><p><strong>{From}</strong></p></th><th><p><strong>{To}</strong></p></th><th><p><strong>{How many}</strong></p></th><th><p><strong>{What it means}</strong></p></th></tr></thead><tbody><tr><td><p>{Handout}</p></td><td><p>{Address}</p></td><td><p>{exactly one}</p></td><td><p>{one sentence, with the verb: a handout is always reachable at exactly one address}</p></td></tr><tr><td><p>{Address}</p></td><td><p>{Handout}</p></td><td><p>{at most one}</p></td><td><p>{…}</p></td></tr></tbody></table>
 <div data-type="extension" data-extension-key="{plantuml extension key, see confluence-style.md}" data-extension-type="com.atlassian.ecosystem" data-layout="default" data-parameters='{"layout":"extension","guestParams":{"code":"{@startuml … @enduml, preamble from confluence-style.md}","diagramName":"{Domain model}","type":"plantuml"},"forgeEnvironment":"PRODUCTION","extensionId":"{extension id, see confluence-style.md}"}'>PlantUML Diagrams &amp; Charts for Confluence</div>
 <h2>{States}</h2>
 <h3>{Emoji} {Entity with a status}</h3>
@@ -66,10 +65,21 @@ Rules:
   data tables and want a header row. The no-`<thead>` rule applies only to the
   **page-properties** table at the top, which is key-value and needs a header
   **column** (`<th>` left, `<td>` right, everything in `<tbody>`).
-- **Sketch before diagram.** The `<pre>` sketch is the authoritative form: the
-  planning skill reads it and it survives the Markdown fallback. The diagram is
-  the overview for the human, and the page has to stand without it - the PlantUML
-  app may not be installed.
+- **The relationship table is the authoritative form**, and it is a table on
+  purpose: an ASCII sketch like `Handout --1-- Address` leaves open which side the
+  `1` belongs to, and needs the same relationship written twice to be understood.
+  So: **one row per direction**, the two entities in named columns, and the
+  quantity **in words** ("exactly one", "at most one", "any number"). The formal
+  notation belongs in the diagram, not here.
+- **The `What it means` sentence carries the verb.** "A handout is always
+  reachable at exactly one address" is what a reader takes away; `0..1` is not.
+- **The diagram carries entities and lines only** - no attributes, no
+  multiplicities, no relationship labels. It answers which entities exist and
+  what is connected to what; everything else is read off the tables. The reason
+  is in `confluence-style.md`: Confluence draws the SVG with its own font and any
+  text in the picture breaks out of its box.
+- The page has to stand **without** the diagram - the PlantUML app may not be
+  installed.
 - **The entity `<h3>` is a link target.** Journeys and stories deep-link to a
   single entity, so the anchor scheme in `confluence-style.md` applies, and
   renaming an entity means correcting the links that point at it.

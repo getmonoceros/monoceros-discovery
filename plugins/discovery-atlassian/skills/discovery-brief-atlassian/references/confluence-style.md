@@ -109,9 +109,6 @@ identical in light and dark mode.
 
 ```
 @startuml
-<style>
-root { FontName Verdana  FontSize 12 }
-</style>
 skinparam shadowing false
 skinparam packageStyle rectangle
 skinparam packageBackgroundColor #FFFFFF
@@ -120,28 +117,43 @@ skinparam packageFontColor #FFFFFF
 skinparam classBackgroundColor #FFFFFF
 skinparam classBorderColor #44546F
 skinparam classFontColor #172B4D
-skinparam classAttributeFontColor #172B4D
 skinparam ArrowColor #44546F
-skinparam ArrowFontColor #172B4D
+hide members
+hide circle
 package Modell #FFFFFF {
-  {the actual diagram}
+  class "   Handout   " as Handout
+  class "   Address   " as Address
+  Handout -- Address
 }
 @enduml
 ```
 
-Three traps, each one paid for by a broken render:
+### Keep text out of the picture
 
-- **Declare the font.** Without `FontName`, PlantUML measures with different
-  metrics than the server draws with, and the labels run out of their boxes.
+Confluence draws the SVG with **its own** font, whatever the diagram asks for.
+PlantUML sizes each box with the font it measured with, so every string is drawn
+wider than the box that was computed for it. Names longer than roughly ten
+characters run out of their box, and labels on the lines collide with the lines.
+Setting `FontName` does not help - it is overridden. This was worked through in
+nine variants; what survives is: **put no text into the diagram that the tables
+already carry.**
+
+- **No attributes in the class boxes.** They are in the attribute tables.
+- **No relationship labels and no multiplicities** on the lines. They are in the
+  relationship table.
+- **Pad every class name with three spaces on each side**, via
+  `class "   Name   " as Name`. That is what buys back the width the metric
+  mismatch eats. The `as Name` keeps the references readable.
 - **Never `skinparam padding`.** It puts a yellow warning banner inside the
-  picture ("Please use CSS style instead of skinparam padding"). Spacing only
-  through the `<style>` block.
+  picture. Spacing only through a `<style>` block, and it barely helps anyway.
 - **The package name carries no quotes.** `package "." #FFFFFF` flips PlantUML
   into a component diagram and the render dies with a syntax error. `package
   Modell #FFFFFF` works, and the white font colour keeps the name invisible.
 
-The package also gives the picture a margin of its own, so nothing sticks to the
-edge of the canvas.
+So the diagram answers exactly one question: **which entities exist and what is
+connected to what.** Everything else is read off the tables. That is not a
+compromise forced on us, it is the division of labour that keeps the picture
+legible.
 
 ## Deep links to a heading
 

@@ -77,7 +77,8 @@ sentence says it is an Aufruf of a Handout.
 - **Iteration is normal.** If an attribute turns out to be an entity, go back
   and add it. Revisions are a sign the analysis is working, not a mistake.
 - **The tables are authoritative, the diagram is the overview.** Planning reads
-  the tables, and they survive the Markdown fallback.
+  the tables, and they survive the Markdown fallback. The diagram answers one
+  question only: which entities exist and what is connected to what.
 
 ## Procedure
 
@@ -107,14 +108,17 @@ Present the candidates from the noun analysis. Then settle, together:
 - Is an important entity missing that no journey names yet?
 - Are two names the same thing (synonyms)?
 
-Confirm the list, then **immediately show a rough text sketch** - entities and
-the obvious relationships only, no attributes:
+Confirm the list, then **immediately show a rough sketch in the chat** -
+entities and the obvious relationships only, no attributes, as plain sentences:
 
 ```
-Handout ──1..*── Aufruf
-Handout ──0..1── Passwort
-Nutzer  ──1..*── Handout
+Ein Handout ist unter genau einer Adresse erreichbar.
+Eine Adresse gehört zu höchstens einem Handout.
+Ein Handout hat beliebig viele Aufrufe.
 ```
+
+Sentences, not `Handout --1-- Adresse`: with that notation nobody can tell which
+side the `1` belongs to, and it takes two lines to say one thing.
 
 ### Step 2: Relationships
 
@@ -190,9 +194,11 @@ the diagram recipe, and the anchor scheme for deep links.
 - **Entities** → one `<h3>` per entity with a fitting topic emoji, a sentence of
   prose, and **its attribute table directly underneath**. One place per entity,
   not names here and attributes there.
-- **Relationships** → the text sketch in a `<pre>` block, then the class diagram
-  as a PlantUML macro (recipe in `confluence-style.md`). Sketch first: it is the
-  authoritative form, the diagram is the overview.
+- **Relationships** → a **table**, one row per direction: the two entities in
+  named columns, the quantity **in words**, and a sentence with the verb. Then the
+  diagram as a PlantUML macro (recipe in `confluence-style.md`), carrying
+  **entities and lines only** - no attributes, no multiplicities, no labels, since
+  any text in the picture breaks out of its box.
 - **States** → one `<h3>` per entity that has a status, with a transition table.
 - **Enumerations** → one table.
 - **Open points** → 2 columns with yellow `open` status chips. Domain questions
