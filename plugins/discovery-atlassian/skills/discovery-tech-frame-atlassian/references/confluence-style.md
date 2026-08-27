@@ -16,8 +16,9 @@ reference; render them in the **output language**. Technical values
 | Pitch / core statement | **info panel** (`panel-info`) |
 | Problem / pain | **error panel** (`panel-error`, red) |
 | Handoff / deliverable | **success panel** (`panel-success`, green) |
-| Enumerable segments (audiences, personas) | full width, h3 + paragraph, **letter emojis** 🇦 🇧 🇨 |
-| Numbered / sequential points (assumptions, steps) | full width, h3 + paragraph, **number emojis** 1️⃣ 2️⃣ 3️⃣ |
+| Enumerable segments (audiences, personas) | full width, h3 + paragraph, **numbered circles, teal** |
+| Numbered / sequential points (assumptions, steps) | full width, h3 + paragraph, **numbered squares, teal** |
+| Negative enumeration, numbered | same shape, **red** instead of teal |
 | Topic / capability list (core capabilities, principles) | **2 columns**, h3 with a **fitting topic emoji** |
 | Exclusions (scope-out) | 2 columns, red **status chip** ("out") |
 | Positive signals (success) | 2 columns, green **status chip** ("Signal") |
@@ -29,13 +30,28 @@ reference; render them in the **output language**. Technical values
   problem, handoff). Not every section a panel.
 - **2 columns uniformly `data-breakout-width="760"`**; odd count → last column
   empty (`<p></p>`).
-- **Topic emojis app-fitting** (not fixed). Letter and number emojis are ordering
-  markers for enumerable resp. numbered lists, and they run in sequence: 🇦 🇧 🇨,
-  1️⃣ 2️⃣ 3️⃣.
-- **Letter emojis are the regional indicators** (`:regional_indicator_a:` …
-  `:regional_indicator_z:`), complete from A to Z. Write them as the character
-  (🇦), one per heading. They only pair into a flag when two sit directly
-  side by side in the same text, which never happens here.
+- **Topic emojis app-fitting** (not fixed). The numbered circles and squares are
+  ordering markers: **circles** for enumerable segments, **squares** for
+  sequential ones, so the two kinds stay apart at a glance.
+- **Teal is the default colour.** A numbered enumeration that is negative takes
+  **red** instead, in the same shape. A section that already carries a red status
+  chip (scope-out, pain points) keeps the chip and takes no number - one marker
+  per section, never two.
+- The numbered markers come from **Atlassian's own emoji set**: 0 to 20, circle
+  and square, ten colours. Write them as an emoji node, not as text - there is no
+  Unicode character behind them:
+
+      <span data-type="emoji" data-shortname=":1_one_circle_teal:" data-emoji-id="atlassian-1_one_circle_teal" data-emoji-text=":1_one_circle_teal:">:1_one_circle_teal:</span>
+
+  The name is `<digit>_<number word>_<circle|square>_<colour>`, so
+  `:1_one_circle_teal:`, `:2_two_circle_teal:`, `:3_three_square_red:`. Colours:
+  blue, gray, green, lime, magenta, orange, purple, red, teal, yellow. The full
+  set: `curl -s https://api.atlassian.com/emoji/atlassian`.
+- **Never as an anchor prefix.** A heading that is a deep-link target takes a
+  topic emoji or none. These markers have no character, so there is nothing for
+  the anchor scheme to encode.
+- **In the Markdown fallback** (no Confluence) they do not exist: write a plain
+  digit there.
 - **Never an excerpt inside a panel** - the excerpt is transcluded, the panel
   would travel with it. Pitch-as-panel only on pages that are **not** transcluded
   (the brief). Persona/journey/design: core statement as a **named excerpt, plain text**.
