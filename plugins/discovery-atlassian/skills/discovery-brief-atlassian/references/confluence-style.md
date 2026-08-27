@@ -110,6 +110,7 @@ identical in light and dark mode.
 ```
 @startuml
 skinparam shadowing false
+skinparam linetype ortho
 skinparam packageStyle rectangle
 skinparam packageBackgroundColor #FFFFFF
 skinparam packageBorderColor #FFFFFF
@@ -144,6 +145,10 @@ already carry.**
 - **Pad every class name with three spaces on each side**, via
   `class "   Name   " as Name`. That is what buys back the width the metric
   mismatch eats. The `as Name` keeps the references readable.
+- **`linetype ortho` for right-angled lines.** Verified with eleven entities and
+  an inheritance: every line runs on the grid, nothing crosses a box, and it
+  reads far more calmly than the diagonal default. At two entities it makes no
+  visible difference, so it costs nothing to set always.
 - **Never `skinparam padding`.** It puts a yellow warning banner inside the
   picture. Spacing only through a `<style>` block, and it barely helps anyway.
 - **The package name carries no quotes.** `package "." #FFFFFF` flips PlantUML
