@@ -3,9 +3,11 @@
 In Confluence as **HTML+** (`contentFormat: html`). A marker per section type -
 see `references/confluence-style.md`. Remove the `{...}` hints.
 
-Page title: `{Product name} | Brief` (convention: product first, then artifact
-type, separated by `|`. The artifact word stays **English** so titles are
-language-neutral; the page content follows the output language.)
+Page title: `{Product name} | Brief`. The brief **always** carries the product:
+it is the root of the tree and the page everything links to. Whether the pages
+below it do too is a separate, per-tree decision
+(`references/discovery-rules.md`). The artifact word stays **English** so titles
+are language-neutral; the page content follows the output language.
 
 ## Output language - what to translate and what not
 

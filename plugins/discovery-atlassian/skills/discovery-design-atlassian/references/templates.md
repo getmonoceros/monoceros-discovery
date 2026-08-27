@@ -4,9 +4,10 @@ In Confluence as **HTML+** (`contentFormat: html`). A marker per section type -
 see `references/confluence-style.md`. Describe the **direction**, not finished
 tokens. Remove the `{...}` hints.
 
-Page title: `{Product name} | Design Brief` (convention: product first, then
-artifact type, separated by `|`. The artifact word stays **English** so titles
-are language-neutral; the page content follows the output language.)
+Page title: `{prefix}Design Brief`, where `{prefix}` is `{Product name} | ` or
+nothing - the per-tree decision in `references/discovery-rules.md`. The artifact
+words stay **English** so titles are language-neutral; the page content follows
+the output language.
 
 ## Output language - what to translate and what not
 

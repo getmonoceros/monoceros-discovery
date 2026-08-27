@@ -28,6 +28,10 @@ usable:
 - **The page structure is closed.** No extra sections, lists, panels or
   tables. What turns up goes into the dialog, and step 4 gives it a
   destination.
+- **The title prefix is a decision.** This skill creates the first pages below
+  the brief, so it asks once whether titles carry the product name: redundant in
+  a space of its own, essential in a shared one. `{prefix}` below stands for
+  `<Product> | ` or for nothing.
 
 Read `references/example-journey.md` and `references/example-persona.md` too -
 a real, human-corrected persona and journey. They are the measure for form and
@@ -66,6 +70,9 @@ language. See the templates for exactly what never gets translated.
 
 Read the brief (from Confluence, a file, or pasted in). Summarize the
 **audience** and **core capabilities** briefly and confirm with the user.
+Settle the **title prefix** here, once, if nothing exists below the brief yet
+(`references/discovery-rules.md`); if pages are already there, read the answer
+off their titles instead of asking.
 Then work out **which flows** the product has - one journey per flow, so the
 count comes out of the brief rather than out of a target figure. Announce the
 sequence: personas → journeys → coverage check → feedback into the brief. What
@@ -81,8 +88,8 @@ its groups by role, so a group that looks like the same person in practice
 still gets its own persona - that role has requirements of its own. For each:
 
 - **Name, age, short characterization** (e.g. "the overwhelmed
-  collector") - becomes the page title, prefixed with the product
-  (`<Product> | <Name>, <age> - <characterization>`).
+  collector") - becomes the page title
+  (`{prefix}<Name>, <age> - <characterization>`).
 - **Description** as short prose (one paragraph): context, situation, why
   the problem hits them. Goes into the excerpt macro later.
 - **Expectations**: three to four, each with a **short title** and one or
@@ -98,8 +105,8 @@ and get confirmation.
 
 One journey per flow. For each you collect:
 
-- **Title**: `<Product> | J-001: <action>`, `<Product> | J-002: <action>`, …
-  - three digits, numbered
+- **Title**: `{prefix}J-001: <action>`, `{prefix}J-002: <action>`, … - three
+  digits, numbered
   in the order the journeys were worked out. The title names the **action**
   ("Ein Handout löschen"), never the story ("Der Abend, an dem es steht").
   Nobody ever finds a literary title again.
@@ -183,8 +190,8 @@ excerpt without a panel).
 
 1. Read the templates from `references/templates.md`.
 2. Create two **container pages under the brief** (ask for the brief page as
-   parent): one titled `<Product> | Personas`, one titled
-   `<Product> | Journeys`. Each uses the
+   parent): one titled `{prefix}Personas`, one titled `{prefix}Journeys`.
+   Each uses the
    **container-page template** (`references/templates.md`): a short intro
    paragraph in the output language, a divider, and the child-pages macro
    that auto-lists everything beneath it. These container pages **replace
@@ -242,8 +249,8 @@ Also as HTML+ (`contentFormat: html`). Structure:
    its heading in the brief** (anchor scheme in
    `references/confluence-style.md`) - not plain text.
 3. **`<h2>Persona(s)</h2>`** + **excerpt-include** that pulls the persona
-   by page title - the **full** title including the product prefix, otherwise
-   it finds nothing (embeds its named `summary` excerpt):
+   by page title - exactly as that page is titled, prefix or not, otherwise it
+   finds nothing (embeds its named `summary` excerpt):
    `<div data-type="extension" data-extension-key="excerpt-include" data-extension-type="com.atlassian.confluence.macro.core" data-parameters='{"macroParams":{"":{"value":"{persona page title}"}}}'></div>`
 4. **`<h2>Trigger</h2>`** + paragraph: the moment only, not the starting
    situation.

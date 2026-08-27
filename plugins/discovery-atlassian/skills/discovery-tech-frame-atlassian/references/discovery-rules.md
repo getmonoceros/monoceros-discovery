@@ -18,25 +18,41 @@ marks around expectation titles, and an entire command-line application.
 
 Plausible is not the test. Backed is.
 
-## Page titles carry the product
+## Page titles: the product prefix is a decision, asked once
 
-Every Confluence page in a discovery tree is titled `<Product> | <Page title>`:
-the product first, then the page's own title, separated by a spaced pipe. No
-exceptions - the brief, the collection pages, every single persona, every single
-journey, the domain model, the technical brief, the design brief.
+The **brief always carries the product**: `<Product> | Brief`. It is the root of
+the tree and the page everything else links to, so it has to be identifiable on
+its own.
 
-The reason is search. Pages are found across spaces, and a title without the
-product cannot be placed there. `Journeys`, or `J-003: Ein Handout löschen`,
-says nothing about which product it belongs to.
+For every page **below** the brief - the collection pages, each persona, each
+journey, the domain model, the technical brief, the design brief - the prefix is
+a decision per tree:
+
+- **A space of its own for this product** → **no prefix**. The space already says
+  which product it is, and `Handout | Journeys` inside a Handout space repeats
+  itself.
+- **A space shared with other discovery trees** → **prefix**
+  (`<Product> | <Page title>`). Without it a title like `Journeys`, or
+  `J-003: Ein Handout löschen`, cannot be placed in a search across spaces.
+
+**Ask once, with AskUserQuestion**, in the first skill that creates a page below
+the brief: "Should the pages carry the product name in their title? In a space
+of its own it is redundant; in a shared space it is what makes them findable."
+
+**Do not ask again in later skills.** Derive the answer from what is already
+there: look at the titles of the pages that already hang under the brief. Do they
+carry the prefix, then follow suit. Only when nothing exists below the brief yet
+do you ask.
+
+Whatever is chosen holds for the **whole** tree - a mixture is worse than either
+option. And where one page references another **by title**, the reference carries
+the title exactly as it is: the excerpt-include macro pulls a persona by its page
+title, and a reference in the wrong form finds nothing.
 
 The artifact words stay **English** (`Brief`, `Personas`, `Journeys`,
-`Domain Model`, `Technical Brief`, `Design Brief`) so the titles are
+`Domain Model`, `Technical Brief`, `Design Brief`) so titles are
 language-neutral. Everything that comes from the product itself - a persona's
 name, a journey's action - follows the output language.
-
-Where one page references another **by title**, the reference carries the full
-title including the product. That matters for the excerpt-include macro, which
-pulls a persona by its page title: a reference without the prefix finds nothing.
 
 ## Read the human's comments before you revise
 

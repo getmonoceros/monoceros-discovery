@@ -24,9 +24,9 @@ a heading or reference label. Emojis are structural markers - keep them.
 Two grouping pages **under the brief**, one per collection, that replace
 folders. Each = a short intro paragraph (in the output language) + a divider +
 the child-pages macro that auto-lists the pages filed beneath it. Titles are
-`{Product name} | Personas` and `{Product name} | Journeys` - the artifact word
-stays English. Reuse an existing collection page instead of creating a
-duplicate, including one that still carries the old, unprefixed title.
+`{prefix}Personas` and `{prefix}Journeys` - the artifact word stays English.
+Reuse an existing collection page instead of creating a duplicate, whichever
+form its title is in.
 
 Intro reference text (render in the **output language**):
 
@@ -46,7 +46,7 @@ Intro reference text (render in the **output language**):
 
 ## Persona page (HTML+, `contentFormat: html`)
 
-Page title: `{Product name} | {Name}, {age} - {short characterization}`
+Page title: `{prefix}{Name}, {age} - {short characterization}`
 
 ```html
 <div data-type="bodied-extension" data-extension-key="excerpt" data-extension-type="com.atlassian.confluence.macro.core" data-parameters='{"macroParams":{"name":{"value":"summary"}}}'><p>{Short prose: context, situation, why the problem hits exactly them.}</p></div>
@@ -67,7 +67,7 @@ Page title: `{Product name} | {Name}, {age} - {short characterization}`
 
 ## Journey page (HTML+, `contentFormat: html`)
 
-Page title: `{Product name} | J-00{n}: {the action}`
+Page title: `{prefix}J-00{n}: {the action}`
 
 The title names the **action** ("Ein Handout löschen"), never the story ("Der
 Abend, an dem es steht"). `J-001`, `J-002`, … stays verbatim; the action
@@ -77,7 +77,7 @@ follows the output language. A real example: `references/example-journey.md`.
 <div data-type="bodied-extension" data-extension-key="excerpt" data-extension-type="com.atlassian.confluence.macro.core" data-parameters='{"macroParams":{"name":{"value":"summary"}}}'><p>{Short summary of the journey, one sentence.}</p></div>
 <div data-type="bodied-extension" data-extension-key="details" data-extension-type="com.atlassian.confluence.macro.core"><table data-width="760"><tbody><tr><th><p><strong>Epic in Jira</strong></p></th><td><p>{to follow}</p></td></tr><tr><th><p><strong>{Addressed core capabilities}</strong></p></th><td><ul><li><p><a href="{brief-url}#{anchor of capability A}">{Capability A}</a></p></li><li><p><a href="{brief-url}#{anchor of capability B}">{Capability B}</a></p></li></ul></td></tr></tbody></table></div>
 <h2>Persona(s)</h2>
-<div data-type="extension" data-extension-key="excerpt-include" data-extension-type="com.atlassian.confluence.macro.core" data-parameters='{"macroParams":{"":{"value":"{full persona page title, incl. the product prefix}"}}}'></div>
+<div data-type="extension" data-extension-key="excerpt-include" data-extension-type="com.atlassian.confluence.macro.core" data-parameters='{"macroParams":{"":{"value":"{the persona page title, exactly as that page is titled}"}}}'></div>
 <h2>{Trigger}</h2>
 <p>{the concrete moment that starts the journey}</p>
 <h2>Journey</h2>
@@ -94,6 +94,9 @@ follows the output language. A real example: `references/example-journey.md`.
 ```
 
 - Excerpt = plain text, named `summary` (no panel).
+- **The excerpt-include takes the persona's title verbatim**, in whichever form
+  the tree uses. A title in the wrong form finds nothing and the section renders
+  empty.
 - **Addressed core capabilities are deep links** into the brief's headings, one
   per capability - anchor scheme in `confluence-style.md`. Plain text there
   loses the only bridge back to the brief.

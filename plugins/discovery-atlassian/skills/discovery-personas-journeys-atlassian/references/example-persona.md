@@ -11,8 +11,11 @@ Markup comes from `templates.md`. What follows is the rendered text.
 **Page title**
 
 ```
-Handout | Miriam Feldkamp, 38 - die Beraterin, die jede Woche liefert
+Miriam Feldkamp, 38 - die Beraterin, die jede Woche liefert
 ```
+
+Space of its own, so no product prefix; in a shared space it would be
+`Handout | Miriam Feldkamp, 38 - …`.
 
 **Excerpt (`summary`)**
 
@@ -62,8 +65,8 @@ unabhängig davon, wie bequem er wäre.
 
 ## What to read off this example
 
-**The title follows the scheme** `<Product> | <Name>, <age> - <characterization>`,
-and the characterization is what she does, not an adjective.
+**The title follows the scheme** `<Name>, <age> - <characterization>`, and the
+characterization is what she does, not an adjective.
 
 **The description is one paragraph and carries the bottleneck.** Not a CV: it
 says where the problem sits ("nicht das Erstellen ist das Problem, sondern das

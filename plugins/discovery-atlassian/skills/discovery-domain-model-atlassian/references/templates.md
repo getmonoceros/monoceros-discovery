@@ -3,10 +3,10 @@
 In Confluence as **HTML+** (`contentFormat: html`). A marker per section type -
 see `references/confluence-style.md`. Remove the `{...}` hints.
 
-Page title: `{Product name} | Domain Model` (product first, then the page's own
-title, separated by a spaced pipe. The artifact words `Domain Model` stay
-**English** so titles are language-neutral; the content follows the output
-language.)
+Page title: `{prefix}Domain Model`, where `{prefix}` is `{Product name} | ` or
+nothing - the per-tree decision in `references/discovery-rules.md`. The artifact
+words `Domain Model` stay **English** so titles are language-neutral; the content
+follows the output language.
 
 No meta preamble ("This document describes …"). The page opens with what the
 domain is about; the functional context sits in the page tree.

@@ -21,8 +21,11 @@ text.
 **Page title**
 
 ```
-Handout | J-001: Ein neues Handout veröffentlichen und mit Passwort schützen
+J-001: Ein neues Handout veröffentlichen und mit Passwort schützen
 ```
+
+This tree lives in a space of its own, so its titles carry no product prefix. In
+a shared space the same page would be `Handout | J-001: …`.
 
 **Excerpt (`summary`)**
 

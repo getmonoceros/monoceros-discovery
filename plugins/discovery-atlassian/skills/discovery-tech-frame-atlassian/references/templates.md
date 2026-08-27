@@ -5,9 +5,10 @@ see `references/confluence-style.md`. List items are described half-sentences
 with the *why*, not keywords. Catalog ids come from the live source. Remove the
 `{...}` hints.
 
-Page title: `{Product name} | Technical Brief` (convention: product first, then
-artifact type, separated by `|`. The artifact word stays **English** so titles
-are language-neutral; the page content follows the output language.)
+Page title: `{prefix}Technical Brief`, where `{prefix}` is
+`{Product name} | ` or nothing - the per-tree decision in
+`references/discovery-rules.md`. The artifact words stay **English** so titles are
+language-neutral; the page content follows the output language.
 
 No meta preamble ("This document captures …"). The page opens with the
 architecture; the functional context (the brief) sits in the page tree, a link

@@ -38,7 +38,9 @@ output is usable:
   comments are the work order, not your impression of the page.
 - **Sections the human wrote are the calibration** for form, and they are not
   touched unasked.
-- **Page titles carry the product**: `<Product> | Domain Model`.
+- **The title prefix follows the tree.** Read it off the pages already under
+  the brief: do they carry `<Product> | `, then so does this page. Only ask if
+  nothing is there yet.
 
 ## Output language
 
@@ -157,7 +159,7 @@ the diagram recipe, and the anchor scheme for deep links.
 
 1. Read the template from `references/templates.md`.
 2. Create the page as **HTML+** (`contentFormat: html`), titled
-   `<Product> | Domain Model`, as a **child of the brief** - a sibling of the
+   `{prefix}Domain Model`, as a **child of the brief** - a sibling of the
    technical brief and the design brief, not nested under either.
 3. If no Confluence is available, write it as a Markdown file and name the path.
 
