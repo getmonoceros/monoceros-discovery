@@ -115,7 +115,7 @@ own marker). For the brief specifically:
 - **Header infobox** (`details` macro): "Platform" and "Status"
   (`<span data-type="status" data-color="blue">` with a "Draft" label in the output language).
 - **Problem / why** → **error panel** (`<div data-type="panel-error">`, red) - the problem as a callout.
-- **Audience** → full width, `<h3>` + `<p>`, with **circle emojis** (🔵 🟢 🟡 …) before the title.
+- **Audience** → full width, `<h3>` + `<p>`, with **letter emojis** (🇦 🇧 🇨 …) before the title.
 - **Core capabilities** → **2 columns** (760), `<h3>` with a **fitting topic emoji** (app-dependent, not fixed).
 - **Out of scope** → 2 columns, red **status chip** in the h3.
 - **How we know it works** → 2 columns, green **status chip** in the h3.

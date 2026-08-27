@@ -16,7 +16,7 @@ reference; render them in the **output language**. Technical values
 | Pitch / core statement | **info panel** (`panel-info`) |
 | Problem / pain | **error panel** (`panel-error`, red) |
 | Handoff / deliverable | **success panel** (`panel-success`, green) |
-| Enumerable segments (audiences, personas) | full width, h3 + paragraph, **circle emojis** 🔵 🟢 🟡 |
+| Enumerable segments (audiences, personas) | full width, h3 + paragraph, **letter emojis** 🇦 🇧 🇨 |
 | Numbered / sequential points (assumptions, steps) | full width, h3 + paragraph, **number emojis** 1️⃣ 2️⃣ 3️⃣ |
 | Topic / capability list (core capabilities, principles) | **2 columns**, h3 with a **fitting topic emoji** |
 | Exclusions (scope-out) | 2 columns, red **status chip** ("out") |
@@ -29,8 +29,13 @@ reference; render them in the **output language**. Technical values
   problem, handoff). Not every section a panel.
 - **2 columns uniformly `data-breakout-width="760"`**; odd count → last column
   empty (`<p></p>`).
-- **Topic emojis app-fitting** (not fixed). Circle/number emojis are ordering
-  markers for enumerable resp. numbered lists.
+- **Topic emojis app-fitting** (not fixed). Letter and number emojis are ordering
+  markers for enumerable resp. numbered lists, and they run in sequence: 🇦 🇧 🇨,
+  1️⃣ 2️⃣ 3️⃣.
+- **Letter emojis are the regional indicators** (`:regional_indicator_a:` …
+  `:regional_indicator_z:`), complete from A to Z. Write them as the character
+  (🇦), one per heading. They only pair into a flag when two sit directly
+  side by side in the same text, which never happens here.
 - **Never an excerpt inside a panel** - the excerpt is transcluded, the panel
   would travel with it. Pitch-as-panel only on pages that are **not** transcluded
   (the brief). Persona/journey/design: core statement as a **named excerpt, plain text**.
