@@ -38,15 +38,21 @@ reference; render them in the **output language**. Technical values
   chip (scope-out, pain points) keeps the chip and takes no number - one marker
   per section, never two.
 - The numbered markers come from **Atlassian's own emoji set**: 0 to 20, circle
-  and square, ten colours. Write them as an emoji node, not as text - there is no
-  Unicode character behind them:
+  and square, ten colours. There is no Unicode character behind them, so write
+  them as an emoji node with **all three attributes**:
 
       <span data-type="emoji" data-shortname=":1_one_circle_teal:" data-emoji-id="atlassian-1_one_circle_teal" data-emoji-text=":1_one_circle_teal:">:1_one_circle_teal:</span>
 
-  The name is `<digit>_<number word>_<circle|square>_<colour>`, so
-  `:1_one_circle_teal:`, `:2_two_circle_teal:`, `:3_three_square_red:`. Colours:
-  blue, gray, green, lime, magenta, orange, purple, red, teal, yellow. The full
-  set: `curl -s https://api.atlassian.com/emoji/atlassian`.
+  **`data-emoji-id` is mandatory.** Verified on a live page: with all three
+  attributes the marker renders as the coloured circle; with `data-shortname`
+  alone, and with a bare `:shortcode:` in the text, Confluence renders the
+  shortcode as literal text.
+
+  The name is `<digit>_<number word>_<circle|square>_<colour>`, and the id is
+  that name prefixed with `atlassian-`. So `:1_one_circle_teal:`,
+  `:2_two_circle_teal:`, `:3_three_square_red:`. Colours: blue, gray, green,
+  lime, magenta, orange, purple, red, teal, yellow. The full set:
+  `curl -s https://api.atlassian.com/emoji/atlassian`.
 - **Never as an anchor prefix.** A heading that is a deep-link target takes a
   topic emoji or none. These markers have no character, so there is nothing for
   the anchor scheme to encode.
