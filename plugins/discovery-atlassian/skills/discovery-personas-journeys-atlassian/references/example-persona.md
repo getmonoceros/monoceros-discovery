@@ -11,7 +11,7 @@ Markup comes from `templates.md`. What follows is the rendered text.
 **Page title**
 
 ```
-Miriam Feldkamp, 38 - die Beraterin, die jede Woche liefert
+Handout | Miriam Feldkamp, 38 - die Beraterin, die jede Woche liefert
 ```
 
 **Excerpt (`summary`)**
@@ -62,8 +62,8 @@ unabhängig davon, wie bequem er wäre.
 
 ## What to read off this example
 
-**The title follows the scheme** `<Name>, <age> - <characterization>`, and the
-characterization is what she does, not an adjective.
+**The title follows the scheme** `<Product> | <Name>, <age> - <characterization>`,
+and the characterization is what she does, not an adjective.
 
 **The description is one paragraph and carries the bottleneck.** Not a CV: it
 says where the problem sits ("nicht das Erstellen ist das Problem, sondern das

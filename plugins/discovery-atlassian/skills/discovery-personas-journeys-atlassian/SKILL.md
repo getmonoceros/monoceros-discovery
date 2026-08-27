@@ -68,7 +68,8 @@ Read the brief (from Confluence, a file, or pasted in). Summarize the
 **audience** and **core capabilities** briefly and confirm with the user.
 Then work out **which flows** the product has - one journey per flow, so the
 count comes out of the brief rather than out of a target figure. Announce the
-sequence: personas → journeys → coverage check → feedback into the brief.
+sequence: personas → journeys → coverage check → feedback into the brief. What
+follows this skill is the domain model, which is derived from the journeys.
 
 **Existing personas/journeys**: if some already exist, ask whether to
 update them or create new ones.
@@ -80,7 +81,8 @@ its groups by role, so a group that looks like the same person in practice
 still gets its own persona - that role has requirements of its own. For each:
 
 - **Name, age, short characterization** (e.g. "the overwhelmed
-  collector") - becomes the page title.
+  collector") - becomes the page title, prefixed with the product
+  (`<Product> | <Name>, <age> - <characterization>`).
 - **Description** as short prose (one paragraph): context, situation, why
   the problem hits them. Goes into the excerpt macro later.
 - **Expectations**: three to four, each with a **short title** and one or
@@ -96,7 +98,8 @@ and get confirmation.
 
 One journey per flow. For each you collect:
 
-- **Title**: `J-001: <action>`, `J-002: <action>`, … - three digits, numbered
+- **Title**: `<Product> | J-001: <action>`, `<Product> | J-002: <action>`, …
+  - three digits, numbered
   in the order the journeys were worked out. The title names the **action**
   ("Ein Handout löschen"), never the story ("Der Abend, an dem es steht").
   Nobody ever finds a literary title again.
@@ -166,8 +169,8 @@ missing, or one is wrong, or two are the same thing. In one real run this
 happened four times, and the skill had no step for it.
 
 So ask explicitly: **what did this change about the brief?** Collect the
-changes, work them into the brief in one pass, and only then let planning and
-design build on it. A finding carried forward silently becomes a defect in
+changes, work them into the brief in one pass, and only then let the domain
+model, the technical brief and planning build on it. A finding carried forward silently becomes a defect in
 every artifact after it.
 
 Get final confirmation.
@@ -180,15 +183,17 @@ excerpt without a panel).
 
 1. Read the templates from `references/templates.md`.
 2. Create two **container pages under the brief** (ask for the brief page as
-   parent): one titled `Personas`, one titled `Journeys`. Each uses the
+   parent): one titled `<Product> | Personas`, one titled
+   `<Product> | Journeys`. Each uses the
    **container-page template** (`references/templates.md`): a short intro
    paragraph in the output language, a divider, and the child-pages macro
    that auto-lists everything beneath it. These container pages **replace
    folders** - the Atlassian connector cannot create Folder-type nodes. If a
-   `Personas`/`Journeys` page already exists under the brief, **reuse** it
-   (don't duplicate).
-3. Create **one page per persona** as a child of the `Personas` page, and
-   **one page per journey** as a child of the `Journeys` page - individual
+   collection page already exists under the brief, **reuse** it (don't
+   duplicate) - including one still carrying the old, unprefixed title.
+3. Create **one page per persona** as a child of the `Personas` collection
+   page, and **one page per journey** as a child of the `Journeys`
+   collection page - individual
    pages so each stays directly linkable by search.
 4. Set the links: journey → its persona (plain page link, no anchor),
    persona → its journey, both point to the brief.
@@ -237,7 +242,8 @@ Also as HTML+ (`contentFormat: html`). Structure:
    its heading in the brief** (anchor scheme in
    `references/confluence-style.md`) - not plain text.
 3. **`<h2>Persona(s)</h2>`** + **excerpt-include** that pulls the persona
-   by page title (embeds its named `summary` excerpt):
+   by page title - the **full** title including the product prefix, otherwise
+   it finds nothing (embeds its named `summary` excerpt):
    `<div data-type="extension" data-extension-key="excerpt-include" data-extension-type="com.atlassian.confluence.macro.core" data-parameters='{"macroParams":{"":{"value":"{persona page title}"}}}'></div>`
 4. **`<h2>Trigger</h2>`** + paragraph: the moment only, not the starting
    situation.

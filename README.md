@@ -21,13 +21,14 @@ the one for the tools you use.
 
 ### discovery-atlassian
 
-Five skills, run in sequence or on their own:
+Six skills, run in sequence or on their own:
 
 1. **discovery-brief** - idea to a one-page brief (Confluence)
 2. **discovery-personas-journeys** - personas and customer journeys (Confluence)
-3. **discovery-design** - a design brief: north star, principles, key screens (Confluence)
-4. **discovery-tech-frame** - technology decisions plus a ready `monoceros init` definition
-5. **planning-epics-stories** - a cut backlog (Jira issues)
+3. **discovery-domain-model** - entities, relationships, attributes and states (Confluence)
+4. **discovery-design** - a design brief: north star, principles, key screens (Confluence)
+5. **discovery-tech-frame** - technology decisions plus a ready `monoceros init` definition
+6. **planning-epics-stories** - a cut backlog (Jira issues)
 
 Each writes to the shared tools; if no Atlassian connection is present, it falls
 back to local files.

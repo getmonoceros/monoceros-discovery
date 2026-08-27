@@ -21,7 +21,7 @@ text.
 **Page title**
 
 ```
-J-001: Ein neues Handout veröffentlichen und mit Passwort schützen
+Handout | J-001: Ein neues Handout veröffentlichen und mit Passwort schützen
 ```
 
 **Excerpt (`summary`)**

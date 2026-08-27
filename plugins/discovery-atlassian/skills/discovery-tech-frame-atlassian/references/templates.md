@@ -31,8 +31,20 @@ CLI flags (`--with-languages`, `--with-services`, `--with-features`,
 ```html
 <h2>{Architecture at a glance}</h2>
 <div data-type="bodied-extension" data-extension-key="excerpt" data-extension-type="com.atlassian.confluence.macro.core" data-parameters='{"macroParams":{"name":{"value":"summary"}}}'><p>{Two to four sentences of prose: how the parts play together - frontend, backend, which data goes where, which services are involved.}</p></div>
+<h2>{Building blocks and interfaces}</h2>
+<h3>{Emoji} {Part 1, e.g. the backend}</h3>
+<p>{its job in one sentence, and who it talks to}</p>
+<h3>{Emoji} {Part 2}</h3>
+<p>{…}</p>
 <h2>{Technology decisions}</h2>
 <section data-type="layout-two-equal" data-breakout="wide" data-breakout-width="760"><div data-type="column" data-width="50"><h3>{Emoji} {Area, e.g. Backend}: {Decision}</h3><p>{one sentence of rationale}</p><h3>{Emoji} {Frontend}: {Decision}</h3><p>{…}</p></div><div data-type="column" data-width="50"><h3>{Emoji} {Data storage}: {Decision}</h3><p>{…}</p><h3>{Emoji} {Auth}: {Decision}</h3><p>{…}</p></div></section>
+<h2>{Operating frame}</h2>
+<h3><span data-type="emoji" data-shortname=":1_one_square_teal:" data-emoji-id="atlassian-1_one_square_teal" data-emoji-text=":1_one_square_teal:">:1_one_square_teal:</span> {Constraint 1, e.g. load}</h3>
+<p>{the constraint in an order of magnitude, and the decision it drove}</p>
+<h3><span data-type="emoji" data-shortname=":2_two_square_teal:" data-emoji-id="atlassian-2_two_square_teal" data-emoji-text=":2_two_square_teal:">:2_two_square_teal:</span> {Constraint 2, e.g. data classes}</h3>
+<p>{…}</p>
+<h2>{Cross-cutting conventions}</h2>
+<section data-type="layout-two-equal" data-breakout="wide" data-breakout-width="760"><div data-type="column" data-width="50"><h3>{Emoji} {Convention 1, e.g. authentication}</h3><p>{one line}</p><h3>{Emoji} {Convention 2, e.g. validation}</h3><p>{one line}</p></div><div data-type="column" data-width="50"><h3>{Emoji} {Convention 3, e.g. error shape}</h3><p>{one line}</p><h3>{Emoji} {Convention 4, e.g. identifiers}</h3><p>{one line}</p></div></section>
 <h2>{Mapping onto the Monoceros container definition}</h2>
 <p><em>{Catalog ids from the live source (CLI {version}). Confirm the exact ids and versions at build time against }</em><code>monoceros list-components</code><em>{.}</em></p>
 <div data-type="bodied-extension" data-extension-key="details" data-extension-type="com.atlassian.confluence.macro.core"><table data-width="760"><tbody><tr><th><p><code>--with-languages</code></p></th><td><p>{id, id, … - each briefly for what}</p></td></tr><tr><th><p><code>--with-services</code></p></th><td><p>{id, id, … - each briefly for what}</p></td></tr><tr><th><p><code>--with-features</code></p></th><td><p>{id, id, … - each briefly for what}</p></td></tr><tr><th><p><code>--with-ports</code></p></th><td><p>{which services browser-reachable}</p></td></tr><tr><th><p><code>--with-repos</code></p></th><td><p>{full HTTPS URL, only for github.com/gitlab.com/bitbucket.org; no repo or another host: omit the line}</p></td></tr></tbody></table></div>
@@ -58,10 +70,22 @@ Rules:
 - **Architecture at a glance** = the **named excerpt `summary`** (plain text, no
   panel). The architecture is the substance of the page and the transcludable
   summary at once - not a duplicate. **No meta intro** as an excerpt.
+- **Building blocks and interfaces** = full width, one `<h3>` per part with a
+  topic emoji, one sentence on its job and its counterparts. Optionally a
+  component diagram below it (recipe in `confluence-style.md`); the list stays
+  authoritative, the diagram is the overview.
 - **Technology decisions** = 2 columns (760), each `<h3>` with a **fitting topic
   emoji** (app-dependent, not fixed: e.g. ☕ Backend, ⚛️ Frontend, 🐍 mock
   service, 🔐 Auth, 🧬 vector DB, 🗄️ object storage, 🔗 integration) + `<p>`
-  rationale. On an odd count leave the last column empty.
+  rationale **including the rejected alternative** in a clause. On an odd count
+  leave the last column empty.
+- **Operating frame** = full width, `<h3>` + `<p>`, **numbered squares in teal**
+  before the title. Every entry names a constraint **and the decision it drove**;
+  an entry that drove nothing belongs in the open points, not here. No catalogue
+  of non-functional requirements.
+- **Cross-cutting conventions** = 2 columns (760), one `<h3>` per convention with
+  a topic emoji, **one line** each. Three to five, no more: they exist so that
+  every story answers these questions the same way.
 - **Mapping onto the container definition** = flag→assignment in the
   **page-properties macro** (`details`), followed by the "Not in the yml" prose
   and the `monoceros init` sketch as a code block. The table must sit inside the

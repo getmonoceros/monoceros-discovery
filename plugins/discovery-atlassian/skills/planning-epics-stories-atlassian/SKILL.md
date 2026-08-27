@@ -1,6 +1,6 @@
 ---
 name: planning-epics-stories-atlassian
-description: Derives the backlog - epics and stories - from the discovery (brief, journeys, personas, technical brief, design) through a guided dialog, and files them as Jira issues. Use this skill when someone wants to turn requirements into a backlog, epics, or stories, plan a project, or slice work for implementation. Goal: every story promises a function and carries everything needed to deliver it.
+description: Derives the backlog - epics and stories - from the discovery (brief, journeys, personas, domain model, technical brief, design) through a guided dialog, and files them as Jira issues. Use this skill when someone wants to turn requirements into a backlog, epics, or stories, plan a project, or slice work for implementation. Goal: every story promises a function and carries everything needed to deliver it.
 allowed-tools: Read, Write, AskUserQuestion
 ---
 
@@ -82,8 +82,14 @@ verbatim.
 
 ### Step 0: Read the discovery and clarify the project
 
-Read brief, journeys, personas, technical brief, and design. Summarize which
-journeys and personas exist, and confirm. Ask for the **Jira project** (key).
+Read brief, journeys, personas, domain model, technical brief, and design.
+Summarize which journeys and personas exist, and confirm.
+
+The **domain model is the reference for every story that touches data**: entity
+names, attributes, states. Take them from there verbatim instead of inventing
+your own, so the schema pieces that grow story by story fit together. It is a
+reference, not a build order - there is still no schema story, and the schema
+arrives with the first function that needs it. Ask for the **Jira project** (key).
 Ask for the URL of the design deliverable (prototype/screens) if it is not in
 the prompt - tool-agnostic (Figma Make, Claude Design, or other). You need it on
 nearly every story, so ask once, up front.

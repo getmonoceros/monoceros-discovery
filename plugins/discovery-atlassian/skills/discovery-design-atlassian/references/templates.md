@@ -34,7 +34,7 @@ succession**. The treatment fits the content. Concretely, the approved layout:
 | Brand personality & tone | full width, h3 + p, **mood emoji** per trait |
 | Design principles | 2 columns (760), **topic emoji** per principle |
 | Visual direction | full width, h3 + p; **palette with color chips** as a mini preview; italic disclaimer at the end |
-| Key screens | full width, h3 + p, **numbered** 1️⃣ 2️⃣ 3️⃣ … |
+| Key screens | full width, h3 + p, **numbered squares in teal** |
 | Interaction & platform | 2 columns (760), **topic emoji** per point |
 | Accessibility | full width, h3 + p, **blue `Required` chip** per requirement |
 | Brand & assets | 2 columns (760), plain (no emoji) |

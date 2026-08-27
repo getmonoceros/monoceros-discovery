@@ -5,11 +5,15 @@ description: Works a released brief into concrete technology decisions for a pro
 
 # Technical Brief (Solution Outline)
 
-You turn a product brief into **concrete technology decisions** and their
-mapping onto a Monoceros container definition. You capture *with what* and
-*why* - not the *what* and *why* of the product, which lives in the brief.
-The document you produce is the source for `monoceros init` and the
+You turn a product brief and its domain model into **concrete technology
+decisions** and their mapping onto a Monoceros container definition. You capture
+*with what* and *why* - not the *what* and *why* of the product, which lives in
+the brief. The document you produce is the source for `monoceros init` and the
 architecture reference for the build.
+
+**Where this sits**: journeys → domain model → **technical brief**. The domain
+model comes first on purpose: what has to be stored decides which storage is
+needed, not the reverse. Read it before you decide anything about data.
 
 ## Before you write anything
 
@@ -100,6 +104,9 @@ anyway (principle 2) - so you don't need a perfectly fresh catalog, but you
   "Assumptions / frame" section as the starting point. Summarize what is
   already implied (platform, login, external services) and confirm with the
   user.
+- **Read the domain model** if it exists: the entities, their volumes, and their
+  states tell you what the storage actually has to do. If there is none, say so
+  and note that the storage decision rests on less than it could.
 - **Existing technical brief**: if one already exists, ask whether to update it
   or create a new one.
 
@@ -111,11 +118,51 @@ the user corrects. Not every area applies.
 - **Backend**: language and role.
 - **Frontend / UI**: if the brief implies a browser interface.
 - **Auth**: if login is needed.
-- **Data storage**: if data is stored → which service.
+- **Data storage**: if data is stored → which service. Derive it from the domain
+  model, not from habit: how many entities, what kind of relationships, does
+  anything need full-text or vector search.
+- **How data gets into the store**: migrations rather than an init script, and
+  with which tool. One line, and planning absorbs it into the first story that
+  needs a schema.
 - **Object storage / files**: if the app stores files → which service.
 - **External dependencies** (e.g. a recognition or other API): decide
   deliberately - a real service, a mock component in the repo, or folded into
   the backend.
+
+**Per decision, name the alternative you rejected**, in a clause. Without it
+nobody can later tell whether a choice was examined or inherited. That is the
+cheap half of an architecture decision record and the half that pays.
+
+#### The operating frame
+
+Ask what the product has to withstand, and record **only what actually drove a
+decision**. Something that drove nothing is not a constraint yet - it goes into
+the open points.
+
+- **Load and data volume**, in orders of magnitude, not in numbers nobody has.
+- **Data classes** the system handles: personal data, payment data, someone
+  else's material - and what follows from that.
+- **Availability** that is expected of it.
+- **Where it may run**: hosting and data residency.
+
+Do not build a catalogue of non-functional requirements. Each entry is one line
+naming the constraint and the decision it forced. Where the product runs
+publicly, this section drives half the stack; where it runs for four people in a
+room, it is three lines.
+
+#### Cross-cutting conventions
+
+Three to five, one line each. Every story needs the same answers, and if they
+are not written down, each story invents its own and nobody notices until the
+fourth: how a request is authenticated, where validation lives, what an error
+response looks like, how identifiers are formed.
+
+#### The building blocks
+
+List the parts: every process or container, its job, and who it talks to. This
+is the question that comes up at the first endpoint and cannot be derived from a
+list of flags. Optionally a component diagram (recipe in
+`references/confluence-style.md`) - the list stays authoritative.
 
 For real choices in the **stack**, use **AskUserQuestion** and offer the actual
 catalog alternatives, not just your favorite (e.g. SQL store
@@ -176,8 +223,15 @@ type). For the technical brief specifically:
 - **Architecture at a glance** → **named excerpt `summary`** (plain text, no
   panel). The page opens with it; **no meta intro** ("This document captures
   …"), which carries nothing and would be worthless as an excerpt.
+- **Building blocks and interfaces** → full width, one `<h3>` per part with a
+  fitting topic emoji, a sentence on its job and who it talks to. Optionally a
+  component diagram below.
 - **Technology decisions** → 2 columns (760) with fitting **topic emojis** in
-  the `<h3>`.
+  the `<h3>`, each with its rejected alternative in the rationale.
+- **Operating frame** → full width, `<h3>` + `<p>`, with **numbered squares in
+  teal**. Each entry names the constraint and the decision it drove.
+- **Cross-cutting conventions** → 2 columns (760), one `<h3>` per convention,
+  one line each.
 - **Mapping onto the container definition** → flag→assignment in the
   **page-properties macro** (`details`), then the "Not in the yml" prose and
   the `init` sketch as a code block.

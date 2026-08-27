@@ -18,6 +18,26 @@ marks around expectation titles, and an entire command-line application.
 
 Plausible is not the test. Backed is.
 
+## Page titles carry the product
+
+Every Confluence page in a discovery tree is titled `<Product> | <Page title>`:
+the product first, then the page's own title, separated by a spaced pipe. No
+exceptions - the brief, the collection pages, every single persona, every single
+journey, the domain model, the technical brief, the design brief.
+
+The reason is search. Pages are found across spaces, and a title without the
+product cannot be placed there. `Journeys`, or `J-003: Ein Handout löschen`,
+says nothing about which product it belongs to.
+
+The artifact words stay **English** (`Brief`, `Personas`, `Journeys`,
+`Domain Model`, `Technical Brief`, `Design Brief`) so the titles are
+language-neutral. Everything that comes from the product itself - a persona's
+name, a journey's action - follows the output language.
+
+Where one page references another **by title**, the reference carries the full
+title including the product. That matters for the excerpt-include macro, which
+pulls a persona by its page title: a reference without the prefix finds nothing.
+
 ## Read the human's comments before you revise
 
 If the artifact already exists and a person has reviewed it, **their comments

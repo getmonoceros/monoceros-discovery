@@ -127,7 +127,7 @@ approved layout (details + HTML patterns in `references/templates.md`):
 - **Visual direction** → full width; the **palette with color chips** as a
   mini preview (chip colors roughly matching the palette), an italic
   disclaimer at the end ("direction, not final tokens").
-- **Key screens** → full width, `<h3>` + `<p>`, **numbered** (1️⃣ 2️⃣ 3️⃣ …).
+- **Key screens** → full width, `<h3>` + `<p>`, **numbered squares in teal** (`:1_one_square_teal:` …).
 - **Interaction & platform** → 2 columns (760), each `<h3>` with a **topic emoji**.
 - **Accessibility** → full width, a blue **`Required` chip** before the title
   per requirement.

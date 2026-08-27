@@ -1,0 +1,189 @@
+---
+name: discovery-domain-model-atlassian
+description: Derives the business domain model for a product from the brief and the journeys through a guided dialog - entities, relationships, attributes, states, enumerations - and files it as a Confluence page under the brief. Use this skill when someone wants to work out the data model, the entities, the domain objects, the attributes, the relationships between them, or the states an object can be in. The domain model is the reference every story is built against, and it feeds the storage decision in the technical brief.
+allowed-tools: Read, Write, AskUserQuestion
+---
+
+# Domain Model
+
+You work out **what the product's world is made of**: the entities, how they
+relate, what they carry, and which states they can be in. The source is the
+brief and the journeys - the nouns the personas actually handle.
+
+The model is a **reference, not a build order**. It exists so the schema pieces
+that grow story by story fit together. Planning still builds a schema only where
+a function needs one; there is no schema story and no up-front database. If you
+find yourself designing tables, you have left this skill's job.
+
+It is also the **business** model, not a database schema: business-readable
+names, no technical abbreviations, no foreign keys, no index decisions.
+
+## Where this sits
+
+Journeys → **domain model** → technical brief. The model comes out of the
+journeys, and the storage decision in the technical brief follows from the
+model, not the other way round. So it is worked out **before** the technical
+brief.
+
+## Before you write anything
+
+Read `references/discovery-rules.md`. Four of its rules decide whether the
+output is usable:
+
+- **Invent nothing.** No entity, attribute, state or enumeration value that is
+  not backed by the dialog, the brief, or a journey. When in doubt, ask; do not
+  plausibly fill the gap. An invented attribute reaches every story that touches
+  the entity.
+- **Read the human's comments first** when the page already exists. Their
+  comments are the work order, not your impression of the page.
+- **Sections the human wrote are the calibration** for form, and they are not
+  touched unasked.
+- **Page titles carry the product**: `<Product> | Domain Model`.
+
+## Output language
+
+Author the page - prose, headings, and labels - in the **user's language**. Take
+it from the conversation, or ask once at the start if it is unclear. Entity and
+attribute names follow the output language too: they are business terms, and the
+build reads them from here. This skill's own instructions and the template's
+technical markers stay as they are.
+
+## Principles
+
+- **Business, not technical.** Entities and attributes are named so a domain
+  expert recognizes them. No `usr_tbl`, no `fk_`, no surrogate-key debates.
+- **Propose, don't interrogate.** Present candidates from the journeys; the user
+  corrects.
+- **Sketch before detail.** A text sketch of entities and their obvious
+  relationships comes first, before any attribute is discussed. It surfaces a
+  misunderstanding while it is still cheap.
+- **Iteration is normal.** If an attribute turns out to be an entity, go back
+  and add it. Revisions are a sign the analysis is working, not a mistake.
+- **The tables are authoritative, the diagram is the overview.** Planning reads
+  the tables, and they survive the Markdown fallback.
+
+## Procedure
+
+### Step 0: Read the sources
+
+Read the brief and **all** journeys (from Confluence, files, or pasted in). The
+journeys are the richer source: they say what the persona actually handles.
+
+Give one integrated summary, not three separate reports: what the product is,
+which entity candidates you see from the nouns, which relationships are already
+derivable, and what is still unclear. Then ask: "Have I got the context right?
+Anything missing?"
+
+**Existing domain model**: if one exists, ask whether to update it or start
+fresh, and read its comments first.
+
+### Step 1: Entities
+
+Present the candidates from the noun analysis. Then settle, together:
+
+- **Entity or attribute?** Rule of thumb: are there several instances of it that
+  are told apart and referred to on their own? Then it is an entity. A colour, a
+  title, a timestamp is an attribute.
+- Is an important entity missing that no journey names yet?
+- Are two names the same thing (synonyms)?
+
+Confirm the list, then **immediately show a rough text sketch** - entities and
+the obvious relationships only, no attributes:
+
+```
+Handout ──1..*── Aufruf
+Handout ──0..1── Passwort
+Nutzer  ──1..*── Handout
+```
+
+### Step 2: Relationships
+
+Propose the relationships from the sketch and the journeys. Do **not** walk
+every possible pair; beyond five entities that is exhausting and rarely needed.
+
+Per relationship: the two entities, a name (a verb or a role), the
+multiplicities, and the type. Then clarify only what is genuinely open:
+
+- "Can a **B** exist without an **A**?" separates a loose relationship from a
+  part-of one.
+- "Is one of these a special case of another?" gives you an inheritance.
+
+### Step 3: Attributes
+
+Per entity: what has to be stored about it, and what makes one instance
+identifiable. Per attribute a **name**, a **type**, and whether it is
+**mandatory**.
+
+Ask about **enumerations** explicitly: are there fields with a fixed set of
+values? A status field almost always is, and it feeds step 4.
+
+Offer the usual bookkeeping attributes rather than assuming them: a technical
+identifier, created-at, changed-at. Offer, do not invent - if the user does not
+want them, they are not in the model.
+
+### Step 4: States
+
+For every entity that carries a status: the allowed **values** and the allowed
+**transitions**. Per transition, what triggers it, what has to hold for it to be
+allowed, and who may do it.
+
+This is where journeys and stories silently drift apart, so it is worth the
+minutes. A journey that publishes something and a journey that deletes it are
+two transitions on the same entity, and if the values do not line up, the
+stories contradict each other.
+
+Entities without a status get no state section. Do not invent a lifecycle to
+fill the template.
+
+### Step 5: Consolidate, then feed back
+
+Present the whole model as text: entities with attributes, relationships with
+multiplicities, states. Ask what is missing, what is redundant, and whether it
+matches the business reality.
+
+Then the mandatory step back: **what did this change about the brief or the
+journeys?** Working out a model regularly exposes a core capability that is
+missing, a journey that skips a step, or two capabilities that are the same
+thing. Collect those, work them into the upstream artifact in one pass, and only
+then let the technical brief and planning build on it. A finding carried forward
+silently becomes a defect in every artifact after it.
+
+Get final confirmation.
+
+## Finish: create the page
+
+Shared style rule: `references/confluence-style.md` - a marker per section type,
+the diagram recipe, and the anchor scheme for deep links.
+
+1. Read the template from `references/templates.md`.
+2. Create the page as **HTML+** (`contentFormat: html`), titled
+   `<Product> | Domain Model`, as a **child of the brief** - a sibling of the
+   technical brief and the design brief, not nested under either.
+3. If no Confluence is available, write it as a Markdown file and name the path.
+
+### Format (HTML+)
+
+- **What the domain is about** → **named excerpt `summary`** (plain text, no
+  panel), one or two sentences. No meta intro ("This document describes …").
+- **Page-properties macro** (`details`): row "Product brief" → the brief as an
+  inline card, row "Covered journeys" → the journeys as inline cards.
+- **Entities** → one `<h3>` per entity with a fitting topic emoji, a sentence of
+  prose, and **its attribute table directly underneath**. One place per entity,
+  not names here and attributes there.
+- **Relationships** → the text sketch in a `<pre>` block, then the class diagram
+  as a PlantUML macro (recipe in `confluence-style.md`). Sketch first: it is the
+  authoritative form, the diagram is the overview.
+- **States** → one `<h3>` per entity that has a status, with a transition table.
+- **Enumerations** → one table.
+- **Open points** → 2 columns with yellow `open` status chips. Domain questions
+  only; a technology question belongs in the technical brief.
+
+## Style
+
+- Propose, don't interrogate; one topic at a time.
+- Sketch early, in text.
+- Explain a modelling term when the user hesitates, using an example from their
+  own product rather than a webshop.
+- Allow iteration: going back to step 1 is normal.
+- Several small models beat one unreadable one. Beyond roughly a dozen entities,
+  propose splitting by subject area.
