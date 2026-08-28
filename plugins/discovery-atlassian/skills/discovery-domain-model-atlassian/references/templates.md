@@ -41,7 +41,7 @@ too - they are read by the build, like the entity and attribute names above. Emo
 <h2>{Entities}</h2>
 <h3>{Emoji} {Entity 1}</h3>
 <p>{one sentence: what it is, in business terms}</p>
-<table data-width="760"><thead><tr><th><p><strong>{Attribute}</strong></p></th><th><p><strong>{Type}</strong></p></th><th><p><strong>{Mandatory}</strong></p></th><th><p><strong>{Note}</strong></p></th></tr></thead><tbody><tr><td><p>{name}</p></td><td><p>{String}</p></td><td><p>{yes}</p></td><td><p>{what a reader cannot see from the name and the type; a dash where there is nothing}</p></td></tr></tbody></table>
+<table data-width="760"><thead><tr><th><p><strong>{Attribute}</strong></p></th><th><p><strong>{Type}</strong></p></th><th><p><strong>{Mandatory}</strong></p></th><th><p><strong>{Note}</strong></p></th></tr></thead><tbody><tr><td><p>{name}</p></td><td><p>{String}</p></td><td><p>{yes}</p></td><td><p>{one clause the name and the type do not already say}</p></td></tr></tbody></table>
 <h3>{Emoji} {Entity 2}</h3>
 <p>{…}</p>
 <table data-width="760">{…}</table>
@@ -62,16 +62,19 @@ Rules:
   panel. It is transcluded, and a panel would travel with it.
 - **One place per entity.** The `<h3>`, the sentence, and the attribute table sit
   together. Never a name list in one section and the attributes in another.
-- **No empty note cell.** Where there is nothing to add, the cell carries a
-  dash. A blank cannot be told apart from a forgotten one, so the reader has to
-  guess whether the attribute was thought about at all. The dash says: decided,
-  nothing to add.
-- **Treat siblings alike.** If `updatedAt` carries a note and `createdAt` is
-  blank, that asymmetry reads as an omission even when it was a decision.
-  Attributes of the same kind get the same treatment: both a note, or both a
-  dash. The note answers what the name and the type do not already say - where
-  the value comes from, who sets it, where it surfaces, what happens when it is
-  missing.
+- **Every attribute carries a note.** No blanks, no dashes, no exceptions: a
+  blank cannot be told apart from a forgotten one, and the reader has to guess
+  whether the attribute was thought about at all. This is the same rule as the
+  described list items everywhere else in discovery - each entry carries its
+  reason.
+- **The note says what the name and the type do not**: where the value comes
+  from, who sets it, where it surfaces, what happens when it is missing, what
+  makes it unique. Not a restatement of the name. "The time of creation" for
+  `createdAt` is filler; "set at upload, not at publication, and it orders the
+  dashboard" is a note.
+- **If you cannot write that clause, the attribute is not settled.** With
+  `createdAt` it is usually open whether it is the upload or the publication
+  moment and who sets it. That is a question for the dialog, not an empty cell.
 - **Attribute, state and enumeration tables keep a real `<thead>`.** These are
   data tables and want a header row. The no-`<thead>` rule applies only to the
   **page-properties** table at the top, which is key-value and needs a header
