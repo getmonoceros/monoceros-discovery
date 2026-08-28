@@ -140,8 +140,14 @@ nine variants; what survives is: **put no text into the diagram that the tables
 already carry.**
 
 - **No attributes in the class boxes.** They are in the attribute tables.
-- **No relationship labels and no multiplicities** on the lines. They are in the
-  relationship table.
+- **Cardinalities on the lines: yes.** `Handout "1" -- "0..*" Tag`. They are one
+  to four characters, they sit at the line ends, and with `ortho` they stay
+  legible even at eleven entities. Without them the picture says nothing about
+  the model and looks bare.
+- **Relationship verbs on the lines: no.** Verified against the same model: the
+  line cuts straight through "erreichbar unter", "verschlagwortet" overlaps the
+  next edge, and two cardinalities land on top of each other. The verb lives in
+  the relationship table, in the sentence.
 - **Pad every class name with three spaces on each side**, via
   `class "   Name   " as Name`. That is what buys back the width the metric
   mismatch eats. The `as Name` keeps the references readable.
@@ -155,8 +161,8 @@ already carry.**
   into a component diagram and the render dies with a syntax error. `package
   Modell #FFFFFF` works, and the white font colour keeps the name invisible.
 
-So the diagram answers exactly one question: **which entities exist and what is
-connected to what.** Everything else is read off the tables. That is not a
+So the diagram answers: **which entities exist, what is connected to what, and
+how many of each.** Everything else is read off the tables. That is not a
 compromise forced on us, it is the division of labour that keeps the picture
 legible.
 

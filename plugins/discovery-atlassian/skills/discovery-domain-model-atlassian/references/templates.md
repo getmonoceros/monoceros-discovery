@@ -46,7 +46,7 @@ too - they are read by the build, like the entity and attribute names above. Emo
 <p>{…}</p>
 <table data-width="760">{…}</table>
 <h2>{Relationships}</h2>
-<table data-width="760"><thead><tr><th><p><strong>{From}</strong></p></th><th><p><strong>{To}</strong></p></th><th><p><strong>{How many}</strong></p></th><th><p><strong>{What it means}</strong></p></th></tr></thead><tbody><tr><td><p>{Handout}</p></td><td><p>{Address}</p></td><td><p>{exactly one}</p></td><td><p>{one sentence, with the verb: a handout is always reachable at exactly one address}</p></td></tr><tr><td><p>{Address}</p></td><td><p>{Handout}</p></td><td><p>{at most one}</p></td><td><p>{…}</p></td></tr></tbody></table>
+<table data-width="760"><thead><tr><th><p><strong>{From}</strong></p></th><th><p><strong>{To}</strong></p></th><th><p><strong>{How many}</strong></p></th><th><p><strong>{What it means}</strong></p></th></tr></thead><tbody><tr><td><p>{Handout}</p></td><td><p>{Address}</p></td><td><p>{1 : 0..1}</p></td><td><p>{one sentence covering both directions, with the verb: a handout is reachable at exactly one address, and an address belongs to at most one handout}</p></td></tr><tr><td><p>{Handout}</p></td><td><p>{Tag}</p></td><td><p>{0..* : 0..*}</p></td><td><p>{…}</p></td></tr></tbody></table>
 <h2>{States}</h2>
 <h3>{Emoji} {Entity with a status}</h3>
 <table data-width="760"><thead><tr><th><p><strong>{From}</strong></p></th><th><p><strong>{To}</strong></p></th><th><p><strong>{Trigger}</strong></p></th><th><p><strong>{Condition}</strong></p></th><th><p><strong>{Who}</strong></p></th></tr></thead><tbody><tr><td><p>{value}</p></td><td><p>{value}</p></td><td><p>{what the persona does}</p></td><td><p>{what has to hold}</p></td><td><p>{which persona or role}</p></td></tr></tbody></table>
@@ -68,19 +68,23 @@ Rules:
   **column** (`<th>` left, `<td>` right, everything in `<tbody>`).
 - **The relationship table is the authoritative form**, and it is a table on
   purpose: an ASCII sketch like `Handout --1-- Address` leaves open which side the
-  `1` belongs to, and needs the same relationship written twice to be understood.
-  So: **one row per direction**, the two entities in named columns, and the
-  quantity **in words** ("exactly one", "at most one", "any number"). The formal
-  notation belongs in the diagram, not here.
-- **The `What it means` sentence carries the verb.** "A handout is always
-  reachable at exactly one address" is what a reader takes away; `0..1` is not.
+  `1` belongs to. Here the **named `From` and `To` columns anchor it**, so the
+  compact notation is unambiguous: `1 : 0..1` reads left onto `From`, right onto
+  `To`, and matches the cardinalities in the diagram.
+- **One row per relationship, not per direction.** Both directions are one fact
+  and belong in one row; two rows say the same thing twice and double the table
+  (eleven relationships became twenty-two rows in the first draft).
+- **The `What it means` sentence carries the verb and both directions.** "A
+  handout is reachable at exactly one address, and an address belongs to at most
+  one handout" is what a reader takes away; `1 : 0..1` alone is not.
 - **The model section comes before the detail.** The diagram sits in its own
   `<h2>` directly after the page properties, because it is the overview and a
   reader wants it first. It carries **entities and lines only** - no attributes,
-  no multiplicities, no relationship labels. It answers which entities exist and
-  what is connected to what; everything else is read off the tables. The reason is
-  in `confluence-style.md`: Confluence draws the SVG with its own font, so any
-  text in the picture breaks out of its box.
+  **with** cardinalities, but no relationship verbs. It answers which entities
+  exist, what is connected to what, and how many of each; everything else is read
+  off the tables. The reason for the limit is in `confluence-style.md`: Confluence
+  draws the SVG with its own font, so longer text in the picture breaks out of its
+  box or collides with a line.
 - **An enumeration and an inheritance must not express the same distinction.**
   `ArtifactType` with the values ZIP, HTML, PDF **and** the entities
   `ZipArtifact`, `HtmlArtifact`, `PdfArtifact` is a contradiction: one of the two

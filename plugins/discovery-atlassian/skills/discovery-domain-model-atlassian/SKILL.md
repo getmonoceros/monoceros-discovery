@@ -126,7 +126,8 @@ Propose the relationships from the sketch and the journeys. Do **not** walk
 every possible pair; beyond five entities that is exhausting and rarely needed.
 
 Per relationship: the two entities, a name (a verb or a role), the
-multiplicities, and the type. Then clarify only what is genuinely open:
+multiplicities for both directions, and the type. One relationship stays **one**
+entry, not one per direction. Then clarify only what is genuinely open:
 
 - "Can a **B** exist without an **A**?" separates a loose relationship from a
   part-of one.
@@ -205,13 +206,16 @@ the diagram recipe, and the anchor scheme for deep links.
 - **The model** → its own `<h2>` right after the page properties, carrying the
   diagram as a PlantUML macro (recipe in `confluence-style.md`). The picture comes
   **before** the detail: it is the overview, and a reader wants it first. It
-  carries **entities and lines only** - no attributes, no multiplicities, no
-  labels, since any text in the picture breaks out of its box.
+  carries entities, lines and **cardinalities** - but no attributes and no
+  relationship verbs, since longer text in the picture breaks out of its box or
+  collides with a line.
 - **Entities** → one `<h3>` per entity with a fitting topic emoji, a sentence of
   prose, and **its attribute table directly underneath**. One place per entity,
   not names here and attributes there.
-- **Relationships** → a **table**, one row per direction: the two entities in
-  named columns, the quantity **in words**, and a sentence with the verb.
+- **Relationships** → a **table**, **one row per relationship**: the two
+  entities in the named `From` and `To` columns, the cardinality as `1 : 0..1`
+  (unambiguous because the columns are named, and matching the diagram), and a
+  sentence carrying the verb and both directions.
 - **States** → one `<h3>` per entity that has a status, with a transition table.
 - **Enumerations** → one table.
 - **Open points** → 2 columns with yellow `open` status chips. Domain questions
