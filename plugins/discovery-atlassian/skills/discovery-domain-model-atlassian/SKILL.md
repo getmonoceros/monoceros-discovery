@@ -214,8 +214,10 @@ the diagram recipe, and the anchor scheme for deep links.
   not names here and attributes there.
 - **Relationships** → a **table**, **one row per relationship**, three columns:
   the two entities as `A ↔︎ B` in one cell, the cardinality written exactly as
-  the diagram writes it (`1 : 0..1`, reading onto the two names in the same
-  order), and a sentence carrying the verb and both directions in words. The
+  the diagram writes it, and a sentence carrying the verb and both directions in
+  words. **The number beside a name says how many of that entity belong to one of
+  the other** - the UML convention, and the opposite of what a reader guesses, so
+  check it against the sentence before you write it down. The
   sentence is not optional: it is what a reader who does not read UML takes away.
   An inheritance carries `Inheritance` instead of a cardinality.
 - **States** → one `<h3>` per entity that has a status, with a transition table.

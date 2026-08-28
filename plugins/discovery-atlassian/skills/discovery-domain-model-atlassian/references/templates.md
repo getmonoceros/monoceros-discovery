@@ -46,7 +46,7 @@ too - they are read by the build, like the entity and attribute names above. Emo
 <p>{…}</p>
 <table data-width="760">{…}</table>
 <h2>{Relationships}</h2>
-<table data-width="760"><thead><tr><th><p><strong>{Relationship}</strong></p></th><th><p><strong>{Cardinality}</strong></p></th><th><p><strong>{What it means}</strong></p></th></tr></thead><tbody><tr><td><p>{Handout} ↔︎ {Address}</p></td><td><p>{1 : 0..1}</p></td><td><p>{one sentence covering both directions, with the verb: a handout is reachable at exactly one address, and an address belongs to at most one handout}</p></td></tr><tr><td><p>{Artifact} ↔︎ {ZipArtifact, HtmlArtifact, PdfArtifact}</p></td><td><p>{Inheritance}</p></td><td><p>{…}</p></td></tr></tbody></table>
+<table data-width="760"><thead><tr><th><p><strong>{Relationship}</strong></p></th><th><p><strong>{Cardinality}</strong></p></th><th><p><strong>{What it means}</strong></p></th></tr></thead><tbody><tr><td><p>{Handout} ↔︎ {Address}</p></td><td><p>{0..1 : 1}</p></td><td><p>{one sentence covering both directions, with the verb: a handout is reachable at exactly one address, and an address belongs to at most one handout}</p></td></tr><tr><td><p>{Artifact} ↔︎ {ZipArtifact, HtmlArtifact, PdfArtifact}</p></td><td><p>{Inheritance}</p></td><td><p>{…}</p></td></tr></tbody></table>
 <h2>{States}</h2>
 <h3>{Emoji} {Entity with a status}</h3>
 <table data-width="760"><thead><tr><th><p><strong>{From}</strong></p></th><th><p><strong>{To}</strong></p></th><th><p><strong>{Trigger}</strong></p></th><th><p><strong>{Condition}</strong></p></th><th><p><strong>{Who}</strong></p></th></tr></thead><tbody><tr><td><p>{value}</p></td><td><p>{value}</p></td><td><p>{what the persona does}</p></td><td><p>{what has to hold}</p></td><td><p>{which persona or role}</p></td></tr></tbody></table>
@@ -74,9 +74,17 @@ Rules:
   that the row covers **both** directions, which is why one relationship is one
   row.
 - **The `Cardinality` column is written exactly as the diagram writes it**, so the
-  two cannot drift: `A "1" -- "0..1" B` becomes `1 : 0..1`. An inheritance has no
-  multiplicity and carries the word `Inheritance` instead, with the subclasses
-  listed on the right of the arrow.
+  two cannot drift: `A "1" -- "0..1" B` becomes `1 : 0..1`.
+- **How to read it: the number beside a name says how many of *that* entity
+  belong to one of the other.** That is the UML convention, and it is the opposite
+  of what most readers guess. For `Handout ↔︎ Address` the correct value is
+  `0..1 : 1`: the `0..1` sits beside Handout because one address belongs to at
+  most one handout, and the `1` sits beside Address because one handout has
+  exactly one address. It looks like "Handout is 0..1", which is exactly why the
+  sentence is not optional. Get this backwards and the model says the opposite of
+  what was agreed.
+- An inheritance has no multiplicity and carries the word `Inheritance` instead,
+  with the subclasses listed on the right of the arrow.
 - Anyone who reads UML gets the precision from the cardinality; everyone else
   reads the sentence, which says the same thing in words. That is why the sentence
   is not optional.
