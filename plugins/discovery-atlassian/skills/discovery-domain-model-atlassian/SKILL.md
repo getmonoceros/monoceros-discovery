@@ -213,9 +213,10 @@ the diagram recipe, and the anchor scheme for deep links.
   prose, and **its attribute table directly underneath**. One place per entity,
   not names here and attributes there.
 - **Relationships** → a **table**, **one row per relationship**: the two
-  entities in the named `From` and `To` columns, the cardinality as `1 : 0..1`
-  (unambiguous because the columns are named, and matching the diagram), and a
-  sentence carrying the verb and both directions.
+  entities in the named `From` and `To` columns, the cardinality written exactly
+  as the diagram writes it (`1 : 0..1`), and a sentence carrying the verb and both
+  directions in words. The sentence is not optional: it is what a reader who does
+  not read UML takes away.
 - **States** → one `<h3>` per entity that has a status, with a transition table.
 - **Enumerations** → one table.
 - **Open points** → 2 columns with yellow `open` status chips. Domain questions

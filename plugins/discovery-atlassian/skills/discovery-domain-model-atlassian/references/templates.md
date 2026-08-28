@@ -46,7 +46,7 @@ too - they are read by the build, like the entity and attribute names above. Emo
 <p>{…}</p>
 <table data-width="760">{…}</table>
 <h2>{Relationships}</h2>
-<table data-width="760"><thead><tr><th><p><strong>{From}</strong></p></th><th><p><strong>{To}</strong></p></th><th><p><strong>{How many}</strong></p></th><th><p><strong>{What it means}</strong></p></th></tr></thead><tbody><tr><td><p>{Handout}</p></td><td><p>{Address}</p></td><td><p>{1 : 0..1}</p></td><td><p>{one sentence covering both directions, with the verb: a handout is reachable at exactly one address, and an address belongs to at most one handout}</p></td></tr><tr><td><p>{Handout}</p></td><td><p>{Tag}</p></td><td><p>{0..* : 0..*}</p></td><td><p>{…}</p></td></tr></tbody></table>
+<table data-width="760"><thead><tr><th><p><strong>{From}</strong></p></th><th><p><strong>{To}</strong></p></th><th><p><strong>{Cardinality}</strong></p></th><th><p><strong>{What it means}</strong></p></th></tr></thead><tbody><tr><td><p>{Handout}</p></td><td><p>{Address}</p></td><td><p>{1 : 0..1}</p></td><td><p>{one sentence covering both directions, with the verb: a handout is reachable at exactly one address, and an address belongs to at most one handout}</p></td></tr><tr><td><p>{Handout}</p></td><td><p>{Tag}</p></td><td><p>{0..* : 0..*}</p></td><td><p>{…}</p></td></tr></tbody></table>
 <h2>{States}</h2>
 <h3>{Emoji} {Entity with a status}</h3>
 <table data-width="760"><thead><tr><th><p><strong>{From}</strong></p></th><th><p><strong>{To}</strong></p></th><th><p><strong>{Trigger}</strong></p></th><th><p><strong>{Condition}</strong></p></th><th><p><strong>{Who}</strong></p></th></tr></thead><tbody><tr><td><p>{value}</p></td><td><p>{value}</p></td><td><p>{what the persona does}</p></td><td><p>{what has to hold}</p></td><td><p>{which persona or role}</p></td></tr></tbody></table>
@@ -69,8 +69,10 @@ Rules:
 - **The relationship table is the authoritative form**, and it is a table on
   purpose: an ASCII sketch like `Handout --1-- Address` leaves open which side the
   `1` belongs to. Here the **named `From` and `To` columns anchor it**, so the
-  compact notation is unambiguous: `1 : 0..1` reads left onto `From`, right onto
-  `To`, and matches the cardinalities in the diagram.
+  compact notation stays readable: the `Cardinality` column is written **exactly
+  as the diagram writes it**, `From "1" -- "0..1" To` becomes `1 : 0..1`. Anyone
+  who reads UML gets the precision; everyone else reads the sentence, which says
+  the same thing in words. That is why the sentence is not optional.
 - **One row per relationship, not per direction.** Both directions are one fact
   and belong in one row; two rows say the same thing twice and double the table
   (eleven relationships became twenty-two rows in the first draft).
