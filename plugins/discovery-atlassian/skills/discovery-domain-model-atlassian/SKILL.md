@@ -155,6 +155,12 @@ Offer the usual bookkeeping attributes rather than assuming them: a technical
 identifier, created-at, changed-at. Offer, do not invent - if the user does not
 want them, they are not in the model.
 
+**Every attribute gets a note or a dash, never a blank**, and attributes of the
+same kind get the same treatment. A note on `updatedAt` next to a blank
+`createdAt` reads as forgetting, not as a decision. The note says what the name
+and the type do not: where the value comes from, who sets it, where it surfaces,
+what happens when it is missing.
+
 ### Step 4: States
 
 For every entity that carries a status: the allowed **values** and the allowed
