@@ -181,8 +181,9 @@ Translate the decisions into the `init` categories with catalog ids:
 - **`--with-features`**: set are `claude` (builder), `github` (code host), and
   **`atlassian/twg`** (Jira read access for Claude - the lean preset, not the
   full `atlassian` with `rovodev`+`forge`). Further features only if the stack
-  really needs them. `twg` needs config at build time - it comes as a **fixed
-  open point** (see below), not as a follow-up question.
+  really needs them. `twg` needs config at build time, so it **may** become an
+  open point - check first whether it is already configured (see "Setting open
+  points correctly"), and never turn it into a follow-up question.
 - **`--with-ports`**: the browser-reachable services. The **first** port
   becomes `<name>.localhost`, each further one `<name>-<port>.localhost`.
 - **`--with-repos`**: first ask **whether a repo for the app already exists**
@@ -247,11 +248,25 @@ type). For the technical brief specifically:
 ### Setting open points correctly
 
 The open points are the **one canonical place for the undecided** - final ports
-and versions to confirm at build time. One point is **always** there: the
-**twg config** (because `atlassian/twg` is set) - "twg config in `<name>.env`:
-`instance` (Atlassian site host), `email` (account mail), `apiToken` (token
-from id.atlassian.com)". Values the user has already given (e.g. the site host)
-enter concretely; the token stays "at apply time". Two rules:
+and versions to confirm at build time.
+
+**The twg config is a point only if it is not already done.** Because
+`atlassian/twg` is set, its configuration has to exist somewhere - but that does
+not mean it is outstanding. Ask which container the technical brief describes:
+
+- **A new workbench for this product**, not created yet → the point belongs on
+  the page. It needs its own `.env`, whatever is configured elsewhere: "twg
+  config in `<name>.env`: `instance` (Atlassian site host), `email` (account
+  mail), `apiToken` (token from id.atlassian.com)". Values the user has already
+  given (e.g. the site host) enter concretely; the token stays "at apply time".
+- **The workbench you are already working in**, with twg authenticated → the
+  point is **done** and does not go on the page. If the discovery artifacts were
+  written to Confluence through twg from inside that container, that is the
+  answer: it is configured, or the pages would not exist.
+
+A settled point on the open list is worse than a missing one: it sends someone
+off to do work that is already finished, and it costs the rest of the list its
+credibility. Two more rules:
 
 - **A section is the one place for its topic.** If a whole section is still open
   (typically: deployment), it carries a note panel "open" - and then does
