@@ -104,4 +104,8 @@ Rules:
   points (a section is the one place for its topic).
 - **Open points** = 2 columns, each `<h3>` with a yellow `open` status chip +
   `<p>`. (HTML+ has no task lists - the chips are the substitute.) On an odd
-  count leave the last column empty.
+  count leave the last column empty. **Only what is undecided about the
+  product** goes here: a technology choice still open, a port to confirm, an
+  unresolved external dependency, a repository that does not exist yet.
+  **Configuring a feature is never an open point** - no credentials, no token,
+  no `.env` entry. That belongs to setting up the workbench, not to the product.
