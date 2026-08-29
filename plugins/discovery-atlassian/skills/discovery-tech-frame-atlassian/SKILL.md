@@ -90,7 +90,12 @@ anyway (principle 2) - so you don't need a perfectly fresh catalog, but you
    (`opencode`/`rovodev`). **`atlassian/twg` is added by default** (no
    question): discovery lives in Confluence, the backlog in Jira, so the
    container needs Jira read access for Claude. `github` is the code-host
-   default. These defaults are **named, not asked** - no selection dialog about
+   default. And **`claude-code-roles`**, because this pipeline ends in a backlog
+   meant to be worked off story by story: the roles are that loop, a planner
+   writes the plan, an implementer executes it, a reviewer checks the result
+   against it. Its model and effort options stay **empty** - empty means the
+   roles inherit the session, which is the right default and needs no decision
+   here. These defaults are **named, not asked** - no selection dialog about
    them. In particular **never** ask whether Atlassian CLIs should go into the
    container: `twg` is set, `forge` and `rovodev` deliberately **left out**
    (lean preset).
@@ -173,8 +178,11 @@ it.
 For real choices in the **stack**, use **AskUserQuestion** and offer the actual
 catalog alternatives, not just your favorite (e.g. SQL store
 `postgres`/`mysql`/`pgvector`, which object storage). The **set defaults**
-(`claude`, `github`, `atlassian/twg`) are **not** a choice - don't offer them,
-don't pose them as an "in/out?" question, just name them. For each decision,
+(`claude`, `github`, `atlassian/twg`, `claude-code-roles`) are **not** a choice -
+don't offer them, don't pose them as an "in/out?" question, just name them. The
+first three are preconditions, the roles are a working style; that is why the
+features row says what each one is for, so a reader can drop the roles
+deliberately rather than wonder how they got there. For each decision,
 record whether it is a Monoceros service, a feature, or an (app-owned)
 dependency.
 
@@ -184,10 +192,11 @@ Translate the decisions into the `init` categories with catalog ids:
 
 - **`--with-languages`**: every language the build needs.
 - **`--with-services`**: only catalog services (networked containers).
-- **`--with-features`**: set are `claude` (builder), `github` (code host), and
+- **`--with-features`**: set are `claude` (builder), `github` (code host),
   **`atlassian/twg`** (Jira read access for Claude - the lean preset, not the
-  full `atlassian` with `rovodev`+`forge`). Further features only if the stack
-  really needs them. `twg` is configured when the workbench is set up; that is
+  full `atlassian` with `rovodev`+`forge`), and **`claude-code-roles`** (plan,
+  implement, review against the plan - it needs `claude`, which is set). Further
+  features only if the stack really needs them. `twg` is configured when the workbench is set up; that is
   not a product question, so it is neither an open point nor a follow-up
   question here.
 - **`--with-ports`**: the browser-reachable services. The **first** port
