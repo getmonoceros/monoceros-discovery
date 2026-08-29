@@ -33,6 +33,7 @@ CLI flags (`--with-languages`, `--with-services`, `--with-features`,
 <h2>{Architecture at a glance}</h2>
 <div data-type="bodied-extension" data-extension-key="excerpt" data-extension-type="com.atlassian.confluence.macro.core" data-parameters='{"macroParams":{"name":{"value":"summary"}}}'><p>{Two to four sentences of prose: how the parts play together - frontend, backend, which data goes where, which services are involved.}</p></div>
 <h2>{Building blocks and interfaces}</h2>
+<div data-type="extension" data-extension-key="{plantuml extension key, see confluence-style.md}" data-extension-type="com.atlassian.ecosystem" data-layout="default" data-parameters='{"layout":"extension","guestParams":{"code":"{@startuml … @enduml, component-diagram preamble from confluence-style.md}","diagramName":"{Building blocks of <product>}","type":"plantuml"},"forgeEnvironment":"PRODUCTION","extensionId":"{extension id, see confluence-style.md}"}'>PlantUML Diagrams &amp; Charts for Confluence</div>
 <h3>{Emoji} {Part 1, e.g. the backend}</h3>
 <p>{its job in one sentence, and who it talks to}</p>
 <h3>{Emoji} {Part 2}</h3>
@@ -72,9 +73,10 @@ Rules:
   panel). The architecture is the substance of the page and the transcludable
   summary at once - not a duplicate. **No meta intro** as an excerpt.
 - **Building blocks and interfaces** = full width, one `<h3>` per part with a
-  topic emoji, one sentence on its job and its counterparts. Optionally a
-  component diagram below it (recipe in `confluence-style.md`); the list stays
-  authoritative, the diagram is the overview.
+  topic emoji, one sentence on its job and its counterparts. **From three parts
+  up, a component diagram sits above them** (recipe in `confluence-style.md`):
+  picture first, then the detail. The list stays authoritative, the diagram is the
+  overview, and the page has to stand without it.
 - **Technology decisions** = 2 columns (760), each `<h3>` with a **fitting topic
   emoji** (app-dependent, not fixed: e.g. ☕ Backend, ⚛️ Frontend, 🐍 mock
   service, 🔐 Auth, 🧬 vector DB, 🗄️ object storage, 🔗 integration) + `<p>`

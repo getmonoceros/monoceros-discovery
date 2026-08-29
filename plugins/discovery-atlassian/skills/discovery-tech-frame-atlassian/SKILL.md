@@ -161,8 +161,14 @@ response looks like, how identifiers are formed.
 
 List the parts: every process or container, its job, and who it talks to. This
 is the question that comes up at the first endpoint and cannot be derived from a
-list of flags. Optionally a component diagram (recipe in
-`references/confluence-style.md`) - the list stays authoritative.
+list of flags.
+
+**From three parts up, draw it as well** - a component diagram, recipe in
+`references/confluence-style.md`. Who calls whom is a structure the reader
+otherwise has to assemble from five paragraphs and hold in their head, and the
+arrows carry the direction that prose states only in passing. The list stays
+authoritative; the picture is the overview, and the page has to stand without
+it.
 
 For real choices in the **stack**, use **AskUserQuestion** and offer the actual
 catalog alternatives, not just your favorite (e.g. SQL store
@@ -225,8 +231,10 @@ type). For the technical brief specifically:
   panel). The page opens with it; **no meta intro** ("This document captures
   …"), which carries nothing and would be worthless as an excerpt.
 - **Building blocks and interfaces** → full width, one `<h3>` per part with a
-  fitting topic emoji, a sentence on its job and who it talks to. Optionally a
-  component diagram below.
+  fitting topic emoji, a sentence on its job and who it talks to, and **from
+  three parts up a component diagram** above them (recipe in
+  `references/confluence-style.md`). The picture first, then the detail, the same
+  order the domain model uses.
 - **Technology decisions** → 2 columns (760) with fitting **topic emojis** in
   the `<h3>`, each with its rejected alternative in the rationale.
 - **Operating frame** → full width, `<h3>` + `<p>`, with **numbered squares in

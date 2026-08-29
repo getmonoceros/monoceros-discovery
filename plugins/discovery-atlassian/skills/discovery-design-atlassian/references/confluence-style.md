@@ -105,29 +105,58 @@ fixed string.
 The app renders the canvas in the reader's colour mode, and PlantUML cannot
 override it: `skinparam backgroundColor` is ignored. So the diagram paints its
 own surface - everything goes inside a white `package`, which makes the picture
-identical in light and dark mode.
+identical in light and dark mode. These lines hold for **every** diagram type:
 
 ```
-@startuml
 skinparam shadowing false
 skinparam linetype ortho
 skinparam packageStyle rectangle
 skinparam packageBackgroundColor #FFFFFF
 skinparam packageBorderColor #FFFFFF
+skinparam ArrowColor #44546F
+```
+
+Then the part that depends on the diagram type.
+
+**Class diagram** (the domain model), with the package name hidden:
+
+```
 skinparam packageFontColor #FFFFFF
 skinparam classBackgroundColor #FFFFFF
 skinparam classBorderColor #44546F
 skinparam classFontColor #172B4D
-skinparam ArrowColor #44546F
 hide members
 hide circle
 package Modell #FFFFFF {
   class "   Handout   " as Handout
   class "   Address   " as Address
-  Handout -- Address
+  Handout "0..1" -- "1" Address
 }
-@enduml
 ```
+
+**Component diagram** (building blocks and interfaces, deployment):
+
+```
+skinparam rectangleBackgroundColor #FFFFFF
+skinparam rectangleBorderColor #44546F
+skinparam rectangleFontColor #172B4D
+skinparam databaseBackgroundColor #FFFFFF
+skinparam databaseBorderColor #44546F
+skinparam databaseFontColor #172B4D
+package Handout #FFFFFF {
+  rectangle "   Caddy   " as Caddy
+  rectangle "   Handout   " as App
+  database "   PostgreSQL   " as DB
+  Caddy --> App
+  App --> DB
+}
+```
+
+Two differences from the class diagram, both observed: `packageFontColor` does
+**not** take effect here, so the package label renders - give the package a name
+that says something, the product or the system. And the arrow direction carries
+real information here, so use `-->` rather than a plain line: it says who calls
+whom. A store is a `database`, everything else a `rectangle`.
 
 ### Keep text out of the picture
 
@@ -136,7 +165,7 @@ PlantUML sizes each box with the font it measured with, so every string is drawn
 wider than the box that was computed for it. Names longer than roughly ten
 characters run out of their box, and labels on the lines collide with the lines.
 Setting `FontName` does not help - it is overridden. This was worked through in
-nine variants; what survives is: **put no text into the diagram that the tables
+nine variants; what survives is: **put no text into the picture that the tables
 already carry.**
 
 - **No attributes in the class boxes.** They are in the attribute tables.
@@ -147,24 +176,35 @@ already carry.**
 - **Relationship verbs on the lines: no.** Verified against the same model: the
   line cuts straight through "erreichbar unter", "verschlagwortet" overlaps the
   next edge, and two cardinalities land on top of each other. The verb lives in
-  the relationship table, in the sentence.
-- **Pad every class name with three spaces on each side**, via
-  `class "   Name   " as Name`. That is what buys back the width the metric
-  mismatch eats. The `as Name` keeps the references readable.
+  the relationship table, in the sentence. The same goes for protocol labels on a
+  component diagram's arrows.
+- **Pad every name with three spaces on each side**, via
+  `class "   Name   " as Name` or `rectangle "   Name   " as Name`. That is what
+  buys back the width the metric mismatch eats. The `as Name` keeps the
+  references readable.
 - **`linetype ortho` for right-angled lines.** Verified with eleven entities and
   an inheritance: every line runs on the grid, nothing crosses a box, and it
-  reads far more calmly than the diagonal default. At two entities it makes no
+  reads far more calmly than the diagonal default. At two boxes it makes no
   visible difference, so it costs nothing to set always.
 - **Never `skinparam padding`.** It puts a yellow warning banner inside the
   picture. Spacing only through a `<style>` block, and it barely helps anyway.
-- **The package name carries no quotes.** `package "." #FFFFFF` flips PlantUML
-  into a component diagram and the render dies with a syntax error. `package
-  Modell #FFFFFF` works, and the white font colour keeps the name invisible.
+- **The package name carries no quotes** in a class diagram. `package "." #FFFFFF`
+  flips PlantUML into a component diagram and the render dies with a syntax
+  error. `package Modell #FFFFFF` works.
 
-So the diagram answers: **which entities exist, what is connected to what, and
-how many of each.** Everything else is read off the tables. That is not a
-compromise forced on us, it is the division of labour that keeps the picture
+So the diagram answers: **which parts exist, what is connected to what, and how
+many or in which direction.** Everything else is read off the tables. That is not
+a compromise forced on us, it is the division of labour that keeps the picture
 legible.
+
+### Where a diagram earns its place
+
+A diagram is worth it from **three parts up**, where prose has to describe a
+structure the reader then has to hold in their head. Below that it repeats a
+sentence. It is always the **overview**, never the carrier of the content: the
+tables and the prose stay authoritative, they are what the planning skill reads,
+and they survive the Markdown fallback. And the page has to stand without it -
+the PlantUML app may not be installed.
 
 ## Deep links to a heading
 
