@@ -111,6 +111,21 @@ After every change to a narrative, check its derived sections against it: does
 each point still describe something that happens in **this** story, and does
 it not already stand on another page?
 
+## Never the em dash
+
+Do not use the em dash character (U+2014) anywhere in what you write. Use a
+normal hyphen with a space on each side, a colon, or a restructured sentence.
+The same goes for the en dash (U+2013) used as punctuation: it is the same
+character reached by a different route.
+
+This holds for **everything the skills produce**: page prose, headings, table
+cells, status-chip labels, diagram labels, Jira summaries and descriptions, and
+the Markdown fallback. It is a house rule, not a matter of taste, and it is the
+kind of thing nobody notices until it is on fifty pages.
+
+Pages a person wrote themselves are not touched for this - see the calibration
+rule above. The rule applies to what you write from now on.
+
 ## Degree, not absoluteness
 
 Absolute promises do not survive the first review, and they damage the
