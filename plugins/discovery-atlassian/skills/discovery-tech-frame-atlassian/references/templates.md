@@ -39,7 +39,8 @@ CLI flags (`--with-languages`, `--with-services`, `--with-features`,
 <h3>{Emoji} {Part 2}</h3>
 <p>{…}</p>
 <h2>{Technology decisions}</h2>
-<section data-type="layout-two-equal" data-breakout="wide" data-breakout-width="760"><div data-type="column" data-width="50"><h3>{Emoji} {Area, e.g. Backend}: {Decision}</h3><p>{one sentence of rationale}</p><h3>{Emoji} {Frontend}: {Decision}</h3><p>{…}</p></div><div data-type="column" data-width="50"><h3>{Emoji} {Data storage}: {Decision}</h3><p>{…}</p><h3>{Emoji} {Auth}: {Decision}</h3><p>{…}</p></div></section>
+<p><em>{State at discovery time. Decisions taken later while building are recorded as ADRs in the repository, not here.}</em></p>
+<section data-type="layout-two-equal" data-breakout="wide" data-breakout-width="760"><div data-type="column" data-width="50"><h3>{Emoji} {Area, e.g. Backend}: {Decision}</h3><p>{rationale, with the rejected alternative in a clause}</p><p><strong>{Must satisfy}:</strong> {one sentence, what the decision is checked against}</p></div><div data-type="column" data-width="50"><h3>{Emoji} {Data storage}: {Decision}</h3><p>{…}</p><p><strong>{Must satisfy}:</strong> {…}</p></div></section>
 <h2>{Operating frame}</h2>
 <h3><span data-type="emoji" data-shortname=":1_one_square_teal:" data-emoji-id="atlassian-1_one_square_teal" data-emoji-text=":1_one_square_teal:">:1_one_square_teal:</span> {Constraint 1, e.g. load}</h3>
 <p>{the constraint in an order of magnitude, and the decision it drove}</p>
@@ -80,8 +81,19 @@ Rules:
 - **Technology decisions** = 2 columns (760), each `<h3>` with a **fitting topic
   emoji** (app-dependent, not fixed: e.g. ☕ Backend, ⚛️ Frontend, 🐍 mock
   service, 🔐 Auth, 🧬 vector DB, 🗄️ object storage, 🔗 integration) + `<p>`
-  rationale **including the rejected alternative** in a clause. On an odd count
-  leave the last column empty.
+  rationale **including the rejected alternative** in a clause, then a second
+  paragraph led by a bold `{Must satisfy}:` carrying **one sentence** on what the
+  decision is checked against. On an odd count leave the last column empty.
+- **One decision, one cell**: heading, rationale, `Must satisfy`. Never two
+  decisions in one column, or the two paragraphs can no longer be told apart.
+- **The `Must satisfy` sentence is mandatory** and it is **one** sentence, not a
+  list: the columns are 760 wide, and a list of three becomes five wrapped lines.
+  Only what is checkable and only what belongs to this decision - what holds for
+  every part is in the cross-cutting conventions, and what is about an entity, a
+  role or a state is in the domain model.
+- **The handoff line** sits in italics under the section heading, so the page may
+  age without becoming wrong: this is the discovery-time state, later decisions
+  are ADRs in the repository.
 - **Operating frame** = full width, `<h3>` + `<p>`, **numbered squares in teal**
   before the title. Every entry names a constraint **and the decision it drove**;
   an entry that drove nothing belongs in the open points, not here. No catalogue

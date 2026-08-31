@@ -138,6 +138,34 @@ the user corrects. Not every area applies.
 nobody can later tell whether a choice was examined or inherited. That is the
 cheap half of an architecture decision record and the half that pays.
 
+**And per decision, one sentence on what it has to satisfy** - "Muss erfüllen".
+The rationale says why the choice was made; this says what it is checked against,
+and it is the place where a requirement like "the usual OpenID providers are
+configurable" finally has a home instead of being written onto a journey page.
+
+Four rules, or the section turns into a requirements dump:
+
+- **Mandatory, for every decision.** Whoever cannot say what a decision is
+  checked against has not finished making it. Same argument as the attribute
+  notes in the domain model.
+- **One sentence, no list.** The section is two columns; a list of three points
+  becomes five wrapped lines per cell. And the limit does the content a favour:
+  what does not fit was usually never a constraint on this decision.
+- **Only what is checkable, and only what is this decision's own.** Not "should
+  be performant". What holds for every part stays in the cross-cutting
+  conventions, or the same rule ends up under five decisions.
+- **A requirement, not a second solution.** "Configurable providers" is a
+  requirement; "use Keycloak" would be another decision.
+
+Three separable constraints on one decision usually mean two decisions packed
+into one. And a constraint that is really about an entity, a role or a state
+belongs in the domain model, not here.
+
+**The section carries a handoff line** in italics under its heading: this is the
+state at discovery time, and decisions taken later while building are recorded as
+ADRs in the repository, not here. The page may then age without becoming wrong,
+and whoever wants the current state knows where to look.
+
 #### The operating frame
 
 Ask what the product has to withstand, and record **only what actually drove a
@@ -245,7 +273,9 @@ type). For the technical brief specifically:
   `references/confluence-style.md`). The picture first, then the detail, the same
   order the domain model uses.
 - **Technology decisions** → 2 columns (760) with fitting **topic emojis** in
-  the `<h3>`, each with its rejected alternative in the rationale.
+  the `<h3>`, each with its rejected alternative in the rationale, then a second
+  paragraph `<strong>Muss erfüllen:</strong>` with **one sentence**. An italic
+  handoff line sits under the section heading.
 - **Operating frame** → full width, `<h3>` + `<p>`, with **numbered squares in
   teal**. Each entry names the constraint and the decision it drove.
 - **Cross-cutting conventions** → 2 columns (760), one `<h3>` per convention,
