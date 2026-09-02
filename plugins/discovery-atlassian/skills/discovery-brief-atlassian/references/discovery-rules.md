@@ -113,26 +113,30 @@ it not already stand on another page?
 
 ## Where each artifact sits
 
-The whole chain, so any skill can say what comes next instead of leaving the
-user to guess:
+Each artifact and what it needs, so any skill can say what comes next instead of
+leaving the user to guess. Written as a table on purpose: the same thing drawn as
+a tree put the technical brief under both branches and was read as depending on
+the design brief, which it does not.
 
-```
-brief
-  → personas & journeys
-      → domain model      ┐ independent of each other,
-      → design brief      ┘ both can be worked in either order
-          → technical brief
-              → planning (epics & stories)
-```
+| Artifact | Needs |
+|---|---|
+| brief | nothing |
+| personas & journeys | the brief |
+| domain model | the journeys |
+| design brief | the brief, the personas, the journeys |
+| technical brief | the brief, the domain model |
+| planning (epics & stories) | all of them |
 
-- The **domain model** comes out of the journeys and feeds the storage decision
-  in the technical brief.
-- The **design brief** comes out of the brief, the personas and the journeys, and
-  feeds the generation of the design system and the hi-fi prototype. Planning
-  needs its deliverable: every story that touches a screen references it.
-- The **technical brief** needs the domain model; it does not need the design
-  brief.
-- **Planning** needs all of them.
+So the journeys fork into **two branches that never meet**: the domain model,
+from which the technical brief follows, and the design brief, which stands on its
+own. Neither branch waits for the other, and planning is the only thing that
+needs both.
+
+- The **domain model** feeds the storage decision in the technical brief: what
+  has to be stored decides which storage, not the other way round.
+- The **design brief** feeds the generation of the design system and the hi-fi
+  prototype. The technical brief does **not** need it. Planning does: every story
+  that touches a screen references its deliverable.
 
 **Name the next step when you finish.** A skill that ends without saying what
 follows leaves the user to reconstruct the order from six descriptions. Where two
