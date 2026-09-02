@@ -74,8 +74,14 @@ Settle the **title prefix** here, once, if nothing exists below the brief yet
 off their titles instead of asking.
 Then work out **which flows** the product has - one journey per flow, so the
 count comes out of the brief rather than out of a target figure. Announce the
-sequence: personas → journeys → coverage check → feedback into the brief. What
-follows this skill is the domain model, which is derived from the journeys.
+sequence: personas → journeys → coverage check → feedback into the brief.
+
+Two artifacts follow this one and both are derived from the journeys: the
+**domain model** and, where the product has a user interface, the **design
+brief**. They are independent of each other, so name both when you finish and
+let the user pick the order (`references/discovery-rules.md` carries the whole
+chain). The design brief is the one that gets skipped, because nothing depends
+on it until planning asks for the prototype.
 
 **Existing personas/journeys**: if some already exist, ask whether to
 update them or create new ones.

@@ -9,6 +9,13 @@ You derive the **design direction** of a product from the brief, personas,
 and journeys - as a design brief that then serves Claude Design (or Figma
 Make) as the basis for generating a design system and a hi-fi prototype.
 
+**Where this sits**: journeys → **design brief** → the generation of the design
+system and the hi-fi prototype. It runs independently of the domain model, so
+either can come first, and it comes **before** planning, which needs its
+deliverable: every story that touches a screen references the prototype. A
+product with a user interface needs this artifact, and an open point in the
+technical brief about the shape of that interface means it needs it now.
+
 **Two ground rules:**
 
 - You **add** the design layer, you do **not duplicate** the product brief

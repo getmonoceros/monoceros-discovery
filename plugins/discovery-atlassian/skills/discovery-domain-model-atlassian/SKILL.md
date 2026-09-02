@@ -24,6 +24,11 @@ journeys, and the storage decision in the technical brief follows from the
 model, not the other way round. So it is worked out **before** the technical
 brief.
 
+The **design brief** sits beside it, not after it: it is derived from the same
+journeys and independent of this model, so either can be worked first. If it is
+still missing when you finish, say so - a product with a user interface needs
+it, and planning will ask for its prototype.
+
 ## Before you write anything
 
 Read `references/discovery-rules.md`. Four of its rules decide whether the

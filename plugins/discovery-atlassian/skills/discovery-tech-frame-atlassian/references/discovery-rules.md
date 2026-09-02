@@ -111,6 +111,36 @@ After every change to a narrative, check its derived sections against it: does
 each point still describe something that happens in **this** story, and does
 it not already stand on another page?
 
+## Where each artifact sits
+
+The whole chain, so any skill can say what comes next instead of leaving the
+user to guess:
+
+```
+brief
+  → personas & journeys
+      → domain model      ┐ independent of each other,
+      → design brief      ┘ both can be worked in either order
+          → technical brief
+              → planning (epics & stories)
+```
+
+- The **domain model** comes out of the journeys and feeds the storage decision
+  in the technical brief.
+- The **design brief** comes out of the brief, the personas and the journeys, and
+  feeds the generation of the design system and the hi-fi prototype. Planning
+  needs its deliverable: every story that touches a screen references it.
+- The **technical brief** needs the domain model; it does not need the design
+  brief.
+- **Planning** needs all of them.
+
+**Name the next step when you finish.** A skill that ends without saying what
+follows leaves the user to reconstruct the order from six descriptions. Where two
+artifacts are open, name both and let the user pick. The design brief is the one
+that gets forgotten, because nothing depends on it until planning asks for the
+prototype: a product with a user interface needs it, and if the technical brief
+carries an open point about the shape of that interface, it needs it now.
+
 ## Never the em dash
 
 Do not use the em dash character (U+2014) anywhere in what you write. Use a
