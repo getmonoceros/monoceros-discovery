@@ -113,24 +113,20 @@ it not already stand on another page?
 
 ## Where each artifact sits
 
-Each artifact and what it needs, so any skill can say what comes next instead of
-leaving the user to guess. Written as a table on purpose: the same thing drawn as
-a tree put the technical brief under both branches and was read as depending on
-the design brief, which it does not.
+The whole chain, so any skill can say what comes next instead of leaving the
+user to guess:
 
-| Artifact | Needs |
-|---|---|
-| brief | nothing |
-| personas & journeys | the brief |
-| domain model | the journeys |
-| design brief | the brief, the personas, the journeys |
-| technical brief | the brief, the domain model |
-| planning (epics & stories) | all of them |
+```
+brief
+  → personas & journeys
+      ├─ domain model → technical brief
+      └─ design brief
+  → planning (epics & stories), once both branches are done
+```
 
-So the journeys fork into **two branches that never meet**: the domain model,
-from which the technical brief follows, and the design brief, which stands on its
-own. Neither branch waits for the other, and planning is the only thing that
-needs both.
+The indentation carries the point: the technical brief hangs off the **domain
+model only**. The journeys fork into two branches that never meet, neither waits
+for the other, and planning is the only thing that needs both.
 
 - The **domain model** feeds the storage decision in the technical brief: what
   has to be stored decides which storage, not the other way round.
