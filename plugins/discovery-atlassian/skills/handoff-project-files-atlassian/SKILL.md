@@ -1,19 +1,26 @@
 ---
-name: handoff-agent-guide-atlassian
-description: Writes the agent instructions for a new project from the finished discovery - CLAUDE.md for Claude Code, AGENTS.md for opencode - with the stack, the conventions, the domain vocabulary and the development flow around the tracker. Splits public from internal content along the project's constellation. Use this skill when someone starts building a project whose discovery is done and the repository has no agent instructions yet, or when the technical brief changed and the instructions have to follow.
+name: handoff-project-files-atlassian
+description: Writes the files a new repository needs before the build starts, from the finished discovery - the README for people, and the agent instructions (CLAUDE.md for Claude Code, AGENTS.md for opencode) with the stack, the conventions, the domain vocabulary and the development flow. Splits public from internal content along the project's constellation. Use this skill when someone starts building a project whose discovery is done and the repository is still empty of both, or when the brief or the technical brief changed and the files have to follow.
 ---
 
-# Agent guide for the project
+# The files a new repository starts with
 
-You write the file an agent reads before every task in this repository:
-`CLAUDE.md` for Claude Code, `AGENTS.md` for opencode. Everything in it is
-**derived** from the discovery, never invented - and everything that would
-otherwise have to be repeated in every single story belongs in it.
+You write two things, both **derived** from the discovery and never invented:
 
-**This file is written in English**, unlike the discovery pages, unless the user
-asks for their language. It goes into the project, where it sits next to the
-code, the ADRs and the commit messages, and it is read by whichever agent works
-the repository next.
+- **The README**, for people. What this is, for whom, how to get it running.
+- **The agent instructions**, for whichever agent works the repository next:
+  `CLAUDE.md` for Claude Code, `AGENTS.md` for opencode. Everything that would
+  otherwise be repeated in every single story belongs in there.
+
+They share everything that makes this skill hard - the constellation, the split
+between public and internal, the confirmation - and differ only in audience. The
+README is read by strangers, the agent instructions by a machine that trusts
+them.
+
+**Both files are written in English**, unlike the discovery pages, unless the
+user asks for their language. They go into the project, where they sit next to
+the code, the ADRs and the commit messages, and the README of a public repository
+is read by people who never saw the discovery.
 
 ## Where this sits
 
@@ -39,8 +46,9 @@ Take the agent from the technical brief's features: `claude` means `CLAUDE.md`,
 `opencode` means `AGENTS.md`. Both features means both files, with the same
 content.
 
-If the file already exists, read it and say what you intend to change. Never
-overwrite a section a person wrote.
+If either file already exists, read it and say what you intend to change. Never
+overwrite a section a person wrote. A README in particular stops being yours the
+moment the project has one: from then on you propose, you do not rewrite.
 
 ## Step 1: The constellation, asked once
 
@@ -76,7 +84,28 @@ leaks the relationship even when the space itself stays closed. Add the private
 file to `.gitignore` in the same step, and say in the public file that internal
 coordinates exist without naming them.
 
-## Step 2: The public file
+## Step 2a: The README
+
+Short, and only from the artifacts. A new project's README earns nothing by being
+long:
+
+- **Name and one sentence**, from the brief's pitch.
+- **The problem and who has it**, two or three sentences from the brief. This is
+  the part a stranger reads and the part no generator can invent.
+- **Status**, honestly: early, and what does not exist yet.
+- **Getting it running**: the requirements and the commands, from the technical
+  brief and its `monoceros` sketch. Where the project is not a workbench, the
+  plain steps.
+- **Configuration**: the environment variables the technical brief names. The
+  names, never the values, and never a default that would work in production.
+- **License**, only where it is decided. Where it is not, say the gap out loud
+  rather than choosing one: nobody may pick a licence on the user's behalf.
+
+**The README is the most public file in the repository**, so the rule about
+internal artifacts binds hardest here: no link into Confluence, no Jira key, no
+customer name, not even in a "see also".
+
+## Step 2b: The agent instructions
 
 Only what holds for **every** task, and only what is in the artifacts:
 
@@ -184,8 +213,9 @@ policy.
 
 Summarize what is about to be written: which files at which paths, the
 constellation that decides the split, the sections and which artifact each one
-came from, and the flow as it now stands. Then ask once whether it fits and
-integrate the corrections.
+came from, and the flow as it now stands. Show the README in full - it is short
+and it is the file strangers read. Then ask once whether it fits and integrate
+the corrections.
 
 This step exists because the previous three each produce content and none of
 them is a decision the user saw in full. Without the gate, a skill that says
@@ -195,8 +225,9 @@ unasked.
 
 ## Step 5: Write the files, and report
 
-Write the public file to the project root, the private one to `.claude/` or
-`.opencode/`, and add the private path to `.gitignore`.
+Write the README and the public agent instructions to the project root, the
+private instructions to `.claude/` or `.opencode/`, and add the private path to
+`.gitignore`.
 
 **Without a filesystem** - the chat has none - give the content as Markdown in
 the message, one block per file with its target path above it, plus the line to

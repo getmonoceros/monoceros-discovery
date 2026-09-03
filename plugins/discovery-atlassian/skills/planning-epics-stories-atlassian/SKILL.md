@@ -28,11 +28,11 @@ upstream").
 ## What follows this skill
 
 The backlog is the last discovery artifact, and the build starts next. A new
-repository has no agent instructions yet, so everything that holds for every
-task would otherwise be repeated in every story: the conventions, the domain
-vocabulary, where decisions go, the flow around the tracker. Name the **agent
-guide** (`handoff-agent-guide`) when you finish, so it is written once instead
-of story by story.
+repository has neither a README nor agent instructions, so everything that holds
+for every task would otherwise be repeated in every story: the conventions, the
+domain vocabulary, where decisions go, the flow around the tracker. Name the
+**project files** (`handoff-project-files`) when you finish, so they are written
+once instead of story by story.
 
 ## What a story is
 

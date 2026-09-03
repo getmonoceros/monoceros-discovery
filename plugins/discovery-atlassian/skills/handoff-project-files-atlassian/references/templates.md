@@ -1,11 +1,13 @@
-# Template: the agent guide
+# Templates: the files a new repository starts with
 
-Markdown files in the repository, not Confluence pages. `CLAUDE.md` for Claude
-Code, `AGENTS.md` for opencode, same content. Remove the `{...}` hints.
+Markdown files in the repository, not Confluence pages. Remove the `{...}` hints.
 
-The **public** file goes to the project root and is committed. The **private**
-one goes to `.claude/CLAUDE.md` (or `.opencode/AGENTS.md`), is added to
-`.gitignore`, and only exists in the two constellations that need it.
+- `README.md` in the project root, committed, for people.
+- The agent instructions in the project root: `CLAUDE.md` for Claude Code,
+  `AGENTS.md` for opencode, same content.
+- The **private** instructions in `.claude/CLAUDE.md` (or
+  `.opencode/AGENTS.md`), added to `.gitignore`, only in the two constellations
+  that need them.
 
 ## Output language
 
@@ -21,7 +23,54 @@ they are what the build compiles against.
 
 ---
 
-## The public file
+## README.md
+
+```markdown
+# {Product}
+
+{The brief's pitch, one sentence.}
+
+## What this is for
+
+{Two or three sentences from the brief: the problem and who has it. The part a
+stranger reads.}
+
+## Status
+
+{Early, and what does not exist yet. Honest, not modest.}
+
+## Getting it running
+
+{Requirements, then the commands. From the technical brief and its monoceros
+sketch, or the plain steps where the project is not a workbench.}
+
+## Configuration
+
+{The environment variables the technical brief names, with what each one is for.
+Names only. No values, and no default that would work in production.}
+
+## License
+
+{Only where it is decided. Where it is not, this section is absent and the gap is
+reported to the user instead - a licence is not something to pick on their
+behalf.}
+```
+
+Rules for the README:
+
+- **The most public file in the repository.** No link into Confluence, no Jira
+  key, no customer name, not in a "see also" either.
+- **Short.** A new project earns nothing by a long README, and every line has to
+  come from an artifact.
+- **It stops being yours** the moment the project has one. From then on propose,
+  never rewrite.
+- **Contributions from outside** are not covered by the discovery. Where the code
+  is public, say the file is silent on it until it is decided. Where it is
+  private, the question does not arise.
+
+---
+
+## The public agent instructions
 
 ```markdown
 # {Product}

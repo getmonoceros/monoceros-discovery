@@ -122,7 +122,7 @@ brief
       ├─ domain model → technical brief
       └─ design brief
   → planning (epics & stories), once both branches are done
-      → agent guide (CLAUDE.md / AGENTS.md), the handoff into the build
+      → project files (README, CLAUDE.md / AGENTS.md), the handoff into the build
 ```
 
 The indentation carries the point: the technical brief hangs off the **domain
