@@ -21,7 +21,7 @@ the one for the tools you use.
 
 ### discovery-atlassian
 
-Six skills, run in sequence or on their own:
+Seven skills, run in sequence or on their own:
 
 1. **discovery-brief** - idea to a one-page brief (Confluence)
 2. **discovery-personas-journeys** - personas and customer journeys (Confluence)
@@ -29,6 +29,7 @@ Six skills, run in sequence or on their own:
 4. **discovery-design** - a design brief: north star, principles, key screens (Confluence)
 5. **discovery-tech-frame** - technology decisions plus a ready `monoceros init` definition
 6. **planning-epics-stories** - a cut backlog (Jira issues)
+7. **handoff-agent-guide** - the project's `CLAUDE.md` / `AGENTS.md`, derived from all of it
 
 Each writes to the shared tools; if no Atlassian connection is present, it falls
 back to local files.
