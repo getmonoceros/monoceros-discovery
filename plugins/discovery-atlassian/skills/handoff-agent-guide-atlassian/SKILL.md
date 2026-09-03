@@ -102,11 +102,16 @@ Only what holds for **every** task, and only what is in the artifacts:
 Keep it short. Every line an agent has to read before every task costs on every
 task, so a sentence that only sometimes applies belongs in the story, not here.
 
-## Step 3: The development flow
+## Step 3: The development flow, proposed and not assumed
 
-Propose this as the default and let the user change it. It is written for a Jira
-tracker; where the tracker is GitHub, the same steps hold with issue state and a
-project column instead of a board status.
+This is the most opinionated part of the guide and the part the user is most
+likely to want different, so it is **proposed**, the same way step 1 asks about
+the constellation: put the twelve steps in the message, then ask with
+**AskUserQuestion** whether to take them as they are or change them. Nothing goes
+into the file before that answer.
+
+It is written for a Jira tracker; where the tracker is GitHub, the same steps
+hold with issue state and a project column instead of a board status.
 
 1. Create a branch from the issue: the issue key plus a slug from its title.
 2. Open a draft pull request, where the code host supports one.
@@ -151,7 +156,20 @@ may want to keep confirming. Name it as an option, with what it would allow.
 Where the user wants it different, take their version. This is a proposal, not a
 policy.
 
-## Step 4: Write the files, and report
+## Step 4: Confirm, before anything is written
+
+Summarize what is about to be written: which files at which paths, the
+constellation that decides the split, the sections and which artifact each one
+came from, and the flow as it now stands. Then ask once whether it fits and
+integrate the corrections.
+
+This step exists because the previous three each produce content and none of
+them is a decision the user saw in full. Without the gate, a skill that says
+"propose" in prose gets read as "write" by anyone following the numbered
+structure - and the flow, which was meant to be a proposal, lands in the file
+unasked.
+
+## Step 5: Write the files, and report
 
 Write the public file to the project root, the private one to `.claude/` or
 `.opencode/`, and add the private path to `.gitignore`.
@@ -169,5 +187,7 @@ back to the artifact that produced it rather than argued about.
 
 - Derived, never invented. When something is missing, name the gap instead of
   filling it.
+- **Nothing is written before step 4.** Assembling content is not the same as
+  agreeing it.
 - Short. This file is read before every task.
 - No em dash (`references/discovery-rules.md`).
