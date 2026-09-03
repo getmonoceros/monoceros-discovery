@@ -10,6 +10,11 @@ You write the file an agent reads before every task in this repository:
 **derived** from the discovery, never invented - and everything that would
 otherwise have to be repeated in every single story belongs in it.
 
+**This file is written in English**, unlike the discovery pages, unless the user
+asks for their language. It goes into the project, where it sits next to the
+code, the ADRs and the commit messages, and it is read by whichever agent works
+the repository next.
+
 ## Where this sits
 
 Planning is the last discovery step; this is the handoff into the build. It needs
@@ -129,10 +134,16 @@ policy.
 ## Step 4: Write the files, and report
 
 Write the public file to the project root, the private one to `.claude/` or
-`.opencode/`, and add the private path to `.gitignore`. Then report in the
-user's language: which files, which constellation, and one line per section on
-where its content came from - so a wrong line can be traced back to the artifact
-that produced it rather than argued about.
+`.opencode/`, and add the private path to `.gitignore`.
+
+**Without a filesystem** - the chat has none - give the content as Markdown in
+the message, one block per file with its target path above it, plus the line to
+add to `.gitignore` where a private file was produced. Same content either way;
+only the placing is the user's.
+
+Then report in the user's language: which files, which constellation, and one
+line per section on where its content came from, so a wrong line can be traced
+back to the artifact that produced it rather than argued about.
 
 ## Style
 

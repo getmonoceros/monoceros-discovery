@@ -9,10 +9,15 @@ one goes to `.claude/CLAUDE.md` (or `.opencode/AGENTS.md`), is added to
 
 ## Output language
 
-Write it in the **user's language**, like the discovery pages - except the
-entity names, attribute names and enum values, which keep the naming language
-the domain model settled on, and the technical markers (paths, commands, tool
-names, `docs/adr/`, `monoceros-ctl`), which stay verbatim.
+**English**, unless the user asks otherwise. This is the exception among the
+artifacts: it lives in the project, beside the code, the ADRs and the commit
+messages, and the next agent to work the repository reads it. Entity and
+attribute names come from the domain model as they are, and the technical
+markers (paths, commands, tool names, `docs/adr/`, `monoceros-ctl`) stay
+verbatim.
+
+Where the user does want their language, the entity names still do not follow -
+they are what the build compiles against.
 
 ---
 
