@@ -103,8 +103,7 @@ brief and get confirmation.
    key screens, **as code** (not Figma-only), so the Monoceros workbench can
    process it directly.
 3. Create the document as an **HTML+ page** (`contentFormat: html`) **under
-   the brief** (ask for the brief page as parent), or fall back per
-   `references/discovery-rules.md`.
+   the brief** (ask for the brief page as parent) or as a Markdown fallback.
    Format see below.
 4. **Produce the finished generation prompt.** Read
    `references/generation-prompt.md`, replace `{{PRODUCTNAME}}` with the

@@ -101,9 +101,8 @@ Integrate corrections.
    page) and create it as an **HTML+ page** (`contentFormat: html`). The brief is
    the parent page under which personas, journeys, technical brief, and design
    brief hang later.
-4. No Confluence: fall back per `references/discovery-rules.md` - a Markdown
-   file where there is a filesystem, otherwise the content in the chat with the
-   note that nothing was filed.
+4. If no Confluence is available, write the brief as a Markdown file and tell the
+   user the path.
 
 ### Format (HTML+) - a marker per section type
 

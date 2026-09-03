@@ -142,32 +142,6 @@ that gets forgotten, because nothing depends on it until planning asks for the
 prototype: a product with a user interface needs it, and if the technical brief
 carries an open point about the shape of that interface, it needs it now.
 
-## Two surfaces, and what each of them can write
-
-These skills run in two places, and they can write different things:
-
-- **In a workbench** (Claude Code in the container): Confluence and Jira through
-  whatever is configured, **and the filesystem**. Everything is possible.
-- **In the chat** (claude.ai or the desktop app): Confluence and Jira through the
-  connector, but **no filesystem**. A file cannot be written, and a "write it as
-  a Markdown file instead" fallback has nowhere to go.
-
-So before you fall back, check which surface you are on rather than assuming:
-
-- **Target reachable** - write it there, as the skill says.
-- **Confluence missing but a filesystem present** - Markdown files, and name the
-  paths.
-- **Neither** - the chat is the only place left. Put the content in the message
-  as a fenced block the user can copy, and say plainly that nothing was filed and
-  where it belongs. That is acceptable for one page; for a whole tree it is not,
-  and then the honest answer is that the artifact needs a target and the run
-  stops until there is one.
-
-**An artifact whose natural target is the repository belongs in the workbench.**
-Say so instead of producing something the user cannot place: the chat fallback
-exists for the case where they have already opened an editor, not as an equal
-path.
-
 ## Never the em dash
 
 Do not use the em dash character (U+2014) anywhere in what you write. Use a

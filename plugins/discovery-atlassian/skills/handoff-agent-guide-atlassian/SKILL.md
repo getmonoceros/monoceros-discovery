@@ -18,23 +18,6 @@ design brief, and the backlog. Run it again whenever the technical brief or the
 domain model changes, because a stale guide is worse than none: an agent trusts
 it.
 
-**This one belongs in the workbench.** Its output is a file in the repository,
-and the chat has no filesystem (`references/discovery-rules.md`, "Two surfaces").
-The other skills file into Confluence and work in either place; this one does
-not. So:
-
-- **In a workbench**: do the whole thing, write the files, add the private path
-  to `.gitignore`.
-- **In the chat**: everything except the write. Settle the constellation and the
-  flow, then give the content as fenced blocks with the target path above each,
-  and say plainly that nothing was written. Recommend running this again in the
-  workbench, where it also gets the repository's actual state - whether a
-  `.gitignore` exists, whether the project is a git repository at all - which the
-  chat can only ask about.
-
-A guide short enough to paste is the point anyway. If yours is not, that is a
-signal it carries something that belongs in a story.
-
 ## Before you write anything
 
 Read `references/discovery-rules.md`. Two of its rules decide the outcome here:
