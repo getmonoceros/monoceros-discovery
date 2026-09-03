@@ -65,7 +65,9 @@ and if it has to be overturned, say so and name the ADR by number.
 
 ## Development flow
 
-{The twelve steps, or the user's version of them.}
+{The twelve steps, or the user's version of them - **only if the tracker is
+public**. Where the tracker is internal, this heading is absent from the public
+file and the flow lives in the private one.}
 
 ## Out of scope
 
@@ -97,6 +99,13 @@ here.
 - {Jira project key}, board {name}
 - {The statuses in the order the flow uses them}
 
+## Development flow
+
+{Where the tracker is internal, the twelve steps live here and nowhere else, and
+here they are concrete: the real status names, the real project key, the actual
+commands. Absent from this file when the tracker is public, because then the flow
+is in the public one.}
+
 ## Access
 
 {How the container reaches these: the tool and the variables it needs, never
@@ -107,6 +116,11 @@ Rules:
 
 - **The split is decided by one rule**: what describes the code is public, what
   names the instance, the customer or an internal artifact is not.
+- **The development flow follows the tracker, not the code.** Issue keys, board
+  statuses, assignment and issue comments are all internal artifacts, so with an
+  internal tracker the whole flow is private. Generalising it is not a
+  compromise: an instruction about issues in a repository without visible issues
+  helps nobody and still describes how the agent works against that tracker.
 - **No public file points at a private one.** Not the README, not the docs, not
   a code comment, not a commit message. The public file may say that internal
   coordinates exist; it does not say where.

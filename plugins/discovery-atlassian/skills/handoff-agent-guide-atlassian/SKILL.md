@@ -54,8 +54,8 @@ That yields four cases, and only the split differs:
 | Code | Discovery | Tracker | Where things go |
 |---|---|---|---|
 | public | public | public | one committed file, everything in it |
-| public | internal | public | two files, see below |
-| public | internal | internal | two files, see below |
+| public | internal | public | two files; the flow stays public |
+| public | internal | internal | two files; **the flow goes private** |
 | private | internal | internal | one committed file, everything in it |
 
 The first and the last case are the simple ones: there is nothing to hide from
@@ -95,9 +95,18 @@ Only what holds for **every** task, and only what is in the artifacts:
 - **How the work is run**: servers through `monoceros-ctl` and
   `.monoceros/launch.json`, never a bare shell start; the shape of an acceptance
   command.
-- **The development flow** around the tracker (step 3).
+- **The development flow** - but **only where the tracker is public**. Where it
+  is not, the whole flow goes into the private file (step 3), and this section
+  says nothing about it.
 - **Out of scope**, from the brief's exclusions. The fence saves more time than
   any instruction.
+
+One gap is worth naming rather than filling, and **only where the code is
+public**: how contributions from outside are handled is nowhere in the discovery,
+not in the brief and not in the technical brief. It is a product decision, so do
+not invent one. Say that the file is silent on it until it is decided, and leave
+it at that. Where the code is private the question does not arise and the note
+does not belong.
 
 Keep it short. Every line an agent has to read before every task costs on every
 task, so a sentence that only sometimes applies belongs in the story, not here.
@@ -112,6 +121,21 @@ into the file before that answer.
 
 It is written for a Jira tracker; where the tracker is GitHub, the same steps
 hold with issue state and a project column instead of a board status.
+
+**Where the settled flow lands depends on the tracker, not on the code.** Count
+what the steps touch: the branch name comes from the issue key, the assignment,
+the board status and the comment are all tracker. In a public repository with an
+internal tracker that is either useless or revealing, so the whole flow goes into
+the private file.
+
+And **do not generalise it to make it publishable**. "Set the issue to the
+in-progress status" in a repository with no visible issues is an instruction into
+the void, and it still describes how your agent works against your tracker. The
+choice is where it goes, not how vague it is. In the private file it may be fully
+concrete: the real status names, the real project key, the `twg` commands.
+
+The draft pull request is the one step that looks public and is not: in this flow
+it is the place your review happens, not a contribution path.
 
 1. Create a branch from the issue: the issue key plus a slug from its title.
 2. Open a draft pull request, where the code host supports one.
