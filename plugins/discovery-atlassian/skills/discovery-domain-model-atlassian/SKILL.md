@@ -207,7 +207,8 @@ the diagram recipe, and the anchor scheme for deep links.
 2. Create the page as **HTML+** (`contentFormat: html`), titled
    `{prefix}Domain Model`, as a **child of the brief** - a sibling of the
    technical brief and the design brief, not nested under either.
-3. If no Confluence is available, write it as a Markdown file and name the path.
+3. No Confluence: fall back per `references/discovery-rules.md` - a Markdown
+   file where there is a filesystem, otherwise the content in the chat.
 
 ### Format (HTML+)
 

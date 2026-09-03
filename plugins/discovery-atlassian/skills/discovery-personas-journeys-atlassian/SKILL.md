@@ -209,8 +209,9 @@ excerpt without a panel).
    pages so each stays directly linkable by search.
 4. Set the links: journey → its persona (plain page link, no anchor),
    persona → its journey, both point to the brief.
-5. If no Confluence is available, write the pages as Markdown files and
-   name the paths.
+5. No Confluence: fall back per `references/discovery-rules.md`. A tree of
+   personas and journeys is too much for a chat fallback - without a filesystem,
+   say so and stop rather than pasting six pages into a message.
 
 ### Persona page: format (HTML+)
 
