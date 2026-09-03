@@ -118,8 +118,10 @@ project column instead of a board status.
 8. Comment on the issue with what changed, including the commit id.
 9. Push, which updates the pull request.
 10. Move the issue to **In Review**.
-11. The user says whether it is good. Then merge, delete the pull request branch,
-    switch to main locally and merge there.
+11. Ask **once**, and list what the yes covers: the merge, deleting the pull
+    request branch, switching to main locally and pulling there, and moving the
+    issue on. Write the actual commands into the question. One yes authorises the
+    whole sequence, and the steps then run without asking again.
 12. Move the issue to **Done** and unassign it.
 
 Two properties are worth naming in the file rather than leaving implicit,
@@ -127,6 +129,24 @@ because they are what makes the flow safe: the agent never merges and never
 closes without the user's word (steps 6 and 11), and every state change on the
 board is paired with something that actually happened in the repository. A board
 whose states move on their own is a board nobody trusts.
+
+**Two gates, not eleven.** The flow asks the user twice, at step 6 and at step
+11, and each question covers everything that follows it until the next gate.
+Write that into the file: without it, an agent facing four outward actions in one
+step will reasonably ask before each one, and asking again after a yes is not
+caution, it is the yes not being worth anything.
+
+**Who does the outward steps.** The roles have a guard that denies the
+implementer anything leaving the machine - it commits, it never pushes. So the
+push, the merge and the cleanup belong to the session that coordinates the
+roles, not to a role. Say so in the file, or the coordinator looks for a role to
+hand it to and finds none.
+
+If the session still asks per command after the yes, that is not the flow but the
+session's permission mode. The fix is an allowlist in the project's
+`.claude/settings.json`, and it is the user's call, not something this skill
+writes for them: `gh pr merge` and `git push` are exactly the operations someone
+may want to keep confirming. Name it as an option, with what it would allow.
 
 Where the user wants it different, take their version. This is a proposal, not a
 policy.
