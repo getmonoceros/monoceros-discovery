@@ -175,7 +175,10 @@ it is the place your review happens, not a contribution path.
 7. Once they confirm, commit.
 8. Comment on the issue with what changed, including the commit id.
 9. Push, which updates the pull request.
-10. Move the issue to **In Review**.
+10. Move the issue to **In Review** and take the pull request out of draft
+    (`gh pr ready <n>`). The two belong together: a board that says "in review"
+    next to a draft that says "not yet" is the one contradiction this flow is
+    built to avoid, and it leaves the maintainer guessing which one is true.
 11. Ask **once**, and list what the yes covers: the merge, deleting the pull
     request branch, switching to main locally and pulling there, and moving the
     issue on. Write the actual commands into the question. One yes authorises the
