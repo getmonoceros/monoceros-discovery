@@ -127,10 +127,9 @@ Only what holds for **every** task, and only what is in the artifacts:
 - **The development flow** - but **only where the tracker is public**. Where it
   is not, the whole flow goes into the private file (step 3), and this section
   says nothing about it.
-- **Who writes issues.** The flow moves an issue along; it never creates one and
-  never rewrites what one says. That belongs to `planning-epics-stories`, which
-  owns the shape of the backlog. Put the sentence in the file: work that turns up
-  during a task gets named to the user, not filed.
+- **Who writes issues** - in the same file as the flow, public or private, since
+  it is about the same tracker. The rule is in the next step; it is not optional,
+  because this file is the only way the roles ever learn it.
 - **Out of scope**, from the brief's exclusions. The fence saves more time than
   any instruction.
 
@@ -172,10 +171,21 @@ it is the place your review happens, not a contribution path.
 
 **The flow moves issues, it does not write them.** Assigning, the status changes
 and the comment in step 8 are its own business. Creating an issue or changing
-what it says is not, however obvious the need looks in the middle of a task:
-that goes through `planning-epics-stories`, or the backlog stops being consistent
-one issue at a time. Say it in the file, next to the flow, because that is where
-the temptation arises.
+what it says is not, however obvious the need looks in the middle of a task: that
+goes through `planning-epics-stories`, or the backlog stops being consistent one
+issue at a time.
+
+**This sentence has to be in the file, and it has to address every agent, not
+just the one reading the flow.** The planner that wants to split a story, the
+implementer that trips over work nobody filed, the reviewer that finds a defect:
+none of them knows that `planning-epics-stories` exists. The role prompts cannot
+carry it either - they ship with the CLI to every workbench, including the many
+that have no Jira and no discovery plugin - so the project's own instructions are
+the only channel. Write it as a rule for anyone working this repository: **name
+new work to the user, do not file it.**
+
+It goes in the same file as the flow: public where the tracker is public, private
+where it is not.
 
 1. Create a branch from the issue: the issue key plus a slug from its title.
 2. Open a draft pull request, where the code host supports one.
