@@ -142,6 +142,28 @@ that gets forgotten, because nothing depends on it until planning asks for the
 prototype: a product with a user interface needs it, and if the technical brief
 carries an open point about the shape of that interface, it needs it now.
 
+## Jira issues are written by one skill only
+
+**Creating a Jira issue, or changing what it says, goes through
+`planning-epics-stories`. Never directly, from any skill and from any agent.**
+
+That skill owns the shape of the backlog: one epic per journey, a story that
+promises a function and carries everything needed to deliver it, no
+infrastructure issues, the persona and journey cards, the backfill onto the
+journey page. An issue created beside it obeys none of that, and nothing catches
+it later - the backlog just quietly stops being consistent, one issue at a time.
+
+The line runs between the **content** of an issue and its **progress**:
+
+- Through the skill: creating an issue, its summary, its description, its
+  acceptance criteria, its parent epic, splitting one into two.
+- Not through the skill, because it is the development flow's own business:
+  moving the status, assigning, and commenting on what happened.
+
+So where something turns up that deserves an issue - an open point, a finding, a
+piece of work the plan uncovered - name it and hand it to that skill. Do not file
+it yourself.
+
 ## Never the em dash
 
 Do not use the em dash character (U+2014) anywhere in what you write. Use a

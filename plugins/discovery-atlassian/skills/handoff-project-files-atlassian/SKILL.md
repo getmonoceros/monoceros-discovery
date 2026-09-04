@@ -127,6 +127,10 @@ Only what holds for **every** task, and only what is in the artifacts:
 - **The development flow** - but **only where the tracker is public**. Where it
   is not, the whole flow goes into the private file (step 3), and this section
   says nothing about it.
+- **Who writes issues.** The flow moves an issue along; it never creates one and
+  never rewrites what one says. That belongs to `planning-epics-stories`, which
+  owns the shape of the backlog. Put the sentence in the file: work that turns up
+  during a task gets named to the user, not filed.
 - **Out of scope**, from the brief's exclusions. The fence saves more time than
   any instruction.
 
@@ -165,6 +169,13 @@ concrete: the real status names, the real project key, the `twg` commands.
 
 The draft pull request is the one step that looks public and is not: in this flow
 it is the place your review happens, not a contribution path.
+
+**The flow moves issues, it does not write them.** Assigning, the status changes
+and the comment in step 8 are its own business. Creating an issue or changing
+what it says is not, however obvious the need looks in the middle of a task:
+that goes through `planning-epics-stories`, or the backlog stops being consistent
+one issue at a time. Say it in the file, next to the flow, because that is where
+the temptation arises.
 
 1. Create a branch from the issue: the issue key plus a slug from its title.
 2. Open a draft pull request, where the code host supports one.

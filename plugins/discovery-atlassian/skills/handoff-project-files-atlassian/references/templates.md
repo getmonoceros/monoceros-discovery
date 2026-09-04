@@ -118,6 +118,10 @@ and if it has to be overturned, say so and name the ADR by number.
 public**. Where the tracker is internal, this heading is absent from the public
 file and the flow lives in the private one.}
 
+{One sentence, wherever the flow ends up: the flow moves issues along, it never
+creates one and never rewrites what one says. New work is named to the user and
+filed through the planning skill, so the backlog keeps its shape.}
+
 ## Out of scope
 
 {The brief's exclusions, one line each. What is deliberately postponed says so
