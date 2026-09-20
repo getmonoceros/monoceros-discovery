@@ -9,12 +9,12 @@ You derive the **design direction** of a product from the brief, personas,
 and journeys - as a design brief that then serves Claude Design (or Figma
 Make) as the basis for generating a design system and a hi-fi prototype.
 
-**Where this sits**: journeys → **design brief** → the generation of the design
-system and the hi-fi prototype. It runs independently of the domain model, so
-either can come first, and it comes **before** planning, which needs its
-deliverable: every story that touches a screen references the prototype. A
-product with a user interface needs this artifact, and an open point in the
-technical brief about the shape of that interface means it needs it now.
+**Where this sits**: journeys → **design brief** → technical brief → planning.
+You decide the shape of the interface here, and the technical brief decides
+afterwards what it is built with, so this skill does **not** read the technical
+brief. It comes **before** planning, which needs its deliverable: every story
+that touches a screen references the prototype. A product with a user interface
+needs this artifact.
 
 **Two ground rules:**
 
@@ -64,9 +64,12 @@ template for exactly what never gets translated.
 ### Step 0: Read the source documents
 
 Read the brief, personas, and journeys (from Confluence, files, or pasted
-in), and if present also the technical brief (it provides platform
-constraints such as PWA / mobile-first). Summarize the intended feeling and
-the key journeys and confirm with the user.
+in), and the domain model if it already exists (it names the things a screen
+shows and lists). Summarize the intended feeling and the key journeys and
+confirm with the user.
+
+Do **not** read the technical brief. It comes after this one and takes the
+platform decision from here.
 
 **Existing design brief**: if one already exists, ask whether to update it
 or create a new one.
@@ -83,8 +86,9 @@ Make a concrete proposal per section and let the user correct it.
 4. **Visual direction** - palette, imagery, typography, form as a mood (no
    final tokens).
 5. **Key screens** - from the journeys, each with its task.
-6. **Interaction & platform** - from the technical brief (PWA, mobile-first,
-   offline, one-tap actions).
+6. **Interaction & platform** - decided here, from the journeys and the
+   personas (PWA, mobile-first, offline, one-tap actions). This is the section
+   the technical brief reads afterwards.
 7. **Accessibility** - contrast, touch targets, not by color alone.
 8. **Brand & assets** - existing brand/assets or greenfield.
 

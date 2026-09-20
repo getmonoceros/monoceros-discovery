@@ -32,7 +32,7 @@ Seven skills, run in sequence or on their own:
 4. **discovery-design** - a design brief: north star, principles, key screens (Confluence)
 5. **discovery-tech-frame** - technology decisions plus a ready `monoceros init` definition
 6. **planning-epics-stories** - a cut backlog (Jira issues)
-7. **handoff-project-files** - the new repository's README and agent instructions (`CLAUDE.md` / `AGENTS.md`), derived from all of it
+7. **handoff-project-files** - the new project's README and agent instructions (`CLAUDE.md` / `AGENTS.md`), written into the project directory and derived from all of it
 
 Each writes to the shared tools; if no Atlassian connection is present, it falls
 back to local files.

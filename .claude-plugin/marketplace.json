@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Monoceros plugins: structured product discovery in your team's tools, plus a quick on-ramp from a raw idea to a running Monoceros workbench.",
-    "version": "0.8.3"
+    "version": "0.8.4"
   },
   "plugins": [
     {

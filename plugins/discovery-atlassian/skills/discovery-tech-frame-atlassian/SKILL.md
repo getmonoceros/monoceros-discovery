@@ -11,9 +11,12 @@ decisions** and their mapping onto a Monoceros container definition. You capture
 the brief. The document you produce is the source for `monoceros init` and the
 architecture reference for the build.
 
-**Where this sits**: journeys → domain model → **technical brief**. The domain
-model comes first on purpose: what has to be stored decides which storage is
-needed, not the reverse. Read it before you decide anything about data.
+**Where this sits**: journeys → domain model → design brief → **technical
+brief** → planning. This is the last discovery artifact before the build, and
+every artifact before it decides something you need here. The domain model comes
+first on purpose: what has to be stored decides which storage is needed, not the
+reverse. The design brief comes first for the same reason: the shape of the
+interface decides how it is delivered, not the other way round.
 
 ## Before you write anything
 
@@ -112,6 +115,15 @@ anyway (principle 2) - so you don't need a perfectly fresh catalog, but you
 - **Read the domain model** if it exists: the entities, their volumes, and their
   states tell you what the storage actually has to do. If there is none, say so
   and note that the storage decision rests on less than it could.
+- **Read the journeys and the personas** if they exist: they name the external
+  systems the product talks to, the order of magnitude for the operating frame,
+  and the devices the thing runs on.
+- **Read the design brief** if it exists: its "Interaction & platform" section
+  is a stack decision in disguise. Offline means local persistence and a sync
+  path, a PWA means a service worker and an install flow, mobile-first decides
+  the delivery. Take that section as given; it is not reopened here.
+- Take from each source only what changes a technology decision. The brand
+  personality, the visual direction and the pain points are not your business.
 - **Existing technical brief**: if one already exists, ask whether to update it
   or create a new one.
 
@@ -121,7 +133,9 @@ Go through these areas, make one concrete proposal per area with a rationale,
 the user corrects. Not every area applies.
 
 - **Backend**: language and role.
-- **Frontend / UI**: if the brief implies a browser interface.
+- **Frontend / UI**: if the brief implies a browser interface. The design brief
+  has already decided the shape (PWA, mobile-first, offline); you decide what
+  delivers it.
 - **Auth**: if login is needed.
 - **Data storage**: if data is stored → which service. Derive it from the domain
   model, not from habit: how many entities, what kind of relationships, does
