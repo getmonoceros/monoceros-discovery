@@ -277,15 +277,19 @@ reference to the token/PAT setup:
 `https://getmonoceros.build/docs/concepts/git-and-repos/`. App-owned
 dependencies (frameworks) you mark explicitly as **not** in the yml.
 
-**Ask first whether the workbench already exists**, because the builder may be
-running this dialog inside one. If it does, `init` is the wrong command and the
-sketch is misleading. Write the `add-*` commands for the mapped components
-instead - `monoceros add-language`, `monoceros add-service`,
+**Always write both paths, and never ask which one applies.** The page outlives
+this dialog and is read by people who were not in it, some of whom already have
+a workbench and some of whom do not. A document that carries only the case that
+was true this afternoon is wrong for half its readers.
+
+So under the `init` sketch comes the second block: the `add-*` commands for the
+mapped components - `monoceros add-language`, `monoceros add-service`,
 `monoceros add-feature`, `monoceros add-port`, `monoceros add-repo` - followed
-by one `monoceros apply <name>`. Say plainly that the discovery plugin cannot be
-added by a command: it is a hand-edit in the yml, under the `claude` feature
-entry, where `monoceros add-feature` left a commented `plugins:` example to
-overwrite. Then `monoceros apply <name>` picks it up.
+by one `monoceros apply <name>`. Label the two so nobody has to guess which is
+theirs. Say plainly, in both cases, that the discovery plugin cannot be added by
+a command: it is a hand-edit in the yml, under the `claude` feature entry, where
+`monoceros add-feature` left a commented `plugins:` example to overwrite. Then
+`monoceros apply <name>` picks it up.
 
 ### Step 3: Confirm
 

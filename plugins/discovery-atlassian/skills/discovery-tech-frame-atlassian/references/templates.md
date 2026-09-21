@@ -52,14 +52,14 @@ CLI flags (`--with-languages`, `--with-services`, `--with-features`,
 <p><em>{Catalog ids from the live source (CLI {version}). Confirm the exact ids and versions at build time against }</em><code>monoceros list-components</code><em>{.}</em></p>
 <div data-type="bodied-extension" data-extension-key="details" data-extension-type="com.atlassian.confluence.macro.core"><table data-width="760"><tbody><tr><th><p><code>--with-languages</code></p></th><td><p>{id, id, … - each briefly for what}</p></td></tr><tr><th><p><code>--with-services</code></p></th><td><p>{id, id, … - each briefly for what}</p></td></tr><tr><th><p><code>--with-features</code></p></th><td><p>{id, id, … - each briefly for what}</p></td></tr><tr><th><p><code>--with-ports</code></p></th><td><p>{which services browser-reachable}</p></td></tr><tr><th><p><code>--with-repos</code></p></th><td><p>{full HTTPS URL, only for github.com/gitlab.com/bitbucket.org; no repo or another host: omit the line}</p></td></tr></tbody></table></div>
 <p>{Not in the yml (app-owned dependencies): {frameworks/libraries the app brings itself}. Tests: {test stacks per component}.}</p>
-<p>{As a sketch (the }<code>--with-repos</code>{ line only when a repo exists on github.com/gitlab.com/bitbucket.org; otherwise omit):}</p>
+<p><strong>{A new workbench}</strong>{: as a sketch (the }<code>--with-repos</code>{ line only when a repo exists on github.com/gitlab.com/bitbucket.org; otherwise omit):}</p>
 <pre data-breakout="wide" data-breakout-width="760"><code class="language-shell">monoceros init {name} --template=discovery-atlassian \
   --with-languages={…} \
   --with-services={…} \
   --with-features={…} \
   --with-ports={…} \
   --with-repos={full HTTPS URL of the repo, asked from the user - no placeholder}</code></pre>
-<p>{If the workbench already exists, leave the block above out and write these instead, one per mapped component, then one }<code>monoceros apply {name}</code>{:}</p>
+<p><strong>{A workbench that already exists}</strong>{: not }<code>init</code>{, but one command per mapped component, then one }<code>monoceros apply {name}</code>{. Both blocks always go on the page, because the reader may be in either situation.}</p>
 <pre data-breakout="wide" data-breakout-width="760"><code class="language-shell">monoceros add-language {name} {id}
 monoceros add-service {name} {id}
 monoceros add-feature {name} {id}
@@ -109,7 +109,11 @@ Rules:
   every story answers these questions the same way.
 - **Mapping onto the container definition** = flag→assignment in the
   **page-properties macro** (`details`), followed by the "Not in the yml" prose
-  and the `monoceros init` sketch as a code block. The table must sit inside the
+  and **both** command blocks: the `monoceros init --template=…` sketch for a
+  new workbench, and the `add-*` commands plus one `apply` for a workbench that
+  already exists. Both always, labelled - the reader of the page may be in
+  either situation, and the plugin line (a hand-edit under the `claude` entry)
+  belongs with them. The table must sit inside the
   `details` macro: a bare table otherwise gets lifted unstably into a `<thead>`
   by the editor. (Even inside the macro the first row lands in `<thead>` -
   harmless on a one-time create, because in ADF it stays a header column
