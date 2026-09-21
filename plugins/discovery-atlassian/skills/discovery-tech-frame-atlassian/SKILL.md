@@ -234,13 +234,20 @@ Translate the decisions into the `init` categories with catalog ids:
 
 - **`--with-languages`**: every language the build needs.
 - **`--with-services`**: only catalog services (networked containers).
-- **`--with-features`**: set are `claude` (builder), `github` (code host),
-  **`atlassian/twg`** (Jira read access for Claude - the lean preset, not the
-  full `atlassian` with `rovodev`+`forge`), and **`claude-code-roles`** (plan,
-  implement, review against the plan - it needs `claude`, which is set). Further
-  features only if the stack really needs them. `twg` is configured when the workbench is set up; that is
-  not a product question, so it is neither an open point nor a follow-up
-  question here.
+- **`--with-features`**: the workbench starts from the
+  **`discovery-atlassian` template**, which already carries `claude` with the
+  discovery plugin, `claude-code-roles` (plan, implement, review against the
+  plan) and `atlassian/twg` (Jira and Confluence access, the lean preset rather
+  than the full `atlassian` with `rovodev`+`forge`). So `--with-features` only
+  carries what comes on top: `github` (code host), and further features if the
+  stack really needs them. `twg` is configured when the workbench is set up;
+  that is not a product question, so it is neither an open point nor a
+  follow-up question here.
+
+  **The template is not a convenience, it is the only way.** A plugin is a
+  nested block under a feature entry, and no flag and no `add-*` command can
+  write one. A workbench built without the template has Claude Code but not the
+  discovery plugin, and nothing points that out afterwards.
 - **`--with-ports`**: the browser-reachable services. The **first** port
   becomes `<name>.localhost`, each further one `<name>-<port>.localhost`.
 - **`--with-repos`**: first ask **whether a repo for the app already exists**
@@ -263,11 +270,22 @@ Translate the decisions into the `init` categories with catalog ids:
   no `--with-repos` line. The "is there a repo?" question (choice) and the URL
   question (free text) are **two** steps.
 
-Produce a `monoceros init <name> …` sketch (the `--with-repos` line only in the
-big-three case; for another host a separate `monoceros add-repo` command below
-instead). Under the code block, put a reference to the token/PAT setup:
+Produce a `monoceros init <name> --template=discovery-atlassian …` sketch (the
+`--with-repos` line only in the big-three case; for another host a separate
+`monoceros add-repo` command below instead). Under the code block, put a
+reference to the token/PAT setup:
 `https://getmonoceros.build/docs/concepts/git-and-repos/`. App-owned
 dependencies (frameworks) you mark explicitly as **not** in the yml.
+
+**Ask first whether the workbench already exists**, because the builder may be
+running this dialog inside one. If it does, `init` is the wrong command and the
+sketch is misleading. Write the `add-*` commands for the mapped components
+instead - `monoceros add-language`, `monoceros add-service`,
+`monoceros add-feature`, `monoceros add-port`, `monoceros add-repo` - followed
+by one `monoceros apply <name>`. Say plainly that the discovery plugin cannot be
+added by a command: it is a hand-edit in the yml, under the `claude` feature
+entry, where `monoceros add-feature` left a commented `plugins:` example to
+overwrite. Then `monoceros apply <name>` picks it up.
 
 ### Step 3: Confirm
 

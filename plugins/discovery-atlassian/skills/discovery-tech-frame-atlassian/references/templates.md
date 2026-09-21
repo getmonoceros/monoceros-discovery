@@ -53,12 +53,18 @@ CLI flags (`--with-languages`, `--with-services`, `--with-features`,
 <div data-type="bodied-extension" data-extension-key="details" data-extension-type="com.atlassian.confluence.macro.core"><table data-width="760"><tbody><tr><th><p><code>--with-languages</code></p></th><td><p>{id, id, … - each briefly for what}</p></td></tr><tr><th><p><code>--with-services</code></p></th><td><p>{id, id, … - each briefly for what}</p></td></tr><tr><th><p><code>--with-features</code></p></th><td><p>{id, id, … - each briefly for what}</p></td></tr><tr><th><p><code>--with-ports</code></p></th><td><p>{which services browser-reachable}</p></td></tr><tr><th><p><code>--with-repos</code></p></th><td><p>{full HTTPS URL, only for github.com/gitlab.com/bitbucket.org; no repo or another host: omit the line}</p></td></tr></tbody></table></div>
 <p>{Not in the yml (app-owned dependencies): {frameworks/libraries the app brings itself}. Tests: {test stacks per component}.}</p>
 <p>{As a sketch (the }<code>--with-repos</code>{ line only when a repo exists on github.com/gitlab.com/bitbucket.org; otherwise omit):}</p>
-<pre data-breakout="wide" data-breakout-width="760"><code class="language-shell">monoceros init {name} \
+<pre data-breakout="wide" data-breakout-width="760"><code class="language-shell">monoceros init {name} --template=discovery-atlassian \
   --with-languages={…} \
   --with-services={…} \
   --with-features={…} \
   --with-ports={…} \
   --with-repos={full HTTPS URL of the repo, asked from the user - no placeholder}</code></pre>
+<p>{If the workbench already exists, leave the block above out and write these instead, one per mapped component, then one }<code>monoceros apply {name}</code>{:}</p>
+<pre data-breakout="wide" data-breakout-width="760"><code class="language-shell">monoceros add-language {name} {id}
+monoceros add-service {name} {id}
+monoceros add-feature {name} {id}
+monoceros apply {name}</code></pre>
+<p>{The discovery plugin has no command. It is a hand-edit in }<code>{name}.yml</code>{, as a }<code>plugins:</code>{ block under the }<code>claude</code>{ feature entry, where }<code>add-feature</code>{ left a commented example to overwrite.}</p>
 <p>{Repo on another host (self-hosted GitLab, GitHub Enterprise …) not in }<code>--with-repos</code>{, but after the init:}</p>
 <pre data-breakout="wide" data-breakout-width="760"><code class="language-shell">monoceros add-repo {name} {https-url} --provider=github|gitlab|bitbucket</code></pre>
 <p>{Token/PAT setup for cloning and pushing (private repo): }<a href="https://getmonoceros.build/docs/concepts/git-and-repos/">getmonoceros.build/docs/concepts/git-and-repos</a>.</p>
