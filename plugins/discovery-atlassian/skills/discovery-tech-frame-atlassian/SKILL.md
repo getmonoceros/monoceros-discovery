@@ -88,23 +88,34 @@ anyway (principle 2) - so you don't need a perfectly fresh catalog, but you
    need, it belongs in the brief, not here.
 4. **Described list items, not a keyword dump** - each point is a half-sentence
    with the *why*.
-5. **Fixed defaults of this workflow.** `claude` is the builder - include it as
-   a feature, unless the user explicitly wants a different agent
-   (`opencode`/`rovodev`). **`atlassian/twg` is added by default** (no
-   question): discovery lives in Confluence, the backlog in Jira, so the
-   container needs Jira read access for Claude. **The code host is asked, not
-   assumed**: where does the repository live, or where will it live? GitHub
-   (also GitHub Enterprise) takes the `github` feature, GitLab (also
-   self-hosted) takes `gitlab`, and Bitbucket takes neither, because the
-   catalog has no CLI for it and cloning there only needs the token. Do not
-   write `github` into the mapping because it is the common case; for a
-   customer on Bitbucket that is a decision nobody made. And **`claude-code-roles`**, because this pipeline ends in a backlog
-   meant to be worked off story by story: the roles are that loop, a planner
-   writes the plan, an implementer executes it, a reviewer checks the result
-   against it. Its model and effort options stay **empty** - empty means the
-   roles inherit the session, which is the right default and needs no decision
-   here. These defaults are **named, not asked** - no selection dialog about
-   them. In particular **never** ask whether Atlassian CLIs should go into the
+5. **Fixed defaults of this workflow.** Four entries go into every mapping, and
+   exactly one of them is a question.
+
+   - **`claude`**, the builder, unless the user explicitly asks for `opencode`
+     instead. (Rovo Dev is not a builder here: it is an option of the
+     `atlassian` feature, not an agent feature of its own.) **If they do ask for
+     OpenCode, three things move with it and you say so**: the roles become
+     `opencode-roles`, the `discovery-atlassian` template does not apply because
+     it is built around Claude Code, and the discovery skills do not come along
+     at all, because they are a Claude plugin. Such a workbench can build the
+     backlog but cannot work the discovery.
+   - **`claude-code-roles`**, because this pipeline ends in a backlog meant to
+     be worked off story by story: a planner writes the plan, an implementer
+     executes it, a reviewer checks the result against it. Its model and effort
+     options stay **empty** - empty means the roles inherit the session, which
+     is the right default and needs no decision here.
+   - **`atlassian/twg`**, no question: discovery lives in Confluence, the
+     backlog in Jira, so the container needs that access for the agent.
+   - **The code host, and this one you ask**: where does the repository live, or
+     where will it live? GitHub (also GitHub Enterprise) takes the `github`
+     feature, GitLab (also self-hosted) takes `gitlab`, and Bitbucket takes
+     neither, because the catalog has no CLI for it and cloning there only needs
+     the token. Do not write `github` into the mapping because it is the common
+     case; for a customer on Bitbucket that is a decision nobody made. While the
+     answer is open, the feature is open too, and it belongs in the open points.
+
+   The first three are **named, not asked** - no selection dialog about them.
+   In particular **never** ask whether Atlassian CLIs should go into the
    container: `twg` is set, `forge` and `rovodev` deliberately **left out**
    (lean preset).
 
@@ -225,13 +236,15 @@ it.
 For real choices in the **stack**, use **AskUserQuestion** and offer the actual
 catalog alternatives, not just your favorite (e.g. SQL store
 `postgres`/`mysql`/`pgvector`, which object storage). The **set defaults**
-(`claude`, `github`, `atlassian/twg`, `claude-code-roles`) are **not** a choice -
-don't offer them, don't pose them as an "in/out?" question, just name them. The
-first three are preconditions, the roles are a working style; that is why the
-features row says what each one is for, so a reader can drop the roles
-deliberately rather than wonder how they got there. For each decision,
-record whether it is a Monoceros service, a feature, or an (app-owned)
-dependency.
+(`claude`, `atlassian/twg`, `claude-code-roles`) are **not** a choice - don't
+offer them, don't pose them as an "in/out?" question, just name them. The first
+two are preconditions, the roles are a working style; that is why the features
+row says what each one is for, so a reader can drop the roles deliberately
+rather than wonder how they got there. The **code host** is not in that list: it
+is one question, and its answer decides `github`, `gitlab` or neither.
+
+For each decision, record whether it is a Monoceros service, a feature, or an
+(app-owned) dependency.
 
 ### Step 2: Mapping onto the yml
 
@@ -244,8 +257,9 @@ Translate the decisions into the `init` categories with catalog ids:
   discovery plugin, `claude-code-roles` (plan, implement, review against the
   plan) and `atlassian/twg` (Jira and Confluence access, the lean preset rather
   than the full `atlassian` with `rovodev`+`forge`). So `--with-features` only
-  carries what comes on top: `github` (code host), and further features if the
-  stack really needs them. `twg` is configured when the workbench is set up;
+  carries what comes on top: the code-host feature the answer decided
+  (`github`, `gitlab`, or none for Bitbucket), and further features if the stack
+  really needs them. `twg` is configured when the workbench is set up;
   that is not a product question, so it is neither an open point nor a
   follow-up question here.
 
@@ -337,7 +351,9 @@ type). For the technical brief specifically:
   one line each.
 - **Mapping onto the container definition** → flag→assignment in the
   **page-properties macro** (`details`), then the "Not in the yml" prose and
-  the `init` sketch as a code block.
+  **both** command blocks: the `init --template=…` sketch for a new workbench,
+  and the `add-*` commands with one `apply` for a workbench that already exists,
+  each labelled, plus the line about the plugin hand-edit.
 - **Deployment** → **note panel** (`panel-note`).
 - **Open points** → 2 columns with yellow `open` status chips.
 
