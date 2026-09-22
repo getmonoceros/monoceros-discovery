@@ -59,10 +59,13 @@ CLI flags (`--with-languages`, `--with-services`, `--with-features`,
   --with-features={…} \
   --with-ports={…} \
   --with-repos={full HTTPS URL of the repo, asked from the user - no placeholder}</code></pre>
-<p><strong>{A workbench that already exists}</strong>{: not }<code>init</code>{, but one command per mapped component, then one }<code>monoceros apply {name}</code>{. Both blocks always go on the page, because the reader may be in either situation.}</p>
+<p><strong>{A workbench that already exists}</strong>{: not }<code>init</code>{, but one command per mapped component, then one }<code>monoceros apply {name}</code>{. The template applies only to }<code>init</code>{, so this block names every feature itself, the four defaults included. Both blocks always go on the page, because the reader may be in either situation.}</p>
 <pre data-breakout="wide" data-breakout-width="760"><code class="language-shell">monoceros add-language {name} {id}
 monoceros add-service {name} {id}
-monoceros add-feature {name} {id}
+monoceros add-feature {name} claude
+monoceros add-feature {name} claude-code-roles
+monoceros add-feature {name} atlassian/twg
+monoceros add-feature {name} {code-host feature, from the answer - or omitted while that is open}
 monoceros apply {name}</code></pre>
 <p>{The discovery plugin has no command. It is a hand-edit in }<code>{name}.yml</code>{, as a }<code>plugins:</code>{ block under the }<code>claude</code>{ feature entry, where }<code>add-feature</code>{ left a commented example to overwrite.}</p>
 <p>{Repo on another host (self-hosted GitLab, GitHub Enterprise …) not in }<code>--with-repos</code>{, but after the init:}</p>

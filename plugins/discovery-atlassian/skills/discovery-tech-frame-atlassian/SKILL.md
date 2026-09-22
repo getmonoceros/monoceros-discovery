@@ -92,8 +92,13 @@ anyway (principle 2) - so you don't need a perfectly fresh catalog, but you
    a feature, unless the user explicitly wants a different agent
    (`opencode`/`rovodev`). **`atlassian/twg` is added by default** (no
    question): discovery lives in Confluence, the backlog in Jira, so the
-   container needs Jira read access for Claude. `github` is the code-host
-   default. And **`claude-code-roles`**, because this pipeline ends in a backlog
+   container needs Jira read access for Claude. **The code host is asked, not
+   assumed**: where does the repository live, or where will it live? GitHub
+   (also GitHub Enterprise) takes the `github` feature, GitLab (also
+   self-hosted) takes `gitlab`, and Bitbucket takes neither, because the
+   catalog has no CLI for it and cloning there only needs the token. Do not
+   write `github` into the mapping because it is the common case; for a
+   customer on Bitbucket that is a decision nobody made. And **`claude-code-roles`**, because this pipeline ends in a backlog
    meant to be worked off story by story: the roles are that loop, a planner
    writes the plan, an implementer executes it, a reviewer checks the result
    against it. Its model and effort options stay **empty** - empty means the
@@ -252,9 +257,13 @@ Translate the decisions into the `init` categories with catalog ids:
   becomes `<name>.localhost`, each further one `<name>-<port>.localhost`.
 - **`--with-repos`**: first ask **whether a repo for the app already exists**
   (don't assume greenfield). Three cases:
-  - **No repo** → omit `--with-repos`; carry the app repo as an **open point**
-    (create it, then link it via `monoceros add-repo`; or the builder creates
-    it in the container and pushes via the `github` feature).
+  - **No repo** → ask **where it will live** (github.com, gitlab.com,
+    bitbucket.org, self-hosted GitHub or GitLab) and take the code-host feature
+    from that answer. Omit `--with-repos` and carry the app repo as an **open
+    point**: create it, then link it with `monoceros add-repo`, or let the
+    builder create it in the container and push through the code-host feature.
+    If the answer is genuinely open, the **feature is open too** - say so in the
+    open points rather than writing `github` into the mapping.
   - **Repo on github.com / gitlab.com / bitbucket.org** → the full **HTTPS
     URL** in `--with-repos` (the provider is auto-detected).
   - **Repo on another host** (self-hosted GitLab, GitHub Enterprise …) →
@@ -286,8 +295,18 @@ So under the `init` sketch comes the second block: the `add-*` commands for the
 mapped components - `monoceros add-language`, `monoceros add-service`,
 `monoceros add-feature`, `monoceros add-port`, `monoceros add-repo` - followed
 by one `monoceros apply <name>`. Label the two so nobody has to guess which is
-theirs. Say plainly, in both cases, that the discovery plugin cannot be added by
-a command: it is a hand-edit in the yml, under the `claude` feature entry, where
+theirs.
+
+**The template applies to `init` and to nothing else, so the second block
+carries every feature itself.** `--with-features` is short because
+`--template=discovery-atlassian` already brought `claude`, `claude-code-roles`
+and `atlassian/twg`. Nothing brings them to a workbench that already exists, so
+the `add-feature` lines are the full set from principle 5, not the leftover from
+the sketch. A second block with only the code-host feature in it builds exactly
+the workbench this whole chain cannot run in.
+
+Say plainly, in both cases, that the discovery plugin cannot be added by a
+command: it is a hand-edit in the yml, under the `claude` feature entry, where
 `monoceros add-feature` left a commented `plugins:` example to overwrite. Then
 `monoceros apply <name>` picks it up.
 
