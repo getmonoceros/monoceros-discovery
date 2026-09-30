@@ -278,13 +278,14 @@ function layout(model, routes) {
   const bandsOn = model.bands.size > 0;
   // a straight line between neighbouring columns carries its label and both
   // cardinalities in the gap, so the gap grows until they fit side by side
-  const labelNeed = Array(C + 1).fill(0);
+  const labelNeed = Array(C + 1).fill(0), labelBy = [];
   for (const e of edges) {
     const r = routes[e.i], a = B.get(e.from), b = B.get(e.to);
     if (r.t !== "SH" || Math.abs(a.col - b.col) !== 1 || !e.label) continue;
     const cardW = (t) => (t && e.kind !== "inheritance" ? measure.regular(t, 12) + 12 : 8);
     const j = Math.max(a.col, b.col);
-    labelNeed[j] = Math.max(labelNeed[j], measure.regular(e.label, 12) + 10 + cardW(e.fromCard) + cardW(e.toCard) + 24);
+    const need = measure.regular(e.label, 12) + 10 + cardW(e.fromCard) + cardW(e.toCard) + 24;
+    if (need > labelNeed[j]) { labelNeed[j] = need; labelBy[j] = e; }
   }
   const vGap = (j) => {
     const n = lanesV[j].length;
@@ -473,9 +474,15 @@ function layout(model, routes) {
   }
   // bands span the full width
   const bandRects = bandEdges.map((be) => ({ ...be, x: MARGIN, w: width - 2 * MARGIN }));
-  // how many line ends meet each box side, for the hints in the report
+  // how many line ends meet each box side, and which labels pushed their
+  // columns apart - both for the hints in the report
   const sideCounts = new Map([...sides].map(([k, items]) => [k, items.length]));
-  return { width, height, bandRects, sideCounts };
+  const widened = [];
+  for (let j = 1; j < C; j++)
+    // a few pixels go unseen; the hint is for a gap that visibly grew
+    if (labelBy[j] && labelNeed[j] > Math.max(COL_GAP, 2 * 40 + lanesV[j].length * LANE) + 30)
+      widened.push(`label "${labelBy[j].label}" widens the gap between ${labelBy[j].from} and ${labelBy[j].to} to ${Math.round(vGap(j))} px; shorten it`);
+  return { width, height, bandRects, sideCounts, widened };
 }
 
 function simplify(pts) {
@@ -794,5 +801,5 @@ writeFileSync(args[1], png.asPng());
 // often unavoidable, so they stay out of `warnings`, which must be empty
 const SIDE = { T: "top", B: "bottom", L: "left", R: "right" };
 const hints = [...res.geo.sideCounts].filter(([, n]) => n >= 3).map(([k, n]) => { const [id, side] = k.split(":"); return `${n} line ends on the ${SIDE[side]} of ${id}`; });
-hints.push(...res.detours);
+hints.push(...res.detours, ...res.geo.widened);
 console.log(JSON.stringify({ ok: true, png: args[1], width: png.width, height: png.height, crossings: res.crossings, warnings: res.warnings, hints }, null, 2));

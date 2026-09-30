@@ -181,8 +181,9 @@ Then **open the PNG and look at it** before it goes anywhere. The report
 cannot judge a picture:
 
 - `warnings` must be empty.
-- `hints` name the spots to look at first: a side where three lines meet, and
-  a line that takes a detour although a straight one was possible. Each one is
+- `hints` name the spots to look at first: a side where three lines meet, a
+  line that takes a detour although a straight one was possible, and a label
+  that pushes its two columns apart. Each one is
   a judgement, not an error: fix it when moving a box does, leave it when it
   does not.
 - Crossings are fine, each gets a small arc. When roughly a third of the lines
