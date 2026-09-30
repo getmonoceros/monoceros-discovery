@@ -75,136 +75,157 @@ reference; render them in the **output language**. Technical values
 - **An update needs the page's current version.** Fetch it immediately before
   writing; a stale version is rejected.
 
-## Diagrams (PlantUML)
+## Diagrams
 
 A diagram is the **overview for the human**, never the carrier of the content.
 The tables stay authoritative: the planning skill reads them, and they survive
 the Markdown fallback. Nobody should have to reconstruct a model from a picture.
 
-Diagrams need the **PlantUML Diagrams & Charts for Confluence** app. It may not
-be installed, and then the macro renders as nothing. So always write the text
-sketch and the tables first, and add the diagram on top. If the diagram is
-missing, the page still stands.
-
-### Writing the macro
-
-Verified: the minimal parameter set is enough. No `cloudId`, no
-`embeddedMacroContext`, no `localId`, no page reference - so a diagram can be
-written onto a page that does not exist yet.
-
-```html
-<div data-type="extension" data-extension-key="4f4a33ef-c50d-44b6-9340-f5cdd566bdd3/f305fd82-ebe5-458b-b477-5e378c610cf3/static/plantuml-fullpage-editor" data-extension-type="com.atlassian.ecosystem" data-layout="default" data-parameters='{"layout":"extension","guestParams":{"code":"@startuml\n…\n@enduml","diagramName":"{caption}","type":"plantuml"},"forgeEnvironment":"PRODUCTION","extensionId":"ari:cloud:ecosystem::extension/4f4a33ef-c50d-44b6-9340-f5cdd566bdd3/f305fd82-ebe5-458b-b477-5e378c610cf3/static/plantuml-fullpage-editor"}'>PlantUML Diagrams &amp; Charts for Confluence</div>
-```
-
-The diagram source is plain text in `guestParams.code`, line breaks as `\n`.
-`diagramName` renders as the caption above the diagram. Everything else is a
-fixed string.
-
-### The preamble every diagram gets
-
-The app renders the canvas in the reader's colour mode, and PlantUML cannot
-override it: `skinparam backgroundColor` is ignored. So the diagram paints its
-own surface - everything goes inside a white `package`, which makes the picture
-identical in light and dark mode. These lines hold for **every** diagram type:
-
-```
-skinparam shadowing false
-skinparam linetype ortho
-skinparam packageStyle rectangle
-skinparam packageBackgroundColor #FFFFFF
-skinparam packageBorderColor #FFFFFF
-skinparam ArrowColor #44546F
-```
-
-Then the part that depends on the diagram type.
-
-**Class diagram** (the domain model), with the package name hidden:
-
-```
-skinparam packageFontColor #FFFFFF
-skinparam classBackgroundColor #FFFFFF
-skinparam classBorderColor #44546F
-skinparam classFontColor #172B4D
-hide members
-hide circle
-package Modell #FFFFFF {
-  class "   Handout   " as Handout
-  class "   Address   " as Address
-  Handout "0..1" -- "1" Address
-}
-```
-
-**Component diagram** (building blocks and interfaces, deployment):
-
-```
-skinparam rectangleBackgroundColor #FFFFFF
-skinparam rectangleBorderColor #44546F
-skinparam rectangleFontColor #172B4D
-skinparam databaseBackgroundColor #FFFFFF
-skinparam databaseBorderColor #44546F
-skinparam databaseFontColor #172B4D
-package Handout #FFFFFF {
-  rectangle "   Caddy   " as Caddy
-  rectangle "   Handout   " as App
-  database "   PostgreSQL   " as DB
-  Caddy --> App
-  App --> DB
-}
-```
-
-Two differences from the class diagram, both observed: `packageFontColor` does
-**not** take effect here, so the package label renders - give the package a name
-that says something, the product or the system. And the arrow direction carries
-real information here, so use `-->` rather than a plain line: it says who calls
-whom. A store is a `database`, everything else a `rectangle`.
-
-### Keep text out of the picture
-
-Confluence draws the SVG with **its own** font, whatever the diagram asks for.
-PlantUML sizes each box with the font it measured with, so every string is drawn
-wider than the box that was computed for it. Names longer than roughly ten
-characters run out of their box, and labels on the lines collide with the lines.
-Setting `FontName` does not help - it is overridden. This was worked through in
-nine variants; what survives is: **put no text into the picture that the tables
-already carry.**
-
-- **No attributes in the class boxes.** They are in the attribute tables.
-- **Cardinalities on the lines: yes.** `Handout "1" -- "0..*" Tag`. They are one
-  to four characters, they sit at the line ends, and with `ortho` they stay
-  legible even at eleven entities. Without them the picture says nothing about
-  the model and looks bare.
-- **Relationship verbs on the lines: no.** Verified against the same model: the
-  line cuts straight through "erreichbar unter", "verschlagwortet" overlaps the
-  next edge, and two cardinalities land on top of each other. The verb lives in
-  the relationship table, in the sentence. The same goes for protocol labels on a
-  component diagram's arrows.
-- **Pad every name with three spaces on each side**, via
-  `class "   Name   " as Name` or `rectangle "   Name   " as Name`. That is what
-  buys back the width the metric mismatch eats. The `as Name` keeps the
-  references readable.
-- **`linetype ortho` for right-angled lines.** Verified with eleven entities and
-  an inheritance: every line runs on the grid, nothing crosses a box, and it
-  reads far more calmly than the diagonal default. At two boxes it makes no
-  visible difference, so it costs nothing to set always.
-- **Never `skinparam padding`.** It puts a yellow warning banner inside the
-  picture. Spacing only through a `<style>` block, and it barely helps anyway.
-- **The package name carries no quotes** in a class diagram. `package "." #FFFFFF`
-  flips PlantUML into a component diagram and the render dies with a syntax
-  error. `package Modell #FFFFFF` works.
-
-So the diagram answers: **which parts exist, what is connected to what, and how
-many or in which direction.** Everything else is read off the tables. That is not
-a compromise forced on us, it is the division of labour that keeps the picture
-legible.
-
 ### Where a diagram earns its place
 
 A diagram is worth it from **three parts up**, where prose has to describe a
 structure the reader then has to hold in their head. Below that it repeats a
-sentence. It is always the **overview**, never the carrier of the content: the
-tables and the prose stay authoritative, they are what the planning skill reads,
-and they survive the Markdown fallback. And the page has to stand without it -
-the PlantUML app may not be installed.
+sentence. The page has to stand without it: write the tables and the prose
+first, and the picture on top.
+
+### How it is made
+
+The picture is a **PNG**, rendered by `scripts/diagram.mjs` from a JSON spec.
+The script ships with the two skills that draw, the domain model and the
+technical brief. The PNG is uploaded to the page as an attachment and embedded
+as an image, not written as a Confluence macro. The PlantUML app used before
+drew its SVG with Confluence's own font, so every name ran wider than its box,
+attributes and verbs had to stay out, and the picture could not be opened full
+screen. A PNG carries its font, needs no app, and Confluence opens it in its
+image viewer with zoom.
+
+The division of labour: **you decide the layout, the script draws the lines.**
+Where a box sits is a judgement about what belongs together, so it is yours.
+Routing the lines, keeping them apart, the small arc where two lines cross, the
+check that no line runs through a box - that is mechanics, and the script does
+it.
+
+### The spec
+
+```json
+{
+  "bands": [
+    { "id": "content", "label": "Content", "tone": "blue" },
+    { "id": "history", "label": "History", "tone": "amber" }
+  ],
+  "boxes": [
+    { "id": "Skill", "band": "content", "row": 0, "col": 0,
+      "attrs": [["name", "String"], ["theory", "String [0..1]"]] },
+    { "id": "SkillAssignment", "band": "history", "row": 1, "col": 0,
+      "attrs": [["state", "SkillAssignmentState"]] }
+  ],
+  "edges": [
+    { "from": "Skill", "to": "SkillAssignment", "fromCard": "1", "toCard": "0..*" }
+  ]
+}
+```
+
+| Key | Meaning |
+|---|---|
+| `bands[]` | Optional. `id`, `label`, `tone`. A band is a stripe across the full width with its label rotated along the left edge. Keep the label to one or two words; the explanation goes in the caption. |
+| `boxes[].id` | Unique. Also the title unless `title` is set. |
+| `boxes[].row`, `col` | Grid cell, from 0. One box per cell. |
+| `boxes[].band` | Which band the box sits in. A band owns whole rows: a row cannot mix bands. |
+| `boxes[].attrs` | Class boxes: `[name, type]` pairs, drawn as `name: Type`. |
+| `boxes[].subtitle` | Component boxes: a line (or a list of lines) under the title, the technology. |
+| `boxes[].shape` | `box` (default), `store` (a cylinder, for a database or object store), `external` (dashed, for a system outside the product). |
+| `boxes[].tone` | Overrides the band's colour. |
+| `edges[]` | `from`, `to`, `fromCard`, `toCard` (cardinality at each end), `label`, `arrow` (`to`, `from`, `both`), `kind: "inheritance"` (`to` is the superclass; no cardinalities). |
+
+Tones: `blue`, `amber`, `green`, `purple`, `gray`.
+
+### Laying out the grid
+
+- **Start from the lines.** Go through the relationships and place first the
+  pairs that should be joined by a straight line: a parent directly above its
+  children, a chain in one row or one column.
+- **The hub goes in the middle**, not to the edge. The entity with the most
+  lines pulls the others around it.
+- **One band per subject area**, stacked top to bottom. The entities that link
+  two areas face each other across the boundary, in the same column, so the
+  line between them runs straight down.
+- **An empty cell beats a squeeze.** Room around a box is room for its lines.
+
+### Render, then look at it
+
+```bash
+node <skill-dir>/scripts/diagram.mjs model.json model.png
+```
+
+The first run installs the renderer (`@resvg/resvg-js`) into
+`~/.cache/monoceros-discovery/` and needs the npm registry once. The script
+prints a report: `crossings`, and `warnings` for a line through a box or two
+lines on top of each other.
+
+Then **open the PNG and look at it** before it goes anywhere. The report
+cannot judge a picture:
+
+- `warnings` must be empty.
+- Crossings are fine, each gets a small arc. When roughly a third of the lines
+  cross, or a line takes a long way round the picture, move a box and render
+  again. Two or three rounds are normal.
+- Every label and every cardinality readable, none on top of another.
+
+Keep the spec file: it goes onto the page with the picture.
+
+### What goes into the picture
+
+- **Class diagram** (the domain model): every entity with its attributes as
+  `name: Type`, and `[0..1]` after the type where the attribute table says
+  *not mandatory*. The attribute table and the box say the same thing. A
+  **cardinality at both ends of every line**. A **label** only where the line
+  does not explain itself: a self-reference ("People Lead"), a second line
+  between the same pair, a person in a role ("written by"). The verb of every
+  other relationship lives in the relationship table. Enumerations stay in their
+  table.
+- **Component diagram** (building blocks): one box per part, the title the
+  part and the `subtitle` its technology. `store` for a database, `external`
+  for a system outside the product. `arrow: "to"` from the caller to the called,
+  and a short `label` with the protocol or the purpose.
+
+### Upload and embed
+
+An attachment belongs to a page, so the page exists first. The order: write the
+page with everything except the picture, render, upload, then add the figure to
+the page.
+
+1. **With `twg`** (the workbench path):
+   `twg confluence content attachments upload --id <page-id> --file <png> -y`
+   returns the attachment id, and
+   `twg confluence content attachments get --attachment-id <att…> -o json`
+   returns `data.fileId`.
+2. **With the Atlassian MCP connector and a shell**: `createConfluenceAttachment`
+   only prepares the upload and returns a `uploadCommand` (a curl call with a
+   token that lasts five minutes). Run it right away, then
+   `getConfluenceAttachment` returns the `fileId`.
+3. **Without a shell** (a chat without a terminal): hand the PNG to the user,
+   say under which heading it goes, and write the page without the figure.
+
+The figure, directly under the section heading, with the spec below it:
+
+```html
+<figure data-type="media-single" data-layout="wide" data-width="100" data-width-type="percentage"><div data-type="media" data-media-type="file" data-id="{fileId}" data-collection="contentId-{page-id}" data-alt="{caption}"></div><figcaption>{caption}</figcaption></figure>
+<details><summary>{Diagram source}</summary><pre><code class="language-json">{the spec, HTML-escaped}</code></pre></details>
+```
+
+The spec on the page is what the next run renders from, not a spec rebuilt from
+memory. **Updating** the picture: render from the edited spec and upload under
+the **same file name**. Confluence keeps it as a new version of the same
+attachment, but with a **new `fileId`**, and the page keeps showing the old
+picture until the figure's `data-id` is switched to it. Verified.
+
+**A page written before** still carries a PlantUML macro
+(`data-extension-key` ending in `plantuml-fullpage-editor`). When the skill
+updates that page, the figure replaces the macro; its PlantUML source is not
+carried over, the spec is written from the tables.
+
+**In the Markdown fallback** the PNG goes next to the Markdown file,
+`![caption](model.png)`, and the spec under it as a `json` block.
 
 ## Deep links to a heading
 

@@ -33,7 +33,8 @@ CLI flags (`--with-languages`, `--with-services`, `--with-features`,
 <h2>{Architecture at a glance}</h2>
 <div data-type="bodied-extension" data-extension-key="excerpt" data-extension-type="com.atlassian.confluence.macro.core" data-parameters='{"macroParams":{"name":{"value":"summary"}}}'><p>{Two to four sentences of prose: how the parts play together - frontend, backend, which data goes where, which services are involved.}</p></div>
 <h2>{Building blocks and interfaces}</h2>
-<div data-type="extension" data-extension-key="{plantuml extension key, see confluence-style.md}" data-extension-type="com.atlassian.ecosystem" data-layout="default" data-parameters='{"layout":"extension","guestParams":{"code":"{@startuml … @enduml, component-diagram preamble from confluence-style.md}","diagramName":"{Building blocks of <product>}","type":"plantuml"},"forgeEnvironment":"PRODUCTION","extensionId":"{extension id, see confluence-style.md}"}'>PlantUML Diagrams &amp; Charts for Confluence</div>
+<figure data-type="media-single" data-layout="wide" data-width="100" data-width-type="percentage"><div data-type="media" data-media-type="file" data-id="{fileId of the uploaded PNG, from three parts up}" data-collection="contentId-{page id}" data-alt="{Building blocks of <product>}"></div><figcaption>{Building blocks of <product>}</figcaption></figure>
+<details><summary>{Diagram source}</summary><pre><code class="language-json">{the diagram spec, HTML-escaped}</code></pre></details>
 <h3>{Emoji} {Part 1, e.g. the backend}</h3>
 <p>{its job in one sentence, and who it talks to}</p>
 <h3>{Emoji} {Part 2}</h3>
@@ -85,8 +86,10 @@ Rules:
 - **Building blocks and interfaces** = full width, one `<h3>` per part with a
   topic emoji, one sentence on its job and its counterparts. **From three parts
   up, a component diagram sits above them** (recipe in `confluence-style.md`):
-  picture first, then the detail. The list stays authoritative, the diagram is the
-  overview, and the page has to stand without it.
+  picture first, then the detail. It is an embedded PNG with the spec in a
+  collapsed section below it, so the next run renders from the spec. The list
+  stays authoritative, the diagram is the overview, and the page has to stand
+  without it.
 - **Technology decisions** = 2 columns (760), each `<h3>` with a **fitting topic
   emoji** (app-dependent, not fixed: e.g. ☕ Backend, ⚛️ Frontend, 🐍 mock
   service, 🔐 Auth, 🧬 vector DB, 🗄️ object storage, 🔗 integration) + `<p>`

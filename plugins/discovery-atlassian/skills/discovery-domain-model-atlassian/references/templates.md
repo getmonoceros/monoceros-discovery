@@ -25,8 +25,8 @@ entity's sentence names the business term.
 
 **Never translate** (leave verbatim): every `data-*` attribute,
 `data-extension-key` and extension type, macro parameter names (the excerpt name
-`summary`, the `details` macro), `data-color` values, the PlantUML keywords and
-`skinparam` lines, and the page-title artifact words (`Domain Model`). Data type
+`summary`, the `details` macro), `data-color` values, the keys of the diagram
+spec, and the page-title artifact words (`Domain Model`). Data type
 names (`String`, `Long`, `DateTime`, `Boolean`, `Decimal`, `Enum`) stay verbatim
 too - they are read by the build, like the entity and attribute names above. Emojis are structural markers - keep them.
 
@@ -37,7 +37,8 @@ too - they are read by the build, like the entity and attribute names above. Emo
 <div data-type="bodied-extension" data-extension-key="excerpt" data-extension-type="com.atlassian.confluence.macro.core" data-parameters='{"macroParams":{"name":{"value":"summary"}}}'><p>{One or two sentences: which things the product deals with and what holds them together.}</p></div>
 <div data-type="bodied-extension" data-extension-key="details" data-extension-type="com.atlassian.confluence.macro.core"><table data-width="760"><tbody><tr><th><p><strong>{Product brief}</strong></p></th><td><p><a href="{brief-url}" data-card-appearance="inline">{brief-url}</a></p></td></tr><tr><th><p><strong>{Journeys}</strong></p></th><td><p><a href="{journeys-collection-page-url}" data-card-appearance="inline">{journeys-collection-page-url}</a></p></td></tr><tr><th><p><strong>{Technical brief}</strong></p></th><td><p><a href="{technical-brief-url}" data-card-appearance="inline">{technical-brief-url}</a></p></td></tr></tbody></table></div>
 <h2>{The model}</h2>
-<div data-type="extension" data-extension-key="{plantuml extension key, see confluence-style.md}" data-extension-type="com.atlassian.ecosystem" data-layout="default" data-parameters='{"layout":"extension","guestParams":{"code":"{@startuml … @enduml, preamble from confluence-style.md, entities and lines only}","diagramName":"{The model of <product>}","type":"plantuml"},"forgeEnvironment":"PRODUCTION","extensionId":"{extension id, see confluence-style.md}"}'>PlantUML Diagrams &amp; Charts for Confluence</div>
+<figure data-type="media-single" data-layout="wide" data-width="100" data-width-type="percentage"><div data-type="media" data-media-type="file" data-id="{fileId of the uploaded PNG}" data-collection="contentId-{page id}" data-alt="{The model of <product>}"></div><figcaption>{The model of <product>}: {one clause on the bands, e.g. the shared pool and the history per person}</figcaption></figure>
+<details><summary>{Diagram source}</summary><pre><code class="language-json">{the diagram spec, HTML-escaped}</code></pre></details>
 <h2>{Entities}</h2>
 <h3>{Emoji} {Entity 1}</h3>
 <p>{one sentence: what it is, in business terms}</p>
@@ -87,7 +88,8 @@ Rules:
   that the row covers **both** directions, which is why one relationship is one
   row.
 - **The `Cardinality` column is written exactly as the diagram writes it**, so the
-  two cannot drift: `A "1" -- "0..1" B` becomes `1 : 0..1`.
+  two cannot drift: an edge `{"from": "A", "to": "B", "fromCard": "1", "toCard": "0..1"}`
+  becomes `A ↔︎ B` over `1 : 0..1`.
 - **How to read it: the number beside a name says how many of *that* entity
   belong to one of the other.** That is the UML convention, and it is the opposite
   of what most readers guess. For `Handout ↔︎ Address` the correct value is
@@ -109,12 +111,12 @@ Rules:
   one handout" is what a reader takes away; `1 : 0..1` alone is not.
 - **The model section comes before the detail.** The diagram sits in its own
   `<h2>` directly after the page properties, because it is the overview and a
-  reader wants it first. It carries **entities and lines only** - no attributes,
-  **with** cardinalities, but no relationship verbs. It answers which entities
-  exist, what is connected to what, and how many of each; everything else is read
-  off the tables. The reason for the limit is in `confluence-style.md`: Confluence
-  draws the SVG with its own font, so longer text in the picture breaks out of its
-  box or collides with a line.
+  reader wants it first. It carries every entity **with its attributes** and the
+  **cardinalities** at both ends of every line; a verb only where the line does
+  not explain itself. It answers which entities exist, what they carry and how
+  many of each belong together. The notes, the verbs and the states are read off
+  the tables. The spec sits in a collapsed section right under the picture, so
+  the next run renders from it.
 - **An enumeration and an inheritance must not express the same distinction.**
   `ArtifactType` with the values ZIP, HTML, PDF **and** the entities
   `ZipArtifact`, `HtmlArtifact`, `PdfArtifact` is a contradiction: one of the two
@@ -123,8 +125,8 @@ Rules:
 - **The page properties link three ways**: the brief above, the **Journeys
   collection page** as the source (one card, not one per journey), and the
   technical brief, which reads this model.
-- The page has to stand **without** the diagram - the PlantUML app may not be
-  installed.
+- The page has to stand **without** the diagram: when the picture could not be
+  uploaded, the tables still carry the whole model.
 - **The entity `<h3>` is a link target.** Journeys and stories deep-link to a
   single entity, so the anchor scheme in `confluence-style.md` applies, and
   renaming an entity means correcting the links that point at it.

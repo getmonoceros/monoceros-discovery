@@ -226,12 +226,15 @@ List the parts: every process or container, its job, and who it talks to. This
 is the question that comes up at the first endpoint and cannot be derived from a
 list of flags.
 
-**From three parts up, draw it as well** - a component diagram, recipe in
-`references/confluence-style.md`. Who calls whom is a structure the reader
+**From three parts up, draw it as well** - a component diagram, rendered as a
+PNG by `scripts/diagram.mjs` from a small spec (recipe in
+`references/confluence-style.md`). Who calls whom is a structure the reader
 otherwise has to assemble from five paragraphs and hold in their head, and the
-arrows carry the direction that prose states only in passing. The list stays
-authoritative; the picture is the overview, and the page has to stand without
-it.
+arrows carry the direction that prose states only in passing. Each part is a
+box with its technology under the name, a store is drawn as a store, a system
+outside the product as an external box, and each arrow carries the protocol or
+the purpose. The list stays authoritative; the picture is the overview, and the
+page has to stand without it.
 
 For real choices in the **stack**, use **AskUserQuestion** and offer the actual
 catalog alternatives, not just your favorite (e.g. SQL store
@@ -338,9 +341,9 @@ type). For the technical brief specifically:
   …"), which carries nothing and would be worthless as an excerpt.
 - **Building blocks and interfaces** → full width, one `<h3>` per part with a
   fitting topic emoji, a sentence on its job and who it talks to, and **from
-  three parts up a component diagram** above them (recipe in
-  `references/confluence-style.md`). The picture first, then the detail, the same
-  order the domain model uses.
+  three parts up a component diagram** above them: an embedded PNG with its spec
+  in a collapsed section below it (recipe in `references/confluence-style.md`).
+  The picture first, then the detail, the same order the domain model uses.
 - **Technology decisions** → 2 columns (760) with fitting **topic emojis** in
   the `<h3>`, each with its rejected alternative in the rationale, then a second
   paragraph `<strong>Muss erfüllen:</strong>` with **one sentence**. An italic
@@ -361,7 +364,12 @@ type). For the technical brief specifically:
 2. Fill it with the worked-out content.
 3. Create the document as an **HTML+ page** (`contentFormat: html`) **under the
    brief** (ask for the space and parent page) or write it as a Markdown
-   fallback.
+   fallback. Everything except the picture goes in now.
+4. From three parts up: write the diagram spec, render it with
+   `scripts/diagram.mjs`, **look at the PNG**, then upload it and add the figure
+   and the spec under "Building blocks and interfaces". Without a way to upload,
+   hand the PNG to the user and say where it goes. In the Markdown fallback the
+   PNG goes next to the file.
 
 ### Setting open points correctly
 

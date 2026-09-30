@@ -82,8 +82,9 @@ sentence says it is an Aufruf of a Handout.
 - **Iteration is normal.** If an attribute turns out to be an entity, go back
   and add it. Revisions are a sign the analysis is working, not a mistake.
 - **The tables are authoritative, the diagram is the overview.** Planning reads
-  the tables, and they survive the Markdown fallback. The diagram answers one
-  question only: which entities exist and what is connected to what.
+  the tables, and they survive the Markdown fallback. The diagram shows at a
+  glance which entities exist, what they carry and how they connect; the notes,
+  the verbs and the states stay in the tables.
 
 ## Procedure
 
@@ -201,13 +202,21 @@ Get final confirmation.
 ## Finish: create the page
 
 Shared style rule: `references/confluence-style.md` - a marker per section type,
-the diagram recipe, and the anchor scheme for deep links.
+the diagram (spec, layout, render, upload), and the anchor scheme for deep links.
 
 1. Read the template from `references/templates.md`.
 2. Create the page as **HTML+** (`contentFormat: html`), titled
    `{prefix}Domain Model`, as a **child of the brief** - a sibling of the
-   technical brief and the design brief, not nested under either.
-3. If no Confluence is available, write it as a Markdown file and name the path.
+   technical brief and the design brief, not nested under either. Everything
+   except the picture goes in now.
+3. Write the diagram spec from the confirmed model, render it with
+   `scripts/diagram.mjs`, and **look at the PNG** before it goes anywhere. Move
+   boxes until it reads calmly; the checks are in `confluence-style.md`.
+4. Upload the PNG to the page and add the figure and the spec under
+   "The model". Without a way to upload, hand the PNG to the user and say where
+   it goes.
+5. If no Confluence is available, write it as a Markdown file with the PNG next
+   to it, and name both paths.
 
 ### Format (HTML+)
 
@@ -218,11 +227,13 @@ the diagram recipe, and the anchor scheme for deep links.
   each journey separately, that turns into a stack), row "Technical brief" → the
   technical brief, which reads this model.
 - **The model** → its own `<h2>` right after the page properties, carrying the
-  diagram as a PlantUML macro (recipe in `confluence-style.md`). The picture comes
-  **before** the detail: it is the overview, and a reader wants it first. It
-  carries entities, lines and **cardinalities** - but no attributes and no
-  relationship verbs, since longer text in the picture breaks out of its box or
-  collides with a line.
+  diagram as an embedded PNG with its spec below it (recipe in
+  `confluence-style.md`). The picture comes **before** the detail: it is the
+  overview, and a reader wants it first. It carries every entity **with its
+  attributes**, and **cardinalities** at both ends of every line. A relationship
+  verb goes on a line only where the line does not explain itself; the rest
+  lives in the relationship table. One band per subject area when the model has
+  more than one.
 - **Entities** → one `<h3>` per entity with a fitting topic emoji, a sentence of
   prose, and **its attribute table directly underneath**. One place per entity,
   not names here and attributes there.
@@ -247,4 +258,4 @@ the diagram recipe, and the anchor scheme for deep links.
   own product rather than a webshop.
 - Allow iteration: going back to step 1 is normal.
 - Several small models beat one unreadable one. Beyond roughly a dozen entities,
-  propose splitting by subject area.
+  propose splitting by subject area; in the picture, a subject area is a band.
