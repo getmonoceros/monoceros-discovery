@@ -88,6 +88,7 @@ const LANE = 26;         // distance between two lanes in a channel
 const COL_GAP = 110, MARGIN = 30, GUTTER = 40;
 const BAND_PAD = 10, BAND_GAP = 22;
 const HOP = 6;
+const LABEL_CHARS = 20;  // the guide's limit for a label, see confluence-style.md
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
@@ -479,9 +480,10 @@ function layout(model, routes) {
   const sideCounts = new Map([...sides].map(([k, items]) => [k, items.length]));
   const widened = [];
   for (let j = 1; j < C; j++)
-    // a few pixels go unseen; the hint is for a gap that visibly grew
-    if (labelBy[j] && labelNeed[j] > Math.max(COL_GAP, 2 * 40 + lanesV[j].length * LANE) + 30)
-      widened.push(`label "${labelBy[j].label}" widens the gap between ${labelBy[j].from} and ${labelBy[j].to} to ${Math.round(vGap(j))} px; shorten it`);
+    // the guide's rule is "about 20 characters", so that is what the hint
+    // checks - and only where the label actually pushed its columns apart
+    if (labelBy[j] && [...labelBy[j].label].length > LABEL_CHARS && labelNeed[j] > Math.max(COL_GAP, 2 * 40 + lanesV[j].length * LANE))
+      widened.push(`label "${labelBy[j].label}" has ${[...labelBy[j].label].length} characters and widens the gap between ${labelBy[j].from} and ${labelBy[j].to} to ${Math.round(vGap(j))} px; keep it to about ${LABEL_CHARS}`);
   return { width, height, bandRects, sideCounts, widened };
 }
 

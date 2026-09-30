@@ -183,7 +183,7 @@ cannot judge a picture:
 - `warnings` must be empty.
 - `hints` name the spots to look at first: a side where three lines meet, a
   line that takes a detour although a straight one was possible, and a label
-  that pushes its two columns apart. Each one is
+  over 20 characters that pushes its two columns apart. Each one is
   a judgement, not an error: fix it when moving a box does, leave it when it
   does not.
 - Crossings are fine, each gets a small arc. When roughly a third of the lines
@@ -203,9 +203,10 @@ Keep the spec file: it goes onto the page with the picture.
   between the same pair, a person in a role ("written by"). The verb of every
   other relationship lives in the relationship table. Enumerations stay in their
   table.
-- **Labels are short**, two or three words. The label names the line; the
-  explanation belongs in the relationship table or the caption. A long label
-  on a straight line widens the gap between the two columns so it still fits.
+- **Labels are short**, two or three words and about 20 characters. The label
+  names the line; the explanation belongs in the relationship table or the
+  caption. A long label on a straight line widens the gap between the two
+  columns so it still fits, and the report names it under `hints`.
 - **Component diagram** (building blocks): one box per part, the title the
   part and the `subtitle` its technology. `store` for a database, `external`
   for a system outside the product. `arrow: "to"` from the caller to the called,
