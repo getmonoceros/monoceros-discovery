@@ -130,7 +130,7 @@ it.
 | `bands[]` | Optional. `id`, `label`, `tone`. A band is a stripe across the full width with its label rotated along the left edge. Keep the label to one or two words; the explanation goes in the caption. |
 | `boxes[].id` | Unique. Also the title unless `title` is set. |
 | `boxes[].row`, `col` | Grid cell, from 0. One box per cell. |
-| `boxes[].band` | Which band the box sits in. A band owns whole rows: a row cannot mix bands. |
+| `boxes[].band` | Which band the box sits in. A band owns whole rows, as one continuous block: a row cannot mix bands, and an empty row between two rows of a band belongs to that band. |
 | `boxes[].attrs` | Class boxes: `[name, type]` pairs, drawn as `name: Type`. |
 | `boxes[].subtitle` | Component boxes: a line (or a list of lines) under the title, the technology. |
 | `boxes[].shape` | `box` (default), `store` (a cylinder, for a database or object store), `external` (dashed, for a system outside the product). |
@@ -138,6 +138,13 @@ it.
 | `edges[]` | `from`, `to`, `fromCard`, `toCard` (cardinality at each end), `label`, `arrow` (`to`, `from`, `both`), `kind: "inheritance"` (`to` is the superclass; no cardinalities). |
 
 Tones: `blue`, `amber`, `green`, `purple`, `gray`.
+
+A **self-reference** is an edge with `from` and `to` on the same box. It is
+drawn as a loop on whichever side is free. The picture cannot show which end of
+a loop is which, so keep one reading: `label` names the role, `fromCard` is how
+many of that role one entity has, and `toCard` how many the role holds. People
+Lead: `"fromCard": "0..1"` (a person has at most one lead), `"toCard": "0..*"`
+(a lead leads any number). The relationship table's sentence says it in words.
 
 ### Laying out the grid
 
@@ -158,9 +165,11 @@ node <skill-dir>/scripts/diagram.mjs model.json model.png
 ```
 
 The first run installs the renderer (`@resvg/resvg-js`) into
-`~/.cache/monoceros-discovery/` and needs the npm registry once. The script
-prints a report: `crossings`, and `warnings` for a line through a box or two
-lines on top of each other.
+`~/.cache/monoceros-discovery/` and needs the npm registry once; without it the
+script stops after two minutes and says why. The script prints a report:
+`crossings`, and `warnings` for a line through a box, two lines on top of each
+other, two cardinalities on top of each other or on a box, and a label that
+covers a cardinality or a box.
 
 Then **open the PNG and look at it** before it goes anywhere. The report
 cannot judge a picture:

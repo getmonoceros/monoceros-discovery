@@ -115,12 +115,28 @@ function readSpec(path) {
     if (!boxes.has(e.to)) errors.push(`edge ${i}: unknown box ${e.to}`);
     return { i, ...e };
   });
-  // bands must own whole, contiguous rows
+  // bands own whole rows, and each band one continuous block of them
   const rowBand = new Map();
   for (const b of boxes.values()) {
     const key = b.band || "";
     if (rowBand.has(b.row) && rowBand.get(b.row) !== key) errors.push(`row ${b.row} mixes bands ${rowBand.get(b.row) || "(none)"} and ${key || "(none)"}`);
     rowBand.set(b.row, key);
+  }
+  const maxRow = Math.max(0, ...[...boxes.values()].map((b) => b.row));
+  for (let r = 0; r <= maxRow; r++) {
+    if (rowBand.has(r)) continue;
+    // an empty row goes to the band above it (between two rows of one band: that band)
+    let up = r - 1, down = r + 1;
+    while (up >= 0 && !rowBand.has(up)) up--;
+    while (down <= maxRow && !rowBand.has(down)) down++;
+    rowBand.set(r, up >= 0 ? rowBand.get(up) : down <= maxRow ? rowBand.get(down) : "");
+  }
+  const seen = new Map();
+  for (let r = 0; r <= maxRow; r++) {
+    const key = rowBand.get(r);
+    if (!key) continue;
+    if (seen.has(key) && seen.get(key) !== r - 1) errors.push(`band ${key} appears in two places (rows up to ${seen.get(key)} and row ${r}); a band must be one continuous block of rows`);
+    seen.set(key, r);
   }
   if (errors.length) {
     console.log(JSON.stringify({ ok: false, errors }, null, 2));
@@ -143,6 +159,7 @@ function sizeBox(b, tone) {
   b.headH = HEAD_H + b.subtitle.length * SUB_H;
   b.h = b.headH + (b.attrs.length ? b.attrs.length * ROW_H + ATTR_PAD : 0);
   if (b.shape === "store") b.h += 12;
+  b.h0 = b.h;
 }
 
 // --------------------------------------------------------------- routing ----
@@ -154,7 +171,8 @@ function sizeBox(b, tone) {
 //   ZV       vertical exit, run in horizontal channel k, vertical entry
 //   ZH       sideways exit, run in vertical channel j, sideways entry
 //   W        vertical exit, channel k1, vertical channel j, channel k2, vertical entry
-//   SELF     loop on the right side through vertical channel col+1
+//   SELF     loop out of one side and back, at the start or end of that side,
+//            through the channel next to it
 
 function candidates(e, B, occ, R, C) {
   const a = B.get(e.from), b = B.get(e.to);
@@ -163,7 +181,13 @@ function candidates(e, B, occ, R, C) {
   const colFree = (c, r1, r2) => { for (let r = Math.min(r1, r2) + 1; r < Math.max(r1, r2); r++) if (has(r, c)) return false; return true; };
   const rowFree = (r, c1, c2) => { for (let c = Math.min(c1, c2) + 1; c < Math.max(c1, c2); c++) if (has(r, c)) return false; return true; };
   const out = [];
-  if (a === b) return [{ t: "SELF", j: ca + 1, cost: 0 }];
+  if (a === b) {
+    const loops = [];
+    for (const side of ["R", "B", "T", "L"])
+      for (const end of ["hi", "lo"])
+        loops.push({ t: "SELF", side, end, sa: side, sb: side, j: side === "R" ? ca + 1 : ca, k: side === "B" ? ra + 1 : ra, cost: 0 });
+    return loops;
+  }
   if (ra === rb && rowFree(ra, ca, cb)) out.push({ t: "SH", sa: cb > ca ? "R" : "L", sb: cb > ca ? "L" : "R", cost: Math.abs(cb - ca) });
   if (ca === cb && colFree(ca, ra, rb)) out.push({ t: "SV", sa: rb > ra ? "B" : "T", sb: rb > ra ? "T" : "B", cost: Math.abs(rb - ra) });
   const g = Math.abs(ra - rb) + Math.abs(ca - cb);
@@ -220,9 +244,12 @@ function layout(model, routes) {
   for (const e of edges) {
     const r = routes[e.i], a = B.get(e.from), b = B.get(e.to);
     if (r.t === "SELF") {
-      addEnd(a.id, "R", { e, end: "a", key: -1 });
-      addEnd(a.id, "R", { e, end: "b", key: 1 });
-      lanesV[r.j].push({ e, seg: "self" });
+      // both ends side by side at one end of the side, so no other line lands between them
+      const base = r.end === "hi" ? 1000 : -1001;
+      addEnd(a.id, r.side, { e, end: "a", key: base });
+      addEnd(a.id, r.side, { e, end: "b", key: base + 1 });
+      if (r.side === "L" || r.side === "R") lanesV[r.j].push({ e, seg: "self" });
+      else lanesH[r.k].push({ e, seg: "self" });
       continue;
     }
     let ka, kb;
@@ -238,10 +265,12 @@ function layout(model, routes) {
     addEnd(a.id, r.sa, { e, end: "a", key: ka, straight: r.t === "SH" || r.t === "SV" });
     addEnd(b.id, r.sb, { e, end: "b", key: kb, straight: r.t === "SH" || r.t === "SV" });
   }
-  // 2. box widths: text, and enough room for the ports on top and bottom
+  // 2. box sizes: the text, and enough room for the ports on each side
   for (const b of B.values()) {
     const n = Math.max((sides.get(`${b.id}:T`) || []).length, (sides.get(`${b.id}:B`) || []).length);
     b.w = Math.max(b.textW, (n + 1) * SEP);
+    const m = Math.max((sides.get(`${b.id}:L`) || []).length, (sides.get(`${b.id}:R`) || []).length);
+    b.h = Math.max(b.h0, m > 1 ? (m + 1) * SEP_V + 20 : 0);
   }
   // 3. columns and channels
   const colW = Array(C).fill(0), rowH = Array(R).fill(0);
@@ -364,6 +393,7 @@ function layout(model, routes) {
   const endsH = (it) => {
     const r = routes[it.e.i], pa = port.get(`${it.e.i}:a`), pb = port.get(`${it.e.i}:b`);
     if (r.t === "ZV") return [[pa.x, up(r.sa)], [pb.x, up(r.sb)]];
+    if (r.t === "SELF") return [[pa.x, up(r.side)], [pb.x, up(r.side)]];
     const vx = vStart[r.j] + vGap(r.j) / 2;
     if (it.seg === "k1") return [[pa.x, up(r.sa)], [vx, r.k2 > r.k1 ? -1 : 1]];
     return [[pb.x, up(r.sb)], [vx, r.k1 > r.k2 ? -1 : 1]];
@@ -383,7 +413,10 @@ function layout(model, routes) {
     const items = lanesV[j].map((it) => {
       const r = routes[it.e.i];
       let ys, lefts = 0;
-      if (it.seg === "self") { const b = B.get(it.e.from); ys = [b.y, b.y + b.h]; lefts = 2; }
+      if (it.seg === "self") {
+        ys = [port.get(`${it.e.i}:a`).y, port.get(`${it.e.i}:b`).y];
+        lefts = r.side === "R" ? 2 : 0;
+      }
       else if (r.t === "ZH") {
         const pa = port.get(`${it.e.i}:a`), pb = port.get(`${it.e.i}:b`);
         ys = [pa.y, pb.y];
@@ -405,8 +438,13 @@ function layout(model, routes) {
     let pts;
     switch (r.t) {
       case "SELF": {
-        const lx = laneX.get(`${e.i}:self`);
-        pts = [[pa.x, pa.y], [lx, pa.y], [lx, pb.y], [pb.x, pb.y]];
+        if (r.side === "L" || r.side === "R") {
+          const lx = laneX.get(`${e.i}:self`);
+          pts = [[pa.x, pa.y], [lx, pa.y], [lx, pb.y], [pb.x, pb.y]];
+        } else {
+          const ly = laneY.get(`${e.i}:self`);
+          pts = [[pa.x, pa.y], [pa.x, ly], [pb.x, ly], [pb.x, pb.y]];
+        }
         break;
       }
       case "SH": case "SV": pts = [[pa.x, pa.y], [pb.x, pb.y]]; break;
@@ -445,6 +483,27 @@ function simplify(pts) {
 // ------------------------------------------------------------- checking ----
 
 function segs(e) { const s = []; for (let i = 1; i < e.pts.length; i++) s.push([e.pts[i - 1], e.pts[i], i - 1]); return s; }
+
+// where a cardinality's text sits; cardSvg draws it at the same place
+function cardRect(p, side, text) {
+  const w = measure.regular(text, 12), h = 13;
+  if (side === "T") return { x: p.x + 5, y: p.y - 17, w, h, tx: p.x + 5, ty: p.y - 7, anchor: "start" };
+  if (side === "B") return { x: p.x + 5, y: p.y + 6, w, h, tx: p.x + 5, ty: p.y + 16, anchor: "start" };
+  if (side === "L") return { x: p.x - 6 - w, y: p.y - 16, w, h, tx: p.x - 6, ty: p.y - 6, anchor: "end" };
+  return { x: p.x + 6, y: p.y - 16, w, h, tx: p.x + 6, ty: p.y - 6, anchor: "start" };
+}
+
+function cards(model) {
+  const out = [];
+  for (const e of model.edges) {
+    if (e.kind === "inheritance") continue;
+    if (e.fromCard) out.push({ e, text: e.fromCard, ...cardRect(e.pa, e.pa.side, e.fromCard) });
+    if (e.toCard) out.push({ e, text: e.toCard, ...cardRect(e.pb, e.pb.side, e.toCard) });
+  }
+  return out;
+}
+
+const overlap = (r, a, pad = 0) => r.x < a.x + a.w + pad && r.x + r.w + pad > a.x && r.y < a.y + a.h + pad && r.y + r.h + pad > a.y;
 
 function analyse(model) {
   const { edges, boxes } = model;
@@ -490,7 +549,16 @@ function analyse(model) {
     const ov = Math.min(Math.max(...ax), Math.max(...bx)) - Math.max(Math.min(...ax), Math.min(...bx));
     if (ov > 2) { warnings.push(`lines ${A.e.from} - ${A.e.to} and ${Bs.e.from} - ${Bs.e.to} run on top of each other`); bad++; }
   }
-  return { hops, crossings, warnings: [...new Set(warnings)], bad };
+  // cardinalities must stay readable: not on each other, not on a box
+  let clash = 0;
+  const cs = cards(model);
+  for (let i = 0; i < cs.length; i++) {
+    for (let j = i + 1; j < cs.length; j++)
+      if (overlap(cs[i], cs[j], 2)) { warnings.push(`cardinalities ${cs[i].text} (${cs[i].e.from} - ${cs[i].e.to}) and ${cs[j].text} (${cs[j].e.from} - ${cs[j].e.to}) overlap`); clash++; }
+    for (const b of boxes.values())
+      if (overlap(cs[i], { x: b.x, y: b.y, w: b.w, h: b.h })) { warnings.push(`cardinality ${cs[i].text} (${cs[i].e.from} - ${cs[i].e.to}) sits on box ${b.id}`); clash++; }
+  }
+  return { hops, crossings, warnings: [...new Set(warnings)], bad, clash };
 }
 
 // -------------------------------------------------------------- optimise ----
@@ -503,8 +571,9 @@ function solve(model) {
   const pick = cands.map(() => 0);
   const score = () => {
     const routes = pick.map((p, i) => cands[i][p]);
-    layout(model, routes);
+    const geo = layout(model, routes);
     const a = analyse(model);
+    const labelCost = placeLabels(model, geo).cost;
     // a crossing is drawn as a small arc and reads fine; a detour around the
     // whole picture does not. So length and bends weigh about as much.
     let shape = 0;
@@ -512,7 +581,9 @@ function solve(model) {
       for (let i = 1; i < e.pts.length; i++) shape += (Math.abs(e.pts[i][0] - e.pts[i - 1][0]) + Math.abs(e.pts[i][1] - e.pts[i - 1][1])) / 15;
       shape += (e.pts.length - 2) * 8;
     }
-    return { total: a.bad * 1000 + a.crossings * 12 + shape + routes.reduce((s, r) => s + r.cost, 0), a };
+    // a box grown for its ports costs a little, so a free side wins
+    for (const b of B.values()) shape += (b.h - b.h0) / 3;
+    return { total: a.bad * 1000 + a.clash * 150 + labelCost * 6 + a.crossings * 12 + shape + routes.reduce((s, r) => s + r.cost, 0), a };
   };
   let best = score().total;
   for (let pass = 0; pass < 4; pass++) {
@@ -578,13 +649,8 @@ function pathD(e, hops) {
   return d;
 }
 
-function cardSvg(p, side, text) {
-  if (!text) return "";
-  const t = esc(text);
-  if (side === "T") return `<text x="${p.x + 5}" y="${p.y - 7}" font-family="Inter" font-size="12" fill="${INK}">${t}</text>`;
-  if (side === "B") return `<text x="${p.x + 5}" y="${p.y + 16}" font-family="Inter" font-size="12" fill="${INK}">${t}</text>`;
-  if (side === "L") return `<text x="${p.x - 6}" y="${p.y - 6}" text-anchor="end" font-family="Inter" font-size="12" fill="${INK}">${t}</text>`;
-  return `<text x="${p.x + 6}" y="${p.y - 6}" font-family="Inter" font-size="12" fill="${INK}">${t}</text>`;
+function cardSvg(c) {
+  return `<text x="${c.tx}" y="${c.ty}" text-anchor="${c.anchor}" font-family="Inter" font-size="12" fill="${INK}">${esc(c.text)}</text>`;
 }
 
 function headSvg(p, side, kind) {
@@ -596,30 +662,52 @@ function headSvg(p, side, kind) {
   return `<polygon points="${pts}" fill="${kind === "inherit" ? "#FFFFFF" : LINE}" stroke="${LINE}" stroke-width="1.3"/>`;
 }
 
-function labelSvg(e, model, placed) {
-  const w = measure.regular(e.label, 12) + 10, h = 17;
-  const rectFor = (p, q, t) => {
-    const x = p[0] + (q[0] - p[0]) * t, y = p[1] + (q[1] - p[1]) * t;
-    return p[0] === q[0] ? { x: x + 6, y: y - 9, w, h, tx: x + 11, ty: y + 4, anchor: "start" }
-                         : { x: x - w / 2, y: y - h - 3, w, h, tx: x, ty: y - 7, anchor: "middle" };
-  };
-  const hit = (r, a) => r.x < a.x + a.w && r.x + r.w > a.x && r.y < a.y + a.h && r.y + r.h > a.y;
+// Labels go where nothing else is: both sides of every segment are tried, and
+// lines, boxes, cardinalities, other labels and the picture's edge count against
+// a spot. Used while choosing routes too, so a route that leaves no room for its
+// label loses.
+function placeLabels(model, geo) {
+  const inner = { x: MARGIN + (model.bands.size ? GUTTER : 0), y: MARGIN / 2 };
+  inner.w = geo.width - MARGIN - inner.x;
+  inner.h = geo.height - MARGIN / 2 - inner.y;
   const segRect = ([p, q]) => ({ x: Math.min(p[0], q[0]) - 1, y: Math.min(p[1], q[1]) - 1, w: Math.abs(q[0] - p[0]) + 2, h: Math.abs(q[1] - p[1]) + 2 });
-  const others = model.edges.filter((f) => f !== e).flatMap((f) => segs(f).map(segRect));
   const boxes = [...model.boxes.values()].map((b) => ({ x: b.x - 4, y: b.y - 4, w: b.w + 8, h: b.h + 8 }));
-  let best = null;
-  for (const sg of segs(e)) {
-    const len = Math.abs(sg[1][0] - sg[0][0]) + Math.abs(sg[1][1] - sg[0][1]);
-    if (len < (sg[0][0] === sg[1][0] ? 24 : 40)) continue;
-    for (const t of [0.5, 0.35, 0.65, 0.2, 0.8]) {
-      const r = rectFor(sg[0], sg[1], t);
-      const score = others.filter((o) => hit(r, o)).length * 10 + boxes.filter((o) => hit(r, o)).length * 25 + placed.filter((o) => hit(r, o)).length * 25 + (len < w + 30 ? 5 : 0) + Math.abs(t - 0.5) * 2;
-      if (!best || score < best.score) best = { ...r, score };
+  const placed = cards(model).map((c) => ({ ...c, card: true }));
+  const out = [], warnings = [];
+  let cost = 0;
+  for (const e of model.edges) {
+    if (!e.label) continue;
+    const w = measure.regular(e.label, 12) + 10, h = 17;
+    const others = model.edges.filter((f) => f !== e).flatMap((f) => segs(f).map(segRect));
+    let best = null;
+    for (const sg of segs(e)) {
+      const [p, q] = sg, vertical = p[0] === q[0];
+      const len = Math.abs(q[0] - p[0]) + Math.abs(q[1] - p[1]);
+      if (len < (vertical ? 24 : 40)) continue;
+      for (const t of [0.5, 0.35, 0.65, 0.2, 0.8])
+        for (const flip of [false, true]) {
+          const x = p[0] + (q[0] - p[0]) * t, y = p[1] + (q[1] - p[1]) * t;
+          const r = vertical
+            ? (flip ? { x: x - 6 - w, y: y - 9, w, h, tx: x - 1 - w, ty: y + 4, anchor: "start" } : { x: x + 6, y: y - 9, w, h, tx: x + 11, ty: y + 4, anchor: "start" })
+            : (flip ? { x: x - w / 2, y: y + 3, w, h, tx: x, ty: y + 16, anchor: "middle" } : { x: x - w / 2, y: y - h - 3, w, h, tx: x, ty: y - 7, anchor: "middle" });
+          const outside = r.x < inner.x || r.x + r.w > inner.x + inner.w || r.y < inner.y || r.y + r.h > inner.y + inner.h;
+          const score = others.filter((o) => overlap(r, o)).length * 10 + boxes.filter((o) => overlap(r, o)).length * 25
+            + placed.filter((o) => overlap(r, o)).length * 25 + (outside ? 40 : 0) + (flip ? 1 : 0) + Math.abs(t - 0.5) * 2;
+          if (!best || score < best.score) best = { ...r, score };
+        }
     }
+    if (!best) { const [p, q] = segs(e)[0]; best = { x: (p[0] + q[0]) / 2, y: (p[1] + q[1]) / 2 - h, w, h, tx: (p[0] + q[0]) / 2, ty: (p[1] + q[1]) / 2 - 5, anchor: "middle", score: 50 }; }
+    for (const c of placed.filter((o) => o.card && overlap(best, o))) warnings.push(`label "${e.label}" overlaps cardinality ${c.text} (${c.e.from} - ${c.e.to})`);
+    if (boxes.some((o) => overlap(best, o))) warnings.push(`label "${e.label}" sits on a box`);
+    cost += best.score > 5 ? best.score : 0;
+    placed.push(best);
+    out.push({ e, ...best });
   }
-  if (!best) { const sg = segs(e)[0]; best = rectFor(sg[0], sg[1], 0.5); }
-  placed.push(best);
-  return `<rect x="${best.x}" y="${best.y}" width="${best.w}" height="${best.h}" rx="3" fill="#FFFFFF" fill-opacity="0.94"/><text x="${best.tx}" y="${best.ty}" text-anchor="${best.anchor}" font-family="Inter" font-size="12" fill="${LABEL}">${esc(e.label)}</text>`;
+  return { labels: out, warnings, cost };
+}
+
+function labelSvg(l) {
+  return `<rect x="${l.x}" y="${l.y}" width="${l.w}" height="${l.h}" rx="3" fill="#FFFFFF" fill-opacity="0.94"/><text x="${l.tx}" y="${l.ty}" text-anchor="${l.anchor}" font-family="Inter" font-size="12" fill="${LABEL}">${esc(l.e.label)}</text>`;
 }
 
 function svg(model, res) {
@@ -635,15 +723,17 @@ function svg(model, res) {
   }
   for (const e of model.edges) o.push(`<path d="${pathD(e, res.hops)}" fill="none" stroke="${LINE}" stroke-width="1.3"/>`);
   for (const b of model.boxes.values()) o.push(boxSvg(b));
-  const placed = [];
+  const cs = cards(model);
   for (const e of model.edges) {
     const inherit = e.kind === "inheritance";
     if (inherit) o.push(headSvg(e.pb, e.pb.side, "inherit"));
     if (e.arrow === "to" || e.arrow === "both") o.push(headSvg(e.pb, e.pb.side, "arrow"));
     if (e.arrow === "from" || e.arrow === "both") o.push(headSvg(e.pa, e.pa.side, "arrow"));
-    if (!inherit) { o.push(cardSvg(e.pa, e.pa.side, e.fromCard)); o.push(cardSvg(e.pb, e.pb.side, e.toCard)); }
-    if (e.label) o.push(labelSvg(e, model, placed));
   }
+  for (const c of cs) o.push(cardSvg(c));
+  const lp = placeLabels(model, res.geo);
+  res.warnings.push(...lp.warnings);
+  for (const l of lp.labels) o.push(labelSvg(l));
   o.push("</svg>");
   return o.join("\n");
 }
@@ -656,7 +746,14 @@ function loadResvg() {
   try { return req("@resvg/resvg-js"); } catch { /* install below */ }
   mkdirSync(dir, { recursive: true });
   if (!existsSync(join(dir, "package.json"))) writeFileSync(join(dir, "package.json"), '{"private":true}\n');
-  execFileSync("npm", ["install", "--no-audit", "--no-fund", "--silent", "--prefix", dir, RESVG_SPEC], { stdio: ["ignore", "ignore", "inherit"] });
+  try {
+    execFileSync("npm", ["install", "--no-audit", "--no-fund", "--loglevel=error", "--prefix", dir, RESVG_SPEC], { stdio: ["ignore", "ignore", "pipe"], timeout: 120000 });
+  } catch (err) {
+    const npmSays = String(err.stderr || "").split("\n").map((l) => l.replace(/^npm (error|ERR!)\s*/, "").trim()).filter((l) => l && !/^(A complete log|code |errno |syscall )/.test(l)).slice(0, 2).join(" ");
+    const why = err.code === "ETIMEDOUT" ? "npm timed out after 120 s" : err.code === "ENOENT" ? "npm is not installed" : npmSays || err.message;
+    console.log(JSON.stringify({ ok: false, errors: [`could not install ${RESVG_SPEC} into ${dir}: ${why}. The renderer needs the npm registry once; the SVG was written if --svg was given.`] }, null, 2));
+    process.exit(1);
+  }
   return req("@resvg/resvg-js");
 }
 
