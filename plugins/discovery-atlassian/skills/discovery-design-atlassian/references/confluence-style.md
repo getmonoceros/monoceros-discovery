@@ -157,6 +157,10 @@ Lead: `"fromCard": "0..1"` (a person has at most one lead), `"toCard": "0..*"`
   two areas face each other across the boundary, in the same column, so the
   line between them runs straight down.
 - **An empty cell beats a squeeze.** Room around a box is room for its lines.
+- **Three lines on one side are one too many.** Each line end carries its
+  cardinality, and three of them in a row make the reader work out which number
+  belongs to which line. Move the box or a neighbour one column along, so the
+  lines split across two sides.
 
 ### Render, then look at it
 

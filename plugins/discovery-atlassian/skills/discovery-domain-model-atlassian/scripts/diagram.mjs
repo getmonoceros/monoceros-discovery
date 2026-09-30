@@ -681,6 +681,8 @@ function placeLabels(model, geo) {
     const others = model.edges.filter((f) => f !== e).flatMap((f) => segs(f).map(segRect));
     let best = null;
     for (const sg of segs(e)) {
+      // its own line counts too, except the piece the label hangs on
+      const own = segs(e).filter((o) => o[2] !== sg[2]).map(segRect);
       const [p, q] = sg, vertical = p[0] === q[0];
       const len = Math.abs(q[0] - p[0]) + Math.abs(q[1] - p[1]);
       if (len < (vertical ? 24 : 40)) continue;
@@ -691,14 +693,15 @@ function placeLabels(model, geo) {
             ? (flip ? { x: x - 6 - w, y: y - 9, w, h, tx: x - 1 - w, ty: y + 4, anchor: "start" } : { x: x + 6, y: y - 9, w, h, tx: x + 11, ty: y + 4, anchor: "start" })
             : (flip ? { x: x - w / 2, y: y + 3, w, h, tx: x, ty: y + 16, anchor: "middle" } : { x: x - w / 2, y: y - h - 3, w, h, tx: x, ty: y - 7, anchor: "middle" });
           const outside = r.x < inner.x || r.x + r.w > inner.x + inner.w || r.y < inner.y || r.y + r.h > inner.y + inner.h;
-          const score = others.filter((o) => overlap(r, o)).length * 10 + boxes.filter((o) => overlap(r, o)).length * 25
+          const score = [...others, ...own].filter((o) => overlap(r, o)).length * 10 + boxes.filter((o) => overlap(r, o)).length * 25
             + placed.filter((o) => overlap(r, o)).length * 25 + (outside ? 40 : 0) + (flip ? 1 : 0) + Math.abs(t - 0.5) * 2;
-          if (!best || score < best.score) best = { ...r, score };
+          if (!best || score < best.score) best = { ...r, score, own };
         }
     }
     if (!best) { const [p, q] = segs(e)[0]; best = { x: (p[0] + q[0]) / 2, y: (p[1] + q[1]) / 2 - h, w, h, tx: (p[0] + q[0]) / 2, ty: (p[1] + q[1]) / 2 - 5, anchor: "middle", score: 50 }; }
     for (const c of placed.filter((o) => o.card && overlap(best, o))) warnings.push(`label "${e.label}" overlaps cardinality ${c.text} (${c.e.from} - ${c.e.to})`);
     if (boxes.some((o) => overlap(best, o))) warnings.push(`label "${e.label}" sits on a box`);
+    if ((best.own || []).some((o) => overlap(best, o))) warnings.push(`label "${e.label}" covers its own line`);
     cost += best.score > 5 ? best.score : 0;
     placed.push(best);
     out.push({ e, ...best });
