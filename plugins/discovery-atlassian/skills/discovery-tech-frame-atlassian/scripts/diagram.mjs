@@ -463,7 +463,9 @@ function layout(model, routes) {
   }
   // bands span the full width
   const bandRects = bandEdges.map((be) => ({ ...be, x: MARGIN, w: width - 2 * MARGIN }));
-  return { width, height, bandRects };
+  // how many line ends meet each box side, for the hints in the report
+  const sideCounts = new Map([...sides].map(([k, items]) => [k, items.length]));
+  return { width, height, bandRects, sideCounts };
 }
 
 function simplify(pts) {
@@ -775,4 +777,8 @@ if (svgAt > 0) writeFileSync(args[svgAt + 1], out);
 const { Resvg } = loadResvg();
 const png = new Resvg(out, { fitTo: { mode: "zoom", value: 2 }, background: "#FFFFFF", font: { fontFiles: [FONT_REGULAR, FONT_SEMIBOLD], loadSystemFonts: false, defaultFontFamily: "Inter" } }).render();
 writeFileSync(args[1], png.asPng());
-console.log(JSON.stringify({ ok: true, png: args[1], width: png.width, height: png.height, crossings: res.crossings, warnings: res.warnings }, null, 2));
+// hints are spots to look at, not errors: at a hub three ends on one side are
+// often unavoidable, so they stay out of `warnings`, which must be empty
+const SIDE = { T: "top", B: "bottom", L: "left", R: "right" };
+const hints = [...res.geo.sideCounts].filter(([, n]) => n >= 3).map(([k, n]) => { const [id, side] = k.split(":"); return `${n} line ends on the ${SIDE[side]} of ${id}`; });
+console.log(JSON.stringify({ ok: true, png: args[1], width: png.width, height: png.height, crossings: res.crossings, warnings: res.warnings, hints }, null, 2));

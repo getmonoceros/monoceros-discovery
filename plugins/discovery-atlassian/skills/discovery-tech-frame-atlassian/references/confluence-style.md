@@ -160,7 +160,9 @@ Lead: `"fromCard": "0..1"` (a person has at most one lead), `"toCard": "0..*"`
 - **Three lines on one side are one too many.** Each line end carries its
   cardinality, and three of them in a row make the reader work out which number
   belongs to which line. Move the box or a neighbour one column along, so the
-  lines split across two sides.
+  lines split across two sides. The report lists every such side under
+  `hints`. At a hub with many relationships three ends on a side are often
+  unavoidable; there the hint stays.
 
 ### Render, then look at it
 
@@ -179,6 +181,8 @@ Then **open the PNG and look at it** before it goes anywhere. The report
 cannot judge a picture:
 
 - `warnings` must be empty.
+- `hints` name the spots to look at first. Each one is a judgement, not an
+  error: fix it when moving a box does, leave it when it does not.
 - Crossings are fine, each gets a small arc. When roughly a third of the lines
   cross, or a line takes a long way round the picture, move a box and render
   again. Two or three rounds are normal.
