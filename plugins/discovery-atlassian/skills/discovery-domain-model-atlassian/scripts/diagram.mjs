@@ -276,10 +276,20 @@ function layout(model, routes) {
   const colW = Array(C).fill(0), rowH = Array(R).fill(0);
   for (const b of B.values()) { colW[b.col] = Math.max(colW[b.col], b.w); rowH[b.row] = Math.max(rowH[b.row], b.h); }
   const bandsOn = model.bands.size > 0;
+  // a straight line between neighbouring columns carries its label and both
+  // cardinalities in the gap, so the gap grows until they fit side by side
+  const labelNeed = Array(C + 1).fill(0);
+  for (const e of edges) {
+    const r = routes[e.i], a = B.get(e.from), b = B.get(e.to);
+    if (r.t !== "SH" || Math.abs(a.col - b.col) !== 1 || !e.label) continue;
+    const cardW = (t) => (t && e.kind !== "inheritance" ? measure.regular(t, 12) + 12 : 8);
+    const j = Math.max(a.col, b.col);
+    labelNeed[j] = Math.max(labelNeed[j], measure.regular(e.label, 12) + 10 + cardW(e.fromCard) + cardW(e.toCard) + 24);
+  }
   const vGap = (j) => {
     const n = lanesV[j].length;
     if (j === 0 || j === C) return n ? 30 + n * LANE : 0;
-    return Math.max(COL_GAP, 2 * 40 + n * LANE);
+    return Math.max(COL_GAP, 2 * 40 + n * LANE, labelNeed[j]);
   };
   const colX = []; // left edge of each column
   let x = MARGIN + (bandsOn ? GUTTER : 0) + 10;
@@ -605,7 +615,10 @@ function solve(model) {
   }
   const routes = pick.map((p, i) => cands[i][p]);
   const geo = layout(model, routes);
-  return { routes, geo, ...analyse(model) };
+  // a detour where a straight line was possible is worth a look, whatever caused it
+  const detours = edges.filter((e) => !["SH", "SV", "SELF"].includes(routes[e.i].t) && cands[e.i].some((c) => c.t === "SH" || c.t === "SV"))
+    .map((e) => `line ${e.from} - ${e.to} takes a detour where a straight line was possible`);
+  return { routes, geo, detours, ...analyse(model) };
 }
 
 // ---------------------------------------------------------------- render ----
@@ -781,4 +794,5 @@ writeFileSync(args[1], png.asPng());
 // often unavoidable, so they stay out of `warnings`, which must be empty
 const SIDE = { T: "top", B: "bottom", L: "left", R: "right" };
 const hints = [...res.geo.sideCounts].filter(([, n]) => n >= 3).map(([k, n]) => { const [id, side] = k.split(":"); return `${n} line ends on the ${SIDE[side]} of ${id}`; });
+hints.push(...res.detours);
 console.log(JSON.stringify({ ok: true, png: args[1], width: png.width, height: png.height, crossings: res.crossings, warnings: res.warnings, hints }, null, 2));

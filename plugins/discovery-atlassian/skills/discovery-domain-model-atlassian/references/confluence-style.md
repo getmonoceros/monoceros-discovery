@@ -181,8 +181,10 @@ Then **open the PNG and look at it** before it goes anywhere. The report
 cannot judge a picture:
 
 - `warnings` must be empty.
-- `hints` name the spots to look at first. Each one is a judgement, not an
-  error: fix it when moving a box does, leave it when it does not.
+- `hints` name the spots to look at first: a side where three lines meet, and
+  a line that takes a detour although a straight one was possible. Each one is
+  a judgement, not an error: fix it when moving a box does, leave it when it
+  does not.
 - Crossings are fine, each gets a small arc. When roughly a third of the lines
   cross, or a line takes a long way round the picture, move a box and render
   again. Two or three rounds are normal.
@@ -200,6 +202,9 @@ Keep the spec file: it goes onto the page with the picture.
   between the same pair, a person in a role ("written by"). The verb of every
   other relationship lives in the relationship table. Enumerations stay in their
   table.
+- **Labels are short**, two or three words. The label names the line; the
+  explanation belongs in the relationship table or the caption. A long label
+  on a straight line widens the gap between the two columns so it still fits.
 - **Component diagram** (building blocks): one box per part, the title the
   part and the `subtitle` its technology. `store` for a database, `external`
   for a system outside the product. `arrow: "to"` from the caller to the called,
