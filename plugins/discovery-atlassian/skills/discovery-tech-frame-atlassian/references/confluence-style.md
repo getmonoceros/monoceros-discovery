@@ -183,9 +183,9 @@ cannot judge a picture:
 - `warnings` must be empty.
 - `hints` name the spots to look at first: a side where three lines meet, a
   line that takes a detour although a straight one was possible, and a label
-  over 20 characters that pushes its two columns apart. Each one is
-  a judgement, not an error: fix it when moving a box does, leave it when it
-  does not.
+  over 20 characters that pushes its two columns apart. Each one is a
+  judgement, not an error: fix it when moving a box does, leave it when it does
+  not.
 - Crossings are fine, each gets a small arc. When roughly a third of the lines
   cross, or a line takes a long way round the picture, move a box and render
   again. Two or three rounds are normal.
