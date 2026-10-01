@@ -243,7 +243,9 @@ neutral module; and the check that enforces it, by name.
 
 List the parts: every process or container, its job, and who it talks to. This
 is the question that comes up at the first endpoint and cannot be derived from a
-list of flags.
+list of flags. A subject area decided as a **service of its own** is one of the
+parts, with its own box in the diagram. Areas that stay modules are not: they
+live inside the box of the part they are built into.
 
 **From three parts up, draw it as well** - a component diagram, rendered as a
 PNG by `scripts/diagram.mjs` from a small spec (recipe in

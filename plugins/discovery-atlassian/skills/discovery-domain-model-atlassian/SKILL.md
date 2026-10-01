@@ -212,8 +212,8 @@ inventing a cut.
 ### Step 6: Consolidate, then feed back
 
 Present the whole model as text: entities with attributes, relationships with
-multiplicities, states with what follows, subject areas. Ask what is missing, what is redundant, and whether it
-matches the business reality.
+multiplicities, states with what follows, subject areas. Ask what is missing,
+what is redundant, and whether it matches the business reality.
 
 Then the mandatory step back: **what did this change about the brief or the
 journeys?** Working out a model regularly exposes a core capability that is
@@ -251,9 +251,6 @@ the diagram (spec, layout, render, upload), and the anchor scheme for deep links
   inline card, row "Journeys" → the **Journeys collection page** as one card (not
   each journey separately, that turns into a stack), row "Technical brief" → the
   technical brief, which reads this model.
-- **Subject areas** → an `<h2>` right after the model, one table row per area:
-  the area, its purpose, the entities it owns, and what it reads from which
-  other area. The bands of the diagram are these areas, nothing else.
 - **The model** → its own `<h2>` right after the page properties, carrying the
   diagram as an embedded PNG with its spec below it (recipe in
   `confluence-style.md`). The picture comes **before** the detail: it is the
@@ -263,6 +260,9 @@ the diagram (spec, layout, render, upload), and the anchor scheme for deep links
   lives in the relationship table. One band per subject area when the model has
   more than one, ordered by the direction: the area the others read from at
   the top.
+- **Subject areas** → an `<h2>` right after the model, one table row per area:
+  the area, its purpose, the entities it owns, and what it reads from which
+  other area. The bands of the diagram are these areas, nothing else.
 - **Entities** → one `<h3>` per entity with a fitting topic emoji, a sentence of
   prose, and **its attribute table directly underneath**. One place per entity,
   not names here and attributes there.

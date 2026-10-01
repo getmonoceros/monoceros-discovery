@@ -67,7 +67,10 @@ The size drops on its own from the second story onward.
 The first story with code also carries the **boundary check** the technical
 brief names for the internal structure, when there is more than one subject
 area. It is not a story of its own: it arrives with the first function, like
-the scaffold.
+the scaffold. **A project that already has code** has no first story left: the
+next story carries the check, and the plan names the existing violations it has
+to fix, or to record in the check as known exceptions so that nothing new gets
+past it.
 
 **Own the whole promise.** If the summary promises X, the story owns every part
 of X. "Replace a publication at the same address" owns the caching that makes
