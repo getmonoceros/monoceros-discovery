@@ -70,6 +70,7 @@ with its own bold label.}
 Plan as a list - everything needed so the persona can carry the function out,
 across all layers. Whatever is missing for that belongs here:
 
+- {Subject area: the area whose entities this story changes - only with more than one area}
 - {Data: schema, migration, persistence}
 - {Service: endpoint, validation, authorization}
 - {View: the screen(s) the persona operates, states, keyboard use}

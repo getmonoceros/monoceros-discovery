@@ -64,6 +64,11 @@ everything that does not exist yet. Do not split it to make it smaller: a small
 story that delivers nothing is worse than a large one that delivers something.
 The size drops on its own from the second story onward.
 
+The first story with code also carries the **boundary check** the technical
+brief names for the internal structure, when there is more than one subject
+area. It is not a story of its own: it arrives with the first function, like
+the scaffold.
+
 **Own the whole promise.** If the summary promises X, the story owns every part
 of X. "Replace a publication at the same address" owns the caching that makes
 the new version actually appear. "Protect a publication with a password" owns
@@ -165,7 +170,10 @@ Each story has these sections (shape and formatting in
    the promise, across all layers (schema and migration, endpoint, view,
    delivery, integrations, edge cases, test level). One overarching task list,
    **not** a wall of prose. Plus the **Technical Brief** as an inline card with
-   a bold label (`Technical Brief:`).
+   a bold label (`Technical Brief:`). With more than one subject area, name the
+   **area the story changes**. A story that changes entities of two areas is a
+   hint: either it is two functions, or one area changes its own data at the
+   other's request. Say which, in the notes.
 4. **## Design**: the affected screen or prototype as a full **`blockCard`**.
    Every story that a person operates changes or uses a screen, so this section
    is the norm, not the exception. If you find yourself wanting to leave it out,

@@ -39,6 +39,8 @@ too - they are read by the build, like the entity and attribute names above. Emo
 <h2>{The model}</h2>
 <figure data-type="media-single" data-layout="wide" data-width="100" data-width-type="percentage"><div data-type="media" data-media-type="file" data-id="{fileId of the uploaded PNG}" data-collection="contentId-{page id}" data-alt="{The model of <product>}"></div><figcaption>{The model of <product>}: {one clause on the bands, e.g. the shared pool and the history per person}</figcaption></figure>
 <details><summary>{Diagram source}</summary><pre><code class="language-json">{the diagram spec, HTML-escaped}</code></pre></details>
+<h2>{Subject areas}</h2>
+<table data-width="760"><thead><tr><th><p><strong>{Area}</strong></p></th><th><p><strong>{Purpose}</strong></p></th><th><p><strong>{Owns}</strong></p></th><th><p><strong>{Reads from}</strong></p></th></tr></thead><tbody><tr><td><p>{Area 1}</p></td><td><p>{one sentence}</p></td><td><p>{Entity, Entity}</p></td><td><p>{Area 2: what, and why - or "nothing"}</p></td></tr></tbody></table>
 <h2>{Entities}</h2>
 <h3>{Emoji} {Entity 1}</h3>
 <p>{one sentence: what it is, in business terms}</p>
@@ -50,7 +52,7 @@ too - they are read by the build, like the entity and attribute names above. Emo
 <table data-width="760"><thead><tr><th><p><strong>{Relationship}</strong></p></th><th><p><strong>{Cardinality}</strong></p></th><th><p><strong>{What it means}</strong></p></th></tr></thead><tbody><tr><td><p>{Handout} ↔︎ {Address}</p></td><td><p>{0..1 : 1}</p></td><td><p>{one sentence covering both directions, with the verb: a handout is reachable at exactly one address, and an address belongs to at most one handout}</p></td></tr><tr><td><p>{Artifact} ↔︎ {ZipArtifact, HtmlArtifact, PdfArtifact}</p></td><td><p>{Inheritance}</p></td><td><p>{…}</p></td></tr></tbody></table>
 <h2>{States}</h2>
 <h3>{Emoji} {Entity with a status}</h3>
-<table data-width="760"><thead><tr><th><p><strong>{From}</strong></p></th><th><p><strong>{To}</strong></p></th><th><p><strong>{Trigger}</strong></p></th><th><p><strong>{Condition}</strong></p></th><th><p><strong>{Who}</strong></p></th></tr></thead><tbody><tr><td><p>{value}</p></td><td><p>{value}</p></td><td><p>{what the persona does}</p></td><td><p>{what has to hold}</p></td><td><p>{which persona or role}</p></td></tr></tbody></table>
+<table data-width="760"><thead><tr><th><p><strong>{From}</strong></p></th><th><p><strong>{To}</strong></p></th><th><p><strong>{Trigger}</strong></p></th><th><p><strong>{Condition}</strong></p></th><th><p><strong>{Who}</strong></p></th><th><p><strong>{What follows}</strong></p></th></tr></thead><tbody><tr><td><p>{value}</p></td><td><p>{value}</p></td><td><p>{what the persona does}</p></td><td><p>{what has to hold}</p></td><td><p>{which persona or role}</p></td><td><p>{the rule that kicks in afterwards, or empty}</p></td></tr></tbody></table>
 <h2>{Enumerations}</h2>
 <table data-width="760"><thead><tr><th><p><strong>{Enumeration}</strong></p></th><th><p><strong>{Values}</strong></p></th><th><p><strong>{Used by}</strong></p></th></tr></thead><tbody><tr><td><p>{name}</p></td><td><p>{value, value, value}</p></td><td><p>{entity.attribute}</p></td></tr></tbody></table>
 <h2>{Open points}</h2>
@@ -130,6 +132,12 @@ Rules:
 - **The entity `<h3>` is a link target.** Journeys and stories deep-link to a
   single entity, so the anchor scheme in `confluence-style.md` applies, and
   renaming an entity means correcting the links that point at it.
+- **Subject areas sit right after the model**, one row each. Every entity is
+  owned by exactly one area, and that area is its band in the diagram. A
+  single area is fine for a small product; the table then has one row.
+- **"What follows" names the rule a transition sets off**, such as "the round's
+  assessments become read only". Empty when nothing follows; never a restatement
+  of the new state.
 - **No state section for an entity without a status**, and no invented lifecycle
   to fill the template. Same for enumerations: no table if there are none.
 - **Open points are domain questions only.** A technology question belongs in

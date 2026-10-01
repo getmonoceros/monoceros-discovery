@@ -130,7 +130,9 @@ anyway (principle 2) - so you don't need a perfectly fresh catalog, but you
   user.
 - **Read the domain model** if it exists: the entities, their volumes, and their
   states tell you what the storage actually has to do. If there is none, say so
-  and note that the storage decision rests on less than it could.
+  and note that the storage decision rests on less than it could. Take its
+  **subject areas** and their direction as given; they are not reopened here.
+  What this brief decides is what each area becomes in code.
 - **Read the journeys and the personas** if they exist: they name the external
   systems the product talks to, the order of magnitude for the operating frame,
   and the devices the thing runs on.
@@ -163,6 +165,17 @@ the user corrects. Not every area applies.
 - **External dependencies** (e.g. a recognition or other API): decide
   deliberately - a real service, a mock component in the repo, or folded into
   the backend.
+- **Internal structure**: only when the domain model has more than one subject
+  area. First ask how many teams build it, how many parts are deployed
+  separately, and how many external systems it talks to. Then, per area: a
+  module inside one deployable, or a service of its own. One team and one
+  deployable means modules. Name how the direction between the areas is
+  checked in the chosen language, so the first story with code can carry the
+  check instead of every later story arguing about it. Where the language
+  rejects a circle by itself, the compiler is the check; where it allows one,
+  a test or lint rule that runs in the acceptance command. Typical ways per
+  language are in `references/module-boundaries.md`; the tool is this
+  project's choice.
 
 **Per decision, name the alternative you rejected**, in a clause. Without it
 nobody can later tell whether a choice was examined or inherited. That is the
@@ -219,6 +232,12 @@ Three to five, one line each. Every story needs the same answers, and if they
 are not written down, each story invents its own and nobody notices until the
 fourth: how a request is authenticated, where validation lives, what an error
 response looks like, how identifiers are formed.
+
+With more than one subject area, one of them is always the **internal
+structure**: one module (package, crate, workspace package) per area; an area
+changes only its own entities and reads the others' only through what the
+owning area offers; no circle between areas; shared enumerations live in a
+neutral module; and the check that enforces it, by name.
 
 #### The building blocks
 

@@ -101,6 +101,19 @@ language the model settled on; the sentence in the output language.}
 - `{Entity}` - {one line}
 - `{Entity}` - {one line}
 
+## Structure
+
+{Only with more than one subject area in the domain model; otherwise drop the
+heading.}
+
+- `{module}` - {area}: owns `{Entity}`, `{Entity}`
+- `{module}` - {area}: owns `{Entity}`; reads `{Entity}` from `{module}`
+
+Direction: `{module}` → `{module}`, never back. An area changes only its own
+entities and reads the others' through what the owning module offers. The
+boundary check ({the check from the technical brief}) runs in the acceptance
+command; do not switch it off to get a story green.
+
 ## Decisions
 
 Under `docs/adr/`, numbered. A decision recorded there is settled: build on it,
@@ -111,6 +124,7 @@ and if it has to be overturned, say so and name the ADR by number.
 - Servers are declared in `.monoceros/launch.json` and driven with
   `monoceros-ctl start|stop|logs`. Never a bare shell start, never `pkill`.
 - An acceptance command has to be able to fail: {the shape this project uses}.
+  {With more than one subject area: it runs the boundary check too.}
 
 ## Development flow
 

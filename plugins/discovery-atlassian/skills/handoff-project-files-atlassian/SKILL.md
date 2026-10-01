@@ -119,11 +119,17 @@ Only what holds for **every** task, and only what is in the artifacts:
 - **The domain vocabulary**: the entity names with one line each, and the naming
   language the domain model settled on. This is what stops every story from
   inventing its own words.
+- **The structure**, when the domain model has more than one subject area: one
+  module per area with the entities it owns, the direction between them, and
+  the rule that an area changes only its own entities. The agent reads this
+  file while building, not Confluence; without it the areas stay on a page and
+  never reach the code.
 - **Where decisions go**: `docs/adr/`, numbered, and the rule that a recorded
   decision is not reopened.
 - **How the work is run**: servers through `monoceros-ctl` and
   `.monoceros/launch.json`, never a bare shell start; the shape of an acceptance
-  command.
+  command, which runs the boundary check from the technical brief where there
+  is one.
 - **The development flow** - but **only where the tracker is public**. Where it
   is not, the whole flow goes into the private file (step 3), and this section
   says nothing about it.

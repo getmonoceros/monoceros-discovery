@@ -112,7 +112,9 @@ Rules:
   of non-functional requirements.
 - **Cross-cutting conventions** = 2 columns (760), one `<h3>` per convention with
   a topic emoji, **one line** each. Three to five, no more: they exist so that
-  every story answers these questions the same way.
+  every story answers these questions the same way. With more than one subject
+  area in the domain model, one of them is the **internal structure** (one
+  module per area, only the owner writes, no circle, and the check by name).
 - **Mapping onto the container definition** = flag→assignment in the
   **page-properties macro** (`details`), followed by the "Not in the yml" prose
   and **both** command blocks: the `monoceros init --template=…` sketch for a

@@ -192,6 +192,25 @@ language, so a skill reads the colour and not the text.
   `green` when they summarize their sources - what they take from those is
   provisional - and carry on.
 
+## Subject areas grow with the journeys
+
+A subject area (a bounded context) is a part of the domain with its own
+language and its own reasons to change. It **owns** its entities: only it
+creates and changes them, the others may read them. The domain model cuts the
+areas, the technical brief decides what each becomes in code, planning names
+the area a story changes, and the project files carry them to the agent that
+builds.
+
+- **An area is cut only from journeys that are worked out**: yellow or green
+  (see "A journey carries a status"). A blue journey gets no area and no
+  interface, only an open point.
+- **Every pass over the domain model may add an area**, and none is settled
+  ahead of the journeys that justify it.
+- **Areas are confirmed with the user one at a time**, never accepted in bulk.
+- **One area is a valid answer** for a small product. Say so rather than
+  inventing a cut.
+- **No circle between areas.** If A reads from B, B does not read from A.
+
 ## Never the em dash
 
 Do not use the em dash character (U+2014) anywhere in what you write. Use a

@@ -202,7 +202,9 @@ Keep the spec file: it goes onto the page with the picture.
   does not explain itself: a self-reference ("People Lead"), a second line
   between the same pair, a person in a role ("written by"). The verb of every
   other relationship lives in the relationship table. Enumerations stay in their
-  table.
+  table. **One band per subject area** of the domain model, ordered by the
+  direction: the area the others read from at the top. Every entity sits in the
+  band of the area that owns it.
 - **Labels are short**, two or three words and about 20 characters. The label
   names the line; the explanation belongs in the relationship table or the
   caption. A long label on a straight line widens the gap between the two

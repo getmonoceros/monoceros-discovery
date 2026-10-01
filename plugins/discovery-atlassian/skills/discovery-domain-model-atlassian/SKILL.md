@@ -176,7 +176,11 @@ moment, and who sets it. Ask, rather than leaving the cell empty.
 
 For every entity that carries a status: the allowed **values** and the allowed
 **transitions**. Per transition, what triggers it, what has to hold for it to be
-allowed, and who may do it.
+allowed, who may do it, and **what follows** from it: the rule that kicks in
+once it has happened ("when a round is closed, its assessments become read
+only"). A story needs that rule, and nobody finds it in a journey's prose. Take
+it from the journeys and the dialog; a transition with no consequence leaves
+the cell empty.
 
 This is where journeys and stories silently drift apart, so it is worth the
 minutes. A journey that publishes something and a journey that deletes it are
@@ -186,10 +190,29 @@ stories contradict each other.
 Entities without a status get no state section. Do not invent a lifecycle to
 fill the template.
 
-### Step 5: Consolidate, then feed back
+### Step 5: Subject areas
+
+Group the entities into subject areas (`references/discovery-rules.md`,
+"Subject areas grow with the journeys"). An area owns its entities: only it
+creates and changes them; others may read them, never write.
+
+Propose the cut from the transitions and the journeys. Entities that change
+together in one step belong together. Entities with a lifecycle and rhythm of
+their own - a half-yearly round, a development plan that runs across rounds -
+are separate. Personal and non-personal data are a strong boundary: an area
+without personal data stays free of it.
+
+Per area: its purpose in one sentence, the entities it owns, what it reads from
+which other area, and why. The direction runs one way; a circle means the cut
+is wrong. Only journeys that are yellow or green count; what a blue journey
+would add is an open point. Confirm each area with the user, one at a time. A
+single area is a valid answer for a small product - say so rather than
+inventing a cut.
+
+### Step 6: Consolidate, then feed back
 
 Present the whole model as text: entities with attributes, relationships with
-multiplicities, states. Ask what is missing, what is redundant, and whether it
+multiplicities, states with what follows, subject areas. Ask what is missing, what is redundant, and whether it
 matches the business reality.
 
 Then the mandatory step back: **what did this change about the brief or the
@@ -228,6 +251,9 @@ the diagram (spec, layout, render, upload), and the anchor scheme for deep links
   inline card, row "Journeys" → the **Journeys collection page** as one card (not
   each journey separately, that turns into a stack), row "Technical brief" → the
   technical brief, which reads this model.
+- **Subject areas** → an `<h2>` right after the model, one table row per area:
+  the area, its purpose, the entities it owns, and what it reads from which
+  other area. The bands of the diagram are these areas, nothing else.
 - **The model** → its own `<h2>` right after the page properties, carrying the
   diagram as an embedded PNG with its spec below it (recipe in
   `confluence-style.md`). The picture comes **before** the detail: it is the
@@ -235,7 +261,8 @@ the diagram (spec, layout, render, upload), and the anchor scheme for deep links
   attributes**, and **cardinalities** at both ends of every line. A relationship
   verb goes on a line only where the line does not explain itself; the rest
   lives in the relationship table. One band per subject area when the model has
-  more than one.
+  more than one, ordered by the direction: the area the others read from at
+  the top.
 - **Entities** → one `<h3>` per entity with a fitting topic emoji, a sentence of
   prose, and **its attribute table directly underneath**. One place per entity,
   not names here and attributes there.
@@ -247,7 +274,8 @@ the diagram (spec, layout, render, upload), and the anchor scheme for deep links
   check it against the sentence before you write it down. The
   sentence is not optional: it is what a reader who does not read UML takes away.
   An inheritance carries `Inheritance` instead of a cardinality.
-- **States** → one `<h3>` per entity that has a status, with a transition table.
+- **States** → one `<h3>` per entity that has a status, with a transition table
+  whose last column says what follows from the transition.
 - **Enumerations** → one table.
 - **Open points** → 2 columns with yellow `open` status chips. Domain questions
   only; a technology question belongs in the technical brief.
