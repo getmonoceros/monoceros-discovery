@@ -95,8 +95,10 @@ journeys are the richer source: they say what the persona actually handles.
 
 Give one integrated summary, not three separate reports: what the product is,
 which entity candidates you see from the nouns, which relationships are already
-derivable, and what is still unclear. Then ask: "Have I got the context right?
-Anything missing?"
+derivable, and what is still unclear. Name the journeys that are not agreed yet
+(status not green, `references/discovery-rules.md`): what the model takes from
+them is provisional. Do not stop because of it. Then ask: "Have I got the
+context right? Anything missing?"
 
 **Existing domain model**: if one exists, ask whether to update it or start
 fresh, and read its comments first.

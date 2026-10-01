@@ -66,7 +66,9 @@ template for exactly what never gets translated.
 Read the brief, personas, and journeys (from Confluence, files, or pasted
 in), and the domain model if it already exists (it names the things a screen
 shows and lists). Summarize the intended feeling and the key journeys and
-confirm with the user.
+confirm with the user. Name the journeys that are not agreed yet (status not
+green, `references/discovery-rules.md`): the screens taken from them are
+provisional. Do not stop because of it.
 
 Do **not** read the technical brief. It comes after this one and takes the
 platform decision from here.

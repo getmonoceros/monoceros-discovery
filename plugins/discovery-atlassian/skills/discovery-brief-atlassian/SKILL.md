@@ -111,8 +111,10 @@ own marker). For the brief specifically:
 
 - **Pitch ("In one sentence")** → **info panel** (`<div data-type="panel-info">`),
   **no excerpt** (the brief is not transcluded; and an excerpt must not contain a panel).
-- **Header infobox** (`details` macro): "Platform" and "Status"
-  (`<span data-type="status" data-color="blue">` with a "Draft" label in the output language).
+- **Header infobox** (`details` macro): "Platform". No status row: the brief
+  is reopened whenever a later step feeds a finding back, so a status would say
+  nothing (`references/discovery-rules.md`, "A journey carries a status"). A
+  brief from before still has one; drop it when you revise the page.
 - **Problem / why** → **error panel** (`<div data-type="panel-error">`, red) - the problem as a callout.
 - **Audience** → full width, `<h3>` + `<p>`, with **numbered circles in teal** (`:1_one_circle_teal:` …) before the title.
 - **Core capabilities** → **2 columns** (760), `<h3>` with a **fitting topic emoji** (app-dependent, not fixed).

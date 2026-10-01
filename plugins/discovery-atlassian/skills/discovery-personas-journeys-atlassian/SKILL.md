@@ -134,6 +134,13 @@ The **epic only comes into being during planning** - "Epic in Jira" and
 "Related work items" stay placeholders ("to follow") on the journey page
 at first and are filled in then.
 
+Every journey carries a **status**: blue Draft, yellow In review, green Agreed
+(`references/discovery-rules.md`, "A journey carries a status"). This skill
+writes blue. Planning reads it: no epic for a blue journey, the epic for a
+yellow one, the epic and its stories for a green one. Set yellow or green only
+when the user says so, and when you revise an agreed journey in substance, say
+so and ask whether it goes back to yellow.
+
 #### The journey text: four movements
 
 The story is not one paragraph. It runs through four movements, each at least
@@ -246,7 +253,10 @@ Structure:
 Also as HTML+ (`contentFormat: html`). Structure:
 
 1. **Excerpt macro** (named `summary`) with the short summary.
-2. **Page-properties macro** (`details`), table as a plain `tbody`: row
+2. **Page-properties macro** (`details`), table as a plain `tbody`. First
+   row "Status" → a **blue status macro** with the Draft label in the output
+   language (`<span data-type="status" data-color="blue">Draft</span>`); the
+   colour is what other skills read. Then row
    "Epic in Jira" → the epic; as long as there is none, the text **"to
    follow"** (no link - planning turns it into the real Jira link); row
    "Addressed core capabilities" → **bullet list of the brief's addressed

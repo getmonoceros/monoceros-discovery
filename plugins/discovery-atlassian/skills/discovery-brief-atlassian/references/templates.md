@@ -22,7 +22,7 @@ keep them.
 
 ```html
 <div data-type="panel-info"><p>{In one sentence: for whom, what, which value.}</p></div>
-<div data-type="bodied-extension" data-extension-key="details" data-extension-type="com.atlassian.confluence.macro.core"><table data-width="760"><tbody><tr><th><p><strong>{Platform}</strong></p></th><td><p>{e.g. PWA}</p></td></tr><tr><th><p><strong>{Status}</strong></p></th><td><p><span data-type="status" data-color="blue">{Draft}</span></p></td></tr></tbody></table></div>
+<div data-type="bodied-extension" data-extension-key="details" data-extension-type="com.atlassian.confluence.macro.core"><table data-width="760"><tbody><tr><th><p><strong>{Platform}</strong></p></th><td><p>{e.g. PWA}</p></td></tr></tbody></table></div>
 <h2>{Problem / why}</h2>
 <div data-type="panel-error"><p>{Two to four sentences of prose: the actual problem and its cause.}</p></div>
 <h2>{Audience}</h2>

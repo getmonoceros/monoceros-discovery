@@ -91,7 +91,12 @@ verbatim.
 ### Step 0: Read the discovery and clarify the project
 
 Read brief, journeys, personas, domain model, technical brief, and design.
-Summarize which journeys and personas exist, and confirm.
+Summarize which journeys and personas exist, and confirm. Read each journey's
+**status** off the colour in the first row of its page properties
+(`references/discovery-rules.md`, "A journey carries a status") and list the
+journeys by status in the summary: that list says what this run will create.
+If the user says a journey is in review or agreed, set its status on the
+journey page and go on.
 
 The **domain model is the reference for every story that touches data**: entity
 names, attributes, states. Take them from there verbatim instead of inventing
@@ -107,12 +112,24 @@ epic already exists - the epic key linked on the journey page still **live** in
 Jira, or an epic with a fitting summary in the project. If one lives, reuse or
 update it, no duplicate. If none exists (e.g. deleted in a test loop, key dead),
 create a new one. The journey link is afterward **always** pulled to the key
-from this run (see backfill), even if an old or dead key still sits there.
+from this run (see backfill), even if an old or dead key still sits there. A
+journey that turned green under an epic from an earlier run gets its stories
+under that epic.
+
+**An epic left over**: its journey went back to blue, or the journey page is
+gone. Tell the user the epic is left over and could be deleted, with its key.
+**Never delete it yourself** - whether it goes is the team's call, and in most
+Jira projects deleting is not permitted anyway.
 
 ### Step 1: Epics are journeys, one to one
 
 One epic per journey. Nothing else becomes an epic: no architectural epic, no
 technical epic, no foundation.
+
+**Which journeys get one follows their status.** A blue journey gets nothing
+yet; name it, it has not been put up for agreement. A yellow journey gets its
+epic, so a team planning on a timeline sees it coming; its stories follow once
+the journey is green. A green journey gets the epic and its stories.
 
 The epic stays lean - one or two sentences of prose (the essence), the **journey
 as a card**, and epic-wide acceptance criteria. No persona, brief, or
@@ -126,8 +143,10 @@ business context.
 
 ### Step 2: Cut the stories
 
-Per epic, propose as many stories as the journey needs. Cut along the function,
-never along the layer. "Upload endpoint" plus "upload screen" is one story, not
+Per epic of a **green** journey, propose as many stories as the journey needs.
+A yellow journey gets none yet: its details are still being agreed, and a story
+cut from them is rewritten later. Cut along the function, never along the
+layer. "Upload endpoint" plus "upload screen" is one story, not
 two.
 
 The **actionable open points of the technical brief** (set a config, mount a

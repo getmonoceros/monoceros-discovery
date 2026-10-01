@@ -75,7 +75,7 @@ follows the output language. A real example: `references/example-journey.md`.
 
 ```html
 <div data-type="bodied-extension" data-extension-key="excerpt" data-extension-type="com.atlassian.confluence.macro.core" data-parameters='{"macroParams":{"name":{"value":"summary"}}}'><p>{Short summary of the journey, one sentence.}</p></div>
-<div data-type="bodied-extension" data-extension-key="details" data-extension-type="com.atlassian.confluence.macro.core"><table data-width="760"><tbody><tr><th><p><strong>Epic in Jira</strong></p></th><td><p>{to follow}</p></td></tr><tr><th><p><strong>{Addressed core capabilities}</strong></p></th><td><ul><li><p><a href="{brief-url}#{anchor of capability A}">{Capability A}</a></p></li><li><p><a href="{brief-url}#{anchor of capability B}">{Capability B}</a></p></li></ul></td></tr></tbody></table></div>
+<div data-type="bodied-extension" data-extension-key="details" data-extension-type="com.atlassian.confluence.macro.core"><table data-width="760"><tbody><tr><th><p><strong>{Status}</strong></p></th><td><p><span data-type="status" data-color="blue">{Draft}</span></p></td></tr><tr><th><p><strong>Epic in Jira</strong></p></th><td><p>{to follow}</p></td></tr><tr><th><p><strong>{Addressed core capabilities}</strong></p></th><td><ul><li><p><a href="{brief-url}#{anchor of capability A}">{Capability A}</a></p></li><li><p><a href="{brief-url}#{anchor of capability B}">{Capability B}</a></p></li></ul></td></tr></tbody></table></div>
 <h2>Persona(s)</h2>
 <div data-type="extension" data-extension-key="excerpt-include" data-extension-type="com.atlassian.confluence.macro.core" data-parameters='{"macroParams":{"":{"value":"{the persona page title, exactly as that page is titled}"}}}'></div>
 <h2>{Trigger}</h2>
@@ -94,6 +94,10 @@ follows the output language. A real example: `references/example-journey.md`.
 ```
 
 - Excerpt = plain text, named `summary` (no panel).
+- **The status row comes first** and starts blue (`{Draft}`). The colour is
+  the value other skills read - blue, yellow, green - so the label can follow
+  the output language. Yellow and green only on the user's word
+  (`discovery-rules.md`, "A journey carries a status").
 - **The excerpt-include takes the persona's title verbatim**, in whichever form
   the tree uses. A title in the wrong form finds nothing and the section renders
   empty.

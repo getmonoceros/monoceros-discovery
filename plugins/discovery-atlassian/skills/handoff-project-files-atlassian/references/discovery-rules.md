@@ -164,6 +164,34 @@ So where something turns up that deserves an issue - an open point, a finding, a
 piece of work the plan uncovered - name it and hand it to that skill. Do not file
 it yourself.
 
+## A journey carries a status, and nothing else does
+
+A journey page's properties open with a **Status** row: a status macro in one
+of three colours. **The colour is the value.** The label follows the output
+language, so a skill reads the colour and not the text.
+
+| Colour | Label (English reference) | Means | Planning creates |
+|---|---|---|---|
+| `blue` | Draft | Written, nobody has looked at it yet. Every journey starts here. | nothing |
+| `yellow` | In review | A human put it up for agreement: the goal and the scope stand, details are open. | the epic |
+| `green` | Agreed | Agreed. | the epic and its stories |
+
+- **A skill writes `blue`** when it creates a journey. It sets `yellow` or
+  `green` only on the user's explicit word in the dialog ("J-003 is agreed"),
+  never on its own judgement: whether something is agreed cannot be read off
+  the page.
+- **A `green` journey revised in substance** - a new step, another capability -
+  is said out loud, with the question whether it goes back to `yellow`. A
+  wording fix is not.
+- **A journey page without the row** comes from before this rule. Ask the user
+  which status it has and write the row; do not read a missing row as `blue`.
+- **No other artifact carries a status.** The brief, the domain model, the
+  design brief and the technical brief exist once per product and are reopened
+  on purpose when a finding is fed back upstream, so a status there would say
+  nothing. The domain model and the design brief name the journeys that are not
+  `green` when they summarize their sources - what they take from those is
+  provisional - and carry on.
+
 ## Never the em dash
 
 Do not use the em dash character (U+2014) anywhere in what you write. Use a

@@ -2,6 +2,8 @@
 
 The journey page arrives from the discovery skill with two `to follow`
 placeholders. **Planning is the only skill that fills them with real data.**
+That includes a yellow journey, which gets its epic before its stories: the
+macro below then shows an empty table, and fills itself once the stories exist.
 Overwrite both, whatever stands there - `to follow` or an old, dead epic key
 from an earlier run.
 
