@@ -34,7 +34,7 @@ identifiers, the BDD keywords Given/When/Then, and the artifact-type names
 
 ## Epic - one per journey, lean
 
-- **Summary**: {short, crisp title}
+- **Summary**: {the journey's page title, id included, without the product prefix - e.g. `J-001: Ein neues Handout veröffentlichen`}
 - **Label**: `business`
 
 {One or two sentences of prose: the essence of the epic.}

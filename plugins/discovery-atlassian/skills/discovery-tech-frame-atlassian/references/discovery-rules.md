@@ -109,7 +109,9 @@ not touched for them.
   same pass. Two break silently and need a look of their own: an excerpt-include
   finds its page by **title**, and a deep link finds its heading by **text**
   (`confluence-style.md`). A merged page leaves no reference behind pointing at
-  the one that went.
+  the one that went. A renamed journey's epic carries its title as summary;
+  that follows too, through planning (see "Jira issues are written by one
+  skill only").
 
 ## Read the human's comments before you revise
 

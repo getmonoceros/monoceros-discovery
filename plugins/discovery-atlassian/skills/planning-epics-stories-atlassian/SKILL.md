@@ -118,7 +118,8 @@ nearly every story, so ask once, up front.
 **Existing backlog / second pass**: for each journey, check whether a fitting
 epic already exists - the epic key linked on the journey page still **live** in
 Jira, or an epic with a fitting summary in the project. If one lives, reuse or
-update it, no duplicate. If none exists (e.g. deleted in a test loop, key dead),
+update it, no duplicate; if its summary no longer matches the journey's title,
+pull it to the title. If none exists (e.g. deleted in a test loop, key dead),
 create a new one. The journey link is afterward **always** pulled to the key
 from this run (see backfill), even if an old or dead key still sits there. A
 journey that turned green under an epic from an earlier run gets its stories
@@ -138,6 +139,13 @@ technical epic, no foundation.
 yet; name it, it has not been put up for agreement. A yellow journey gets its
 epic, so a team planning on a timeline sees it coming; its stories follow once
 the journey is green. A green journey gets the epic and its stories.
+
+**The epic's summary is the journey's title**, id included and without the
+product prefix (the Jira project already names the product): the journey
+`Handout | J-001: Ein neues Handout veröffentlichen` gives the epic
+`J-001: Ein neues Handout veröffentlichen`, and `WP-04/1: …` stays `WP-04/1: …`.
+The same name on both sides is what lets anyone go from the board to the page
+and back without a lookup.
 
 The epic stays lean - one or two sentences of prose (the essence), the **journey
 as a card**, and epic-wide acceptance criteria. No persona, brief, or
