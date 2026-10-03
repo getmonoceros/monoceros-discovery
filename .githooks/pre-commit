@@ -1,0 +1,4 @@
+#!/bin/sh
+# Copies staged changes to shared files into the skills and stages the copies.
+# Activate once per clone: git config core.hooksPath .githooks
+exec "$(git rev-parse --show-toplevel)/scripts/sync-shared.sh" --staged

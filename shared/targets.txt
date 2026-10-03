@@ -1,0 +1,13 @@
+# Which shared file is copied into which skills.
+#
+# A skill has to be self-contained: installed on claude.ai or in the desktop
+# app it cannot read a file outside its own directory. So files that several
+# skills need are kept once under shared/<plugin>/ and copied into each skill
+# at the same relative path. Edit the file here, never the copy;
+# scripts/sync-shared.sh copies it, and the pre-commit hook does so on commit.
+#
+# <plugin>/<path>  <skill> ...
+
+discovery-atlassian/references/discovery-rules.md  discovery-brief-atlassian discovery-personas-journeys-atlassian discovery-domain-model-atlassian discovery-design-atlassian discovery-tech-frame-atlassian planning-epics-stories-atlassian handoff-project-files-atlassian
+discovery-atlassian/references/confluence-style.md discovery-brief-atlassian discovery-personas-journeys-atlassian discovery-domain-model-atlassian discovery-design-atlassian discovery-tech-frame-atlassian
+discovery-atlassian/scripts/diagram.mjs            discovery-domain-model-atlassian discovery-tech-frame-atlassian

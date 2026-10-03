@@ -92,6 +92,25 @@ later applies pull it again so a change here reaches your workbench. Needs
 Monoceros 1.57.0 or newer; details on the
 [Claude Code feature page](https://getmonoceros.build/docs/features/claude/#plugins).
 
+## Development
+
+Some files are needed by several skills: `discovery-rules.md`,
+`confluence-style.md` and the diagram script. A skill has to be self-contained,
+so each one carries its own copy. The source lives once under `shared/`, and
+`shared/targets.txt` says which skills get which file. **Edit the file under
+`shared/`, never a copy.**
+
+Activate the hook once per clone; it copies a staged change into the skills and
+stages the copies with it:
+
+```
+git config core.hooksPath .githooks
+```
+
+Without the hook, copy by hand with `scripts/sync-shared.sh`, and check with
+`scripts/sync-shared.sh --check`. A copy edited directly is never overwritten:
+the script stops and names it.
+
 ## License
 
 Apache-2.0. See [LICENSE](LICENSE).
