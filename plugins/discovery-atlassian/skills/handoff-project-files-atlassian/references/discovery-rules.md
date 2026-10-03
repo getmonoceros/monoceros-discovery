@@ -18,6 +18,19 @@ marks around expectation titles, and an entire command-line application.
 
 Plausible is not the test. Backed is.
 
+## No commercial internals
+
+Discovery pages and Jira issues carry **no prices, no estimates, no effort
+figures**, and no statement about what is priced and what is not. Dates and
+the business goal of an increment are fine. So is naming a consequence in
+words - "this makes the export more work" is a finding, not a figure.
+
+The reason is where the pages live: often in a space the customer reads too.
+A figure there is a commercial statement, made by whoever wrote the page,
+outside the place where such statements are made. When the material a skill
+reads contains figures (an estimate, an offer), take the content from it and
+leave the figures behind.
+
 ## Page titles: the product prefix is a decision, asked once
 
 The **brief always carries the product**: `<Product> | Brief`. It is the root of
@@ -79,6 +92,24 @@ conversation a translation.
   that nobody agreed to.
 
 Wherever a skill refers to a journey by id, both forms are meant.
+
+## Every reference is a link
+
+A reference to a page that **exists** is a link - an inline card - never just
+its title in text. And it runs **both ways**: where the template of the other
+page has a field for the counterpart (a persona's "Involved in these
+journeys", a journey's persona and capabilities), that field gets the link in
+the same pass. Back-links go into those fields only; another page's prose is
+not touched for them.
+
+- **A page that does not exist yet** stays text. When it is created, the
+  references to it become links in that same pass: search for its title or id
+  on the pages of the tree.
+- **Renaming or merging a page** carries every reference to it along in the
+  same pass. Two break silently and need a look of their own: an excerpt-include
+  finds its page by **title**, and a deep link finds its heading by **text**
+  (`confluence-style.md`). A merged page leaves no reference behind pointing at
+  the one that went.
 
 ## Read the human's comments before you revise
 
