@@ -141,9 +141,10 @@ One journey per flow. For each you collect:
   and that therefore must not be built to be thrown away. Each a **short title
   + reasoning**; naming a consequence ("makes the export more work") is fine.
   Take them from the dialog or the material the user brings (an estimate, an
-  offer, a tender). **No risk named, no section content**: leave it empty
-  rather than invent one. This is the one section written from the delivery
-  side; the journey text above stays on the user's side.
+  offer, a tender). **No risk named, no section**: the page goes without it
+  rather than carry an invented one or an empty heading. This is the one
+  section written from the delivery side; the journey text above stays on the
+  user's side.
 
 The **epic only comes into being during planning** - "Epic in Jira" and
 "Related work items" stay placeholders ("to follow") on the journey page
@@ -295,8 +296,9 @@ Also as HTML+ (`contentFormat: html`). Structure:
 8. **`<h2>Risks</h2>`** + 2-column layout (760), each risk `<h3>` with a
    **yellow status chip `Risk`** in front of the title
    (`<span data-type="status" data-color="yellow">Risk</span>`) + `<p>`.
-   With no risk named, the heading stands with an empty `<p></p>` under it,
-   so a later run has its place.
+   **Only when a risk is named.** Without one the section is left out
+   entirely. A risk named later adds the section in this place, after "What
+   the app changes" and before "Related work items".
 9. **`<h2>Related work items</h2>`** + a plain **`<p>to follow</p>`**
    placeholder.
 

@@ -116,8 +116,9 @@ verbatim; the action follows the output language. A real example:
 - **Pain points** each h3 with a red `{Problem}` chip, **what the app
   changes** each h3 with a green `{Solution}` chip.
 - **Risks** each h3 with a yellow `{Risk}` chip: the delivery side, not the
-  user's. Optional; with none named the section is the heading and an empty
-  `<p></p>`, never an invented risk.
+  user's. **Only when a risk is named**; otherwise leave the `{Risks}` heading
+  and its layout out entirely, never write an invented risk or an empty
+  section. A risk named later adds the section in exactly this place.
 - **This skill only writes placeholders for the two epic-dependent spots.**
   There is no epic yet, so the "Epic in Jira" row is `{to follow}` and the
   "Related work items" section is a plain `{to follow}` paragraph. **Do not
