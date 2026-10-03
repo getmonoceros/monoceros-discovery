@@ -22,6 +22,7 @@ reference; render them in the **output language**. Technical values
 | Topic / capability list (core capabilities, principles) | **2 columns**, h3 with a **fitting topic emoji** |
 | Exclusions (scope-out) | 2 columns, red **status chip** ("out") |
 | Positive signals (success) | 2 columns, green **status chip** ("Signal") |
+| Risks (journey) | 2 columns, yellow **status chip** ("Risk") |
 | Plain prose (narrated journey) | no marker |
 
 ## Rules

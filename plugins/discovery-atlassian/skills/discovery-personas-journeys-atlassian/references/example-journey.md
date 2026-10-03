@@ -148,6 +148,10 @@ verdict on system behavior, no invented feelings.
 **The title names the action**, not the story: "Ein neues Handout
 veröffentlichen und mit Passwort schützen".
 
+**The Risks section is empty here**, and that is the normal case: nothing in
+the dialog made delivering this journey uncertain. A risk is written only when
+someone names one, never to fill the section.
+
 **The pain points name today's world** - the tool, the attachment, the mailbox,
 the shared screen - and each one has its counterpart in "Was die Anwendung
 ändert". Four and four, in the same order.

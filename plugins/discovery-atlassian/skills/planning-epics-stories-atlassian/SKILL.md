@@ -177,6 +177,9 @@ Each story has these sections (shape and formatting in
    **area the story changes**. A story that changes entities of two areas is a
    hint: either it is two functions, or one area changes its own data at the
    other's request. Say which, in the notes.
+   Every **risk** on the journey page goes into the notes of the stories it
+   bears on, said as what it means for this story: built to be reused, the
+   volume kept configurable, the date that sets its place in the order.
 4. **## Design**: the affected screen or prototype as a full **`blockCard`**.
    Every story that a person operates changes or uses a screen, so this section
    is the norm, not the exception. If you find yourself wanting to leave it out,
@@ -206,7 +209,8 @@ Report the result of this pass to the user before you create anything.
 
 Order stories by value and dependency. The order runs across the whole backlog,
 not epic by epic: journeys interleave when one journey's function is worthless
-without another's (a link nobody can open is not a delivered function).
+without another's (a link nobody can open is not a delivered function). A hard
+date among a journey's risks weighs in the order too.
 
 ### Step 5: Create in Jira
 

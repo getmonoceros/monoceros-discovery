@@ -89,6 +89,8 @@ follows the output language. A real example: `references/example-journey.md`.
 <section data-type="layout-two-equal" data-breakout="wide" data-breakout-width="760"><div data-type="column" data-width="50"><h3><span data-type="status" data-color="red">{Problem}</span> {title}</h3><p>{reasoning}</p></div><div data-type="column" data-width="50"><h3><span data-type="status" data-color="red">{Problem}</span> {title}</h3><p>{…}</p></div></section>
 <h2>{What the app changes}</h2>
 <section data-type="layout-two-equal" data-breakout="wide" data-breakout-width="760"><div data-type="column" data-width="50"><h3><span data-type="status" data-color="green">{Solution}</span> {title}</h3><p>{…}</p></div><div data-type="column" data-width="50"><h3><span data-type="status" data-color="green">{Solution}</span> {title}</h3><p>{…}</p></div></section>
+<h2>{Risks}</h2>
+<section data-type="layout-two-equal" data-breakout="wide" data-breakout-width="760"><div data-type="column" data-width="50"><h3><span data-type="status" data-color="yellow">{Risk}</span> {title}</h3><p>{what makes delivery costly, uncertain or tight on time}</p></div><div data-type="column" data-width="50"><h3><span data-type="status" data-color="yellow">{Risk}</span> {title}</h3><p>{…}</p></div></section>
 <h2>{Related work items}</h2>
 <p>{to follow}</p>
 ```
@@ -110,6 +112,9 @@ follows the output language. A real example: `references/example-journey.md`.
   situation belongs in movement 1; written in both places it stands twice.
 - **Pain points** each h3 with a red `{Problem}` chip, **what the app
   changes** each h3 with a green `{Solution}` chip.
+- **Risks** each h3 with a yellow `{Risk}` chip: the delivery side, not the
+  user's. Optional; with none named the section is the heading and an empty
+  `<p></p>`, never an invented risk.
 - **This skill only writes placeholders for the two epic-dependent spots.**
   There is no epic yet, so the "Epic in Jira" row is `{to follow}` and the
   "Related work items" section is a plain `{to follow}` paragraph. **Do not

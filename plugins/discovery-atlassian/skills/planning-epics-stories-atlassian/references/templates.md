@@ -77,6 +77,7 @@ across all layers. Whatever is missing for that belongs here:
 - {Delivery: routing, caching, headers - whatever the promise depends on}
 - {Integrations: auth, storage, external services}
 - {Edge cases}
+- {Risks: what a risk named on the journey page means for this story - only where the journey names one}
 - {Test level}
 
 **Technical Brief:** {as inline card}

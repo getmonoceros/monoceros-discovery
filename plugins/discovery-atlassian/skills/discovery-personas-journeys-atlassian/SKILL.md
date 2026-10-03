@@ -129,6 +129,16 @@ One journey per flow. For each you collect:
 - **Pain points today**: three to four, each **short title + reasoning**.
 - **What the app changes**: three to four, each **short title +
   reasoning**, one per pain point and in the same order.
+- **Risks** (optional): what makes **delivering** this journey costly,
+  uncertain or tight on time - not the user's view, which pain points and
+  changes already carry. Typical: a hard date, a volume nobody has counted yet,
+  a dependency on someone outside the team, a part that later journeys reuse
+  and that therefore must not be built to be thrown away. Each a **short title
+  + reasoning**; naming a consequence ("makes the export more work") is fine.
+  Take them from the dialog or the material the user brings (an estimate, an
+  offer, a tender). **No risk named, no section content**: leave it empty
+  rather than invent one. This is the one section written from the delivery
+  side; the journey text above stays on the user's side.
 
 The **epic only comes into being during planning** - "Epic in Jira" and
 "Related work items" stay placeholders ("to follow") on the journey page
@@ -197,7 +207,7 @@ Get final confirmation.
 ## Finish: create the Confluence tree
 
 Shared style rule: `references/confluence-style.md` (a marker per section
-type - topic emojis on lists, status chips for pain/solution, a named
+type - topic emojis on lists, status chips for pain/solution/risk, a named
 excerpt without a panel).
 
 1. Read the templates from `references/templates.md`.
@@ -277,7 +287,12 @@ Also as HTML+ (`contentFormat: html`). Structure:
 7. **`<h2>What the app changes</h2>`** + 2-column layout, each point
    `<h3>` with a **green status chip `Solution`** in front of the title +
    `<p>`.
-8. **`<h2>Related work items</h2>`** + a plain **`<p>to follow</p>`**
+8. **`<h2>Risks</h2>`** + 2-column layout (760), each risk `<h3>` with a
+   **yellow status chip `Risk`** in front of the title
+   (`<span data-type="status" data-color="yellow">Risk</span>`) + `<p>`.
+   With no risk named, the heading stands with an empty `<p></p>` under it,
+   so a later run has its place.
+9. **`<h2>Related work items</h2>`** + a plain **`<p>to follow</p>`**
    placeholder.
 
 **This skill only writes placeholders for the two epic-dependent spots.**
