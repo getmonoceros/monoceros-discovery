@@ -67,6 +67,16 @@ reference; render them in the **output language**. Technical values
   the left one a `<th>` (row header). A `<thead>` makes the first row render as a
   gray header row spanning both columns instead of a header column. A read can
   hand the first row back to you inside a `<thead>`; dissolve it on write-back.
+  Observed as well (October 2026): on save, the **value** cell of the first row
+  turned into a `<th>`. Writing the whole table anew, without `<thead>`, fixed
+  it.
+- **For a targeted edit, read the page as `html`.** A read in `markdown` carries
+  no `data-local-id`, so there is nothing to aim an edit at.
+- **A replaced node gets a new `data-local-id`** (observed October 2026 with
+  `updateConfluenceContent`, `edits` and `replaceNode`). The id you aimed at is
+  gone afterwards, and a follow-up edit against it misses. Either give the
+  replacement a `data-local-id` of your own, or replace the stable parent - the
+  table cell rather than the paragraph inside it.
 - **When patching stored HTML, allow for attributes.** Saved headings and cells
   carry `data-local-id`, so a pattern like `<h2>Text</h2>` never matches - it has
   to be `<h2[^>]*>Text</h2>`. The same goes for `<td>`, `<p>` and `<li>`.
