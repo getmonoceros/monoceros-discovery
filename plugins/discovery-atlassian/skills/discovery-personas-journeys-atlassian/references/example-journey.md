@@ -25,7 +25,9 @@ J-001: Ein neues Handout veröffentlichen und mit Passwort schützen
 ```
 
 This tree lives in a space of its own, so its titles carry no product prefix. In
-a shared space the same page would be `Handout | J-001: …`.
+a shared space the same page would be `Handout | J-001: …`. Nothing numbered
+Handout's flows before, so the standard scheme applies; with an offer that
+numbered them as work packages, the title would start `WP-04: …`.
 
 **Excerpt (`summary`)**
 

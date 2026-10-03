@@ -71,7 +71,11 @@ Read the brief (from Confluence, a file, or pasted in). Summarize the
 **audience** and **core capabilities** briefly and confirm with the user.
 Settle the **title prefix** here, once, if nothing exists below the brief yet
 (`references/discovery-rules.md`); if pages are already there, read the answer
-off their titles instead of asking.
+off their titles instead of asking. Settle the **journey ids** the same way
+(`references/discovery-rules.md`, "Journey ids"): if the material numbers the
+flows already - an order, an offer, a tender, an estimate - propose that
+numbering once; otherwise `J-001`. Journeys that exist already show the scheme
+in their titles.
 Then work out **which flows** the product has - one journey per flow, so the
 count comes out of the brief rather than out of a target figure. Announce the
 sequence: personas → journeys → coverage check → feedback into the brief.
@@ -110,11 +114,12 @@ and get confirmation.
 
 One journey per flow. For each you collect:
 
-- **Title**: `{prefix}J-001: <action>`, `{prefix}J-002: <action>`, … - three
-  digits, numbered
-  in the order the journeys were worked out. The title names the **action**
-  ("Ein Handout löschen"), never the story ("Der Abend, an dem es steht").
-  Nobody ever finds a literary title again.
+- **Title**: `{prefix}{id}: <action>`. Under the standard scheme the id is
+  `J-001`, `J-002`, … - three digits, numbered in the order the journeys were
+  worked out. With an existing numbering it is that id, verbatim (`WP-04`),
+  and a journey split in two keeps it with a suffix (`WP-04/1`, `WP-04/2`).
+  The title names the **action** ("Ein Handout löschen"), never the story
+  ("Der Abend, an dem es steht"). Nobody ever finds a literary title again.
 - **Short summary** (one sentence) - goes into the excerpt.
 - **Persona**: which persona runs through it (embedded via
   excerpt-include).

@@ -54,6 +54,32 @@ The artifact words stay **English** (`Brief`, `Personas`, `Journeys`,
 language-neutral. Everything that comes from the product itself - a persona's
 name, a journey's action - follows the output language.
 
+## Journey ids: an existing numbering is kept
+
+A journey's title starts with its id: `J-001: <action>`. That is the standard
+scheme, and it holds unless the flows are **already numbered** somewhere else -
+in an order, an offer, a tender, an estimate. Then that numbering is the one
+people check the work against, and a second one beside it makes every
+conversation a translation.
+
+- **Look for one, and propose it.** The skill that writes the first journey
+  checks the material it has been given for a numbering of the flows. Found one:
+  propose it once, with AskUserQuestion, naming where it comes from. Found none,
+  or the user declines: `J-001`, `J-002`, … in the order the journeys are
+  worked out.
+- **Do not ask again.** Later skills and later runs read the scheme off the
+  journey titles that already exist, the way they read the title prefix.
+- **The id is taken verbatim**, with its own letters, digits and separators:
+  an offer that numbers its work packages `WP-04` gives `WP-04: <action>`.
+- **A journey that has to be split keeps its id** with a suffix: `WP-04/1`,
+  `WP-04/2`. The original numbering stays traceable. Under the standard scheme a
+  new flow just takes the next free number.
+- **A journey the source does not number** gets its id from the user, never
+  from you: inventing a number inside someone else's scheme puts a line into it
+  that nobody agreed to.
+
+Wherever a skill refers to a journey by id, both forms are meant.
+
 ## Read the human's comments before you revise
 
 If the artifact already exists and a person has reviewed it, **their comments

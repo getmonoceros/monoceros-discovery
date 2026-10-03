@@ -67,11 +67,14 @@ Page title: `{prefix}{Name}, {age} - {short characterization}`
 
 ## Journey page (HTML+, `contentFormat: html`)
 
-Page title: `{prefix}J-00{n}: {the action}`
+Page title: `{prefix}{id}: {the action}`
 
-The title names the **action** ("Ein Handout löschen"), never the story ("Der
-Abend, an dem es steht"). `J-001`, `J-002`, … stays verbatim; the action
-follows the output language. A real example: `references/example-journey.md`.
+`{id}` is `J-001`, `J-002`, … under the standard scheme, or the id from an
+existing numbering, verbatim, with `/1`, `/2` for a split journey
+(`discovery-rules.md`, "Journey ids"). The title names the **action** ("Ein
+Handout löschen"), never the story ("Der Abend, an dem es steht"). The id stays
+verbatim; the action follows the output language. A real example:
+`references/example-journey.md`.
 
 ```html
 <div data-type="bodied-extension" data-extension-key="excerpt" data-extension-type="com.atlassian.confluence.macro.core" data-parameters='{"macroParams":{"name":{"value":"summary"}}}'><p>{Short summary of the journey, one sentence.}</p></div>
