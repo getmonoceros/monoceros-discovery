@@ -12,11 +12,51 @@ In Jira as **ADF**. Remove the `{...}` hints in the final version.
 - **Story to Epic via the Parent field**, not a generic issue link.
 - **Epic label** `business`. There is no other epic label; the backlog has no
   architectural or technical epic.
-- **Acceptance criteria as a checkbox list** (a real task list); Given/When/Then
-  each on its own line, labels **bold and in color `#403294`**.
+- **Acceptance criteria as a checkbox list**: one ADF `taskList` with one
+  `taskItem` per criterion. Given/When/Then each on its own line, separated by
+  `hardBreak` inside the same `taskItem`; labels **bold and in color
+  `#403294`**. Never use `blockTaskItem`: the Jira API accepts it, but the
+  issue editor cannot load it and shows an empty description in edit mode.
+  The exact shape is under [Acceptance criteria in ADF](#acceptance-criteria-in-adf).
 - Headings as real headings. The heading is exactly "Acceptance criteria", with
   no addition like "(Definition of Done)".
 - Descriptions structured, not a wall of prose.
+
+## Acceptance criteria in ADF
+
+A `taskItem` holds inline content directly (text, marks, `hardBreak`), never a
+`paragraph`. One criterion looks like this:
+
+```json
+{
+  "type": "taskList",
+  "attrs": { "localId": "ac-list" },
+  "content": [
+    {
+      "type": "taskItem",
+      "attrs": { "localId": "ac-1", "state": "TODO" },
+      "content": [
+        { "type": "text", "text": "Given", "marks": [{ "type": "strong" }, { "type": "textColor", "attrs": { "color": "#403294" } }] },
+        { "type": "text", "text": " {initial situation}" },
+        { "type": "hardBreak" },
+        { "type": "text", "text": "When", "marks": [{ "type": "strong" }, { "type": "textColor", "attrs": { "color": "#403294" } }] },
+        { "type": "text", "text": " {the persona does something}" },
+        { "type": "hardBreak" },
+        { "type": "text", "text": "Then", "marks": [{ "type": "strong" }, { "type": "textColor", "attrs": { "color": "#403294" } }] },
+        { "type": "text", "text": " {what they can see or do afterwards}" }
+      ]
+    }
+  ]
+}
+```
+
+Further criteria are further `taskItem` entries in the same `taskList`, each
+with its own `localId`.
+
+If the tool takes Markdown instead of ADF and converts it, a multi-line
+`- [ ]` item can come out as `blockTaskItem`. After creating an issue, read
+its description back; if it contains `blockTaskItem`, rewrite it in the shape
+above before moving on.
 
 ## Output language - what to translate and what not
 
