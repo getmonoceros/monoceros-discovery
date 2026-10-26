@@ -93,6 +93,12 @@ or workbench templates?"
   only, `get_component` does not know it. An older CLI rejects `--copy`; ask
   them to update by re-running the Monoceros install script rather than working
   from an output without `templates`.
+- **Team or personal.** Each local entry carries `source`: `team` when the file
+  is committed in the team repository the builder's templates folder is a
+  clone of, so every colleague has it; `personal` when it exists on the
+  builder's machine only. The output then names that repository as
+  `templateRepository`. An output without `source` comes from an older CLI:
+  treat its local entries as the team's, as before.
 
 `monoceros-docs` among the MCP servers and a `template-authoring` workbench
 template are for writing Monoceros templates, not for building a product. Never
@@ -146,10 +152,15 @@ map them as project components.
    (lean preset). The three are requirements of the workbench, not of a
    template: whichever template it starts from, they end up in it (Step 2,
    "The workbench template").
-6. **The builder's own first.** Where a local service or MCP server (`local:
-   true` in the pasted output) covers the same need as a curated one, take the
-   local one and say that it is the team's own: they keep it for a reason. It
-   is named by its file name like a curated one (`--with-services=rabbitmq`).
+6. **The team's own first, personal last.** The technical brief is built from
+   by the whole team, so what it proposes has to exist on every colleague's
+   machine. Where a local service or MCP server with `source: team` covers the
+   same need as a curated one, take the team's: they keep it for a reason.
+   Then the curated catalog. A `personal` one only when the builder asks for
+   it, and the page then says it exists on the builder's machine only, so a
+   colleague's `init` fails until it is in the team repository. A local
+   component is named by its file name like a curated one
+   (`--with-services=rabbitmq`).
 
 ## Procedure
 
@@ -294,8 +305,8 @@ page has to stand without it.
 
 For real choices in the **stack**, use **AskUserQuestion** and offer the actual
 catalog alternatives, not just your favorite (e.g. SQL store
-`postgres`/`mysql`/`pgvector`, which object storage), the builder's own ones
-included and marked as theirs. The **set defaults**
+`postgres`/`mysql`/`pgvector`, which object storage), the team's own ones
+included and marked as such (principle 6). The **set defaults**
 (`claude`, `atlassian/twg`, `claude-code-roles`) are **not** a choice - don't
 offer them, don't pose them as an "in/out?" question, just name them. The first
 two are preconditions, the roles are a working style; that is why the features
@@ -316,11 +327,13 @@ the three defaults: `claude` with the discovery plugin, `claude-code-roles`
 Confluence access, the lean preset rather than the full `atlassian` with
 `rovodev`+`forge`).
 
-If the pasted output lists templates of the builder's own (`local: true`), ask
-which one the workbench starts from: `discovery-atlassian` or one of theirs,
-with the real names (a team standard often carries the registries and services
-the company works with). The builder may also name any other template from the
-output. Without a pasted output or without own templates, it is
+If the pasted output lists templates of the team's own (`local: true`,
+`source: team`), ask which one the workbench starts from: `discovery-atlassian`
+or one of the team's, with the real names (a team standard often carries the
+registries and services the company works with). Don't offer `personal`
+templates; the builder may still name one, or any other template from the
+output, and a personal one gets the same note as a personal component
+(principle 6). Without a pasted output or without team templates, it is
 `discovery-atlassian` and there is nothing to ask.
 
 For any other template, read what it brings from its entry in `templates` and
@@ -364,7 +377,10 @@ Translate the decisions into the `init` categories with catalog ids:
 
 - **`--with-languages`**: every language the build needs.
 - **`--with-services`**: only services from the catalog or the pasted output
-  (networked containers), the builder's own first (principle 6).
+  (networked containers), the team's own first (principle 6). By name only,
+  never with `@<version>`: `--with-services=mailpit`, not `mailpit@1`. The CLI
+  reads anything after `@` as an image name, and the workbench breaks. The
+  same goes for `add-service`.
 - **`--with-features`**: only what comes on top of the template: the
   code-host feature the answer decided (`github`, `gitlab`, or none for
   Bitbucket), the defaults the template lacks, and further features if the
@@ -372,7 +388,7 @@ Translate the decisions into the `init` categories with catalog ids:
   that is not a product question, so it is neither an open point nor a
   follow-up question here.
 - **`--with-mcp-servers`**: only an MCP server the build itself needs, the
-  builder's own first; omit the line otherwise.
+  team's own first; omit the line otherwise.
 - **`--with-ports`**: port **numbers**, comma-separated, never a name: the
   ports the app itself listens on inside the workspace (`--with-ports=3000`,
   or `5173,3000` for a separate dev server and API). The **first** port
@@ -424,7 +440,7 @@ So under the `init` sketch comes the second block: the `add-*` commands for the
 mapped components - `monoceros add-language`, `monoceros add-service`,
 `monoceros add-feature`, `monoceros add-mcp-server`, `monoceros add-port`,
 `monoceros add-repo` - followed by one `monoceros apply <name>`, with the
-builder's own services and MCP servers first here too. Label the two so nobody
+team's own services and MCP servers first here too. Label the two so nobody
 has to guess which is theirs.
 
 **The template applies to `init` and to nothing else, so the second block
@@ -470,8 +486,12 @@ type). For the technical brief specifically:
   **page-properties macro** (`details`), then the "Not in the yml" prose and
   **both** command blocks: the `init --template=…` sketch for a new workbench,
   and the `add-*` commands with one `apply` for a workbench that already exists,
-  each labelled, plus the line about the plugin hand-edit. The builder's own
-  components are marked as theirs in the table.
+  each labelled, plus the line about the plugin hand-edit. Local components
+  are marked in the table as the team's or as personal. When the proposal uses
+  a team file and the output names a `templateRepository`, one line under the
+  table says where the team files come from: that URL and the guide section
+  [Get it onto every machine](https://getmonoceros.build/docs/guides/templates/#get-it-onto-every-machine).
+  No clone command of your own: the guide is the one place that says how.
 - **Deployment** → **note panel** (`panel-note`).
 - **Open points** → 2 columns with yellow `open` status chips.
 
