@@ -23,10 +23,11 @@ The English strings below are the **reference meaning**, not literal output.
 **Never translate** (leave verbatim): every `data-*` attribute,
 `data-extension-key` and extension type, macro parameter names (`summary`, the
 `details` and `excerpt` macros), `data-color` values, JQL/ids, the monoceros
-CLI flags (`--with-languages`, `--with-services`, `--with-features`,
-`--with-ports`, `--with-repos`, `--provider`) and command names
-(`monoceros init`, `monoceros add-repo`, `monoceros list-components`), the
-`language-shell` class, URLs, and the page-title artifact word
+CLI flags (`--template`, `--with-languages`, `--with-services`,
+`--with-features`, `--with-mcp-servers`, `--with-ports`, `--with-repos`,
+`--provider`) and command names (`monoceros init`, `monoceros add-repo`,
+`monoceros list-components`), the yml keys of the plugin block, the
+`language-shell` and `language-yaml` classes, URLs, and the page-title artifact word
 (`Technical Brief`). Emojis are structural markers - keep them.
 
 ```html
@@ -50,16 +51,22 @@ CLI flags (`--with-languages`, `--with-services`, `--with-features`,
 <h2>{Cross-cutting conventions}</h2>
 <section data-type="layout-two-equal" data-breakout="wide" data-breakout-width="760"><div data-type="column" data-width="50"><h3>{Emoji} {Convention 1, e.g. authentication}</h3><p>{one line}</p><h3>{Emoji} {Convention 2, e.g. validation}</h3><p>{one line}</p></div><div data-type="column" data-width="50"><h3>{Emoji} {Convention 3, e.g. error shape}</h3><p>{one line}</p><h3>{Emoji} {Convention 4, e.g. identifiers}</h3><p>{one line}</p></div></section>
 <h2>{Mapping onto the Monoceros container definition}</h2>
-<p><em>{Catalog ids from the live source (CLI {version}). Confirm the exact ids and versions at build time against }</em><code>monoceros list-components</code><em>{.}</em></p>
-<div data-type="bodied-extension" data-extension-key="details" data-extension-type="com.atlassian.confluence.macro.core"><table data-width="760"><tbody><tr><th><p><code>--with-languages</code></p></th><td><p>{id, id, … - each briefly for what}</p></td></tr><tr><th><p><code>--with-services</code></p></th><td><p>{id, id, … - each briefly for what}</p></td></tr><tr><th><p><code>--with-features</code></p></th><td><p>{id, id, … - each briefly for what}</p></td></tr><tr><th><p><code>--with-ports</code></p></th><td><p>{which services browser-reachable}</p></td></tr><tr><th><p><code>--with-repos</code></p></th><td><p>{full HTTPS URL, only for github.com/gitlab.com/bitbucket.org; no repo or another host: omit the line}</p></td></tr></tbody></table></div>
+<p><em>{Catalog ids from the live source (CLI {version}), or from the builder's own }</em><code>monoceros list-components --json</code><em>{ output when they keep their own templates. Confirm the exact ids and versions at build time against }</em><code>monoceros list-components</code><em>{.}</em></p>
+<div data-type="bodied-extension" data-extension-key="details" data-extension-type="com.atlassian.confluence.macro.core"><table data-width="760"><tbody><tr><th><p><code>--template</code></p></th><td><p>{discovery-atlassian, or the template the builder chose - and what it already brings}</p></td></tr><tr><th><p><code>--with-languages</code></p></th><td><p>{id, id, … - each briefly for what; only what the template does not bring}</p></td></tr><tr><th><p><code>--with-services</code></p></th><td><p>{id, id, … - each briefly for what, the team's own marked as such; only what the template does not bring}</p></td></tr><tr><th><p><code>--with-features</code></p></th><td><p>{id, id, … - each briefly for what; a default the template lacked says so}</p></td></tr><tr><th><p><code>--with-mcp-servers</code></p></th><td><p>{id, … - only when the build needs one, the team's own marked as such; otherwise omit the line}</p></td></tr><tr><th><p><code>--with-ports</code></p></th><td><p>{port numbers the app listens on, each briefly for what - numbers only, never a service name; a service's web UI is not a port here}</p></td></tr><tr><th><p><code>--with-repos</code></p></th><td><p>{full HTTPS URL, only for github.com/gitlab.com/bitbucket.org; no repo or another host: omit the line}</p></td></tr></tbody></table></div>
 <p>{Not in the yml (app-owned dependencies): {frameworks/libraries the app brings itself}. Tests: {test stacks per component}.}</p>
 <p><strong>{A new workbench}</strong>{: as a sketch (the }<code>--with-repos</code>{ line only when a repo exists on github.com/gitlab.com/bitbucket.org; otherwise omit):}</p>
-<pre data-breakout="wide" data-breakout-width="760"><code class="language-shell">monoceros init {name} --template=discovery-atlassian \
+<pre data-breakout="wide" data-breakout-width="760"><code class="language-shell">monoceros init {name} --template={discovery-atlassian, or the chosen template} \
   --with-languages={…} \
   --with-services={…} \
   --with-features={…} \
-  --with-ports={…} \
+  --with-mcp-servers={…} \
+  --with-ports={port numbers, e.g. 3000} \
   --with-repos={full HTTPS URL of the repo, asked from the user - no placeholder}</code></pre>
+<p>{Only for a template other than discovery-atlassian: which of }<code>claude</code>{ with the discovery plugin, }<code>claude-code-roles</code>{ and }<code>atlassian</code>{ with twg it lacked, and that }<code>--with-features</code>{ above closes them. If the plugin is missing, it has no flag: paste this block under the }<code>claude</code>{ entry in }<code>{name}.yml</code>{ after the init, then }<code>monoceros apply {name}</code>{:}</p>
+<pre data-breakout="wide" data-breakout-width="760"><code class="language-yaml">    plugins:
+      - url: https://github.com/getmonoceros/monoceros-discovery.git
+        enable:
+          - discovery-atlassian</code></pre>
 <p><strong>{A workbench that already exists}</strong>{: not }<code>init</code>{, but one command per mapped component, then one }<code>monoceros apply {name}</code>{. The template applies only to }<code>init</code>{, so this block names every feature itself, the four defaults included. Both blocks always go on the page, because the reader may be in either situation.}</p>
 <pre data-breakout="wide" data-breakout-width="760"><code class="language-shell">monoceros add-language {name} {id}
 monoceros add-service {name} {id}
@@ -67,6 +74,8 @@ monoceros add-feature {name} claude
 monoceros add-feature {name} claude-code-roles
 monoceros add-feature {name} atlassian/twg
 monoceros add-feature {name} {code-host feature, from the answer - or omitted while that is open}
+monoceros add-mcp-server {name} {id, only when the build needs one}
+monoceros add-port {name} {port number, one line per port}
 monoceros apply {name}</code></pre>
 <p>{The discovery plugin has no command. It is a hand-edit in }<code>{name}.yml</code>{, as a }<code>plugins:</code>{ block under the }<code>claude</code>{ feature entry, where }<code>add-feature</code>{ left a commented example to overwrite.}</p>
 <p>{Repo on another host (self-hosted GitLab, GitHub Enterprise …) not in }<code>--with-repos</code>{, but after the init:}</p>
@@ -121,7 +130,12 @@ Rules:
   new workbench, and the `add-*` commands plus one `apply` for a workbench that
   already exists. Both always, labelled - the reader of the page may be in
   either situation, and the plugin line (a hand-edit under the `claude` entry)
-  belongs with them. The table must sit inside the
+  belongs with them. The `init` flags carry only what the template does not
+  already bring. With a template other than `discovery-atlassian`, the line
+  under the sketch names the defaults it lacked, and the yml block is there
+  only when the plugin is one of them; with `discovery-atlassian`, neither
+  appears under the sketch. The plugin line under the second block stays in
+  every case. The table must sit inside the
   `details` macro: a bare table otherwise gets lifted unstably into a `<thead>`
   by the editor. (Even inside the macro the first row lands in `<thead>` -
   harmless on a one-time create, because in ADF it stays a header column
