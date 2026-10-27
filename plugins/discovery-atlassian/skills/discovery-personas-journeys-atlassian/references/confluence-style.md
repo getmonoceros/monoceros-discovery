@@ -85,6 +85,12 @@ reference; render them in the **output language**. Technical values
   about to patch.
 - **An update needs the page's current version.** Fetch it immediately before
   writing; a stale version is rejected.
+- **A code block starts at column 0.** Confluence drops the leading whitespace
+  of a code block's first line, masked as `&#32;` too, so a snippet that starts
+  indented loses its structure: the first line moves left, the others do not,
+  and whoever copies it gets broken yml. Write every code block from column 0
+  and keep the indentation relative to that; when the snippet belongs at a
+  deeper level of a file, the sentence before it says where.
 
 ## Diagrams
 

@@ -367,15 +367,19 @@ line so the reader finds the spot, and a link to
 [Plugins](https://getmonoceros.build/docs/features/claude/#plugins) follows it:
 
 ```yaml
-  - ref: ghcr.io/getmonoceros/monoceros-features/claude-code:1
-    plugins:
-      - url: https://github.com/getmonoceros/monoceros-discovery.git
-        enable:
-          - discovery-atlassian
+- ref: ghcr.io/getmonoceros/monoceros-features/claude-code:1
+  plugins:
+    - url: https://github.com/getmonoceros/monoceros-discovery.git
+      enable:
+        - discovery-atlassian
 ```
 
-The entry's `options:` stay as they are; the `plugins:` block replaces the
-commented example `add-feature` left there.
+The snippet starts at column 0 on purpose: Confluence drops the leading
+whitespace of a code block, so an indented snippet arrives broken. So the
+sentence before it always says where it goes, in these words or close to them:
+"Merge this into the `claude-code` entry under `features:` in `<name>.yml`; its
+`- ref:` line sits at the indentation of the other feature entries." The entry's `options:` stay as they are; the
+`plugins:` block replaces the commented example `add-feature` left there.
 
 **The plugin comes from the template or from that hand-edit, nothing else.** A
 plugin is a nested block under a feature entry, and no flag and no `add-*`
@@ -473,8 +477,9 @@ Say plainly that the discovery plugin cannot be added by a command: for a
 workbench that already exists always, for a new one when its template lacks
 it. It is a hand-edit in the yml, under the `claude` feature entry (where
 `monoceros add-feature` left a commented `plugins:` example to overwrite). Then
-`monoceros apply <name>` picks it up. **Never as prose alone**: the same yml
-snippet and the [Plugins](https://getmonoceros.build/docs/features/claude/#plugins) link as under the sketch go
+`monoceros apply <name>` picks it up. **Never as prose alone, never "as
+above"**: the same yml snippet, written out again with the same sentence on
+the indentation, and the [Plugins](https://getmonoceros.build/docs/features/claude/#plugins) link as under the sketch go
 under the second block too, because nobody writes a nested yml block from a
 sentence.
 

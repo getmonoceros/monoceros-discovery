@@ -63,12 +63,12 @@ CLI flags (`--template`, `--with-languages`, `--with-services`,
   --with-mcp-servers={…} \
   --with-ports={port numbers, e.g. 3000} \
   --with-repos={full HTTPS URL of the repo, asked from the user - no placeholder}</code></pre>
-<p>{Only for a template other than discovery-atlassian: which of }<code>claude</code>{ with the discovery plugin, }<code>claude-code-roles</code>{ and }<code>atlassian</code>{ with twg it lacked, and that }<code>--with-features</code>{ above closes them. If the plugin is missing, it has no flag: paste this block under the }<code>claude</code>{ entry in }<code>{name}.yml</code>{ after the init, then }<code>monoceros apply {name}</code>{:}</p>
-<pre data-breakout="wide" data-breakout-width="760"><code class="language-yaml">  - ref: ghcr.io/getmonoceros/monoceros-features/claude-code:1
-    plugins:
-      - url: https://github.com/getmonoceros/monoceros-discovery.git
-        enable:
-          - discovery-atlassian</code></pre>
+<p>{Only for a template other than discovery-atlassian: which of }<code>claude</code>{ with the discovery plugin, }<code>claude-code-roles</code>{ and }<code>atlassian</code>{ with twg it lacked, and that }<code>--with-features</code>{ above closes them. If the plugin is missing, it has no flag: merge this block into the }<code>claude-code</code>{ entry under }<code>features:</code>{ in }<code>{name}.yml</code>{ after the init (its }<code>- ref:</code>{ line sits at the indentation of the other feature entries), then }<code>monoceros apply {name}</code>{:}</p>
+<pre data-breakout="wide" data-breakout-width="760"><code class="language-yaml">- ref: ghcr.io/getmonoceros/monoceros-features/claude-code:1
+  plugins:
+    - url: https://github.com/getmonoceros/monoceros-discovery.git
+      enable:
+        - discovery-atlassian</code></pre>
 <p>{The entry's }<code>options:</code>{ stay as they are. More in }<a href="https://getmonoceros.build/docs/features/claude/#plugins">{Plugins}</a>{.}</p>
 <p><strong>{A workbench that already exists}</strong>{: not }<code>init</code>{, but one command per mapped component, then one }<code>monoceros apply {name}</code>{. The template applies only to }<code>init</code>{, so this block names every feature itself, the four defaults included. Both blocks always go on the page, because the reader may be in either situation.}</p>
 <pre data-breakout="wide" data-breakout-width="760"><code class="language-shell">monoceros add-language {name} {id}
@@ -80,12 +80,12 @@ monoceros add-feature {name} {code-host feature, from the answer - or omitted wh
 monoceros add-mcp-server {name} {id, only when the build needs one}
 monoceros add-port {name} {port number, one line per port}
 monoceros apply {name}</code></pre>
-<p>{The discovery plugin has no command. It is a hand-edit in }<code>{name}.yml</code>{: replace the commented }<code>plugins:</code>{ example that }<code>add-feature</code>{ left under the }<code>claude-code</code>{ entry with this block, then }<code>monoceros apply {name}</code>{:}</p>
-<pre data-breakout="wide" data-breakout-width="760"><code class="language-yaml">  - ref: ghcr.io/getmonoceros/monoceros-features/claude-code:1
-    plugins:
-      - url: https://github.com/getmonoceros/monoceros-discovery.git
-        enable:
-          - discovery-atlassian</code></pre>
+<p>{The discovery plugin has no command. It is a hand-edit in }<code>{name}.yml</code>{: replace the commented }<code>plugins:</code>{ example that }<code>add-feature</code>{ left under the }<code>claude-code</code>{ entry with this block; its }<code>- ref:</code>{ line sits at the indentation of the other feature entries. Then }<code>monoceros apply {name}</code>{.}</p>
+<pre data-breakout="wide" data-breakout-width="760"><code class="language-yaml">- ref: ghcr.io/getmonoceros/monoceros-features/claude-code:1
+  plugins:
+    - url: https://github.com/getmonoceros/monoceros-discovery.git
+      enable:
+        - discovery-atlassian</code></pre>
 <p>{The entry's }<code>options:</code>{ stay as they are. More in }<a href="https://getmonoceros.build/docs/features/claude/#plugins">{Plugins}</a>{.}</p>
 <p>{Repo on another host (self-hosted GitLab, GitHub Enterprise …) not in }<code>--with-repos</code>{, but after the init:}</p>
 <pre data-breakout="wide" data-breakout-width="760"><code class="language-shell">monoceros add-repo {name} {https-url} --provider=github|gitlab|bitbucket</code></pre>
