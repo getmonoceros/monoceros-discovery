@@ -112,7 +112,11 @@ map them as project components.
    feature; framework/library from the project manifest (Spring Boot, Django,
    Next.js, …) → **dependency**, which the app brings itself - **not** in the
    yml. Never invent a component; if the idea needs something uncurated, say so
-   and take the nearest alternative or mark it as a dependency.
+   and take the nearest alternative or mark it as a dependency. A **service or
+   an MCP server** has a third way: the builder keeps the choice and describes
+   it once as a file of their own. Offer both, the nearest alternative and the
+   file, and let the builder pick. The file route is an open point, not a
+   mapping entry (see "A component nobody has yet").
 2. **The technical brief is a proposal, not the final yml.** The exact ids and
    versions are confirmed against `monoceros list-components` at build time. So
    you don't need a perfectly fresh catalog - but you must not invent anything.
@@ -457,6 +461,16 @@ it. It is a hand-edit in the yml, under the `claude` feature entry (where
 `monoceros add-feature` left a commented `plugins:` example to overwrite). Then
 `monoceros apply <name>` picks it up.
 
+**One line for later, under both blocks**: once the workbench has proven itself
+on the project, `monoceros create-template <name> <template>` turns it into a
+workbench template the next project starts from, with a link to
+[monoceros create-template](https://getmonoceros.build/docs/reference/utilities/create-template/).
+`<template>` is a placeholder for a new name, never the template the
+workbench started from: the command never overwrites one and stops instead.
+Only a hint, never an open point: it is not undecided about the product. Leave
+it out when the sketch adds nothing to its template, because then the template
+already is that setup.
+
 ### Step 3: Confirm
 
 Summarize the technical brief, get confirmation, integrate corrections.
@@ -492,6 +506,8 @@ type). For the technical brief specifically:
   table says where the team files come from: that URL and the guide section
   [Get it onto every machine](https://getmonoceros.build/docs/guides/templates/#get-it-onto-every-machine).
   No clone command of your own: the guide is the one place that says how.
+  A component nobody has yet is marked as such and left out of both blocks;
+  the `create-template` line closes the section (Step 2).
 - **Deployment** → **note panel** (`panel-note`).
 - **Open points** → 2 columns with yellow `open` status chips.
 
@@ -533,6 +549,31 @@ rules:
   during planning into the story whose function needs it, and only becomes an issue of
   its own if no function needs it. An empty "Open points" section means: the
   technical brief stands.
+
+### A component nobody has yet
+
+When the builder keeps a service or an MCP server that neither the catalog nor
+their own files have (principle 1), it becomes one open point per component:
+
+- **What it is for**, in one sentence, and that it is described once as a file:
+  `services/<name>.yml` or `mcp-servers/<name>.yml`, in the team repository
+  when the output names a `templateRepository`, otherwise in the builder's
+  `~/.monoceros/templates/`. Link the guide section that shows how:
+  [Add a service the catalog doesn't have](https://getmonoceros.build/docs/guides/templates/#add-a-service-the-catalog-doesnt-have)
+  or [Add your own MCP server](https://getmonoceros.build/docs/guides/templates/#add-your-own-mcp-server).
+  With a team repository, also
+  [Create a template with an agent](https://getmonoceros.build/docs/guides/templates/#create-a-template-with-an-agent):
+  its `template-authoring` workbench lets an agent write the file.
+- **Then the command**: once the file exists,
+  `monoceros add-service <name> <service>` (or `add-mcp-server`) and
+  `monoceros apply <name>`.
+- **No file content on the page.** Not a descriptor, not an image tag: the tag
+  comes from the image's registry, and the file is checked where it is written.
+  The page names what is needed; writing it is a step of its own.
+
+In the mapping table the component stands under its flag, marked as not yet a
+file and pointing at the open point. It is **not** in either command block:
+`init` and `add-service` stop on a name no file and no catalog entry knows.
 
 ## Style
 

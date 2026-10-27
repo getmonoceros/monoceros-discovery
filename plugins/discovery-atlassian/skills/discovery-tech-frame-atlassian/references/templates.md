@@ -52,7 +52,7 @@ CLI flags (`--template`, `--with-languages`, `--with-services`,
 <section data-type="layout-two-equal" data-breakout="wide" data-breakout-width="760"><div data-type="column" data-width="50"><h3>{Emoji} {Convention 1, e.g. authentication}</h3><p>{one line}</p><h3>{Emoji} {Convention 2, e.g. validation}</h3><p>{one line}</p></div><div data-type="column" data-width="50"><h3>{Emoji} {Convention 3, e.g. error shape}</h3><p>{one line}</p><h3>{Emoji} {Convention 4, e.g. identifiers}</h3><p>{one line}</p></div></section>
 <h2>{Mapping onto the Monoceros container definition}</h2>
 <p><em>{Catalog ids from the live source (CLI {version}), or from the builder's own }</em><code>monoceros list-components --json</code><em>{ output when they keep their own templates. Confirm the exact ids and versions at build time against }</em><code>monoceros list-components</code><em>{.}</em></p>
-<div data-type="bodied-extension" data-extension-key="details" data-extension-type="com.atlassian.confluence.macro.core"><table data-width="760"><tbody><tr><th><p><code>--template</code></p></th><td><p>{discovery-atlassian, or the template the builder chose - and what it already brings}</p></td></tr><tr><th><p><code>--with-languages</code></p></th><td><p>{id, id, … - each briefly for what; only what the template does not bring}</p></td></tr><tr><th><p><code>--with-services</code></p></th><td><p>{id, id, … - each briefly for what, the team's own marked as such, a personal one as on the builder's machine only; only what the template does not bring}</p></td></tr><tr><th><p><code>--with-features</code></p></th><td><p>{id, id, … - each briefly for what; a default the template lacked says so}</p></td></tr><tr><th><p><code>--with-mcp-servers</code></p></th><td><p>{id, … - only when the build needs one, the team's own marked as such, a personal one as on the builder's machine only; otherwise omit the line}</p></td></tr><tr><th><p><code>--with-ports</code></p></th><td><p>{port numbers the app listens on, each briefly for what - numbers only, never a service name; a service's web UI is not a port here}</p></td></tr><tr><th><p><code>--with-repos</code></p></th><td><p>{full HTTPS URL, only for github.com/gitlab.com/bitbucket.org; no repo or another host: omit the line}</p></td></tr></tbody></table></div>
+<div data-type="bodied-extension" data-extension-key="details" data-extension-type="com.atlassian.confluence.macro.core"><table data-width="760"><tbody><tr><th><p><code>--template</code></p></th><td><p>{discovery-atlassian, or the template the builder chose - and what it already brings}</p></td></tr><tr><th><p><code>--with-languages</code></p></th><td><p>{id, id, … - each briefly for what; only what the template does not bring}</p></td></tr><tr><th><p><code>--with-services</code></p></th><td><p>{id, id, … - each briefly for what, the team's own marked as such, a personal one as on the builder's machine only, one nobody has yet as not yet a file (see open points); only what the template does not bring}</p></td></tr><tr><th><p><code>--with-features</code></p></th><td><p>{id, id, … - each briefly for what; a default the template lacked says so}</p></td></tr><tr><th><p><code>--with-mcp-servers</code></p></th><td><p>{id, … - only when the build needs one, the team's own marked as such, a personal one as on the builder's machine only, one nobody has yet as not yet a file (see open points); otherwise omit the line}</p></td></tr><tr><th><p><code>--with-ports</code></p></th><td><p>{port numbers the app listens on, each briefly for what - numbers only, never a service name; a service's web UI is not a port here}</p></td></tr><tr><th><p><code>--with-repos</code></p></th><td><p>{full HTTPS URL, only for github.com/gitlab.com/bitbucket.org; no repo or another host: omit the line}</p></td></tr></tbody></table></div>
 <p>{Only when the proposal uses a team file and the output names a templateRepository: }<em>{The team's templates come from }</em><code>{templateRepository}</code><em>{; to get them onto your machine, see }</em><a href="https://getmonoceros.build/docs/guides/templates/#get-it-onto-every-machine">{Get it onto every machine}</a><em>{.}</em></p>
 <p>{Not in the yml (app-owned dependencies): {frameworks/libraries the app brings itself}. Tests: {test stacks per component}.}</p>
 <p><strong>{A new workbench}</strong>{: as a sketch (the }<code>--with-repos</code>{ line only when a repo exists on github.com/gitlab.com/bitbucket.org; otherwise omit):}</p>
@@ -81,11 +81,14 @@ monoceros apply {name}</code></pre>
 <p>{The discovery plugin has no command. It is a hand-edit in }<code>{name}.yml</code>{, as a }<code>plugins:</code>{ block under the }<code>claude</code>{ feature entry, where }<code>add-feature</code>{ left a commented example to overwrite.}</p>
 <p>{Repo on another host (self-hosted GitLab, GitHub Enterprise …) not in }<code>--with-repos</code>{, but after the init:}</p>
 <pre data-breakout="wide" data-breakout-width="760"><code class="language-shell">monoceros add-repo {name} {https-url} --provider=github|gitlab|bitbucket</code></pre>
+<p>{Unless the sketch adds nothing to its template: }<em>{Once the workbench has proven itself on the project, }</em><code>monoceros create-template {name} &lt;new-template&gt;</code><em>{ turns it into a workbench template the next project starts from: }</em><a href="https://getmonoceros.build/docs/reference/utilities/create-template/">{monoceros create-template}</a><em>{.}</em></p>
 <p>{Token/PAT setup for cloning and pushing (private repo): }<a href="https://getmonoceros.build/docs/concepts/git-and-repos/">getmonoceros.build/docs/concepts/git-and-repos</a>.</p>
 <h2>{Deployment}</h2>
 <div data-type="panel-note"><p>{Target and mechanics, as far as known. As long as open: "Target still to be decided" - then NOT additionally in Open points.}</p></div>
 <h2>{Open points}</h2>
 <section data-type="layout-two-equal" data-breakout="wide" data-breakout-width="760"><div data-type="column" data-width="50"><h3><span data-type="status" data-color="yellow">{open}</span> {Point 1}</h3><p>{what needs clarifying/doing}</p></div><div data-type="column" data-width="50"><h3><span data-type="status" data-color="yellow">{open}</span> {Point 2}</h3><p>{…}</p></div></section>
+<!-- A service or MCP server nobody has yet fills a column like any other point, e.g.: -->
+<section data-type="layout-two-equal" data-breakout="wide" data-breakout-width="760"><div data-type="column" data-width="50"><h3><span data-type="status" data-color="yellow">{open}</span> {Describe {component} as a file}</h3><p>{What it is for. Described once as }<code>{services|mcp-servers}/{component}.yml</code>{ in the team repository (or in }<code>~/.monoceros/templates/</code>{ without one): }<a href="https://getmonoceros.build/docs/guides/templates/#add-a-service-the-catalog-doesnt-have">{Add a service the catalog doesn't have}</a>{ or }<a href="https://getmonoceros.build/docs/guides/templates/#add-your-own-mcp-server">{Add your own MCP server}</a>{; with a team repository also }<a href="https://getmonoceros.build/docs/guides/templates/#create-a-template-with-an-agent">{Create a template with an agent}</a>{. Then }<code>monoceros add-service {name} {component}</code>{ (or }<code>add-mcp-server</code>{) and }<code>monoceros apply {name}</code>{.}</p></div><div data-type="column" data-width="50"></div></section>
 ```
 
 Rules:
@@ -136,7 +139,11 @@ Rules:
   under the sketch names the defaults it lacked, and the yml block is there
   only when the plugin is one of them; with `discovery-atlassian`, neither
   appears under the sketch. The plugin line under the second block stays in
-  every case. The table must sit inside the
+  every case. A component nobody has a file for yet stands in the table,
+  marked so, and in neither block. The `create-template` line closes the
+  section unless the sketch adds nothing to its template; its template name
+  stays a placeholder for a new name, never the one the workbench started
+  from (the command never overwrites a template). The table must sit inside the
   `details` macro: a bare table otherwise gets lifted unstably into a `<thead>`
   by the editor. (Even inside the macro the first row lands in `<thead>` -
   harmless on a one-time create, because in ADF it stays a header column
@@ -153,6 +160,9 @@ Rules:
   `<p>`. (HTML+ has no task lists - the chips are the substitute.) On an odd
   count leave the last column empty. **Only what is undecided about the
   product** goes here: a technology choice still open, a port to confirm, an
-  unresolved external dependency, a repository that does not exist yet.
+  unresolved external dependency, a repository that does not exist yet, a
+  service or MCP server nobody has a file for yet (one point each: what it is
+  for, where the file goes, the guide links, then the `add-*` command; never
+  the file's content or an image tag).
   **Configuring a feature is never an open point** - no credentials, no token,
   no `.env` entry. That belongs to setting up the workbench, not to the product.
