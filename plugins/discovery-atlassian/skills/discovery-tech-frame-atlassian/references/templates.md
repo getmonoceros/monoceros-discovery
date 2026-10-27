@@ -55,7 +55,7 @@ CLI flags (`--template`, `--with-languages`, `--with-services`,
 <div data-type="bodied-extension" data-extension-key="details" data-extension-type="com.atlassian.confluence.macro.core"><table data-width="760"><tbody><tr><th><p><code>--template</code></p></th><td><p>{discovery-atlassian, or the template the builder chose - and what it already brings}</p></td></tr><tr><th><p><code>--with-languages</code></p></th><td><p>{id, id, … - each briefly for what; only what the template does not bring}</p></td></tr><tr><th><p><code>--with-services</code></p></th><td><p>{id, id, … - each briefly for what, the team's own marked as such, a personal one as on the builder's machine only, one nobody has yet as not yet a file (see open points); only what the template does not bring}</p></td></tr><tr><th><p><code>--with-features</code></p></th><td><p>{id, id, … - each briefly for what; a default the template lacked says so}</p></td></tr><tr><th><p><code>--with-mcp-servers</code></p></th><td><p>{id, … - only when the build needs one, the team's own marked as such, a personal one as on the builder's machine only, one nobody has yet as not yet a file (see open points); otherwise omit the line}</p></td></tr><tr><th><p><code>--with-ports</code></p></th><td><p>{port numbers the app listens on, each briefly for what - numbers only, never a service name; a service's web UI is not a port here; only ports the template's ports list does not carry}</p></td></tr><tr><th><p><code>--with-repos</code></p></th><td><p>{full HTTPS URL, only for github.com/gitlab.com/bitbucket.org; no repo, another host, or a repo the template's repos list already carries: omit the line}</p></td></tr></tbody></table></div>
 <p>{Only when the proposal uses a team file and the output names a templateRepository: }<em>{The team's templates come from }</em><code>{templateRepository}</code><em>{; to get them onto your machine, see }</em><a href="https://getmonoceros.build/docs/guides/templates/#get-it-onto-every-machine">{Get it onto every machine}</a><em>{.}</em></p>
 <p>{Not in the yml (app-owned dependencies): {frameworks/libraries the app brings itself}. Tests: {test stacks per component}.}</p>
-<p><strong>{A new workbench}</strong>{: as a sketch (the }<code>--with-repos</code>{ line only when a repo exists on github.com/gitlab.com/bitbucket.org; otherwise omit):}</p>
+<p><strong>{A new workbench}</strong>{: as a sketch (the }<code>--with-repos</code>{ line only when a repo exists on github.com/gitlab.com/bitbucket.org and the template does not carry it; otherwise omit):}</p>
 <pre data-breakout="wide" data-breakout-width="760"><code class="language-shell">monoceros init {name} --template={discovery-atlassian, or the chosen template} \
   --with-languages={…} \
   --with-services={…} \
@@ -79,6 +79,7 @@ monoceros add-feature {name} atlassian/twg
 monoceros add-feature {name} {code-host feature, from the answer - or omitted while that is open}
 monoceros add-mcp-server {name} {id, only when the build needs one}
 monoceros add-port {name} {port number, one line per port}
+monoceros add-repo {name} {https-url, also when the template carries it; --provider=github|gitlab|bitbucket only for another host; no repo yet: omit the line}
 monoceros apply {name}</code></pre>
 <p>{The discovery plugin has no command. It is a hand-edit in }<code>{name}.yml</code>{: replace the commented }<code>plugins:</code>{ example that }<code>add-feature</code>{ left under the }<code>claude-code</code>{ entry with this block; its }<code>- ref:</code>{ line sits at the indentation of the other feature entries. Then }<code>monoceros apply {name}</code>{.}</p>
 <pre data-breakout="wide" data-breakout-width="760"><code class="language-yaml">- ref: ghcr.io/getmonoceros/monoceros-features/claude-code:1
@@ -157,13 +158,20 @@ Rules:
   by the editor. (Even inside the macro the first row lands in `<thead>` -
   harmless on a one-time create, because in ADF it stays a header column
   `th`+`td`.)
-- **Repos** = when the chosen template's `repos` already carries the
-  repository, it is cloned: omit `--with-repos` and the `add-repo` line, and
-  don't ask. Otherwise the skill asks whether a repo already exists. No repo →
-  omit `--with-repos`, carry the repo as an open point. github/gitlab/bitbucket →
-  full HTTPS URL in `--with-repos`. Another host → not in `--with-repos`, but
-  `monoceros add-repo <name> <url> --provider=…` below it (ask for the
-  provider). Under the code block, the docs link to the token setup.
+- **Repos** = the skill asks whether a repo already exists, unless the chosen
+  template's `repos` already carries it: then its `url` and `provider` are the
+  answer. No repo → no repo line in either block, carry the repo as an open
+  point. A repo exists →
+  - **Sketch**: github/gitlab/bitbucket → full HTTPS URL in `--with-repos`.
+    Another host → not in `--with-repos`, but
+    `monoceros add-repo <name> <url> --provider=…` below it (ask for the
+    provider). Neither when the template already carries the repo: `init`
+    clones it.
+  - **Second block**: always `monoceros add-repo <name> <url>`, with
+    `--provider=…` for another host, also when the template carries the repo,
+    because the template never reaches a workbench that already exists.
+
+  Under the code block, the docs link to the token setup.
 - **Deployment** = **note panel** (`panel-note`). As long as undecided: a short
   "open" text - and the point then does **not** additionally appear in the open
   points (a section is the one place for its topic).

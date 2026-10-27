@@ -475,7 +475,9 @@ template already brought `claude`, `claude-code-roles` and `atlassian/twg`, or
 the sketch closed the gaps. Nothing brings them to a workbench that already exists, so
 the `add-feature` lines are the full set from principle 5, not the leftover from
 the sketch. A second block with only the code-host feature in it builds exactly
-the workbench this whole chain cannot run in.
+the workbench this whole chain cannot run in. The same holds for the app's
+repository and ports: the second block names them with `add-repo` and
+`add-port` even when the template brings them to a new workbench.
 
 Say plainly that the discovery plugin cannot be added by a command: for a
 workbench that already exists always, for a new one when its template lacks
