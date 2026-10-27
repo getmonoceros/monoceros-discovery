@@ -64,10 +64,12 @@ CLI flags (`--template`, `--with-languages`, `--with-services`,
   --with-ports={port numbers, e.g. 3000} \
   --with-repos={full HTTPS URL of the repo, asked from the user - no placeholder}</code></pre>
 <p>{Only for a template other than discovery-atlassian: which of }<code>claude</code>{ with the discovery plugin, }<code>claude-code-roles</code>{ and }<code>atlassian</code>{ with twg it lacked, and that }<code>--with-features</code>{ above closes them. If the plugin is missing, it has no flag: paste this block under the }<code>claude</code>{ entry in }<code>{name}.yml</code>{ after the init, then }<code>monoceros apply {name}</code>{:}</p>
-<pre data-breakout="wide" data-breakout-width="760"><code class="language-yaml">    plugins:
+<pre data-breakout="wide" data-breakout-width="760"><code class="language-yaml">  - ref: ghcr.io/getmonoceros/monoceros-features/claude-code:1
+    plugins:
       - url: https://github.com/getmonoceros/monoceros-discovery.git
         enable:
           - discovery-atlassian</code></pre>
+<p>{The entry's }<code>options:</code>{ stay as they are. More in }<a href="https://getmonoceros.build/docs/features/claude/#plugins">{Plugins}</a>{.}</p>
 <p><strong>{A workbench that already exists}</strong>{: not }<code>init</code>{, but one command per mapped component, then one }<code>monoceros apply {name}</code>{. The template applies only to }<code>init</code>{, so this block names every feature itself, the four defaults included. Both blocks always go on the page, because the reader may be in either situation.}</p>
 <pre data-breakout="wide" data-breakout-width="760"><code class="language-shell">monoceros add-language {name} {id}
 monoceros add-service {name} {id}
@@ -78,7 +80,13 @@ monoceros add-feature {name} {code-host feature, from the answer - or omitted wh
 monoceros add-mcp-server {name} {id, only when the build needs one}
 monoceros add-port {name} {port number, one line per port}
 monoceros apply {name}</code></pre>
-<p>{The discovery plugin has no command. It is a hand-edit in }<code>{name}.yml</code>{, as a }<code>plugins:</code>{ block under the }<code>claude</code>{ feature entry, where }<code>add-feature</code>{ left a commented example to overwrite.}</p>
+<p>{The discovery plugin has no command. It is a hand-edit in }<code>{name}.yml</code>{: replace the commented }<code>plugins:</code>{ example that }<code>add-feature</code>{ left under the }<code>claude-code</code>{ entry with this block, then }<code>monoceros apply {name}</code>{:}</p>
+<pre data-breakout="wide" data-breakout-width="760"><code class="language-yaml">  - ref: ghcr.io/getmonoceros/monoceros-features/claude-code:1
+    plugins:
+      - url: https://github.com/getmonoceros/monoceros-discovery.git
+        enable:
+          - discovery-atlassian</code></pre>
+<p>{The entry's }<code>options:</code>{ stay as they are. More in }<a href="https://getmonoceros.build/docs/features/claude/#plugins">{Plugins}</a>{.}</p>
 <p>{Repo on another host (self-hosted GitLab, GitHub Enterprise …) not in }<code>--with-repos</code>{, but after the init:}</p>
 <pre data-breakout="wide" data-breakout-width="760"><code class="language-shell">monoceros add-repo {name} {https-url} --provider=github|gitlab|bitbucket</code></pre>
 <p>{Unless the sketch adds nothing to its template: }<em>{Once the workbench has proven itself on the project, }</em><code>monoceros create-template {name} &lt;new-template&gt;</code><em>{ turns it into a workbench template the next project starts from: }</em><a href="https://getmonoceros.build/docs/reference/utilities/create-template/">{monoceros create-template}</a><em>{.}</em></p>
@@ -133,12 +141,13 @@ Rules:
   and **both** command blocks: the `monoceros init --template=…` sketch for a
   new workbench, and the `add-*` commands plus one `apply` for a workbench that
   already exists. Both always, labelled - the reader of the page may be in
-  either situation, and the plugin line (a hand-edit under the `claude` entry)
-  belongs with them. The `init` flags carry only what the template does not
+  either situation, and the plugin hand-edit belongs with them as the yml
+  snippet with the `ref` line and the Plugins docs link, never as a sentence
+  alone. The `init` flags carry only what the template does not
   already bring. With a template other than `discovery-atlassian`, the line
   under the sketch names the defaults it lacked, and the yml block is there
   only when the plugin is one of them; with `discovery-atlassian`, neither
-  appears under the sketch. The plugin line under the second block stays in
+  appears under the sketch. The plugin snippet under the second block stays in
   every case. A component nobody has a file for yet stands in the table,
   marked so, and in neither block. The `create-template` line closes the
   section unless the sketch adds nothing to its template; its template name

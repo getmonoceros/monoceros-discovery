@@ -362,14 +362,20 @@ Name each one the template lacks and close it, never drop the requirement:
 missing or twg-less `atlassian` goes in as `atlassian/twg` (it merges into an
 `atlassian` entry that is already there). A missing plugin block has no flag:
 say so, and give the block to paste under the `claude` entry after `init`,
-followed by `monoceros apply <name>`:
+followed by `monoceros apply <name>`. The snippet carries the entry's `ref`
+line so the reader finds the spot, and a link to
+[Plugins](https://getmonoceros.build/docs/features/claude/#plugins) follows it:
 
 ```yaml
+  - ref: ghcr.io/getmonoceros/monoceros-features/claude-code:1
     plugins:
       - url: https://github.com/getmonoceros/monoceros-discovery.git
         enable:
           - discovery-atlassian
 ```
+
+The entry's `options:` stay as they are; the `plugins:` block replaces the
+commented example `add-feature` left there.
 
 **The plugin comes from the template or from that hand-edit, nothing else.** A
 plugin is a nested block under a feature entry, and no flag and no `add-*`
@@ -467,7 +473,10 @@ Say plainly that the discovery plugin cannot be added by a command: for a
 workbench that already exists always, for a new one when its template lacks
 it. It is a hand-edit in the yml, under the `claude` feature entry (where
 `monoceros add-feature` left a commented `plugins:` example to overwrite). Then
-`monoceros apply <name>` picks it up.
+`monoceros apply <name>` picks it up. **Never as prose alone**: the same yml
+snippet and the [Plugins](https://getmonoceros.build/docs/features/claude/#plugins) link as under the sketch go
+under the second block too, because nobody writes a nested yml block from a
+sentence.
 
 **One line for later, under both blocks**: once the workbench has proven itself
 on the project, `monoceros create-template <name> <template>` turns it into a
@@ -508,7 +517,7 @@ type). For the technical brief specifically:
   **page-properties macro** (`details`), then the "Not in the yml" prose and
   **both** command blocks: the `init --template=…` sketch for a new workbench,
   and the `add-*` commands with one `apply` for a workbench that already exists,
-  each labelled, plus the line about the plugin hand-edit. Local components
+  each labelled, plus the plugin hand-edit as a yml snippet with the docs link. Local components
   are marked in the table as the team's or as personal. When the proposal uses
   a team file and the output names a `templateRepository`, one line under the
   table says where the team files come from: that URL and the guide section
