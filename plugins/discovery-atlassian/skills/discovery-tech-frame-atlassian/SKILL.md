@@ -394,6 +394,10 @@ language the template carries (`node:22` is node), a service in its `services`
 (`postgres@1` means the template brings postgres), a feature or an MCP server in
 its lists: none of them is repeated. If the brief needs another version of a
 language than the template pins, say so instead of adding it a second time.
+The same goes for a port in its `ports` and a repository whose `url` is in its
+`repos`: the template already routes and clones them. A template whose entry
+has no `ports` and no `repos` at all comes from an older CLI; for it they are
+unknown rather than empty, so propose ports and the repository as usual.
 
 Translate the decisions into the `init` categories with catalog ids:
 
