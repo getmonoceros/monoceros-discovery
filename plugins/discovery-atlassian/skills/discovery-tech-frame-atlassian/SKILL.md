@@ -334,7 +334,8 @@ For each decision, record whether it is a Monoceros service, a feature, or an
 #### The workbench template
 
 The workbench starts from the **`discovery-atlassian` template**, which carries
-the three defaults: `claude` with the discovery plugin, `claude-code-roles`
+three of the four defaults from principle 5 (the fourth, the code-host feature,
+comes from the user's answer): `claude` with the discovery plugin, `claude-code-roles`
 (plan, implement, review against the plan) and `atlassian/twg` (Jira and
 Confluence access, the lean preset rather than the full `atlassian` with
 `rovodev`+`forge`).
