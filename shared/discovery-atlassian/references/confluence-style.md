@@ -134,7 +134,7 @@ it.
     { "id": "Skill", "band": "content", "row": 0, "col": 0,
       "attrs": [["name", "String"], ["theory", "String [0..1]"]] },
     { "id": "SkillAssignment", "band": "history", "row": 1, "col": 0,
-      "attrs": [["state", "SkillAssignmentState"]] }
+      "attrs": [["skill", "Skill"], ["state", "SkillAssignmentState"]] }
   ],
   "edges": [
     { "from": "Skill", "to": "SkillAssignment", "fromCard": "1", "toCard": "0..*" }
@@ -213,8 +213,8 @@ Keep the spec file: it goes onto the page with the picture.
 ### What goes into the picture
 
 - **Class diagram** (the domain model): every entity with its attributes as
-  `name: Type`, and `[0..1]` after the type where the attribute table says
-  *not mandatory*. The attribute table and the box say the same thing. A
+  `name: Type`, references included (`skill: Skill`), and `[0..1]` after the
+  type where the attribute table says *not mandatory*. The attribute table and the box say the same thing. A
   **cardinality at both ends of every line**. A **label** only where the line
   does not explain itself: a self-reference ("People Lead"), a second line
   between the same pair, a person in a role ("written by"). The verb of every

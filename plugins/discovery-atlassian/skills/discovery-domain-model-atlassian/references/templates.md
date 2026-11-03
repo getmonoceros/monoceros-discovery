@@ -44,7 +44,7 @@ too - they are read by the build, like the entity and attribute names above. Emo
 <h2>{Entities}</h2>
 <h3>{Emoji} {Entity 1}</h3>
 <p>{one sentence: what it is, in business terms}</p>
-<table data-width="760"><thead><tr><th><p><strong>{Attribute}</strong></p></th><th><p><strong>{Type}</strong></p></th><th><p><strong>{Mandatory}</strong></p></th><th><p><strong>{Note}</strong></p></th></tr></thead><tbody><tr><td><p>{name}</p></td><td><p>{String}</p></td><td><p>{yes}</p></td><td><p>{one clause the name and the type do not already say}</p></td></tr></tbody></table>
+<table data-width="760"><thead><tr><th><p><strong>{Attribute}</strong></p></th><th><p><strong>{Type}</strong></p></th><th><p><strong>{Mandatory}</strong></p></th><th><p><strong>{Note}</strong></p></th></tr></thead><tbody><tr><td><p>{name}</p></td><td><p>{String}</p></td><td><p>{yes}</p></td><td><p>{one clause the name and the type do not already say}</p></td></tr><tr><td><p>{address}</p></td><td><p>{Address}</p></td><td><p>{yes}</p></td><td><p>{a reference: named after the role, typed with the entity it points at}</p></td></tr></tbody></table>
 <h3>{Emoji} {Entity 2}</h3>
 <p>{…}</p>
 <table data-width="760">{…}</table>
@@ -65,6 +65,14 @@ Rules:
   panel. It is transcluded, and a panel would travel with it.
 - **One place per entity.** The `<h3>`, the sentence, and the attribute table sit
   together. Never a name list in one section and the attributes in another.
+- **An entity without its references is incomplete.** Every relationship
+  therefore appears twice: as an attribute row on the side that holds the
+  reference (the n side of 1:n, the choosing side of n:m, in 1:1 the side that
+  cannot exist without the other), typed with the other
+  entity, and as a row in the relationship table. Both name the same
+  cardinality: `FocusArea [0..*]` in the attribute row is the `0..*` beside
+  FocusArea in the relationship row. It is not a foreign key: no ID, no `Id`
+  suffix, the type is the entity.
 - **Every attribute carries a note.** No blanks, no dashes, no exceptions: a
   blank cannot be told apart from a forgotten one, and the reader has to guess
   whether the attribute was thought about at all. This is the same rule as the
@@ -78,6 +86,8 @@ Rules:
 - **If you cannot write that clause, the attribute is not settled.** With
   `createdAt` it is usually open whether it is the upload or the publication
   moment and who sets it. That is a question for the dialog, not an empty cell.
+- **A derived attribute names the function that shows or uses it** in its note.
+  A computed value no journey or core capability reads is not in the model.
 - **Attribute, state and enumeration tables keep a real `<thead>`.** These are
   data tables and want a header row. The no-`<thead>` rule applies only to the
   **page-properties** table at the top, which is key-value and needs a header

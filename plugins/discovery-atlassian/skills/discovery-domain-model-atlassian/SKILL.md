@@ -15,7 +15,9 @@ a function needs one; there is no schema story and no up-front database. If you
 find yourself designing tables, you have left this skill's job.
 
 It is also the **business** model, not a database schema: business-readable
-names, no technical abbreviations, no foreign keys, no index decisions.
+names, no technical abbreviations, no foreign keys, no index decisions. A
+reference to another entity still belongs on the entity: it is an attribute
+typed with that entity (step 3). What stays out is the ID behind it.
 
 ## Where this sits
 
@@ -115,6 +117,11 @@ Present the candidates from the noun analysis. Then settle, together:
   title, a timestamp is an attribute.
 - Is an important entity missing that no journey names yet?
 - Are two names the same thing (synonyms)?
+- **Which name?** An entity takes the term of the system it lives in, not a
+  general word. When the people are kept as a Jira issue type called Employee,
+  the entity is `Employee`, not `Person`. The build meets that term in the
+  system, and a second word for the same thing is a translation every reader
+  has to make.
 
 Confirm the list, then **immediately show a rough sketch in the chat** -
 entities and the obvious relationships only, no attributes, as plain sentences:
@@ -146,6 +153,35 @@ entry, not one per direction. Then clarify only what is genuinely open:
 Per entity: what has to be stored about it, and what makes one instance
 identifiable. Per attribute a **name**, a **type**, and whether it is
 **mandatory**.
+
+**References are attributes.** When an entity points at another one, that is a
+row in its attribute table like any other: named after the role (`skill`,
+`peopleLead`, `closedBy`), typed with the target entity (`Skill`, `Employee`,
+`FocusArea [0..*]` for several), mandatory yes or no, and a note. A single
+reference that may be missing is `Employee` with mandatory *no*, and the picture
+writes it `Employee [0..1]` like any optional attribute. The row sits on the
+side that holds the reference:
+
+- in a 1:n relationship on the n side: a `Waypoint` names its `pathTemplate`,
+  the template does not list its waypoints;
+- in an n:m relationship on the side that chooses: an assessment names its
+  focus areas, not the other way round;
+- in a 1:1 relationship on the side that cannot exist without the other.
+
+The relationship table keeps both directions; the attribute row is what makes
+the entity complete on its own. In a real run `Waypoint` showed only `position`,
+and nobody could see from the entity that it belongs to a path template and
+names a skill.
+
+This is not a foreign key: no ID, no `Id` suffix, the type is the entity.
+`skill: Skill`, never `skillId: Long`.
+
+**A derived attribute only when a function shows or uses it.** A value computed
+from others (a count, a `finished` flag read off the state of the parts) goes in
+only when a journey or a core capability names the screen or the rule that
+reads it, and its note says which. In a real run the model gave a `FocusSkill` a
+`finished` nobody had asked for, and the user's first question was where it came
+from and which function it belonged to. No function, no attribute.
 
 Ask about **enumerations** explicitly: are there fields with a fixed set of
 values? A status field almost always is, and it feeds step 4.
@@ -211,8 +247,8 @@ inventing a cut.
 
 ### Step 6: Consolidate, then feed back
 
-Present the whole model as text: entities with attributes, relationships with
-multiplicities, states with what follows, subject areas. Ask what is missing,
+Present the whole model as text: entities with attributes, references
+included, relationships with multiplicities, states with what follows, subject areas. Ask what is missing,
 what is redundant, and whether it matches the business reality.
 
 Then the mandatory step back: **what did this change about the brief or the
@@ -264,8 +300,8 @@ the diagram (spec, layout, render, upload), and the anchor scheme for deep links
   the area, its purpose, the entities it owns, and what it reads from which
   other area. The bands of the diagram are these areas, nothing else.
 - **Entities** → one `<h3>` per entity with a fitting topic emoji, a sentence of
-  prose, and **its attribute table directly underneath**. One place per entity,
-  not names here and attributes there.
+  prose, and **its attribute table directly underneath**, the references it
+  holds included. One place per entity, not names here and attributes there.
 - **Relationships** → a **table**, **one row per relationship**, three columns:
   the two entities as `A ↔︎ B` in one cell, the cardinality written exactly as
   the diagram writes it, and a sentence carrying the verb and both directions in
