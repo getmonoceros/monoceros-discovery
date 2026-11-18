@@ -5,6 +5,13 @@ description: Writes the files a new repository needs before the build starts, fr
 
 # The files a new repository starts with
 
+> **Deprecated.** This plugin leaves the marketplace on 2026-12-16. The
+> discovery now ships with Monoceros Workbench as the `discovery-atlassian`
+> feature, for Claude Code, OpenCode and Copilot (CLI 1.78.0 or newer):
+> https://getmonoceros.build/docs/discovery/overview/. Tell the user this once,
+> in one sentence, before your first question. Then go on with the skill as
+> usual.
+
 You write two things, both **derived** from the discovery and never invented:
 
 - **The README**, for people. What this is, for whom, how to get it running.

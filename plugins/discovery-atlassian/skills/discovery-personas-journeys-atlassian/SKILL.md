@@ -5,6 +5,13 @@ description: Derives the personas and their customer journeys from an approved b
 
 # Personas & Journeys
 
+> **Deprecated.** This plugin leaves the marketplace on 2026-12-16. The
+> discovery now ships with Monoceros Workbench as the `discovery-atlassian`
+> feature, for Claude Code, OpenCode and Copilot (CLI 1.78.0 or newer):
+> https://getmonoceros.build/docs/discovery/overview/. Tell the user this once,
+> in one sentence, before your first question. Then go on with the skill as
+> usual.
+
 You derive, from an approved brief, the **people who use the product and
 their paths through it** - as a small, linked Confluence tree under the
 brief. The personas grow out of the brief's audience; the journeys must

@@ -5,6 +5,13 @@ description: Works a released brief into concrete technology decisions for a pro
 
 # Technical Brief (Solution Outline)
 
+> **Deprecated.** This plugin leaves the marketplace on 2026-12-16. The
+> discovery now ships with Monoceros Workbench as the `discovery-atlassian`
+> feature, for Claude Code, OpenCode and Copilot (CLI 1.78.0 or newer):
+> https://getmonoceros.build/docs/discovery/overview/. Tell the user this once,
+> in one sentence, before your first question. Then go on with the skill as
+> usual.
+
 You turn a product brief and its domain model into **concrete technology
 decisions** and their mapping onto a Monoceros container definition. You capture
 *with what* and *why* - not the *what* and *why* of the product, which lives in

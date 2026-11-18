@@ -11,6 +11,13 @@ discovery flows straight into an isolated, reproducible dev container. The story
 of the whole chain, discovery through the three build roles, is on
 [getmonoceros.build/from-idea-to-code](https://getmonoceros.build/from-idea-to-code/).
 
+> **`discovery-atlassian` is deprecated and leaves this marketplace on
+> 2026-12-16.** The discovery now ships with Monoceros Workbench as the
+> `discovery-atlassian` feature and runs in Claude Code, OpenCode and Copilot
+> (CLI 1.78.0 or newer). Set it up as described in
+> [Discovery](https://getmonoceros.build/docs/discovery/overview/). The
+> `quickstart` plugin stays here.
+
 This repository is a **plugin marketplace**. One plugin per backend, and you
 install the one for the tools you use.
 
@@ -18,7 +25,7 @@ install the one for the tools you use.
 
 | Plugin | What it does | Backend | Status |
 | --- | --- | --- | --- |
-| `discovery-atlassian` | The full discovery chain | Confluence + Jira | active |
+| `discovery-atlassian` | The full discovery chain | Confluence + Jira | deprecated, removed on 2026-12-16 |
 | `quickstart` | Idea to a running workbench, in one dialog | none | active |
 | `discovery-notion` | The discovery chain | Notion | planned |
 
@@ -73,24 +80,10 @@ Code, use the `/plugin` commands:
 
 ### In a Monoceros workbench
 
-Name it in the workbench yml instead, on the `claude` feature entry, and every
-container comes up with it installed:
-
-```yaml
-features:
-  - ref: ghcr.io/getmonoceros/monoceros-features/claude-code:1
-    options:
-      permissionMode: auto
-    plugins:
-      - url: https://github.com/getmonoceros/monoceros-discovery.git
-        enable:
-          - discovery-atlassian
-```
-
-`monoceros apply <name>` registers the marketplace and installs the plugin, and
-later applies pull it again so a change here reaches your workbench. Needs
-Monoceros 1.57.0 or newer; details on the
-[Claude Code feature page](https://getmonoceros.build/docs/features/claude/#plugins).
+Use the `discovery-atlassian` feature of the workbench instead of this plugin.
+A `plugins:` entry for it on the `claude` feature stops working once the plugin
+leaves the marketplace. [Discovery](https://getmonoceros.build/docs/discovery/overview/)
+shows the setup.
 
 ## Development
 

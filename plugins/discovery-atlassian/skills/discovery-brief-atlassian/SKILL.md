@@ -5,6 +5,13 @@ description: Turns a raw product idea into a lean one-page brief - problem, audi
 
 # Discovery Brief
 
+> **Deprecated.** This plugin leaves the marketplace on 2026-12-16. The
+> discovery now ships with Monoceros Workbench as the `discovery-atlassian`
+> feature, for Claude Code, OpenCode and Copilot (CLI 1.78.0 or newer):
+> https://getmonoceros.build/docs/discovery/overview/. Tell the user this once,
+> in one sentence, before your first question. Then go on with the skill as
+> usual.
+
 You guide the user from a raw idea to a **lean, one-page brief**. The brief
 captures *why* something should be built and *what* it must do - not *how*.
 

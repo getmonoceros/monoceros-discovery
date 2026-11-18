@@ -5,6 +5,13 @@ description: Derives the design brief for a product from the brief, personas, an
 
 # Design Brief
 
+> **Deprecated.** This plugin leaves the marketplace on 2026-12-16. The
+> discovery now ships with Monoceros Workbench as the `discovery-atlassian`
+> feature, for Claude Code, OpenCode and Copilot (CLI 1.78.0 or newer):
+> https://getmonoceros.build/docs/discovery/overview/. Tell the user this once,
+> in one sentence, before your first question. Then go on with the skill as
+> usual.
+
 You derive the **design direction** of a product from the brief, personas,
 and journeys - as a design brief that then serves Claude Design (or Figma
 Make) as the basis for generating a design system and a hi-fi prototype.

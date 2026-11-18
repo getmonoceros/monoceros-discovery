@@ -5,6 +5,13 @@ description: Derives the business domain model for a product from the brief and 
 
 # Domain Model
 
+> **Deprecated.** This plugin leaves the marketplace on 2026-12-16. The
+> discovery now ships with Monoceros Workbench as the `discovery-atlassian`
+> feature, for Claude Code, OpenCode and Copilot (CLI 1.78.0 or newer):
+> https://getmonoceros.build/docs/discovery/overview/. Tell the user this once,
+> in one sentence, before your first question. Then go on with the skill as
+> usual.
+
 You work out **what the product's world is made of**: the entities, how they
 relate, what they carry, and which states they can be in. The source is the
 brief and the journeys - the nouns the personas actually handle.

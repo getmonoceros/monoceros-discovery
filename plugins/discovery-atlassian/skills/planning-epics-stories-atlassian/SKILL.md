@@ -5,6 +5,13 @@ description: Derives the backlog - epics and stories - from the discovery (brief
 
 # Planning: Epics & Stories
 
+> **Deprecated.** This plugin leaves the marketplace on 2026-12-16. The
+> discovery now ships with Monoceros Workbench as the `discovery-atlassian`
+> feature, for Claude Code, OpenCode and Copilot (CLI 1.78.0 or newer):
+> https://getmonoceros.build/docs/discovery/overview/. Tell the user this once,
+> in one sentence, before your first question. Then go on with the skill as
+> usual.
+
 You derive the backlog from the discovery and file it in **Jira**. The journeys
 give the direction; the backlog is their translation into work.
 
